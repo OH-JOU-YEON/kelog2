@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+	<!-- JDBC 드라이버 클래스 : MySQL 사용 설정 -->
+		<property name="driverClassName"
+			value="com.mysql.cj.jdbc.Driver"></property>
+			<!-- JDBC URL : MySQL 데이터베이스 연결 -->
+		<property name="jdbcUrl"
+			value="jdbc:mysql://localhost:3306/kelog?useSSL=false&amp;serverTimezone=Asia/Seoul" />
+		<property name="username" value="root"></property>
+		<property name="password" value="0000"></property>
+	</bean>
+	<!-- hikariDataSource 설정: hikariCP를 이용한 데이터베이스 연결 풀 -->
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
+		destroy-method="close">
+		<constructor-arg ref="hikariConfig" />
+	</bean>
+	<!--  MyBatis와 Spring 통합을 위한 설정 -->
+	<bean id="sqlSessionFactory"
+	class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<!-- MyBatis에서 사용 할 패키지 경로 지정 -> 파일명만 작성 가능 -->
+		<property name="typeAliasesPackage" value="org.spring.domain"/>
+	</bean>
+	
+	<context:component-scan base-package="org.spring.service"/>
+	
+	<mybatis-spring:scan base-package="org.spring.persistence"/>
+	
+</beans>
