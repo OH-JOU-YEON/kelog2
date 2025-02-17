@@ -31,11 +31,11 @@
 	class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
 		<!-- MyBatis에서 사용 할 패키지 경로 지정 -> 파일명만 작성 가능 -->
-		<property name="typeAliasesPackage" value="org.spring.domain"/>
+		<property name="typeAliasesPackage" value="com.spring.domain"/>
 	</bean>
 	
-	<context:component-scan base-package="org.spring.service"/>
+	<context:component-scan base-package="com.spring.service"/>
 	
-	<mybatis-spring:scan base-package="org.spring.persistence"/>
+	<mybatis-spring:scan base-package="com.spring.persistence"/>
 	
 </beans>

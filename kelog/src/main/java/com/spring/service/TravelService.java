@@ -8,4 +8,6 @@ public interface TravelService extends GenericService<TravelPostDTO, Integer> {
 
 	public List<TravelPostDTO> listAll();
 
+	public int modify(TravelPostDTO dto);
+
 }
