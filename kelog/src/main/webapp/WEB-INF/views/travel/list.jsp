@@ -37,7 +37,7 @@
 								<tr>
 									<td>${vo.travelNo }</td>
 									<td>${vo.title }</td>
-									<td><a href="/travelpost/read?bno=${vo.travelNo }">${vo.content }</a></td>
+									<td><a href="/travel/read?travelNo=${vo.travelNo }">${vo.content }</a></td>
 									<td>${vo.nickName }</td>
 									<td><fmt:formatDate pattern="yyyy-MM-dd a hh:mm:ss"
 											value="${vo.regDate }" /></td>
@@ -100,7 +100,7 @@
 
 	$(document).ready(function() {
 		$("#regBtn").on("click", function() {
-			self.location = "/board/register";
+			self.location = "/travel/created";
 		});
 
 		$(".close, .btn-secondary").on("click", function() {
