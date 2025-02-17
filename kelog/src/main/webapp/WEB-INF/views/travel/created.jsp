@@ -8,5 +8,6 @@
 </head>
 <body>
 	<h1>여행게시판 글쓰기</h1>
+	
 </body>
 </html>

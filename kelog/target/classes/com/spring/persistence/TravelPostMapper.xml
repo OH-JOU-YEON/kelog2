@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.spring.persistence.TravelPostMapper">
+
+<insert id="insert">
+	INSERT INTO travelpost (title, content) VALUES(#{title},#{content});
+</insert>
+
+<select id="read">
+	SELECT * FROM travelpost WHERE travelNO = #{travelNO}
+</select>
+
+<update id="update">
+	UPDATE travelpost SET title = #{title}, content = #{content} WHERE travelNO = #{travelNO}
+</update>
+
+
+</mapper>
+  
+
