@@ -6,14 +6,8 @@
 <mapper namespace="com.spring.persistence.BlogPostAddressMappingMapper">
 
 
-<insert id = "insert" parameterType = "com.spring.domain.BlogPostAddressMappingDTO" useGeneratedKeys="true" keyProperty="id">
-INSERT INTO BlogPostAddressMapping VALUES ( #{blogPostId}, #{addressId});
-</insert>
 
-<select id = "getAddressList" resultType="hashmap">
-SELECT * FROM BlogPostAddressMapping 
-WHERE blogPostId = #{blogPostId}; 
-</select>
+
 
 
 </mapper>

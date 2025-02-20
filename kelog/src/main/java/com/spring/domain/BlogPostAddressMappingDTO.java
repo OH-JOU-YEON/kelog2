@@ -1,8 +1,8 @@
 package com.spring.domain;
 
-import lombok.Getter;
+import lombok.Data;
 
-@Getter 
+@Data
 public class BlogPostAddressMappingDTO {
 	
 	int id; 
@@ -10,14 +10,5 @@ public class BlogPostAddressMappingDTO {
 	int blogPostId; 
 	
 	int addressId; 
-	
-	
-	public BlogPostAddressMappingDTO(int blogPostId, int addressId) {
-		
-		this.blogPostId = blogPostId;
-		
-		this.addressId = addressId; 
-		
-	}
 
 }

@@ -5,6 +5,7 @@
   
 <mapper namespace="com.spring.persistence.TravelPostMapper">
 
+ <!--  작성자 추가 해야함 -->
 <insert id="insert">
 	INSERT INTO travelpost (title, content) VALUES(#{title},#{content});
 </insert>
