@@ -6,6 +6,9 @@
 <mapper namespace="com.spring.persistence.HashTagMapper">
 
 
+<insert id = "insert" parameterType = "com.spring.domain.HashTagDTO" useGeneratedKeys="true" keyProperty="hashNo">
+INSERT INTO hashTag VALUES (#{hashName});
+</insert>
 
 
 </mapper>

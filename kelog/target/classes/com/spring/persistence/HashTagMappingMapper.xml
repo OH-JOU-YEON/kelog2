@@ -23,8 +23,8 @@ SELECT * FROM hashTagMapping
 WHERE hashNo = #{hashNo} AND TripNO = #{tripNo}; 
 </select>
 
-<insert id = "insert" parameterType = "com.spring.domain.HashTagMappingDTO">
-INSERT INTO hashTagMapping VALUES (#{indexNo}, #{hasNo}, #{blogNo}, #{travelNo}, #{tipNo});
+<insert id = "insert" parameterType = "com.spring.domain.HashTagMappingDTO" useGeneratedKeys="true" keyProperty="indexNo">
+INSERT INTO hashTagMapping VALUES ( #{hasNo}, #{blogNo}, #{travelNo}, #{tipNo});
 </insert>
 
 
