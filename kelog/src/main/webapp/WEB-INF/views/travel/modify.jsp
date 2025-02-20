@@ -23,10 +23,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<form role="form">
-						<div class="form-group">
-							<label>travelNo</label> <input class="form-control" name="travelNo"
-								readonly="readonly" value="${dto.travelNo }">
-						</div>
+						<input class="form-control" name="travelNo" type="hidden" value="${dto.travelNo}">
 						<div class="form-group">
 							<label>Title</label> <input class="form-control" name="title"
 								value="${dto.title }">
@@ -38,7 +35,7 @@
 						</div>
 						<!--end form-group  -->
 						<div class="form-group">
-							<label>Writer</label> <input class="form-control" name="nickName"
+							<label>nickName</label> <input class="form-control" name="nickName"
 								readonly="readonly" value="${dto.nickName }">
 						</div>
 						<div class="form-group">
