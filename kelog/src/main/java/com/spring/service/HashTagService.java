@@ -16,7 +16,7 @@ public class HashTagService {
 	
 	
 	
-	//µ¿ÀÏÇÑ Å¸ÀÌÆ²ÀÇ ÅÂ±×°¡ ÀÖ´ÂÁö °Ë»çÇØº» µÚ¿¡ ÀÖÀ¸¸é ±×°Å ¹İÈ¯ÇÏ°í ¾Æ´Ï¸é »õ·Î »ı¼ºÇÏ´Â ¸Ş¼­µå 
+	
 	
 	public HashTagDTO saveTag(String title) {
 		
@@ -33,8 +33,7 @@ public class HashTagService {
 		return hashTagDTO; 
 	}
 	
-	
-	//ÅÂ±× »èÁ¦ ¸Ş¼­µå 
+
 	
 	public String deleteTag(int hashNo) {
 		
@@ -49,7 +48,7 @@ public class HashTagService {
 			return deletedName; 
 		}else {
 			
-			return "»èÁ¦µÉ °ªÀÌ Ã³À½ºÎÅÍ Á¸ÀçÇÏÁö ¾Ê¾Ò½À´Ï´Ù"; 
+			return "ì‚­ì œí•˜ë ¤ëŠ” ê°ì²´ê°€ ì²˜ìŒë¶€í„° ì—†ì—ˆìŠµë‹ˆë‹¤."; 
 		}
 	}
 	

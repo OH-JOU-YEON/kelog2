@@ -19,8 +19,6 @@ public class NavAddressService {
 	
 	
 	
-	//ÁÖ¼Ò°¡ ÀÖ´ÂÁö °Ë»öÇÏ°í ÀÖÀ¸¸é ÀÖ´Â°Å ¹İÈ¯. ¾øÀ¸¸é »õ·Î ¸¸µé¾î¼­ ¹İÈ¯ 
-	//°Ë»öÀº ÀÌ¸§, À§µµ, °æµµ·Î ÇÑ´Ù. 
 	
 	public NavAddressDTO getNavAddress(String addName, double latitude, double longitude) {
 		
@@ -33,7 +31,7 @@ public class NavAddressService {
 	}
 	
 	
-	//ºí·Î±× Æ÷½ºÆ® ¾ÆÀÌµğ¶û ÁÖ¼Ò ¾ÆÀÌµğ ¹Ş¾Æ¼­ °Ë»öÇÏ°í ÀÖÀ¸¸é ÀÖ´Â °Å ¹İÈ¯ ¾øÀ¸¸é »õ·Î ¸¸µé¾î¼­ ¹İÈ¯ 
+
 	
 	public BlogPostAddressMappingDTO getBlogPostAddressMapping(int blogPostId,int addressId ) {
 		
@@ -48,7 +46,7 @@ public class NavAddressService {
 		
 	}
 	
-	//°Ë»öÇØº¸°í ÀÖÀ¸¸é »èÁ¦ÇÏ°í ¹øÈ£¸¦ ¹®ÀÚ¿­ ÇüÅÂ·Î ¹İÈ¯ ¾øÀ¸¸é Ã³À½ºÎÅÍ ¾ø¾ú´Ù´Â ¹®ÀÚ¿­ ¹İÈ¯ 
+
 	
 	public String deleteBlogPostMappingDTO(int id) {
 		
@@ -60,7 +58,7 @@ public class NavAddressService {
 			return Integer.toString(id); 
 		}else {
 			
-			return "»èÁ¦ÇÏ·Á´Â °´Ã¼°¡ Ã³À½ºÎÅÍ ¾ø¾ú½À´Ï´Ù."; 
+			return "ì‚­ì œí•˜ë ¤ëŠ” ê°ì²´ê°€ ì²˜ìŒë¶€í„° ì—†ì—ˆìŠµë‹ˆë‹¤."; 
 		}
 	}
 

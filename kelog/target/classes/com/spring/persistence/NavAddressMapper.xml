@@ -7,7 +7,7 @@
 
 
 <insert id = "insert" parameterType = "com.spring.domain.NavAddressDTO" useGeneratedKeys="true" keyProperty="addressNo">
-INSERT INTO hashTag VALUES (#{addressNo}, #{addName}, #{latitude}, #{longitude});
+INSERT INTO hashTag VALUES (addressNo = #{addressNo},addName = #{addName},latitude = #{latitude},longitude = #{longitude});
 </insert>
 
 <select id="findByNameAndTude">

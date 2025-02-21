@@ -14,7 +14,7 @@ public class HashTagMappingService {
 	
 	
 	
-	//ÅÂ±× ¸ÅÇÎ »ı¼ºÇÏ´Â ¸Ş¼­µå. »ı¼º Àü¿¡ °Ë»öÇØº¸°í ÀÖÀ¸¸é ±×°Å ¹İÈ¯. ¾øÀ¸¸é »ı¼º 
+
 	
 		public HashTagMappingDTO createHashTagMapping(int hashNo, int key, String type) {
 			
@@ -58,7 +58,7 @@ public class HashTagMappingService {
 		}
 	
 	
-	//ÅÂ±× ¸ÅÇÎ »èÁ¦ÇÏ´Â ¸Ş¼­µå 
+
 	
 		public String deleteHashTagMapping(int indexNo) {
 			
@@ -71,7 +71,7 @@ public class HashTagMappingService {
 				return Integer.toString(indexNo); 
 			}else {
 				
-				return "»èÁ¦ÇÒ °´Ã¼°¡ Ã³À½ºÎÅÍ Á¸ÀçÇÏÁö ¾Ê¾Ò½À´Ï´Ù."; 
+				return "ì‚­ì œí•˜ë ¤ëŠ” ê°ì²´ê°€ ì²˜ìŒë¶€í„° ì—†ì—ˆìŠµë‹ˆë‹¤."; 
 			}
 		}
 	
