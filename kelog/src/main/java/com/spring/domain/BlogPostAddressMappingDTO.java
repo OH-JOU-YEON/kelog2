@@ -2,6 +2,7 @@ package com.spring.domain;
 
 import lombok.Getter;
 
+
 @Getter 
 public class BlogPostAddressMappingDTO {
 	
@@ -12,12 +13,11 @@ public class BlogPostAddressMappingDTO {
 	int addressId; 
 	
 	
-	public BlogPostAddressMappingDTO(int blogPostId, int addressId) {
+	public BlogPostAddressMappingDTO(int blogPostId,int addressId) {
 		
-		this.blogPostId = blogPostId;
+		this.blogPostId = blogPostId; 
 		
 		this.addressId = addressId; 
-		
 	}
 
 }

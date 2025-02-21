@@ -23,7 +23,7 @@ public class NavAddressService {
 	public NavAddressDTO getNavAddress(String addName, double latitude, double longitude) {
 		
 		if(navAddressMapper.findByNameAndTude(addName, latitude, latitude) != null) {
-			return navAddressMapper.findByNameAndTude(addName, latitude, latitude); 
+			return (NavAddressDTO) navAddressMapper.findByNameAndTude(addName, latitude, latitude); 
 		} else {
 			
 			return navAddressMapper.insert(new NavAddressDTO(addName, latitude, longitude));

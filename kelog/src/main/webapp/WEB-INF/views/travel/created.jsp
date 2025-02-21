@@ -10,29 +10,29 @@
 		<!-- /.col-lg-12 -->
 	</div>
 	<!-- end row -->
-
-
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<form role="form" action="/travel/created" method="post">
+					<form id="fom" action="/travel/created" method="post">
 						<div class="form-group">
-							<label>Title</label> <input class="form-control" name="title">
+							<label>Title</label> <input name="title" class="form-control">
 						</div>
 						<!--end form-group  -->
 						<div class="form-group">
 							<label>Content</label>
-							<textarea class="form-control" rows="3" name="content"></textarea>
+							<textarea id="content" name="content" class="form-control"
+								style="display: none;"></textarea>
 						</div>
 						<!--end form-group  -->
+						<div id="editor"></div>
 
 						<div class="form-group">
 							<label>nickName</label> <input readonly="readonly"
 								class="form-control" name="nickName">
 						</div>
 						<!--end form-group  -->
-						<button type="submit" class="btn btn-success">submit</button>
+						<button type="button" id="submitBtn" class="btn btn-success">Submit</button>
 						<button type="reset" class="btn btn-success">reset</button>
 					</form>
 				</div>
@@ -45,5 +45,26 @@
 	<!--end row -->
 </div>
 <!-- end page-wrapper -->
+<script type="text/javascript">
+	const editor = new toastui.Editor({
+		el : document.querySelector('#editor'),
+		height : '500px',
+		initialEditType : 'markdown',
+		previewStyle : 'vertical'
+	});
 
+
+// 폼 제출 전에 Editor의 내용을 textarea에 저장
+$('#submitBtn').on('click', function() {
+	// 에디터의 HTML 값을 숨겨진 textarea에 저장
+	$('#content').val(editor.getHTML());
+
+	// 디버깅용 콘솔 로그
+	console.log("전송할 Title:", $("textarea[name='title']").val());
+	console.log("전송할 Content:", $('#content').val());
+
+	// 폼 제출
+	$("#fom").submit();
+});
+</script>
 <%@include file="../includes/footer.jsp"%>

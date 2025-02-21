@@ -1,5 +1,8 @@
 package com.spring.domain;
 
+import lombok.Getter;
+
+@Getter
 public class NavAddressDTO {
 	
 	private int addressNo; 
@@ -11,7 +14,8 @@ public class NavAddressDTO {
 	private double longitude; 
 	
 	
-	public NavAddressDTO(String addName, double latitude, double longitude ) {
+	public NavAddressDTO(String addName, double latitude, double longitude) {
+		
 		
 		this.addName = addName; 
 		

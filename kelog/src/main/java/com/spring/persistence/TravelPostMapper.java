@@ -12,18 +12,19 @@ public interface TravelPostMapper {
 	public void insert(TravelPostDTO dto);
 	
 	
-	public TravelPostDTO read(int travelNo);
+	public TravelPostDTO read(int travelBoardNo);
 
 	
 	public int update(TravelPostDTO dto);
 	
-	@Delete("DELETE FROM travelpost WHERE travelNo = #{travelNo}")	
-	public int delete(int travelNo);
+	@Delete("DELETE FROM travelpost WHERE travelBoardNo = #{travelBoardNo}")	
+	public int delete(int travelBoardNo);
 
-	@Select("SELECT * FROM travelpost ORDER BY travelNo DESC ")
+	@Select("SELECT * FROM travelpost ORDER BY travelBoardNo DESC ")
 	public List<TravelPostDTO> readAll();
 
-
+	public int getLike(int travelBoardNo);
 	
+	public int getDislike(int travelBoardNo);
 	
 }
