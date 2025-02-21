@@ -24,7 +24,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					 <input class="form-control" type="hidden"
-							name="travelNo" value="${dto.travelNo }">
+							name="travelBoardNo" value="${dto.travelBoardNo }">
 
 					<!--end form-group  -->
 					<div class="form-group">
@@ -35,7 +35,6 @@
 					<div class="form-group">
 						<label>Content</label>
 						<div id="editor" style="display:none;">${dto.content}</div>
-						
                 		<div id="viewer"></div>
 					</div>
 					<!--end form-group  -->
@@ -48,7 +47,7 @@
 							readonly="readonly" value="${formattedRegDate }">
 					</div>
 					<!--end form-group  -->
-					<a class="btn btn-success" href="/travel/modify?travelNo=${dto.travelNo }">Modify</a>
+					<a class="btn btn-success" href="/travel/modify?travelBoardNo=${dto.travelBoardNo }">Modify</a>
 					<a class="btn btn-success" href="/travel/list">List</a>
 				</div>
 				<!-- end panel-body -->
@@ -64,11 +63,14 @@ s
 		    <script>
 		    
 			    $(function(){
+			    	let Content = ${dto.content};
 		        	ToView();
 		        });
 		        
 		        /*토스트 UI */
 	    		const content = [].join('\n');
+		        
+	    		 
 		        
 	    	    const editor = new toastui.Editor({
 		               el: document.querySelector('#editor'),	
@@ -79,7 +81,9 @@ s
 		            el: document.querySelector('#viewer'),
 		            viewer: true,
 		            height: '500px',
-		            initialValue: content
+		            initialEditType : 'wysiwyg',
+		            initialValue: Content
+		            
 		        });
 
 		        function ToView(){

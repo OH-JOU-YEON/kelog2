@@ -42,9 +42,9 @@ public class TravelPostController {
 	}
 
 	@GetMapping({ "/read", "/modify" })
-	public void get(@RequestParam("travelNo") Integer travelNo, Model model) {
-		log.info("travelNo :" + travelNo);
-		TravelPostDTO dto = service.read(travelNo);
+	public void get(@RequestParam("travelBoardNo") Integer travelBoardNo, Model model) {
+		log.info("travelBoardNo :" + travelBoardNo);
+		TravelPostDTO dto = service.read(travelBoardNo);
 		log.info(dto);
 		model.addAttribute("dto", dto);
 	}
@@ -58,8 +58,8 @@ public class TravelPostController {
 	}
 
 	@PostMapping("/remove")
-	public String delete(@RequestParam("travelNo") Integer travelNo, RedirectAttributes rttr) {
-		int deleteRow = service.delete(travelNo);
+	public String delete(@RequestParam("travelBoardNo") Integer travelBoardNo, RedirectAttributes rttr) {
+		int deleteRow = service.delete(travelBoardNo);
 		log.info("delete deleteRow: " + deleteRow);
 		rttr.addFlashAttribute("result", "del");
 		return "redirect:/travel/list";

@@ -25,7 +25,7 @@
 						class="table table-striped table-bordered table-hover">
 						<thead>
 							<tr>
-								<th>TRAVELNO</th>
+								<th>travelBoardNo</th>
 								<th>TITLE</th>
 								<th>CONTENT</th>
 								<th>NICKNAME</th>
@@ -35,9 +35,9 @@
 						<tbody>
 							<c:forEach var="vo" items="${list }">
 								<tr>
-									<td>${vo.travelNo }</td>
+									<td>${vo.travelBoardNo }</td>
 									<td>${vo.title }</td>
-									<td><a href="/travel/read?travelNo=${vo.travelNo }">${vo.content }</a></td>
+									<td><a href="/travel/read?travelBoardNo=${vo.travelBoardNo }">${vo.content }</a></td>
 									<td>${vo.nickName }</td>
 									<td><fmt:formatDate pattern="yyyy-MM-dd a hh:mm:ss"
 											value="${vo.regDate }" /></td>

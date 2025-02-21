@@ -11,13 +11,20 @@
 </insert>
 
 <select id="read">
-	SELECT * FROM travelpost WHERE travelNO = #{travelNO}
+	SELECT * FROM travelpost WHERE travelBoardNo = #{travelBoardNo}
 </select>
 
 <update id="update">
-	UPDATE travelpost SET title = #{title}, content = #{content} WHERE travelNO = #{travelNO}
+	UPDATE travelpost SET title = #{title}, content = #{content} WHERE travelBoardNo = #{travelBoardNo}
 </update>
 
+<update id="getLike">
+	UPDATE travelpost SET likeCnt = likeCnt + 1 WHERE travelBoardNo = #{travelBoardNo}
+</update>
+
+<update id="getDislike">
+	UPDATE travelpost SET likeCnt = likeCnt - 1 WHERE travelBoardNo = #{travelBoardNo}
+</update>
 
 </mapper>
   

@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class TravelPostDTO {
 	
-	private int travelNo;
+	private int travelBoardNo;
 	private String title;
 	private String content;
 	private String nickName;

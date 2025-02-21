@@ -23,7 +23,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<form role="form">
-						<input class="form-control" name="travelNo" type="hidden" value="${dto.travelNo}">
+						<input class="form-control" name="travelBoardNo" type="hidden" value="${dto.travelBoardNo}">
 						<div class="form-group">
 							<label>Title</label> <input class="form-control" name="title"
 								value="${dto.title }">
