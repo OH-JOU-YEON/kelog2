@@ -1,6 +1,5 @@
 package com.spring.controller;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,4 +63,7 @@ public class TravelPostController {
 		rttr.addFlashAttribute("result", "del");
 		return "redirect:/travel/list";
 	}
+	
+	
+	
 }

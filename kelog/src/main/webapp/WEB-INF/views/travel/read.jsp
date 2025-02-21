@@ -35,8 +35,8 @@
 					<div class="form-group">
 						<label>Content</label>
 						<div id="editor" style="display:none;">${dto.content}</div>
-                		<div id="viewer"></div>
 					</div>
+                		<div id="viewer"></div>
 					<!--end form-group  -->
 					<div class="form-group">
 						<label>Writer</label> <input class="form-control" name="nickName"
@@ -59,11 +59,10 @@
 	<!--end row -->
 </div>
 <!-- end page-wrapper -->
-s		    
+			    
 		    <script>
 		    
 			    $(function(){
-			    	let Content = ${dto.content};
 		        	ToView();
 		        });
 		        
@@ -82,7 +81,7 @@ s
 		            viewer: true,
 		            height: '500px',
 		            initialEditType : 'wysiwyg',
-		            initialValue: Content
+		            initialValue: content
 		            
 		        });
 
