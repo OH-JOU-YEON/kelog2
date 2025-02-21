@@ -15,16 +15,16 @@ WHERE HashNo = #{hashNo} And BlogNo = #{BlogNo};
 
 <select id="findByHashNoAndTravelNo">
 SELECT * FROM hashTagMapping
-WHERE hashNo = #{hashNo} AND TravelNo = #{travelNo}; </select>
+WHERE hashNo = #{hashNo} AND travelBoard = #{travelNo}; </select>
 
 
 <select id="findByHashNoAndTipNo">
 SELECT * FROM hashTagMapping
-WHERE hashNo = #{hashNo} AND TripNO = #{tripNo}; 
+WHERE hashNo = #{hashNo} AND travelBoardNo = #{tripNo}; 
 </select>
 
 <insert id = "insert" parameterType = "com.spring.domain.HashTagMappingDTO" useGeneratedKeys="true" keyProperty="indexNo">
-INSERT INTO hashTagMapping VALUES ( #{hasNo}, #{blogNo}, #{travelNo}, #{tipNo});
+INSERT INTO hashTagMapping VALUES (hashNo =  #{hasNo},blogPostNo = #{blogNo},tipBoardNo = #{travelNo},tipBoardNo = #{tipNo});
 </insert>
 
 

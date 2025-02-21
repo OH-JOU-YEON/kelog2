@@ -16,7 +16,7 @@ public class HashTagMappingDTO {
 	private int tipNo; 
 	
 
-	//생성 시 매핑하는 자료의 타입을 명시한다. 
+
 
 	
 	public HashTagMappingDTO(int hashNo, int key, String type) {
