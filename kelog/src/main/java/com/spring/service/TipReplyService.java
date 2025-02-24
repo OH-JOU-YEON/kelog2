@@ -1,7 +1,22 @@
 package com.spring.service;
 
-import com.spring.domain.TipPostReplyDTO;
+import java.util.List;
 
-public interface TipReplyService extends GenericService<TipPostReplyDTO, Integer> {
+import com.spring.domain.ReplyDTO;
 
+public interface TipReplyService {
+	// 특정 글의 댓글 전체 보이기
+	public List<ReplyDTO> listReply(int bno);
+	
+	// 댓글 등록
+	public int addReply(ReplyDTO reply);
+	
+	//추가 된 댓글 반환
+	public ReplyDTO selectReply(int rno);
+	
+	// 댓글 삭제
+	public void deleteReply(int rno);
+	
+	// 댓글 수정
+	public void updateReply(ReplyDTO reply);
 }

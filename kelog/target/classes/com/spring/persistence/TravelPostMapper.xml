@@ -18,14 +18,6 @@
 	UPDATE travelpost SET title = #{title}, content = #{content} WHERE travelBoardNo = #{travelBoardNo}
 </update>
 
-<update id="getLike">
-	UPDATE travelpost SET likeCnt = likeCnt + 1 WHERE travelBoardNo = #{travelBoardNo}
-</update>
-
-<update id="getDislike">
-	UPDATE travelpost SET likeCnt = likeCnt - 1 WHERE travelBoardNo = #{travelBoardNo}
-</update>
-
 </mapper>
   
 
