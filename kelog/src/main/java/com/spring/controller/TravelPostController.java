@@ -35,6 +35,7 @@ public class TravelPostController {
 
 	@PostMapping("/created")
 	public String created(TravelPostDTO dto) {
+		
 		service.created(dto);
 
 		return "redirect:/travel/list";

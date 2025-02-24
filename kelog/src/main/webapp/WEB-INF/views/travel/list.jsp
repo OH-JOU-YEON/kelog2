@@ -36,8 +36,8 @@
 							<c:forEach var="vo" items="${list }">
 								<tr>
 									<td>${vo.travelBoardNo }</td>
-									<td>${vo.title }</td>
-									<td><a href="/travel/read?travelBoardNo=${vo.travelBoardNo }">${vo.content }</a></td>
+									<td><a href="/travel/read?travelBoardNo=${vo.travelBoardNo }">${vo.title }</a></td>
+									<td>${vo.content }</td>
 									<td>${vo.nickName }</td>
 									<td><fmt:formatDate pattern="yyyy-MM-dd a hh:mm:ss"
 											value="${vo.regDate }" /></td>
