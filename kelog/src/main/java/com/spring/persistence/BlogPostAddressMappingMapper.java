@@ -17,7 +17,7 @@ public interface BlogPostAddressMappingMapper {
 
 	public List<BlogPostAddressMappingDTO> getAddressList(int blogPostId); 
 	
-	
+	@Select("SELECT * FROM blogPostAddressMapping WHERE blogPostId = #{blogPostId} AND addressId = #{addressId}")
 	public BlogPostAddressMappingDTO findByBlogPostIdAndAddressId(int blogPostId, int addressId); 
 	
 	

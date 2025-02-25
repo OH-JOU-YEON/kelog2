@@ -6,7 +6,10 @@
 <mapper namespace="com.spring.persistence.BlogPostAddressMappingMapper">
 
 
-
+<select id = "getAddressList" resultType = BlogPostAddressMappingDTO>
+SELECT * FROM blogPostAddressMapping 
+where blogPostId = #{blogPostId}; 
+</select>
 
 
 
