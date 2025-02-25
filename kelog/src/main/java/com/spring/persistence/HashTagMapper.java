@@ -1,4 +1,5 @@
 package com.spring.persistence;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
@@ -16,6 +17,8 @@ public interface HashTagMapper {
 	
 	@Select("SELECT FROM hashTag WHERE hashName = #{hashName}")
 	public HashTagDTO findHashTagByHashName(String hashName); 
+	
+	public List<HashMap<String,Integer>> findHashTagNoByHashNameLike(String hashName); 
 	
 
 	

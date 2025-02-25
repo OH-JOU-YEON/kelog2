@@ -10,6 +10,10 @@
 INSERT INTO hashTag VALUES (#{hashName});
 </insert>
 
+<select id = "findHashTagNoByHashNameLike" parameterType="map" resultType="map">
+SELECT hashNo FROM hashTag WHERE hashName like CONCAT(‘%’, #{hashName}, ‘%’);
+</select>
+
 
 </mapper>
   
