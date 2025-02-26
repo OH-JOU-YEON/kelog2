@@ -15,7 +15,6 @@ public class TravelPostDTO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd a hh:mm:ss")
 	private Date regDate;
 	private String tag;
-	private int viewCnt;
-	private int likeCnt;
-	private int dislikeCnt;
+	private int likeCnt = 0;
+	private int dislikeCnt = 0;
 }

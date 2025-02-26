@@ -10,4 +10,7 @@ public interface TravelService extends GenericService<TravelPostDTO, Integer> {
 
 	public int modify(TravelPostDTO dto);
 
+	public int uplikecount(Integer travelBoardNo);
+
+	public int downlikecount(Integer travelBoardNo);
 }
