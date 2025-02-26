@@ -15,15 +15,15 @@ import com.spring.service.TipReplyService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
-@RequestMapping("/reply/*")
+//@RequestMapping("/reply/*")
 //@RequiredArgsConstructor
-@Controller
-@Log4j
+//@Controller
+//@Log4j
 public class ReplyController {
 	
 //	private final BlogReplyService Blogservice;
 //	private final TipReplyService Tipservice;
-	
+//	
 //	@ResponseBody
 //	@PostMapping("/blogregister")
 //	public ReplyDTO blogregister(ReplyDTO reply) {
@@ -41,6 +41,10 @@ public class ReplyController {
 //		Blogservice.deleteReply(blogReplyNo);
 //		return "redirect:/blog/read?blogPostNo="+blogPostNo;
 //	}	
+//	
+//	
+//	
+//	
 //	@ResponseBody
 //	@PostMapping("/tipregister")
 //	public ReplyDTO tipregister(ReplyDTO reply) {
@@ -59,7 +63,7 @@ public class ReplyController {
 //		Tipservice.deleteReply(tipReplyNo);
 //		return "redirect:/tip/read?blogPostNo="+tipBoardNo;
 //	}	
-	
+//	
 	
 	
 }

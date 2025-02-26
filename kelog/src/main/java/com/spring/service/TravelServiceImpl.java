@@ -41,15 +41,5 @@ public class TravelServiceImpl implements TravelService {
 		return mapper.update(dto);
 	}
 
-	@Override
-	public int uplikecount(Integer travelBoardNo) {
-		int result = mapper.upLikecount(travelBoardNo);
-		return result;
-	}
-	@Override
-	public int downlikecount(Integer travelBoardNo) {
-		int result = mapper.downLikecount(travelBoardNo);
-		return result;
-	}
 
 }

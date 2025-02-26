@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.domain.TravelPostDTO;
@@ -66,18 +65,6 @@ public class TravelPostController {
 		return "redirect:/travel/list";
 	}
 	
-	@PostMapping("/like")
-	@ResponseBody
-	public int like (@RequestParam("travelBoardNo") Integer travelBoardNo) {
-		int updatedLikeCount = service.uplikecount(travelBoardNo);
-		return updatedLikeCount;
-	}
 	
-	@PostMapping("/unlike")
-	@ResponseBody
-	public int downlike (@RequestParam("travelBoardNo") Integer travelBoardNo) {
-		int updatedLikeCount = service.downlikecount(travelBoardNo);
-		return updatedLikeCount;
-	}
 	
 }

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 import com.spring.domain.TravelPostDTO;
 
@@ -24,9 +23,8 @@ public interface TravelPostMapper {
 	@Select("SELECT * FROM travelpost ORDER BY travelBoardNo DESC ")
 	public List<TravelPostDTO> readAll();
 
+	public int getLike(int travelBoardNo);
 	
-	public int upLikecount(Integer travelBoardNo);
+	public int getDislike(int travelBoardNo);
 	
-	public int downLikecount(Integer travelBoardNo);
 }
-
