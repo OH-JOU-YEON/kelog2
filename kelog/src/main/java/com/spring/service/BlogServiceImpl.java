@@ -43,4 +43,16 @@ public class BlogServiceImpl implements BlogService {
 		return mapper.update(dto);
 	}
 
+	@Override
+	public int uplikecount(Integer blogPostNo) {
+		int result = mapper.upLikecount(blogPostNo);
+		return result;
+	}
+
+	@Override
+	public int unlikecount(Integer blogPostNo) {
+		int result = mapper.unLikecount(blogPostNo);
+		return result;
+	}
+
 }

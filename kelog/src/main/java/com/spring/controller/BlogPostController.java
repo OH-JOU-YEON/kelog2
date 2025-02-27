@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.domain.BlogPostDTO;
@@ -30,7 +31,7 @@ public class BlogPostController {
 	}
 
 	@GetMapping("/created")
-	public void TravelPostGet() {
+	public void blogPostGet() {
 
 	}
 
@@ -39,12 +40,12 @@ public class BlogPostController {
 		
 		service.created(dto);
 
-		return "redirect:/travel/list";
+		return "redirect:/blog/list";
 	}
 
 	@GetMapping({ "/read", "/modify" })
 	public void get(@RequestParam("blogPostNo") Integer blogPostNo, Model model) {
-		log.info("travelBoardNo :" + blogPostNo);
+		log.info("blogBoardNo :" + blogPostNo);
 		BlogPostDTO dto = service.read(blogPostNo);
 		log.info(dto);
 		model.addAttribute("dto", dto);
@@ -55,16 +56,32 @@ public class BlogPostController {
 		int updateRow = service.modify(dto);
 		log.info("modify updateRow: " + updateRow);
 		rttr.addFlashAttribute("result", "mod");
-		return "redirect:/travel/list";
+		return "redirect:/blog/list";
 	}
 
 	@PostMapping("/remove")
-	public String delete(@RequestParam("travelBoardNo") Integer travelBoardNo, RedirectAttributes rttr) {
-		int deleteRow = service.delete(travelBoardNo);
+	public String delete(@RequestParam("blogBoardNo") Integer blogBoardNo, RedirectAttributes rttr) {
+		int deleteRow = service.delete(blogBoardNo);
 		log.info("delete deleteRow: " + deleteRow);
 		rttr.addFlashAttribute("result", "del");
-		return "redirect:/travel/list";
+		return "redirect:/blog/list";
 	}
+	
+	@PostMapping("/like")
+	@ResponseBody
+	public int like (@RequestParam("blogPostNo") Integer blogPostNo) {
+		int updatedLikeCount = service.uplikecount(blogPostNo);
+		return updatedLikeCount;
+	}
+	
+	@PostMapping("/unlike")
+	@ResponseBody
+	public int downlike (@RequestParam("blogPostNo") Integer blogPostNo) {
+		int updatedLikeCount = service.unlikecount(blogPostNo);
+		return updatedLikeCount;
+	}
+	
+	
 	
 	
 }

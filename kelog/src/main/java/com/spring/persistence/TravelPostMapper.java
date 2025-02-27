@@ -27,6 +27,12 @@ public interface TravelPostMapper {
 	
 	public int upLikecount(Integer travelBoardNo);
 	
-	public int downLikecount(Integer travelBoardNo);
+	public int unLikecount(Integer travelBoardNo);
+
+
+	public int updisLikecount(Integer travelBoardNo);
+
+
+	public int undisLikecount(Integer travelBoardNo);
 }
 

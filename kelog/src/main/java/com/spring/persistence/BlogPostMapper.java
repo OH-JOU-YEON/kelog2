@@ -24,4 +24,8 @@ public interface BlogPostMapper {
 	public int getLike(int blogPostNo);
 	
 	public int getDislike(int blogPostNo);
+
+	public int upLikecount(Integer blogPostNo);
+
+	public int unLikecount(Integer blogPostNo);
 }

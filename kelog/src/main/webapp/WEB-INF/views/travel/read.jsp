@@ -49,6 +49,11 @@
 					<p id="likeCount">좋아요: ${dto.likeCnt}</p>
 					
 					<button id="likeButton" data-board-id="${dto.travelBoardNo}">좋아요</button>
+					
+					<p id="dislikeCount">싫어요: ${dto.dislikeCnt}</p>
+					
+					<button id="dislikeButton" data-board-id="${dto.travelBoardNo}">싫어요</button>					
+					
 					<!--end form-group  -->
 					<a class="btn btn-success" href="/travel/modify?travelBoardNo=${dto.travelBoardNo }">Modify</a>
 					<a class="btn btn-success" href="/travel/list">List</a>
@@ -138,6 +143,48 @@ $(document).ready(function() {
     });
 });
 
+$(document).ready(function() {
+    // 좋아요 버튼 클릭 이벤트
+    $('#dislikeButton').on('click', function() {
+        var travelBoardNo = $(this).data('board-id');  // 게시물 번호
+        var userId = '${sessionScope.userId}';  // 세션에서 사용자 ID 가져오기 (예시)
+
+        // 좋아요 상태에 따라 AJAX 요청을 다르게 보냄
+        var url = ($("#dislikeButton").text() === '싫어요') ? '/travel/dislike' : '/travel/undislike';
+        var action = ($("#dislikeButton").text() === '싫어요') ? 'dislike' : 'undislike';
+
+        $.ajax({
+            url: url,  
+            type: 'POST',  // HTTP 메소드
+            data: {
+                travelBoardNo: travelBoardNo,
+                userId: userId
+            },
+            dataType: "json",
+            success: function(updateddisLikeCount) {
+                // 서버에서 받아온 업데이트된 좋아요 수로 갱신
+                 var currentdisLikeCount = parseInt($('#dislikeCount').text().replace('싫어요: ', ''));
+
+                // 싫어요 상태에 따라 카운트를 +1 또는 -1
+                if (action === 'dislike') {
+                	currentdisLikeCount += 1;  // 좋아요 눌렀을 때 +1
+                } else {
+                	currentdisLikeCount -= 1;  // 좋아요 취소했을 때 -1
+                }
+
+                // 새로운 싫어요 수 갱신
+                $('#dislikeCount').html('싫어요: ' + currentdisLikeCount); 
+                
+                // 버튼 텍스트 변경
+                var buttonText = (action === 'dislike') ? '싫어요 취소' : '싫어요';
+                $("#dislikeButton").text(buttonText);  // 버튼 텍스트 변경
+            },
+            error: function(e) {
+                console.log(e);
+            }
+        });
+    });
+});
 </script>
 		    
 <%@include file="../includes/footer.jsp"%>

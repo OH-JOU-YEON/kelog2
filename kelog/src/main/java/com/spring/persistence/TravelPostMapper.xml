@@ -22,10 +22,17 @@
 	UPDATE travelpost SET likeCnt = likeCnt + 1 WHERE travelBoardNo = #{travelBoardNo}
 </update>	
 
-<update id="downLikecount">
+<update id="unLikecount">
 	UPDATE travelpost SET likeCnt = likeCnt - 1 WHERE travelBoardNo = #{travelBoardNo}
 </update>
 
+<update id="updisLikecount">
+	UPDATE travelpost SET dislikeCnt = dislikeCnt + 1 WHERE travelBoardNo = #{travelBoardNo}
+</update>	
+
+<update id="undisLikecount">
+	UPDATE travelpost SET dislikeCnt = dislikeCnt - 1 WHERE travelBoardNo = #{travelBoardNo}
+</update>
 
 </mapper>
   

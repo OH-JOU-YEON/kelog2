@@ -12,4 +12,8 @@ public interface BlogService extends GenericService<BlogPostDTO, Integer> {
 	public List<BlogPostDTO> listAll();
 
 	public int modify(BlogPostDTO dto);
+
+	public int uplikecount(Integer blogPostNo);
+
+	public int unlikecount(Integer blogPostNo);
 }

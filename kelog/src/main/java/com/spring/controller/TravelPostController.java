@@ -76,8 +76,21 @@ public class TravelPostController {
 	@PostMapping("/unlike")
 	@ResponseBody
 	public int downlike (@RequestParam("travelBoardNo") Integer travelBoardNo) {
-		int updatedLikeCount = service.downlikecount(travelBoardNo);
+		int updatedLikeCount = service.unlikecount(travelBoardNo);
 		return updatedLikeCount;
 	}
 	
+	@PostMapping("/dislike")
+	@ResponseBody
+	public int dislike (@RequestParam("travelBoardNo") Integer travelBoardNo) {
+		int updatedLikeCount = service.updislikecount(travelBoardNo);
+		return updatedLikeCount;
+	}
+	
+	@PostMapping("/undislike")
+	@ResponseBody
+	public int undislike (@RequestParam("travelBoardNo") Integer travelBoardNo) {
+		int updatedLikeCount = service.undislikecount(travelBoardNo);
+		return updatedLikeCount;
+	}	
 }

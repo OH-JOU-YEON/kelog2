@@ -47,9 +47,20 @@ public class TravelServiceImpl implements TravelService {
 		return result;
 	}
 	@Override
-	public int downlikecount(Integer travelBoardNo) {
-		int result = mapper.downLikecount(travelBoardNo);
+	public int unlikecount(Integer travelBoardNo) {
+		int result = mapper.unLikecount(travelBoardNo);
 		return result;
 	}
-
+	
+	
+	@Override
+	public int updislikecount(Integer travelBoardNo) {
+		int result = mapper.updisLikecount(travelBoardNo);
+		return result;
+	}
+	@Override
+	public int undislikecount(Integer travelBoardNo) {
+		int result = mapper.undisLikecount(travelBoardNo);
+		return result;
+	}
 }
