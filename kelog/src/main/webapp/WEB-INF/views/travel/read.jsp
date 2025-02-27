@@ -39,7 +39,7 @@
                 		<div id="viewer"></div>
 					<!--end form-group  -->
 					<div class="form-group">
-						<label>Writer</label> <input class="form-control" name="nickName"
+						<label>nickName</label> <input class="form-control" name="nickName"
 							readonly="readonly" value="${dto.nickName }">
 					</div>
 					<div class="form-group">
@@ -104,8 +104,15 @@ $(document).ready(function() {
     // 좋아요 버튼 클릭 이벤트
     $('#likeButton').on('click', function() {
         var travelBoardNo = $(this).data('board-id');  // 게시물 번호
-        var userId = '${sessionScope.userId}';  // 세션에서 사용자 ID 가져오기 (예시)
+        var email = '${user.email}';  // 세션에서 사용자 ID 가져오기 (예시)
 
+        console.log(email);
+        
+        if (!email) {
+            alert("로그인 후 좋아요를 누를 수 있습니다.");
+            return;  // 로그인되지 않으면 더 이상 진행하지 않음
+        }
+        
         // 좋아요 상태에 따라 AJAX 요청을 다르게 보냄
         var url = ($("#likeButton").text() === '좋아요') ? '/travel/like' : '/travel/unlike';
         var action = ($("#likeButton").text() === '좋아요') ? 'like' : 'unlike';
@@ -115,7 +122,7 @@ $(document).ready(function() {
             type: 'POST',  // HTTP 메소드
             data: {
                 travelBoardNo: travelBoardNo,
-                userId: userId
+                email: email
             },
             dataType: "json",
             success: function(updatedLikeCount) {
@@ -147,18 +154,25 @@ $(document).ready(function() {
     // 좋아요 버튼 클릭 이벤트
     $('#dislikeButton').on('click', function() {
         var travelBoardNo = $(this).data('board-id');  // 게시물 번호
-        var userId = '${sessionScope.userId}';  // 세션에서 사용자 ID 가져오기 (예시)
+        var email = '${user.email}';  
+        
+        console.log(email);
 
+        if (!email) {
+            alert("로그인 후 싫어요를 누를 수 있습니다.");
+            return;  // 로그인되지 않으면 더 이상 진행하지 않음
+        }
+        
         // 좋아요 상태에 따라 AJAX 요청을 다르게 보냄
         var url = ($("#dislikeButton").text() === '싫어요') ? '/travel/dislike' : '/travel/undislike';
         var action = ($("#dislikeButton").text() === '싫어요') ? 'dislike' : 'undislike';
 
         $.ajax({
             url: url,  
-            type: 'POST',  // HTTP 메소드
+            type: 'POST',  
             data: {
                 travelBoardNo: travelBoardNo,
-                userId: userId
+                email: email
             },
             dataType: "json",
             success: function(updateddisLikeCount) {

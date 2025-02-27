@@ -7,7 +7,7 @@
 
  <!--  작성자 추가 해야함 -->
 <insert id="insert">
-	INSERT INTO travelpost (title, content) VALUES(#{title},#{content});
+	INSERT INTO travelpost (title, content, nickName) VALUES(#{title},#{content},#{nickName});
 </insert>
 
 <select id="read">

@@ -8,4 +8,5 @@ public interface GenericService<DTO, K> {
 	
 	public int delete(K key);
 	
+	public int modify(DTO dto);
 }

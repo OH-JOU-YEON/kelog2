@@ -1,5 +1,18 @@
 package com.spring.service;
 
-public interface UserService {
+import java.util.List;
+
+import com.spring.domain.UserDTO;
+
+
+public interface UserService extends GenericService<UserDTO, Integer> {
+
+	public UserDTO login(UserDTO dto);
+
+	public UserDTO selectUser(String email);
+	
+	public UserDTO select(int uno);
+
+	public List<UserDTO> listAll();
 
 }
