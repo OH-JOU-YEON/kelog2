@@ -9,6 +9,12 @@
 	INSERT INTO tipboard (title, content,nickName) VALUES(#{title},#{content},#{nickName});
 </insert>
 
+<select id="read">
+	SELECT * FROM tipboard WHERE tipBoardNo = #{tipBoardNo}
+</select>
 
+<update id="update" >
+	UPDATE tipboard SET title = #{title}, content = #{content} WHERE tipBoardNo = #{tipBoardNo}
+</update>
 
 </mapper>

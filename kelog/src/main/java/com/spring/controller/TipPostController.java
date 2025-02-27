@@ -3,11 +3,13 @@ package com.spring.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.domain.TipPostDTO;
-import com.spring.domain.TravelPostDTO;
 import com.spring.service.TipService;
 
 import lombok.RequiredArgsConstructor;
@@ -36,5 +38,26 @@ public class TipPostController {
 
 		return "redirect:/tip/list";
 	}
-	
+	@GetMapping({ "/read", "/modify" })
+	public void get(@RequestParam("tipBoardNo") Integer tipBoardNo, Model model) {
+		log.info("tipBoardNo :" + tipBoardNo);
+		TipPostDTO dto = service.read(tipBoardNo);
+		log.info(dto);
+		model.addAttribute("dto", dto);
+	}
+	@PostMapping("/modify")
+	public String modify(@ModelAttribute TipPostDTO dto, RedirectAttributes rttr) {
+		log.info("modify content:"+dto.getContent());
+		int updateRow = service.modify(dto);
+		log.info("modify updateRow: " + updateRow);
+		rttr.addFlashAttribute("result", "mod");
+		return "redirect:/tip/list";
+	}
+	@PostMapping("/remove")
+	public String delete(@RequestParam("tipBoardNo") Integer tipBoardNo, RedirectAttributes rttr) {
+		int deleteRow = service.delete(tipBoardNo);
+		log.info("delete deleteRow: " + deleteRow);
+		rttr.addFlashAttribute("result", "del");
+		return "redirect:/tip/list";
+	}
 }

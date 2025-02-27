@@ -47,7 +47,7 @@
 							readonly="readonly" value="${formattedRegDate }">
 					</div>
 					<!--end form-group  -->
-					<a class="btn btn-success" href="/tip/modify?travelBoardNo=${dto.travelBoardNo }">Modify</a>
+					<a class="btn btn-success" href="/tip/modify?tipBoardNo=${dto.tipBoardNo }">Modify</a>
 					<a class="btn btn-success" href="/tip/list">List</a>
 				</div>
 				<!-- end panel-body -->

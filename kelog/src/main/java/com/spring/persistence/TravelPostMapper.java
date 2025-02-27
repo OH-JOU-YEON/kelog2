@@ -11,10 +11,8 @@ public interface TravelPostMapper {
 	
 	public void insert(TravelPostDTO dto);
 	
-	
 	public TravelPostDTO read(int travelBoardNo);
 
-	
 	public int update(TravelPostDTO dto);
 	
 	@Delete("DELETE FROM travelpost WHERE travelBoardNo = #{travelBoardNo}")	

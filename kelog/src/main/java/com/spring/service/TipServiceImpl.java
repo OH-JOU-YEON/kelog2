@@ -24,20 +24,17 @@ public class TipServiceImpl implements TipService{
 
 	@Override
 	public TipPostDTO read(Integer key) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.read(key);
 	}
 
 	@Override
 	public int delete(Integer key) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mapper.delete(key);
 	}
 
 	@Override
 	public int modify(TipPostDTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mapper.update(dto);
 	}
 
 	@Override

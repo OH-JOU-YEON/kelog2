@@ -31,10 +31,11 @@
 						<!--end form-group  -->
 						<div class="form-group">
 							<label>Content</label>
-							<textarea id="editor" class="form-control" rows="3" name="content"  style="display:none;">${dto.content }</textarea>
+							<textarea id="content" name="content" class="form-control"
+								style="display: none;"></textarea>
 						</div>
-							<div id="viewer"></div>
 						<!--end form-group  -->
+						<div id="editor">${dto.content }</div>
 						<div class="form-group">
 							<label>nickName</label> <input class="form-control" name="nickName"
 								readonly="readonly" value="${dto.nickName }">
@@ -70,8 +71,10 @@ $(function(){
 		let operation = $(this).data("oper");
 		console.log(operation);
 		
+		
 		if(operation === "modify"){
 			formObj.attr("action","/tip/modify").attr("method","post");
+			$('#content').val(editor.getHTML());
 		}else if (operation === "remove"){
 			formObj.attr("action","/tip/remove").attr("method","post");
 		}else if (operation === "list"){

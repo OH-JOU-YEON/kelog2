@@ -37,7 +37,7 @@
 							<c:forEach var="vo" items="${tiplist }">
 								<tr>
 									<td>${vo.tipBoardNo }</td>
-									<td><a href="/tip/read?travelBoardNo=${vo.tipBoardNo }">${vo.title }</a></td>
+									<td><a href="/tip/read?tipBoardNo=${vo.tipBoardNo }">${vo.title }</a></td>
 									<td>${vo.content }</td>
 									<td>${vo.nickName }</td>
 									<td><fmt:formatDate pattern="yyyy-MM-dd a hh:mm:ss"

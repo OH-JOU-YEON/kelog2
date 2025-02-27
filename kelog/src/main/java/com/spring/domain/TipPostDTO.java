@@ -16,4 +16,16 @@ public class TipPostDTO {
 	private int likeCnt;
 	private String tag;
 	private int reportCnt;
+	
+	
+	public TipPostDTO(String nickName, String title, String content) {
+		super();
+		this.nickName = nickName;
+		this.title = title;
+		this.content = content;
+	}
+	
+	
+	
+	
 }
