@@ -17,6 +17,7 @@
         <img src="/upload/${user.profileImg}"></img>
     </div>
  	<a href="/travel/list">추천게시판으로 이동</a>
+ 	<a href="/tip/list">팁게시판으로 이동</a>
  	<a href="/user/read?uno=${user.uno}">내 정보 보기</a>
     <div>
     <form action="/login/google/revoke/token" method="get">

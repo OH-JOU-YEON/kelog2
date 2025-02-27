@@ -93,7 +93,6 @@ public class GoogleOAuthController {
         googleVO.setPicture(userInfo.get("picture")); 
         googleVO.setOauth("google");
      
-        
         model.addAllAttributes(userInfo);
         session.setAttribute("user", userInfo);
         session.setAttribute("token", result.getAccessToken());
