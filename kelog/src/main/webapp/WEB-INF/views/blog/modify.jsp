@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <c:set var="formattedRegDate">
@@ -23,7 +23,8 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<form role="form">
-						<input class="form-control" name="blogPostNo" type="hidden" value="${dto.blogPostNo}">
+						<input class="form-control" name="blogPostNo" type="hidden"
+							value="${dto.blogPostNo}">
 						<div class="form-group">
 							<label>Title</label> <input class="form-control" name="title"
 								value="${dto.title }">
@@ -31,20 +32,22 @@
 						<!--end form-group  -->
 						<div class="form-group">
 							<label>Content</label>
-							<textarea id="editor" class="form-control" rows="3" name="content"  style="display:none;">${dto.content }</textarea>
+							<textarea id="content" name="content" class="form-control"
+								style="display: none;"></textarea>
 						</div>
-							<div id="viewer"></div>
+						<!--end form-group  -->
+						<div id="editor">${dto.content }</div>
 						<!--end form-group  -->
 						<div class="form-group">
-							<label>nickName</label> <input class="form-control" name="nickName"
-								readonly="readonly" value="${dto.nickName }">
+							<label>nickName</label> <input class="form-control"
+								name="nickName" readonly="readonly" value="${dto.nickName }">
 						</div>
 						<div class="form-group">
-							<label>RegDate</label> 
-							<input class="form-control" name="regDate" disabled="disabled" value="${formattedRegDate }">
-						</div>						
+							<label>RegDate</label> <input class="form-control" name="regDate"
+								disabled="disabled" value="${formattedRegDate }">
+						</div>
 						<!--end form-group  -->
-						
+
 						<!-- 사용자 지정 속성 (커스텀 데이터 속성) -->
 						<button type="button" class="btn btn-primary" data-oper="modify">Modify</button>
 						<button type="button" class="btn btn-danger" data-oper="remove">Remove</button>
@@ -72,6 +75,7 @@ $(function(){
 		
 		if(operation === "modify"){
 			formObj.attr("action","/blog/modify").attr("method","post");
+			$('#content').val(editor.getHTML());
 		}else if (operation === "remove"){
 			formObj.attr("action","/blog/remove").attr("method","post");
 		}else if (operation === "list"){

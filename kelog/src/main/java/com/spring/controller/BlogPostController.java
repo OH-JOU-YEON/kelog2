@@ -60,8 +60,8 @@ public class BlogPostController {
 	}
 
 	@PostMapping("/remove")
-	public String delete(@RequestParam("blogBoardNo") Integer blogBoardNo, RedirectAttributes rttr) {
-		int deleteRow = service.delete(blogBoardNo);
+	public String delete(@RequestParam("blogPostNo") Integer blogPostNo, RedirectAttributes rttr) {
+		int deleteRow = service.delete(blogPostNo);
 		log.info("delete deleteRow: " + deleteRow);
 		rttr.addFlashAttribute("result", "del");
 		return "redirect:/blog/list";
@@ -80,8 +80,5 @@ public class BlogPostController {
 		int updatedLikeCount = service.unlikecount(blogPostNo);
 		return updatedLikeCount;
 	}
-	
-	
-	
 	
 }

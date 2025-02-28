@@ -53,9 +53,11 @@
 					<p id="dislikeCount">싫어요: ${dto.dislikeCnt}</p>
 					
 					<button id="dislikeButton" data-board-id="${dto.travelBoardNo}">싫어요</button>					
-					
 					<!--end form-group  -->
-					<a class="btn btn-success" href="/travel/modify?travelBoardNo=${dto.travelBoardNo }">Modify</a>
+					
+					<c:if test="${dto.nickName == user.nickName }">
+						<a class="btn btn-success" href="/travel/modify?travelBoardNo=${dto.travelBoardNo }">Modify</a>
+					</c:if>
 					<a class="btn btn-success" href="/travel/list">List</a>
 				</div>
 				<!-- end panel-body -->

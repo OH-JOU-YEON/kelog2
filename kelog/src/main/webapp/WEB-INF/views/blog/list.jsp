@@ -33,14 +33,14 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="dto" items="${list }">
+							<c:forEach var="vo" items="${list }">
 								<tr>
-									<td>${dto.blogPostNo }</td>
-									<td><a href="/blog/read?blogPostNo=${dto.blogPostNo }">${dto.title }</a></td>
-									<td>${dto.content }</td>
-									<td>${dto.nickName }</td>
+									<td>${vo.blogPostNo }</td>
+									<td><a href="/blog/read?blogPostNo=${vo.blogPostNo }">${vo.title }</a></td>
+									<td>${vo.content }</td>
+									<td>${vo.nickName }</td>
 									<td><fmt:formatDate pattern="yyyy-MM-dd a hh:mm:ss"
-											value="${dto.regDate }" /></td>
+											value="${vo.regDate }" /></td>
 								</tr>
 							</c:forEach>
 						</tbody>

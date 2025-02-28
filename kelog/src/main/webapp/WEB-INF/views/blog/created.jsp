@@ -46,7 +46,7 @@ out.println(sbHtml);
 
 						<div class="form-group">
 							<label>nickName</label> <input readonly="readonly"
-								class="form-control" name="nickName">
+								class="form-control" name="nickName" value="${user.nickName }">
 						</div>
 						<!--end form-group  -->
 						<button type="button" id="submitBtn" class="btn btn-success">Submit</button>

@@ -18,7 +18,6 @@
 	</div>
 	<!-- end row -->
 
-
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
@@ -50,7 +49,9 @@
 					
 					<button id="likeButton" data-board-id="${dto.blogPostNo}">좋아요</button>
 					<!--end form-group  -->
-					<a class="btn btn-success" href="/blog/modify?blogPostNo=${dto.blogPostNo }">Modify</a>
+					<c:if test="${dto.nickName == user.nickName }">
+						<a class="btn btn-success" href="/blog/modify?blogPostNo=${dto.blogPostNo }">Modify</a>
+					</c:if>
 					<a class="btn btn-success" href="/blog/list">List</a>
 				</div>
 				<!-- end panel-body -->
