@@ -49,10 +49,12 @@ public class UserController {
 	@GetMapping("/login")
 	public String loginForm(@RequestParam("email") String email,UserDTO user, HttpSession session,RedirectAttributes rttr) {
 		UserDTO member = userService.selectUser(email);
+		
 		if(member != null) {
 			// 로그인 성공
 			log.info("membercontroller login: "+member);
 			session.setAttribute("user", member);
+			session.setAttribute("uno", member.getUno());
 			return "/oauth/google/loginSuccess";
 		}else {
 			
@@ -67,6 +69,7 @@ public class UserController {
 		if(member != null) {
 			// 로그인 성공
 			session.setAttribute("user", member);
+			session.setAttribute("uno", member.getUno());
 			return "redirect:/oauth/google/loginSuccess";
 		}else {
 			// 로그인 실패

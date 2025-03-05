@@ -12,13 +12,22 @@ public interface TravelService extends GenericService<TravelPostDTO, Integer> {
 
 	
 	// 좋아요 확인 취소
-	public int uplikecount(Integer travelBoardNo);
+	
+	public boolean isUserLikedTravelPost(int uno, Integer travelBoardNo);
+	
+	public int uplikecount(Integer travelBoardNo, int uno);
 
-	public int unlikecount(Integer travelBoardNo);
+	public int unlikecount(Integer travelBoardNo, int uno);
 
 	
-	// 싫어요 확인 취소
-	public int updislikecount(Integer travelBoardNo);
+	//싫어요 확인 취소
+	
+	public boolean isUserunLikedTravelPost(int uno, Integer travelBoardNo);
+	
+	public int upunlikecount(Integer travelBoardNo, int uno);
 
-	public int undislikecount(Integer travelBoardNo);
+	public int ununlikecount(Integer travelBoardNo, int uno);	
+
+	
+
 }

@@ -3,8 +3,10 @@ package com.spring.persistence;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.domain.TravelPostDTO;
 
@@ -24,15 +26,35 @@ public interface TravelPostMapper {
 	@Select("SELECT * FROM travelpost ORDER BY travelBoardNo DESC ")
 	public List<TravelPostDTO> readAll();
 
+	// 좋아요
+	
+	public boolean isLike(@Param("uno") int uno, @Param("travelBoardNo") Integer travelBoardNo);
+	
+	public void addlike(@Param("uno") int uno, @Param("travelBoardNo") Integer travelBoardNo);
+	
+	public void removelike(@Param("uno") int uno, @Param("travelBoardNo") Integer travelBoardNo);
 	
 	public int upLikecount(Integer travelBoardNo);
 	
 	public int unLikecount(Integer travelBoardNo);
 
+	// 싫어요
+	
+	public boolean isunLike(@Param("uno") int uno, @Param("travelBoardNo") Integer travelBoardNo);
 
-	public int updisLikecount(Integer travelBoardNo);
+	public void addunlike(@Param("uno") int uno, @Param("travelBoardNo") Integer travelBoardNo);
+
+	public void removeunlike(@Param("uno") int uno, @Param("travelBoardNo") Integer travelBoardNo);
+
+	public int upunLikecount(Integer travelBoardNo);
+
+	public int ununLikecount(Integer travelBoardNo);
+	
+	
+	
 
 
-	public int undisLikecount(Integer travelBoardNo);
+
+
 }
 

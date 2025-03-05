@@ -41,26 +41,61 @@ public class TravelServiceImpl implements TravelService {
 		return mapper.update(dto);
 	}
 
-	@Override
-	public int uplikecount(Integer travelBoardNo) {
-		int result = mapper.upLikecount(travelBoardNo);
-		return result;
-	}
-	@Override
-	public int unlikecount(Integer travelBoardNo) {
-		int result = mapper.unLikecount(travelBoardNo);
-		return result;
-	}
-	
+	// 좋아요
 	
 	@Override
-	public int updislikecount(Integer travelBoardNo) {
-		int result = mapper.updisLikecount(travelBoardNo);
-		return result;
+	public int uplikecount(Integer travelBoardNo, int uno) {
+		addLike(uno, travelBoardNo);
+        return mapper.upLikecount(travelBoardNo);
 	}
 	@Override
-	public int undislikecount(Integer travelBoardNo) {
-		int result = mapper.undisLikecount(travelBoardNo);
-		return result;
+	public int unlikecount(Integer travelBoardNo,int uno) {
+		removeLike(uno, travelBoardNo);
+        return mapper.unLikecount(travelBoardNo);
 	}
+	
+	@Override
+	public boolean isUserLikedTravelPost(int uno, Integer travelBoardNo) {
+		return mapper.isLike(uno,travelBoardNo);
+	}
+	
+    public void addLike(int uno, Integer travelBoardNo) {
+        mapper.addlike(uno, travelBoardNo);
+    }
+	
+    public void removeLike(int uno, Integer travelBoardNo) {
+        mapper.removelike(uno, travelBoardNo);
+    }
+
+    // 싫어요
+    
+	@Override
+	public int upunlikecount(Integer travelBoardNo, int uno) {
+		addunLike(uno, travelBoardNo);
+		return mapper.upunLikecount(travelBoardNo);
+	}
+
+	@Override
+	public int ununlikecount(Integer travelBoardNo, int uno) {
+		removeunLike(uno, travelBoardNo);
+		return mapper.ununLikecount(travelBoardNo);
+	}    
+    
+	@Override
+	public boolean isUserunLikedTravelPost(int uno, Integer travelBoardNo) {
+		return mapper.isunLike(uno,travelBoardNo);
+	}
+	
+    public void addunLike(int uno, Integer travelBoardNo) {
+        mapper.addunlike(uno, travelBoardNo);
+    }
+	
+    public void removeunLike(int uno, Integer travelBoardNo) {
+        mapper.removeunlike(uno, travelBoardNo);
+    }
+
+    
+
+    
+    
 }

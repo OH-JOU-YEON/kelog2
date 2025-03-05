@@ -3,6 +3,7 @@ package com.spring.persistence;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.spring.domain.BlogPostDTO;
@@ -21,11 +22,16 @@ public interface BlogPostMapper {
 	@Select("SELECT * FROM blogPost ORDER BY blogPostNo DESC ")
 	public List<BlogPostDTO> readAll();
 
-	public int getLike(int blogPostNo);
+	// 좋아요
 	
-	public int getDislike(int blogPostNo);
+	public void addlike(@Param("uno") int uno, @Param("blogPostNo") Integer blogPostNo);
 
+	public void removelike(@Param("uno") int uno, @Param("blogPostNo") Integer blogPostNo);
+
+	public boolean isLike(@Param("uno") int uno, @Param("blogPostNo") Integer blogPostNo);
+	
 	public int upLikecount(Integer blogPostNo);
 
 	public int unLikecount(Integer blogPostNo);
+
 }

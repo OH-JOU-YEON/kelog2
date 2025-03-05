@@ -18,6 +18,8 @@
 	UPDATE travelpost SET title = #{title}, content = #{content} WHERE travelBoardNo = #{travelBoardNo}
 </update>
 
+ <!--  좋아요 구현 -->
+
 <update id="upLikecount">
 	UPDATE travelpost SET likeCnt = likeCnt + 1 WHERE travelBoardNo = #{travelBoardNo}
 </update>	
@@ -26,13 +28,40 @@
 	UPDATE travelpost SET likeCnt = likeCnt - 1 WHERE travelBoardNo = #{travelBoardNo}
 </update>
 
-<update id="updisLikecount">
+<select id="isLike" resultType="boolean">
+	SELECT COUNT(1) > 0 FROM liketable WHERE userno = #{uno} AND travellikeno = #{travelBoardNo}
+</select>
+
+<insert id="addlike">
+    INSERT INTO liketable (userno, travellikeno) VALUES (#{uno}, #{travelBoardNo})
+</insert>
+
+<delete id="removelike">
+    DELETE FROM liketable WHERE userno = #{uno} AND travellikeno = #{travelBoardNo}
+</delete>
+
+
+ <!-- 싫어요 구현 -->
+
+<update id="upunLikecount">
 	UPDATE travelpost SET dislikeCnt = dislikeCnt + 1 WHERE travelBoardNo = #{travelBoardNo}
 </update>	
 
-<update id="undisLikecount">
+<update id="ununLikecount">
 	UPDATE travelpost SET dislikeCnt = dislikeCnt - 1 WHERE travelBoardNo = #{travelBoardNo}
 </update>
+
+<select id="isunLike" resultType="boolean">
+	SELECT COUNT(1) > 0 FROM unliketable WHERE userno = #{uno} AND disllikeno = #{travelBoardNo}
+</select>
+
+<insert id="addunlike">
+    INSERT INTO unliketable (userno, disllikeno) VALUES (#{uno}, #{travelBoardNo})
+</insert>
+
+<delete id="removeunlike">
+    DELETE FROM unliketable WHERE userno = #{uno} AND disllikeno = #{travelBoardNo}
+</delete>
 
 </mapper>
   

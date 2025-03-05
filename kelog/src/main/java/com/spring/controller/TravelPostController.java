@@ -38,18 +38,30 @@ public class TravelPostController {
 
 	@PostMapping("/created")
 	public String created(TravelPostDTO dto) {
-		
+
 		service.created(dto);
 
 		return "redirect:/travel/list";
 	}
 
 	@GetMapping({ "/read", "/modify" })
-	public void get(@RequestParam("travelBoardNo") Integer travelBoardNo, Model model) {
+	public void get(@RequestParam("travelBoardNo") Integer travelBoardNo, Model model, HttpSession session) {
 		log.info("travelBoardNo :" + travelBoardNo);
-		TravelPostDTO dto = service.read(travelBoardNo);
-		log.info(dto);
-		model.addAttribute("dto", dto);
+		
+		Integer uno = (Integer) session.getAttribute("uno");
+		if(uno == null) {
+			TravelPostDTO dto = service.read(travelBoardNo);
+			log.info(dto);
+			model.addAttribute("dto", dto);
+		}else {
+			boolean isLiked = service.isUserLikedTravelPost(uno, travelBoardNo);
+			boolean isunLiked = service.isUserunLikedTravelPost(uno, travelBoardNo);
+			session.setAttribute("isliked", isLiked);
+			session.setAttribute("isunliked", isunLiked);
+			TravelPostDTO dto = service.read(travelBoardNo);
+			log.info(dto);
+			model.addAttribute("dto", dto);
+		}
 	}
 
 	@PostMapping("/modify")
@@ -67,32 +79,50 @@ public class TravelPostController {
 		rttr.addFlashAttribute("result", "del");
 		return "redirect:/travel/list";
 	}
-	
+
 	@PostMapping("/like")
 	@ResponseBody
-	public int like (@RequestParam("travelBoardNo") Integer travelBoardNo, HttpSession session) {
-		int updatedLikeCount = service.uplikecount(travelBoardNo);
-		return updatedLikeCount;
+	public int like(@RequestParam("travelBoardNo") Integer travelBoardNo, HttpSession session) {
+
+		Integer uno = (Integer) session.getAttribute("uno");
+		
+		System.out.println("호히원 아이디:: "+ uno);
+
+		if (uno != 0 || uno != null) {
+			boolean isLiked = service.isUserLikedTravelPost(uno, travelBoardNo);
+			if (!isLiked) {
+				session.setAttribute("isliked", isLiked);
+				log.info(isLiked);
+				System.out.println(isLiked);
+				return service.uplikecount(travelBoardNo,uno);
+			} else {
+				session.setAttribute("isliked", isLiked);
+				log.info(isLiked);
+				System.out.println(isLiked);
+				return service.unlikecount(travelBoardNo,uno);
+			}
+		}
+		return 0;
 	}
 	
 	@PostMapping("/unlike")
 	@ResponseBody
-	public int downlike (@RequestParam("travelBoardNo") Integer travelBoardNo) {
-		int updatedLikeCount = service.unlikecount(travelBoardNo);
-		return updatedLikeCount;
+	public int unlike(@RequestParam("travelBoardNo") Integer travelBoardNo, HttpSession session) {
+
+		Integer uno = (Integer) session.getAttribute("uno");
+		
+
+		if (uno != 0 || uno != null) {
+			boolean isunLiked = service.isUserunLikedTravelPost(uno, travelBoardNo);
+			if (!isunLiked) {
+				session.setAttribute("isunliked", isunLiked);
+				return service.upunlikecount(travelBoardNo,uno);
+			} else {
+				session.setAttribute("isunliked", isunLiked);
+				return service.ununlikecount(travelBoardNo,uno);
+			}
+		}
+		return 0;
 	}
-	
-	@PostMapping("/dislike")
-	@ResponseBody
-	public int dislike (@RequestParam("travelBoardNo") Integer travelBoardNo) {
-		int updatedLikeCount = service.updislikecount(travelBoardNo);
-		return updatedLikeCount;
-	}
-	
-	@PostMapping("/undislike")
-	@ResponseBody
-	public int undislike (@RequestParam("travelBoardNo") Integer travelBoardNo) {
-		int updatedLikeCount = service.undislikecount(travelBoardNo);
-		return updatedLikeCount;
-	}	
+
 }

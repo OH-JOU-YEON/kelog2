@@ -26,4 +26,17 @@
 	UPDATE blogPost SET likeCnt = likeCnt - 1 WHERE blogPostNo = #{blogPostNo}
 </update>
 
+<select id="isLike" resultType="boolean">
+	SELECT COUNT(1) > 0 FROM liketable WHERE userno = #{uno} AND bloglikeno = #{blogPostNo}
+</select>
+
+<insert id="addlike">
+    INSERT INTO liketable (userno, bloglikeno) VALUES (#{uno}, #{blogPostNo})
+</insert>
+
+<delete id="removelike">
+    DELETE FROM liketable WHERE userno = #{uno} AND bloglikeno = #{blogPostNo}
+</delete>
+
+
 </mapper>

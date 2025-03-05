@@ -10,12 +10,11 @@ import com.spring.persistence.BlogPostMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
-
 @Service
 @RequiredArgsConstructor
 @Log4j
 public class BlogServiceImpl implements BlogService {
-	
+
 	private final BlogPostMapper mapper;
 
 	@Override
@@ -44,15 +43,29 @@ public class BlogServiceImpl implements BlogService {
 	}
 
 	@Override
-	public int uplikecount(Integer blogPostNo) {
-		int result = mapper.upLikecount(blogPostNo);
-		return result;
+	public boolean isUserLikedblogPost(Integer uno, Integer blogPostNo) {
+		return mapper.isLike(uno, blogPostNo);
+	}
+
+	
+	public void addLike(int uno, Integer blogPostNo) {
+		mapper.addlike(uno, blogPostNo);
+	}
+
+	public void removeLike(int uno, Integer blogPostNo) {
+		mapper.removelike(uno, blogPostNo);
 	}
 
 	@Override
-	public int unlikecount(Integer blogPostNo) {
-		int result = mapper.unLikecount(blogPostNo);
-		return result;
+	public int uplikecount(Integer blogPostNo, Integer uno) {
+		addLike(uno, blogPostNo);
+        return mapper.upLikecount(blogPostNo);
+	}
+
+	@Override
+	public int unlikecount(Integer blogPostNo, Integer uno) {
+		removeLike(uno, blogPostNo);
+        return mapper.unLikecount(blogPostNo);
 	}
 
 }

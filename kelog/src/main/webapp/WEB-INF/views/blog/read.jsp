@@ -45,9 +45,10 @@
 						<label>RegDate</label> <input class="form-control" name="regDate"
 							readonly="readonly" value="${formattedRegDate }">
 					</div>
-						<p id="likeCount">좋아요: ${dto.likeCnt}</p>
 					
-					<button id="likeButton" data-board-id="${dto.blogPostNo}">좋아요</button>
+					<p id="likeCount">좋아요: ${dto.likeCnt}</p>
+					
+					<button id="likeButton${dto.blogPostNo}" onclick="toggleLike(${dto.blogPostNo})">${isliked ? '좋아요 취소' : '좋아요'}</button>
 					<!--end form-group  -->
 					<c:if test="${dto.nickName == user.nickName }">
 						<a class="btn btn-success" href="/blog/modify?blogPostNo=${dto.blogPostNo }">Modify</a>
@@ -96,45 +97,38 @@
 		    </script>
 		    
 <script>
-$(document).ready(function() {
-    // 좋아요 버튼 클릭 이벤트
-    $('#likeButton').on('click', function() {
-        var blogPostNo = $(this).data('board-id');  // 게시물 번호
-        var userId = '${sessionScope.userId}';  // 세션에서 사용자 ID 가져오기 (예2        // 좋아요 상태에 따라 AJAX 요청을 다르게 보냄
-        var url = ($("#likeButton").text() === '좋아요') ? '/blog/like' : '/blog/unlike';
-        var action = ($("#likeButton").text() === '좋아요') ? 'like' : 'unlike';
+function toggleLike(blogPostNo) {
+	
+    var email = '${user.email}';  // 세션에서 사용자 ID 가져오기 (예시)
 
-        $.ajax({
-            url: url,  // 좋아요/좋아요 취소에 맞는 URL로 요청
-            type: 'POST',  // HTTP 메소드
-            data: {
-            	blogPostNo: blogPostNo,
-                //userId: userId
-            },
-            dataType: "json",
-            success: function(updatedLikeCount) {
-                // 서버에서 받아온 업데이트된 좋아요 수로 갱신
-                 var currentLikeCount = parseInt($('#likeCount').text().replace('좋아요: ', ''));
-
-                // 좋아요 상태에 따라 카운트를 +1 또는 -1
-                if (action === 'like') {
-                    currentLikeCount += 1;  // 좋아요 눌렀을 때 +1
-                } else {
-                    currentLikeCount -= 1;  // 좋아요 취소했을 때 -1
-                }
-
-                // 새로운 좋아요 수 갱신
+    console.log(email);
+    
+    if (!email) {
+        alert("로그인 후 좋아요를 누를 수 있습니다.");
+        return;  // 로그인되지 않으면 더 이상 진행하지 않음
+    }
+    
+    $.ajax({
+        url: '/blog/like',
+        type: 'POST',
+        data: { blogPostNo: blogPostNo },
+        success: function() {
+        	var currentLikeCount = parseInt($('#likeCount').text().replace('좋아요: ', ''));
+        	console.log("성공");
+            // 좋아요 버튼 상태 변경
+            let likeButton = document.getElementById("likeButton" + blogPostNo);
+            if (likeButton.textContent == "좋아요") {
+                likeButton.textContent = '좋아요 취소';
+                currentLikeCount += 1;
                 $('#likeCount').html('좋아요: ' + currentLikeCount); 
-                
-                // 버튼 텍스트 변경
-                var buttonText = (action === 'like') ? '좋아요 취소' : '좋아요';
-                $("#likeButton").text(buttonText);  // 버튼 텍스트 변경
-            },
-            error: function(e) {
-                console.log(e);
+            } else {
+                likeButton.textContent = '좋아요';
+                currentLikeCount -= 1;
+                $('#likeCount').html('좋아요: ' + currentLikeCount); 
             }
-        });
+        }
     });
-});
+}
+
 </script>		    
 <%@include file="../includes/footer.jsp"%>

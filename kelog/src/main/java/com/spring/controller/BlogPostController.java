@@ -1,5 +1,7 @@
 package com.spring.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.domain.BlogPostDTO;
+import com.spring.domain.TravelPostDTO;
 import com.spring.service.BlogService;
 
 import lombok.RequiredArgsConstructor;
@@ -44,11 +47,21 @@ public class BlogPostController {
 	}
 
 	@GetMapping({ "/read", "/modify" })
-	public void get(@RequestParam("blogPostNo") Integer blogPostNo, Model model) {
-		log.info("blogBoardNo :" + blogPostNo);
-		BlogPostDTO dto = service.read(blogPostNo);
-		log.info(dto);
-		model.addAttribute("dto", dto);
+	public void get(@RequestParam("blogPostNo") Integer blogPostNo, Model model, HttpSession session) {
+		
+		Integer uno = (Integer) session.getAttribute("uno");
+		
+		if(uno == null) {
+			BlogPostDTO dto = service.read(blogPostNo);
+			log.info(dto);
+			model.addAttribute("dto", dto);
+		}else {
+			boolean isLiked = service.isUserLikedblogPost(uno, blogPostNo);
+			session.setAttribute("isliked", isLiked);
+			BlogPostDTO dto = service.read(blogPostNo);
+			log.info(dto);
+			model.addAttribute("dto", dto);
+		}
 	}
 
 	@PostMapping("/modify")
@@ -69,16 +82,27 @@ public class BlogPostController {
 	
 	@PostMapping("/like")
 	@ResponseBody
-	public int like (@RequestParam("blogPostNo") Integer blogPostNo) {
-		int updatedLikeCount = service.uplikecount(blogPostNo);
-		return updatedLikeCount;
-	}
-	
-	@PostMapping("/unlike")
-	@ResponseBody
-	public int downlike (@RequestParam("blogPostNo") Integer blogPostNo) {
-		int updatedLikeCount = service.unlikecount(blogPostNo);
-		return updatedLikeCount;
+	public int like(@RequestParam("blogPostNo") Integer blogPostNo, HttpSession session) {
+
+		Integer uno = (Integer) session.getAttribute("uno");
+		
+		System.out.println("호히원 아이디:: "+ uno);
+
+		if (uno != 0 || uno != null) {
+			boolean isLiked = service.isUserLikedblogPost(uno, blogPostNo);
+			if (!isLiked) {
+				session.setAttribute("isliked", isLiked);
+				log.info(isLiked);
+				System.out.println(isLiked);
+				return service.uplikecount(blogPostNo,uno);
+			} else {
+				session.setAttribute("isliked", isLiked);
+				log.info(isLiked);
+				System.out.println(isLiked);
+				return service.unlikecount(blogPostNo,uno);
+			}
+		}
+		return 0;
 	}
 	
 }

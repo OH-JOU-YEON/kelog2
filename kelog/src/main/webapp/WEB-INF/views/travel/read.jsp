@@ -48,12 +48,13 @@
 					</div>
 					<p id="likeCount">좋아요: ${dto.likeCnt}</p>
 					
-					<button id="likeButton" data-board-id="${dto.travelBoardNo}">좋아요</button>
+					<button id="likeButton${dto.travelBoardNo}" onclick="toggleLike(${dto.travelBoardNo})">${isliked ? '좋아요 취소' : '좋아요'}</button>				
 					
-					<p id="dislikeCount">싫어요: ${dto.dislikeCnt}</p>
 					
-					<button id="dislikeButton" data-board-id="${dto.travelBoardNo}">싫어요</button>					
-					<!--end form-group  -->
+					<p id="unlikeCount">싫어요: ${dto.dislikeCnt}</p>
+					
+					<button id="unlikeButton${dto.travelBoardNo}" onclick="toggleunLike(${dto.travelBoardNo})">${isunliked ? '싫어요 취소' : '싫어요'}</button>			
+					
 					
 					<c:if test="${dto.nickName == user.nickName }">
 						<a class="btn btn-success" href="/travel/modify?travelBoardNo=${dto.travelBoardNo }">Modify</a>
@@ -102,105 +103,75 @@
 		    
 		    </script>
 <script>
-$(document).ready(function() {
-    // 좋아요 버튼 클릭 이벤트
-    $('#likeButton').on('click', function() {
-        var travelBoardNo = $(this).data('board-id');  // 게시물 번호
-        var email = '${user.email}';  // 세션에서 사용자 ID 가져오기 (예시)
+function toggleLike(travelBoardNo) {
+	
+    var email = '${user.email}';  // 세션에서 사용자 ID 가져오기 (예시)
 
-        console.log(email);
-        
-        if (!email) {
-            alert("로그인 후 좋아요를 누를 수 있습니다.");
-            return;  // 로그인되지 않으면 더 이상 진행하지 않음
-        }
-        
-        // 좋아요 상태에 따라 AJAX 요청을 다르게 보냄
-        var url = ($("#likeButton").text() === '좋아요') ? '/travel/like' : '/travel/unlike';
-        var action = ($("#likeButton").text() === '좋아요') ? 'like' : 'unlike';
-
-        $.ajax({
-            url: url,  // 좋아요/좋아요 취소에 맞는 URL로 요청
-            type: 'POST',  // HTTP 메소드
-            data: {
-                travelBoardNo: travelBoardNo,
-                email: email
-            },
-            dataType: "json",
-            success: function(updatedLikeCount) {
-                // 서버에서 받아온 업데이트된 좋아요 수로 갱신
-                 var currentLikeCount = parseInt($('#likeCount').text().replace('좋아요: ', ''));
-
-                // 좋아요 상태에 따라 카운트를 +1 또는 -1
-                if (action === 'like') {
-                    currentLikeCount += 1;  // 좋아요 눌렀을 때 +1
-                } else {
-                    currentLikeCount -= 1;  // 좋아요 취소했을 때 -1
-                }
-
-                // 새로운 좋아요 수 갱신
+    console.log(email);
+    
+    if (!email) {
+        alert("로그인 후 좋아요를 누를 수 있습니다.");
+        return;  // 로그인되지 않으면 더 이상 진행하지 않음
+    }
+    
+    $.ajax({
+        url: '/travel/like',
+        type: 'POST',
+        data: { travelBoardNo: travelBoardNo },
+        success: function() {
+        	var currentLikeCount = parseInt($('#likeCount').text().replace('좋아요: ', ''));
+        	console.log("성공");
+            // 좋아요 버튼 상태 변경
+            let likeButton = document.getElementById("likeButton" + travelBoardNo);
+            if (likeButton.textContent == "좋아요") {
+                likeButton.textContent = '좋아요 취소';
+                currentLikeCount += 1;
                 $('#likeCount').html('좋아요: ' + currentLikeCount); 
-                
-                // 버튼 텍스트 변경
-                var buttonText = (action === 'like') ? '좋아요 취소' : '좋아요';
-                $("#likeButton").text(buttonText);  // 버튼 텍스트 변경
-            },
-            error: function(e) {
-                console.log(e);
+            } else {
+                likeButton.textContent = '좋아요';
+                currentLikeCount -= 1;
+                $('#likeCount').html('좋아요: ' + currentLikeCount); 
             }
-        });
-    });
-});
-
-$(document).ready(function() {
-    // 좋아요 버튼 클릭 이벤트
-    $('#dislikeButton').on('click', function() {
-        var travelBoardNo = $(this).data('board-id');  // 게시물 번호
-        var email = '${user.email}';  
-        
-        console.log(email);
-
-        if (!email) {
-            alert("로그인 후 싫어요를 누를 수 있습니다.");
-            return;  // 로그인되지 않으면 더 이상 진행하지 않음
         }
-        
-        // 좋아요 상태에 따라 AJAX 요청을 다르게 보냄
-        var url = ($("#dislikeButton").text() === '싫어요') ? '/travel/dislike' : '/travel/undislike';
-        var action = ($("#dislikeButton").text() === '싫어요') ? 'dislike' : 'undislike';
-
-        $.ajax({
-            url: url,  
-            type: 'POST',  
-            data: {
-                travelBoardNo: travelBoardNo,
-                email: email
-            },
-            dataType: "json",
-            success: function(updateddisLikeCount) {
-                // 서버에서 받아온 업데이트된 좋아요 수로 갱신
-                 var currentdisLikeCount = parseInt($('#dislikeCount').text().replace('싫어요: ', ''));
-
-                // 싫어요 상태에 따라 카운트를 +1 또는 -1
-                if (action === 'dislike') {
-                	currentdisLikeCount += 1;  // 좋아요 눌렀을 때 +1
-                } else {
-                	currentdisLikeCount -= 1;  // 좋아요 취소했을 때 -1
-                }
-
-                // 새로운 싫어요 수 갱신
-                $('#dislikeCount').html('싫어요: ' + currentdisLikeCount); 
-                
-                // 버튼 텍스트 변경
-                var buttonText = (action === 'dislike') ? '싫어요 취소' : '싫어요';
-                $("#dislikeButton").text(buttonText);  // 버튼 텍스트 변경
-            },
-            error: function(e) {
-                console.log(e);
-            }
-        });
     });
-});
+}
+
+</script>
+
+<script>
+function toggleunLike(travelBoardNo) {
+	
+    var email = '${user.email}';  // 세션에서 사용자 ID 가져오기 (예시)
+
+    console.log(email);
+    
+    if (!email) {
+        alert("로그인 후 싫어요를 누를 수 있습니다.");
+        return;  // 로그인되지 않으면 더 이상 진행하지 않음
+    }
+    
+    $.ajax({
+        url: '/travel/unlike',
+        type: 'POST',
+        data: { travelBoardNo: travelBoardNo },
+        success: function() {
+        	var unLikeCount = parseInt($('#unlikeCount').text().replace('싫어요: ', ''));
+        	console.log("성공");
+            // 좋아요 버튼 상태 변경
+            let unlikeButton = document.getElementById("unlikeButton" + travelBoardNo);
+            if (unlikeButton.textContent == "싫어요") {
+            	unlikeButton.textContent = '싫어요 취소';
+                unLikeCount += 1;
+                $('#unlikeCount').html('싫어요: ' + unLikeCount); 
+            } else {
+            	unlikeButton.textContent = '싫어요';
+                unLikeCount -= 1;
+                $('#unlikeCount').html('싫어요: ' + unLikeCount); 
+            }
+        }
+    });
+}
+
 </script>
 		    
 <%@include file="../includes/footer.jsp"%>
