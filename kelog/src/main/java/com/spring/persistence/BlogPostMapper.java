@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.spring.domain.BlogPostDTO;
+import com.spring.domain.BlogReportDTO;
 
 public interface BlogPostMapper {
 	public void insert(BlogPostDTO dto);
@@ -33,5 +34,7 @@ public interface BlogPostMapper {
 	public int upLikecount(Integer blogPostNo);
 
 	public int unLikecount(Integer blogPostNo);
+
+	public void insertReport(BlogReportDTO dto);
 
 }

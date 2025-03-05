@@ -55,6 +55,7 @@ public class UserController {
 			log.info("membercontroller login: "+member);
 			session.setAttribute("user", member);
 			session.setAttribute("uno", member.getUno());
+			session.setAttribute("email", member.getEmail());
 			return "/oauth/google/loginSuccess";
 		}else {
 			
@@ -70,6 +71,7 @@ public class UserController {
 			// 로그인 성공
 			session.setAttribute("user", member);
 			session.setAttribute("uno", member.getUno());
+			session.setAttribute("email", member.getEmail());
 			return "redirect:/oauth/google/loginSuccess";
 		}else {
 			// 로그인 실패

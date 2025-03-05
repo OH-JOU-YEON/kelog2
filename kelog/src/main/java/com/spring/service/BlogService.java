@@ -19,4 +19,6 @@ public interface BlogService extends GenericService<BlogPostDTO, Integer> {
 	public int uplikecount(Integer blogPostNo, Integer uno);
 
 	public int unlikecount(Integer blogPostNo, Integer uno);
+
+	public void reportBlogPost(int blogPostNo, String email, String reportReason);
 }

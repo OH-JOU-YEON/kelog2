@@ -105,4 +105,24 @@ public class BlogPostController {
 		return 0;
 	}
 	
+	@PostMapping("/report")
+	public String reportPost(@RequestParam("blogPostNo") int blogPostNo,@RequestParam("reportReason") String reportReason, HttpSession session) {
+		
+	     String email = (String) session.getAttribute("email");  // 세션에서 사용자 이메일 가져오기
+	     
+	     System.out.println(session);
+	     
+	        if (email == null || reportReason.isEmpty()) {
+	            // 로그인하지 않았거나 신고 사유를 선택하지 않으면 에러 처리 후 리다이렉트
+	            return "redirect:/blog/read?blogPostNo="+blogPostNo;
+	        }
+
+	        // 서비스 계층에서 신고 데이터 처리
+	        service.reportBlogPost(blogPostNo, email, reportReason);
+	        
+	        // 신고 처리 후 해당 게시글 페이지로 리다이렉트
+	        return "redirect:/blog/read?blogPostNo=" + blogPostNo;
+	}
+	
+	
 }

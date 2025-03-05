@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.spring.domain.BlogPostDTO;
+import com.spring.domain.BlogReportDTO;
 import com.spring.persistence.BlogPostMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -66,6 +67,16 @@ public class BlogServiceImpl implements BlogService {
 	public int unlikecount(Integer blogPostNo, Integer uno) {
 		removeLike(uno, blogPostNo);
         return mapper.unLikecount(blogPostNo);
+	}
+
+	@Override
+	public void reportBlogPost(int blogPostNo, String email, String reportReason) {
+		BlogReportDTO dto = new BlogReportDTO();
+		dto.setBlogPostNo(blogPostNo);
+		dto.setEmail(email);
+		dto.setReportReason(reportReason);
+		
+		mapper.insertReport(dto);
 	}
 
 }

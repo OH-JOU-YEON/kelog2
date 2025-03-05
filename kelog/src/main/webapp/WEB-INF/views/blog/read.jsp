@@ -8,7 +8,39 @@
 </c:set>
 
 <%@include file="../includes/header.jsp"%>
+<div id="reportModal" class="modal">
+	<div class="modal-content">
+		<span class="close-btn" id="closeModal">&times;</span>
+		<h2>게시글 신고</h2>
+		<form id="reportForm" method="post" action="/blog/report">
+			<input class="form-control" type="hidden" name="blogPostNo"
+				value="${dto.blogPostNo }">
+			<div class="form-group">
+				<label>게시판 제목</label><input class="form-control" type="text"
+					readonly="readonly" name="title" value="${dto.title }">
+			</div>
+			<div class="form-group">
+				<label>신고자</label><input class="form-control" type="text"
+					readonly="readonly" name="nickName" value="${user.nickName}">
+			</div>
+			<div class="form-group">
+				<label>신고 사유</label> <select name="reportReason">
+					<option selected>::선택하세요::</option>
+					<option value="불법정보">불법정보</option>
+					<option value="욕설/인신공격">욕설/인신공격</option>
+					<option value="음란성/선정성">음란성/선정성</option>
+					<option value="영리목적/홍보성">영리목적/홍보성</option>
+					<option value="개인정보노출">개인정보노출</option>
+				</select>
+			</div>
 
+			<div class="modal-actions">
+				<button type="submit" class="btn btn-danger">신고</button>
+				<button type="button" class="btn btn-secondary" id="cancelBtn">취소</button>
+			</div>
+		</form>
+	</div>
+</div>
 <div id="page-wrapper">
 	<div class="row">
 		<div class="col-lg-12">
@@ -22,8 +54,8 @@
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-body">
-					 <input class="form-control" type="hidden"
-							name="blogPostNo" value="${dto.blogPostNo }">
+					<input class="form-control" type="hidden" name="blogPostNo"
+						value="${dto.blogPostNo }">
 
 					<!--end form-group  -->
 					<div class="form-group">
@@ -33,9 +65,9 @@
 					<!--end form-group  -->
 					<div class="form-group">
 						<label>Content</label>
-						<div id="editor" style="display:none;">${dto.content}</div>
+						<div id="editor" style="display: none;">${dto.content}</div>
 					</div>
-                		<div id="viewer"></div>
+					<div id="viewer"></div>
 					<!--end form-group  -->
 					<div class="form-group">
 						<label>Writer</label> <input class="form-control" name="nickName"
@@ -45,15 +77,19 @@
 						<label>RegDate</label> <input class="form-control" name="regDate"
 							readonly="readonly" value="${formattedRegDate }">
 					</div>
-					
+
 					<p id="likeCount">좋아요: ${dto.likeCnt}</p>
-					
-					<button id="likeButton${dto.blogPostNo}" onclick="toggleLike(${dto.blogPostNo})">${isliked ? '좋아요 취소' : '좋아요'}</button>
+
+					<button id="likeButton${dto.blogPostNo}"
+						onclick="toggleLike(${dto.blogPostNo})">${isliked ? '좋아요 취소' : '좋아요'}</button>
 					<!--end form-group  -->
 					<c:if test="${dto.nickName == user.nickName }">
-						<a class="btn btn-success" href="/blog/modify?blogPostNo=${dto.blogPostNo }">Modify</a>
+						<a class="btn btn-success"
+							href="/blog/modify?blogPostNo=${dto.blogPostNo }">Modify</a>
 					</c:if>
-					<a class="btn btn-success" href="/blog/list">List</a>
+					<a class="btn btn-success" href="/blog/list">List</a> <button
+						class="btn btn-success post-category bg-primary" id="reportBtn"
+						style="position: absolute; right: 0;">신고하기</button>
 				</div>
 				<!-- end panel-body -->
 			</div>
@@ -64,8 +100,40 @@
 	<!--end row -->
 </div>
 <!-- end page-wrapper -->
-			    
-		    <script>
+<script>
+
+    const reportBtn = document.getElementById('reportBtn');
+    const reportModal = document.getElementById('reportModal');
+    const closeModal = document.getElementById('closeModal');
+    const cancelBtn = document.getElementById('cancelBtn');
+
+    // 신고 버튼 클릭시 모달창 띄움
+    reportBtn.onclick = function() {
+        reportModal.style.display = 'block';
+    }
+
+    // 모달 닫기 X 버튼을 클릭시 모달 닫기
+    closeModal.onclick = function() {
+        reportModal.style.display = 'none';
+    }
+
+    // 취소 버튼을 클릭시 모달 닫기
+    cancelBtn.onclick = function() {
+        reportModal.style.display = 'none';
+    }
+
+    // 모달 바깥 부분을 클릭시 모달 닫기
+    window.onclick = function(event) {
+        if (event.target === reportModal) {
+            reportModal.style.display = 'none';
+        }
+    }
+
+</script>
+
+
+
+<script>
 		    
 			    $(function(){
 		        	ToView();
@@ -95,7 +163,7 @@
 		        };
 
 		    </script>
-		    
+
 <script>
 function toggleLike(blogPostNo) {
 	
@@ -130,5 +198,5 @@ function toggleLike(blogPostNo) {
     });
 }
 
-</script>		    
+</script>
 <%@include file="../includes/footer.jsp"%>

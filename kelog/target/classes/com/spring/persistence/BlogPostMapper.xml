@@ -38,5 +38,10 @@
     DELETE FROM liketable WHERE userno = #{uno} AND bloglikeno = #{blogPostNo}
 </delete>
 
+<insert id="insertReport">
+	INSERT INTO report (blogPostNo, email, reportReason) VALUES(#{blogPostNo},#{email},#{reportReason})
+</insert>
+
+
 
 </mapper>
