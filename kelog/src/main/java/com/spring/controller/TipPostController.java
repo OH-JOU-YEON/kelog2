@@ -60,4 +60,9 @@ public class TipPostController {
 		rttr.addFlashAttribute("result", "del");
 		return "redirect:/tip/list";
 	}
+	@GetMapping("/report")
+	public void report(Integer tipBoardNo, Model model) {
+		TipPostDTO dto = service.read(tipBoardNo);
+		model.addAttribute("report", dto);
+	}
 }

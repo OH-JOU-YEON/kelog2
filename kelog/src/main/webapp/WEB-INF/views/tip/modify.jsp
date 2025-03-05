@@ -38,7 +38,7 @@
 						<div id="editor">${dto.content }</div>
 						<div class="form-group">
 							<label>nickName</label> <input class="form-control" name="nickName"
-								readonly="readonly" value="${dto.nickName }">
+								readonly="readonly" value="${nickName }">
 						</div>
 						<div class="form-group">
 							<label>RegDate</label> 

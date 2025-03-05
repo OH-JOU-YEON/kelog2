@@ -21,6 +21,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.spring.domain.GoogleOAuthURLDTO;
 import com.spring.domain.UserDTO;
+import com.spring.service.NickNameService;
 import com.spring.service.UserService;
 
 import java.io.*;
@@ -37,6 +38,7 @@ import lombok.extern.log4j.Log4j;
 public class UserController {
 	
 	private final UserService userService;
+	private final NickNameService nickNameService;
 	
 	
 	@RequestMapping("/main")
@@ -50,9 +52,11 @@ public class UserController {
 	public String loginForm(@RequestParam("email") String email,UserDTO user, HttpSession session,RedirectAttributes rttr) {
 		UserDTO member = userService.selectUser(email);
 		if(member != null) {
+			String nick = nickNameService.selectNickName(member.getUno());
 			// 로그인 성공
 			log.info("membercontroller login: "+member);
 			session.setAttribute("user", member);
+			session.setAttribute("nickName", nick);
 			return "/oauth/google/loginSuccess";
 		}else {
 			
@@ -65,8 +69,10 @@ public class UserController {
 	public String login(UserDTO user, HttpSession session, RedirectAttributes rttr) {
 		UserDTO member = userService.login(user);
 		if(member != null) {
+			String nick = nickNameService.selectNickName(member.getUno());
 			// 로그인 성공
 			session.setAttribute("user", member);
+			session.setAttribute("nickName", nick);
 			return "redirect:/oauth/google/loginSuccess";
 		}else {
 			// 로그인 실패
@@ -79,7 +85,7 @@ public class UserController {
 	
 
 	@PostMapping("/create")
-	public String register(UserDTO member, HttpSession session,@RequestParam("file") MultipartFile file, RedirectAttributes rttr) {
+	public String register(UserDTO member,@RequestParam("nickName") String nickName ,HttpSession session,@RequestParam("file") MultipartFile file, RedirectAttributes rttr) {
 		if (!file.isEmpty()) {
 			String uploadFolder = "C:\\upload"; // 업로드 경로 설정
 			String originalFileName = file.getOriginalFilename(); // 실제 첨부된 파일이름
@@ -121,7 +127,10 @@ public class UserController {
 		log.info("membercontroller :"+member);
 		userService.created(member);
 		UserDTO user = userService.selectUser(member.getEmail());
+		nickNameService.created(nickName,user.getUno());
+		String Name = nickNameService.selectNickName(user.getUno());
 		session.setAttribute("user", user);
+		session.setAttribute("nickName", Name);
 		return "/oauth/google/loginSuccess";
 
 	}
@@ -129,8 +138,11 @@ public class UserController {
 	public void get(@RequestParam("uno") Integer uno, Model model) {
 		log.info("uno: " + uno);
 		UserDTO user = userService.select(uno);
+		String nickName = nickNameService.selectNickName(uno);
 
-		log.info(user);
+		log.info("nickName : "+nickName);
+		log.info("user : "+user);
+		model.addAttribute("nickName", nickName);
 		model.addAttribute("user", user);
 	}
 	@PostMapping("/read")
@@ -141,7 +153,7 @@ public class UserController {
 	
 	@PostMapping("/modify")
 	// 파라미터 자동수집
-	public String modify(@ModelAttribute UserDTO member, HttpSession session,@RequestParam("file") MultipartFile file ,RedirectAttributes rttr) {
+	public String modify(@ModelAttribute UserDTO member,@RequestParam("nickName") String nickName ,HttpSession session,@RequestParam("file") MultipartFile file ,RedirectAttributes rttr) {
 		if (!file.isEmpty()) {
 			String uploadFolder = "C:\\upload"; // 업로드 경로 설정
 			String originalFileName = file.getOriginalFilename(); // 실제 첨부된 파일이름
@@ -170,9 +182,14 @@ public class UserController {
 			}
 		}
 		int updateRow = userService.modify(member);
+		int updatenick = nickNameService.modify(nickName,member.getUno());
+		
 		log.info("modify updateRow: " + updateRow);
+		log.info("modify updatenick: " + updatenick);
 		UserDTO user = userService.select(member.getUno());
+		String nN = nickNameService.selectNickName(user.getUno());
 		session.setAttribute("user", user);
+		session.setAttribute("nickName", nN);
 		return "/user/read"; // 목록 페이지로 이동(get방식)
 	}
 	

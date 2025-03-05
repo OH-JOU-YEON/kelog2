@@ -11,7 +11,7 @@
 	<form>
 		<div>
 			<label>nickName</label> 
-			<input name="nickName" type="text" value="${user.nickName }" >
+			<input name="nickName" type="text" value="${nickName }" >
 		</div>
 		<div>
 			<label>email</label> 

@@ -22,7 +22,7 @@
 	</div>
 	<div>
 		<label>nickName</label> <input name="nickName" type="text"
-			value="${user.nickName }" readonly="readonly">
+			value="${nickName }" readonly="readonly">
 	</div>
 	<div>
 		<label>email</label> <input name="email" type="text"

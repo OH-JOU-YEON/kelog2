@@ -15,10 +15,10 @@ import com.spring.service.TipReplyService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
-//@RequestMapping("/reply/*")
-//@RequiredArgsConstructor
-//@Controller
-//@Log4j
+@RequestMapping("/reply/*")
+@RequiredArgsConstructor
+@Controller
+@Log4j
 public class ReplyController {
 	
 //	private final BlogReplyService Blogservice;
@@ -64,6 +64,6 @@ public class ReplyController {
 //		return "redirect:/tip/read?blogPostNo="+tipBoardNo;
 //	}	
 //	
-	
-	
+//	
+//	
 }

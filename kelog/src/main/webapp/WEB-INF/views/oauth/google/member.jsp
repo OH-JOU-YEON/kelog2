@@ -13,9 +13,9 @@
  	<label>email</label>
     <input type="text" name="email" value="${user.email}" readonly="readonly">
     <label>nickName</label>
-    <input type="text" name="nickName" value="${user.name}" >
+    <input type="text" name="nickName" value="${user.name}">
     <label>profileImg</label> 
-	<input id="i_imageFileName" name="file" type="file" value="${user.picture}" >
+	<input id="i_imageFileName" name="file" type="file" value="${user.picture}">
 	<img id="preview" alt="업로드된 파일" src="${user.picture}"
 									style="width: 300px; height: 300px">
 	<input type="hidden" name="profileImg" value="${user.picture}">
