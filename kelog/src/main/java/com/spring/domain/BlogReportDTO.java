@@ -7,4 +7,6 @@ public class BlogReportDTO {
 	private int blogPostNo;
 	private String email;
 	private String reportReason;
+	
+	//ㄹㄴㄹㅇㄴㄹㄴㅇㄹㄴㅇㄹㄴ
 }
