@@ -8,5 +8,4 @@ public class BlogReportDTO {
 	private String email;
 	private String reportReason;
 	
-	//ㄹㄴㄹㅇㄴㄹㄴㅇㄹㄴㅇㄹㄴ
 }
