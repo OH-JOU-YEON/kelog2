@@ -2497,7 +2497,7 @@ textarea.form-control.is-invalid {
   display: inline-block;
   font-weight: 700;
   line-height: 1.5;
-  text-align: center;
+  text-align: center !important;
   vertical-align: middle;
   user-select: none;
   background-color: transparent;
@@ -2536,19 +2536,19 @@ fieldset:disabled .btn {
 }
 .btn-primary {
   color: #000;
-  background-color: #ff5e3a;
-  border-color: #ff5e3a;
+  background-color: #9edbff;
+  border-color: #9eb3ff;
 }
 .btn-primary:hover {
   color: #000;
-  background-color: #ff7658;
-  border-color: #ff6e4e;
+  background-color: #bee7ff;
+  border-color: #9eb3ff;
 }
 .btn-check:focus + .btn-primary,
 .btn-primary:focus {
   color: #000;
-  background-color: #ff7658;
-  border-color: #ff6e4e;
+  background-color: #00a2ff;
+  border-color: #9eb3ff;
   box-shadow: 0 0 0 0.25rem rgba(217, 80, 49, 0.5);
 }
 .btn-check:active + .btn-primary,
@@ -2557,8 +2557,8 @@ fieldset:disabled .btn {
 .btn-primary:active,
 .show > .btn-primary.dropdown-toggle {
   color: #000;
-  background-color: #ff7e61;
-  border-color: #ff6e4e;
+  background-color: #369ad4;
+  border-color: #9edbff;
 }
 .btn-check:active + .btn-primary:focus,
 .btn-check:checked + .btn-primary:focus,
@@ -2570,8 +2570,8 @@ fieldset:disabled .btn {
 .btn-primary.disabled,
 .btn-primary:disabled {
   color: #000;
-  background-color: #ff5e3a;
-  border-color: #ff5e3a;
+  background-color: #2b6180;
+  border-color: #2b6180;
 }
 .btn-success {
   color: #000;
@@ -2710,8 +2710,8 @@ fieldset:disabled .btn {
 .btn-outline-primary:active,
 .btn-outline-primary:hover {
   color: #000;
-  background-color: #ff5e3a;
-  border-color: #ff5e3a;
+  background-color: #2d89be;
+  border-color: #2d89be;
 }
 .btn-check:active + .btn-outline-success:focus,
 .btn-check:checked + .btn-outline-success:focus,
@@ -3833,7 +3833,7 @@ fieldset:disabled .btn {
 .page-link:hover {
   z-index: 2;
   color: #fff;
-  background-color: #ff5e3a;
+  background-color: #2d89be;
   border-color: #dee2e6;
 }
 .page-link:focus {
@@ -5092,7 +5092,7 @@ fieldset:disabled .btn {
 }
 .link-primary:focus,
 .link-primary:hover {
-  color: #ff7e61;
+  color: #2d89be;
 }
 .link-success {
   color: #08ddc1;

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.persistence.TipPostMapper">
+
+	<insert id="insert">
+		INSERT INTO tipboard (title, content,nickName)
+		VALUES(#{title},#{content},#{nickName});
+	</insert>
+
+	<select id="read">
+		SELECT * FROM tipboard WHERE tipBoardNo = #{tipBoardNo}
+	</select>
+
+	<update id="update">
+		UPDATE tipboard SET title = #{title}, content = #{content} WHERE tipBoardNo
+		= #{tipBoardNo}
+	</update>
+
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(tipBoardNo) FROM tipboard;
+	</select>
+	
+		<select id="listwithPasing" parameterType="Criteria" resultType="TipPostDTO">
+	SELECT * FROM tipboard ORDER BY tipBoardNo DESC LIMIT #{start},#{amount};	
+	</select>
+	<update id="upLikecount">
+	UPDATE tipboard SET likeCnt = likeCnt + 1 WHERE tipBoardNo = #{tipBoardNo}
+</update>	
+
+<update id="unLikecount">
+	UPDATE tipboard SET likeCnt = likeCnt - 1 WHERE tipBoardNo = #{tipBoardNo}
+</update>
+
+<select id="isLike" resultType="boolean">
+	SELECT COUNT(no) > 0 FROM liketable WHERE userno = #{uno} AND tiplikeno = #{tipBoardNo}
+</select>
+
+<insert id="addlike">
+    INSERT INTO liketable (userno, tiplikeno) VALUES (#{uno}, #{tipBoardNo})
+</insert>
+
+<delete id="removelike">
+    DELETE FROM liketable WHERE userno = #{uno} AND tiplikeno = #{tipBoardNo}
+</delete>
+</mapper>

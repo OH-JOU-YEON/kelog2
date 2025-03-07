@@ -6,12 +6,12 @@
 <mapper namespace="com.spring.persistence.UserMapper">
 
 	<insert id="insert">
-		INSERT INTO user (email, nickName, profileImg)
-		VALUES(#{email},#{nickName},#{profileImg})
+		INSERT INTO user (email, profileImg)
+		VALUES(#{email},#{profileImg})
 	</insert>
 
 <update id="update">
-		UPDATE user SET nickName = #{nickName}, profileImg=#{profileImg}
+		UPDATE user SET profileImg=#{profileImg}
 		WHERE uno = #{uno}
 	</update>
 </mapper>

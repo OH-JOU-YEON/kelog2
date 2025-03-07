@@ -7,7 +7,6 @@ import lombok.Data;
 public class UserDTO {
  private int uno;
  private String email;
- private String nickName;
  private String profileImg;
  private Role role;
  private Activity activity;
@@ -16,12 +15,11 @@ public class UserDTO {
 	    admin, user
 	}
  public enum Activity {
-	 Active, Inactive
+	 active, inactive
  }
-public UserDTO(String email, String nickName, String profileImg) {
+public UserDTO(String email, String profileImg) {
 	super();
 	this.email = email;
-	this.nickName = nickName;
 	this.profileImg = profileImg;
 }
 

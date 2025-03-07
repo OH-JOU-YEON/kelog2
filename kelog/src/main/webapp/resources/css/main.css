@@ -131,6 +131,18 @@ if the page has a “left panel”, add a class for BODY -- ".page-has-left-pane
 if the page has a “right panel”, add a class for BODY -- ".page-has-right-panels"
 
 */
+@font-face {
+  font-family: 'Ownglyph_wiseelist-Rg';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2501-1@1.1/Ownglyph_wiseelist-Rg.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Ownglyph_wiseelist-Rg', sans-serif;
+}
+
+
 .header {
   height: 70px;
   background-color: #3f4257;
@@ -181,6 +193,10 @@ if the page has a “right panel”, add a class for BODY -- ".page-has-right-pa
 
 .header-spacer--standard {
   height: 86px; }
+
+.search-box{
+  margin-top: 60px;
+}
 
 .search-bar {
   float: left;
@@ -473,10 +489,6 @@ if the page has a “right panel”, add a class for BODY -- ".page-has-right-pa
   position: relative;
   margin: 0;
   padding: 0; }
-  .top-header.top-header-favorit .top-header-thumb {
-    background-image: url("../img/main.jpg"); 
-    width: 1920px;
-  } 
   .top-header.top-header-favorit .top-header-author {
     transform: translate(0);
     left: 100px;
@@ -498,14 +510,11 @@ if the page has a “right panel”, add a class for BODY -- ".page-has-right-pa
 
 .top-header-thumb {
   position: relative;
-  border-radius: 5px 5px 0 0;
   height: 650px;
-  background-image: url("../img/top-header1.webp");
+  background-image: url("../img/mainBoard.jpg");
   background-size: cover;
-  background-repeat: no-repeat;
   background-position: center;
-  background-color: #fff;
-  background-color: var(--olympus-white-color); }
+ }
   .top-header-thumb:after {
     content: '';
     display: block;
@@ -963,9 +972,7 @@ if the page has a “right panel”, add a class for BODY -- ".page-has-right-pa
     opacity: 0; }
   .header--standard-landing .header-menu .nav-item a, .header--standard-landing .header-menu li a {
     color: #fff;
-    color: var(--olympus-white-color);
     fill: #fff;
-    fill: var(--olympus-white-color);
     display: block; }
   .header--standard-landing .header-menu .nav-item.js-expanded-menu, .header--standard-landing .header-menu li.js-expanded-menu {
     visibility: visible;
@@ -2480,10 +2487,19 @@ button.btn-md {
   font-size: 0.75rem;
   border-radius: 0.3rem; }
 
-button.btn-md-2 {
-  padding: .8rem 2.1rem;
-  font-size: 0.688rem;
-  border-radius: 0.3rem; }
+  button.btn-md-2 {
+    padding: .8rem 2.1rem; /* 양옆의 패딩 크기를 유지 */
+    font-size: 0.688rem;
+    border-radius: 0.3rem;
+    text-align: center !important; /* 텍스트를 중앙으로 정렬 */
+    line-height: 1.5; /* 텍스트가 세로 중앙에 정렬되도록 조정 */
+    display: inline-block; /* 버튼 크기에 맞게 텍스트가 중앙에 위치하도록 */
+    width: auto !important; /* 버튼 너비 자동 조정 */
+    max-width: 100%; /* 버튼이 부모의 너비를 넘지 않도록 설정 */
+    white-space: nowrap; /* 텍스트가 한 줄로 유지 */
+    overflow: hidden; /* 넘치는 텍스트는 숨기기 */
+    text-overflow: ellipsis; /* 넘치는 텍스트는 '...'으로 표시 */
+}
 
 button.btn-lg {
   padding: 1rem 3rem; }
@@ -2499,7 +2515,6 @@ button.btn-lg {
 
 img {
   vertical-align: unset;
-  max-width: 100%;
   height: auto;
   display: inline-block; }
 
@@ -2634,9 +2649,12 @@ img {
   border-radius: 5px;
   border: 1px solid #e6ecf5;
   border: 1px solid var(--olympus-border-color);
-  margin-bottom: 35px; }
+  margin-bottom: 35px; 
+  margin-top: 20px;
+}
   .ui-block .ui-block-title:last-child {
-    border-bottom: 0; }
+    border-bottom: 0;
+   }
 
 .ui-block-title {
   padding: 23px 25px 18px;
@@ -2769,7 +2787,6 @@ img {
 .btn {
   color: #fff;
   color: var(--olympus-white-color);
-  margin-bottom: 15px;
   position: relative; }
   .btn:hover {
     opacity: .8;
@@ -2910,17 +2927,13 @@ button:hover {
       width: 22px; }
 
 .btn-primary:hover {
-  background-color: #ff763a;
-  background-color: var(--olympus-orange);
-  border-color: #ff763a;
-  border-color: var(--olympus-orange);
+  background-color: #146fa3;
+  border-color: #9eb3ff;
   opacity: 1; }
 
 .btn-secondary:hover {
-  background-color: #ff5e3a;
-  background-color: var(--olympus-primary-color);
-  border-color: #ff5e3a;
-  border-color: var(--olympus-primary-color);
+  background-color: #9edbff;
+  border-color: #9eb3ff;
   opacity: 1; }
 
 .btn-purple {
@@ -4527,7 +4540,7 @@ fieldset[disabled] .checkbox, fieldset[disabled] .checkbox input[type=checkbox],
   top: 50%;
   transform: translate(0, -50%); }
   .btn-next:hover, .btn-prev:hover, .btn-next-without:hover, .btn-prev-without:hover {
-    fill: #ff5e3a;
+    fill: #2bb1ff;
     fill: var(--olympus-primary-color); }
 
 .btn-next, .btn-next-without {
@@ -4738,7 +4751,7 @@ fieldset[disabled] .checkbox, fieldset[disabled] .checkbox input[type=checkbox],
 .registration-login-form {
   border: 1px solid #e6ecf5;
   border: 1px solid var(--olympus-border-color);
-  border-radius: 0 5px 5px 0;
+  border-radius: 5px;
   background-color: #fff;
   background-color: var(--olympus-white-color);
   overflow: hidden;
@@ -16865,6 +16878,244 @@ Build date: 2018-12-12 00:07:25
   내가 직접 추가한 CSS 코드들 - 시작
   */
 
+  /* 이전/다음 버튼에 화살표 추가 */
+.pagination .page-item .page-link {
+  background: none;
+  border: none;
+  color: #007bff;
+  padding: 10px 15px;
+  text-decoration: none;
+}
+
+.pagination .page-item .page-link:hover {
+  background-color: rgba(0, 123, 255, 0.1);
+  color: #0056b3;
+}
+
+/* 1, 2, 3 페이지 번호 버튼 */
+.pagination .page-item .page-link {
+  border: 1px solid transparent;
+  padding: 10px 15px;
+}
+
+.pagination .page-item:hover .page-link {
+  border-color: #007bff;  /* 마우스를 올리면 테두리가 보이게 */
+  color: #007bff;
+}
+
+.pagination .page-item.disabled .page-link {
+  color: #6c757d; /* disabled 상태에서 회색 텍스트 */
+  pointer-events: none;
+}
+
+/* 이전/다음 버튼에 화살표 모양 */
+.pagination .page-item .page-link span {
+  font-size: 16px;
+}
+
+
+
+
+/* 드롭다운 메뉴 기본 스타일 */
+.login-set-item {
+    position: relative;
+}
+
+.login-drop-menu {
+    position: absolute;
+    top: 100%; /* 버튼 바로 아래에 표시 */
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100px;
+    display: none; /* 기본적으로 숨겨짐 */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.login-drop-menu li {
+    border-bottom: 1px solid #ddd;
+}
+
+.login-drop-menu li:last-child {
+    border-bottom: none;
+}
+
+.login-drop-menu a {
+    display: block;
+    padding: 10px;
+    color: #333 !important;
+    text-decoration: none;
+    background-color: #fff;
+}
+
+.login-drop-menu a:hover {
+    background-color: #f5f5f5;
+}
+
+
+
+
+
+  .main-row {
+    position: relative; /* 텍스트가 부모 요소에 상대적으로 위치할 수 있도록 설정 */
+}
+
+
+.overlay-text {
+  position: absolute; /* 텍스트를 상위 요소 위에 위치시킴 */
+  top: 50%; /* 세로 중앙 */
+  left: 50%; /* 가로 중앙 */
+  transform: translate(-100%, -50%); /* 정확히 중앙 정렬 */
+  color: white; /* 텍스트 색상 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+  z-index: 10; /* 텍스트가 이미지 위에 표시되도록 */
+  padding: 0 20px; /* 화면 크기 줄어들 때 텍스트가 화면을 벗어나지 않도록 패딩 추가 */
+}
+
+/* 반응형 웹을 위한 미디어 쿼리 */
+@media (max-width: 1200px) {
+  .overlay-text h1 {
+    font-size: 5vw; /* 큰 화면에서 5%의 너비 비율로 텍스트 크기 설정 */
+  }
+  .overlay-text p {
+    font-size: 3vw; /* 작은 화면에서 적당히 작은 텍스트 크기 설정 */
+  }
+}
+
+@media (max-width: 768px) {
+  .overlay-text h1 {
+    font-size: 6vw; /* 더 작은 화면에서는 텍스트 크기를 더 키운다 */
+  }
+  .overlay-text p {
+    font-size: 4vw; /* 더 작은 화면에서 적당히 큰 텍스트 크기 설정 */
+  }
+}
+
+@media (max-width: 480px) {
+  .overlay-text h1 {
+    font-size: 8vw; /* 매우 작은 화면에서는 텍스트 크기를 더 키운다 */
+  }
+  .overlay-text p {
+    font-size: 5vw; /* 아주 작은 화면에서는 텍스트 크기를 더욱 키운다 */
+  }
+}
+
+
+.overlay-text h1 {
+  font-size: 30px;
+  margin: 0;
+}
+
+.overlay-text p {
+  font-size: 18px;
+}
+
+/* 둥근 영역 설정 */
+.image-container {
+  width: 30vw;  /* 화면 너비의 30%로 크기 설정 */
+  height: 30vw; /* 화면 너비의 30%로 크기 설정 */
+  border-radius: 50%; /* 둥근 모양 */
+  overflow: hidden; /* 이미지가 영역을 넘지 않도록 설정 */
+  position: absolute;
+  top: 50%; /* 상단 중앙 정렬 */
+  left: 50%; /* 좌측 중앙 정렬 */
+  transform: translate( 20%, -50%); /* 정확히 중앙 정렬 */
+  z-index: 10; /* 이미지 위에 텍스트가 보이도록 */
+}
+
+/* 슬라이더 영역 설정 */
+.image-slider {
+  display: flex;
+  transition: transform 1s ease-in-out; /* 슬라이드 전환 애니메이션 */
+  width: 100%; /* 슬라이드 영역의 크기를 100%로 설정 */
+}
+
+/* 개별 이미지 설정 */
+.image-container .image-slider .image-slide img.img-fluid {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important; /* 이미지 비율을 유지하면서 영역에 꽉 차도록 설정 */
+}
+
+/* 반응형 웹을 위한 미디어 쿼리 */
+
+/* 화면 크기가 1200px 이상일 경우 */
+@media (min-width: 1200px) {
+  .image-container {
+    width: 500px;  /* 1200px 이상일 때는 고정 크기 */
+    height: 500px; /* 1200px 이상일 때는 고정 크기 */
+  }
+}
+
+/* 화면 크기가 768px 이상, 1200px 미만일 경우 */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .image-container {
+    width: 30vw;  /* 화면 너비의 40%로 크기 설정 */
+    height: 30vw; /* 화면 너비의 40%로 크기 설정 */
+  }
+}
+
+/* 화면 크기가 768px 미만일 경우 (모바일 화면) */
+@media (max-width: 767px) {
+  .image-container {
+    width: 30vw;  /* 화면 너비의 50%로 크기 설정 */
+    height: 30vw; /* 화면 너비의 50%로 크기 설정 */
+  }
+}
+
+
+
+  /* 다국어 기능 */
+  .language-tabs {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 ;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    display: none; /* 기본적으로 숨겨놓기 */
+    z-index: 999; /* 드롭다운이 다른 요소들 위에 보이도록 */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: auto; /* 자동으로 넓이 맞추기 */
+}
+
+.language-tabs li {
+    display: inline-block; /* 한 줄에 표시 */
+    padding: 6px 12px;
+    cursor: pointer;
+    border-right: 1px solid #ccc; /* 구분선 추가 */
+}
+
+.language-tabs li:last-child {
+    border-right: none; /* 마지막 항목에는 구분선 없음 */
+}
+
+.language-tabs li:hover {
+    background-color: #f0f0f0;
+}
+
+.language-tabs li a {
+    text-decoration: none;
+    color: #333 !important;
+    font-size: 14px;
+    display: block; /* 링크가 전체 영역을 차지하도록 설정 */
+    padding: 5px 10px;
+}
+
+.language-tabs li a:hover {
+    color: #007bff;
+}
+
+.language-tabs .selected {
+    background-color: #007bff;
+    color: white; /* 선택된 항목의 텍스트 색 */
+}
+
+
+
+
   .info {
     display: flex;
     align-items: center; /* 세로 중앙 정렬 */
@@ -17065,6 +17316,58 @@ Build date: 2018-12-12 00:07:25
     padding: 25px;
   }
 
+
+  .ui-tabs {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+    padding: 0;
+
+  }
+  .ui-tabs li {
+    margin: 0;
+  }
+  .ui-tabs li a {
+    text-decoration: none;
+    border: none;
+    border-radius: 5px 5px 0 0;
+    display: block;
+    padding: 10px 16px;
+    background: #f2f2f2;
+    transition: background 0.2s;
+    border: 1px solid #ccc; 
+  }
+  .ui-tabs li a:hover {
+    background: #e2e2e2;
+  }
+  .ui-tabs li.active a {
+    background: #fff;
+    font-weight: 600;
+    position: relative;
+    z-index: 2;
+  }
+
+
+  .outer-container {
+    position: relative;
+    margin-top: 5rem; 
+  }
+
+
+  .outer-border {
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    padding: 20px;
+  }
+
+
+  .tabs-outside {
+    position: absolute;
+    top: 0;
+    right: 20px; 
+    transform: translateY(-50%); 
+  }
 
 
    /*

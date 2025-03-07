@@ -724,7 +724,7 @@
 					</div>
 				</c:forEach>
 			</div>					
-			<button id="regBtn" type="button" class="btn btn-primary btn-md-2">등록하기</button>
+			<button id="regBtn" type="button" class="btn btn-primary btn-md-2">글등록</button>
 
 			<!-- Pagination -->
 
@@ -811,9 +811,18 @@
 	}
 	
 	$(document).ready(function() {
-		$("#regBtn").on("click", function() {
-			self.location = "/blog/created";
-		});
+		var email = '${user.email}';
+	
+			$("#regBtn").on("click", function() {
+				if(!email){
+					alert("로그인 후 글 등록할 수 있습니다.");
+		   	        return; 
+				}else{
+					self.location = "/blog/created";
+				}
+			});
+			
+		
 
 		$(".close, .btn-secondary").on("click", function() {
 			$("#mymodal").modal("hide");
