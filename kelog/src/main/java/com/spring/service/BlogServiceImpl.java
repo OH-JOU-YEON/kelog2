@@ -1,12 +1,22 @@
 package com.spring.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.domain.BlogDTO;
 import com.spring.domain.BlogPostDTO;
 import com.spring.domain.BlogReportDTO;
+import com.spring.domain.UserDTO;
+import com.spring.domain.DTOS.BlogNoAndNickNameVO;
+import com.spring.domain.DTOS.BlogProfileDTO;
+import com.spring.domain.DTOS.logDTO;
+import com.spring.persistence.BlogMapper;
 import com.spring.persistence.BlogPostMapper;
+import com.spring.persistence.NickNameMapper;
+import com.spring.persistence.UserMapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -17,6 +27,15 @@ import lombok.extern.log4j.Log4j;
 public class BlogServiceImpl implements BlogService {
 
 	private final BlogPostMapper mapper;
+	
+	@Autowired
+	private final UserMapper usermapper; 
+	
+	@Autowired
+	private final BlogMapper blogMapper; 
+	
+	@Autowired
+	private final NickNameMapper nickNameMapper; 
 
 	@Override
 	public void created(BlogPostDTO dto) {
@@ -77,6 +96,63 @@ public class BlogServiceImpl implements BlogService {
 		dto.setReportReason(reportReason);
 		
 		mapper.insertReport(dto);
+	}
+	
+	
+	public BlogNoAndNickNameVO getblogNoAndNickName(String email) {
+		
+		UserDTO userDTO = usermapper.selectMember(email); 
+		
+		BlogDTO blogDTO = blogMapper.findBlogByUserNo(userDTO.getUno()); 
+		
+		String nickName = nickNameMapper.selectNickName(userDTO.getUno()); 
+		
+		return new BlogNoAndNickNameVO(blogDTO.getBlogNo(),nickName); 
+		
+		
+	}
+	
+	
+	public BlogProfileDTO getBlogProfileByBlogName(String blogName,String email) {
+		
+		BlogDTO blogDTO = blogMapper.findBlogByBlogName(blogName); 
+		
+		UserDTO userDTO = usermapper.select(blogDTO.getUno()); 
+		
+		boolean mineOrNot; 
+		
+		if(userDTO.getEmail() == email) {
+			mineOrNot = true; 
+		}else {
+			mineOrNot = false; 
+		}
+		
+		return new BlogProfileDTO(userDTO,mineOrNot); 
+	}
+	
+	
+	public BlogDTO getBlogByBlogNameAndUno(String blogName,int uno) {
+		
+		BlogDTO blogDTO = blogMapper.findBlogByBlogName(blogName); 
+		
+		if(blogDTO == null) {
+			
+			blogDTO = new BlogDTO(uno,blogName); 
+			
+			blogMapper.insert(blogDTO);
+		}
+		
+		return blogDTO; 
+	}
+	
+	
+	public List<logDTO> getblogPosts(String blogName) {
+		
+		BlogDTO blogDTO = blogMapper.findBlogByBlogName(blogName); 
+		
+		
+		return mapper.findAllByBlogNo(blogDTO.getBlogNo()).stream().map(s -> new logDTO(s)).collect(Collectors.toList()); 
+		
 	}
 
 }

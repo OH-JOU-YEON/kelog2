@@ -8,11 +8,14 @@ import org.apache.ibatis.annotations.Select;
 
 import com.spring.domain.BlogPostDTO;
 import com.spring.domain.BlogReportDTO;
+import com.spring.domain.Criteria;
 
 public interface BlogPostMapper {
 	public void insert(BlogPostDTO dto);
 	
 	public BlogPostDTO read(int blogPostNo);
+	
+	
 
 	
 	public int update(BlogPostDTO dto);
@@ -22,6 +25,10 @@ public interface BlogPostMapper {
 
 	@Select("SELECT * FROM blogPost ORDER BY blogPostNo DESC ")
 	public List<BlogPostDTO> readAll();
+	
+	
+	@Select("SELECT * FROM blogPost WHERE blogNo = #{blogNo} ")
+	public List<BlogPostDTO> findAllByBlogNo(int blogNo, Criteria cri);
 
 	// 좋아요
 	

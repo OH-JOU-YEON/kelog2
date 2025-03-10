@@ -16,7 +16,7 @@ import java.util.UUID;
 public class FileApiController {
 
     // 파일 업로드 경로
-
+	
     private final String uploadDir = Paths.get("C:", "tui-editor", "upload").toString();
     /**
      * 에디터 이미지 업로드

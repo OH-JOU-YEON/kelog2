@@ -20,4 +20,7 @@ public class BlogPostDTO {
 	private int viewCnt;
 	private int likeCnt;
 	private int reportCnt;
+	
+	
+	
 }

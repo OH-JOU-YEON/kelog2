@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.spring.persistence.BlogMapper">
+
+<insert id="insert" parameterType = "com.spring.domain.BlogDTO" useGeneratedKeys="true" keyProperty="blogNo">
+INSERT INTO blog VALUES (uno = #{uno}, blogName = #{blogName});
+</insert>
+
+
+
+
+</mapper>

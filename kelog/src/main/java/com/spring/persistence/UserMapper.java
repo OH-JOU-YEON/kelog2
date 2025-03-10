@@ -22,4 +22,5 @@ public interface UserMapper {
 	public UserDTO select(int uno);
 	
 	public int update(UserDTO dto);
+	
 }

@@ -345,7 +345,7 @@
 												</div>
 												<div class="form-group">
 													<label for="post-hashTags">해시태그</label> <input name="hashTag"
-														class="form-control" id="hashTag">
+														class="form-control" id="hashTag" placeholder = "해시태그 구분은 띄어쓰기로 해주세요">
 												</div>
 												<div class="form-group">
 													<label for="address">추가한 주소</label> <div  style = "display:none"
