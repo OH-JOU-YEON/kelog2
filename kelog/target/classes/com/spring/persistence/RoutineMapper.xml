@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.persistence.RoutineMapper">
+
+	<insert id="insert">
+		INSERT INTO routine (email, content, eventDate)
+		VALUES (#{email}, #{content}, #{eventDate})
+	</insert>
+
+	<select id="getEventsByUserId">
+		SELECT * FROM routine WHERE email = #{email}
+	</select>
+
+	<update id="modify">
+		UPDATE routine
+		SET content = #{content}, eventDate = #{eventDate}
+		WHERE routineNo = #{routineNo}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM routine WHERE routineNo = #{routineNo}
+	</delete>
+
+</mapper>

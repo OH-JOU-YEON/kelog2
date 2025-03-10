@@ -1,254 +1,279 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
-	<title>Landing Page</title>
+<title>Landing Page</title>
 
-	<!-- Required meta tags always come first -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
+<!-- Required meta tags always come first -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
 
-	<!-- Theme Font -->
-	<link rel="preload" type="text/css" href="css/theme-font.min.css" as="style">
+<!-- Theme Font -->
+<link rel="preload" type="text/css"
+	href="/resources/css/theme-font.min.css" as="style">
 
-	<!-- Bootstrap CSS -->
+<!-- Bootstrap CSS -->
 
-	<link rel="stylesheet" type="text/css" href="Bootstrap/dist/css/bootstrap2.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/Bootstrap/dist/css/bootstrap2.css">
 
-	<!-- Main Styles CSS -->
-	<link rel="stylesheet" type="text/css" href="css/main2.css">
+<!-- Main Styles CSS -->
+<link rel="stylesheet" type="text/css" href="/resources/css/main2.css">
 
-	<!-- Main RTL CSS -->
-	<!--<link rel="stylesheet" type="text/css" href="css/rtl.min.css">-->
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="stylesheet"
+	href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
+<script
+	src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+	
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="stylesheet"
+	href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
+<script
+	src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+<!-- Main RTL CSS -->
+<!--<link rel="stylesheet" type="text/css" href="css/rtl.min.css">-->
 
 </head>
 
 <body class="landing-page">
 
 
-<!-- Preloader -->
+	<!-- Preloader -->
 
-<div id="hellopreloader">
-	<div class="preloader">
-		<svg width="45" height="45" stroke="#fff">
-			<g fill="none" fill-rule="evenodd" stroke-width="2" transform="translate(1 1)">
+	<div id="hellopreloader">
+		<div class="preloader">
+			<svg width="45" height="45" stroke="#fff">
+			<g fill="none" fill-rule="evenodd" stroke-width="2"
+					transform="translate(1 1)">
 				<circle cx="22" cy="22" r="6" stroke="none">
-					<animate attributeName="r" begin="1.5s" calcMode="linear" dur="3s" repeatCount="indefinite" values="6;22"/>
-					<animate attributeName="stroke-opacity" begin="1.5s" calcMode="linear" dur="3s" repeatCount="indefinite" values="1;0"/>
-					<animate attributeName="stroke-width" begin="1.5s" calcMode="linear" dur="3s" repeatCount="indefinite" values="2;0"/>
+					<animate attributeName="r" begin="1.5s" calcMode="linear" dur="3s"
+					repeatCount="indefinite" values="6;22" />
+					<animate attributeName="stroke-opacity" begin="1.5s"
+					calcMode="linear" dur="3s" repeatCount="indefinite" values="1;0" />
+					<animate attributeName="stroke-width" begin="1.5s"
+					calcMode="linear" dur="3s" repeatCount="indefinite" values="2;0" />
 				</circle>
 				<circle cx="22" cy="22" r="6" stroke="none">
-					<animate attributeName="r" begin="3s" calcMode="linear" dur="3s" repeatCount="indefinite" values="6;22"/>
-					<animate attributeName="stroke-opacity" begin="3s" calcMode="linear" dur="3s" repeatCount="indefinite" values="1;0"/>
-					<animate attributeName="stroke-width" begin="3s" calcMode="linear" dur="3s" repeatCount="indefinite" values="2;0"/>
+					<animate attributeName="r" begin="3s" calcMode="linear" dur="3s"
+					repeatCount="indefinite" values="6;22" />
+					<animate attributeName="stroke-opacity" begin="3s"
+					calcMode="linear" dur="3s" repeatCount="indefinite" values="1;0" />
+					<animate attributeName="stroke-width" begin="3s" calcMode="linear"
+					dur="3s" repeatCount="indefinite" values="2;0" />
 				</circle>
 				<circle cx="22" cy="22" r="8">
-					<animate attributeName="r" begin="0s" calcMode="linear" dur="1.5s" repeatCount="indefinite" values="6;1;2;3;4;5;6"/>
+					<animate attributeName="r" begin="0s" calcMode="linear" dur="1.5s"
+					repeatCount="indefinite" values="6;1;2;3;4;5;6" />
 				</circle>
 			</g>
 		</svg>
 
-		<div class="text">Loading ...</div>
+			<div class="text">Loading ...</div>
+		</div>
 	</div>
-</div>
 
-<!-- ... end Preloader -->
+	<!-- ... end Preloader -->
 
 
-<!-- Header Standard Landing  -->
+	<!-- Header Standard Landing  -->
 
-<div class="header--standard header--standard-landing" id="header--standard">
-	<div class="container">
-		<div class="header--standard-wrap">
+	<div class="header--standard header--standard-landing"
+		id="header--standard">
+		<div class="container">
+			<div class="header--standard-wrap">
 
-			<a href="12-FavouritePage.html" class="logo"></a>
+				<a href="12-FavouritePage.html" class="logo"></a>
 				<div class="img-wrap">
-					<img loading="lazy" src="img/logo-colored-small.webp" width="34" height="34" alt="Olympus" class="logo-colored">
+					<img loading="lazy" src="/resources/img/logo-colored-small.webp"
+						width="34" height="34" alt="Olympus" class="logo-colored">
 				</div>
 				<div class="title-block">
 					<h6 class="logo-title">로고 들어갈 자리</h6>
-			
-				</div>
-				
-			<a href="#" class="open-responsive-menu js-open-responsive-menu">
-				<svg class="olymp-menu-icon"><use xlink:href="#olymp-menu-icon"></use></svg>
-			</a>
 
-			<div class="nav nav-pills nav1 header-menu">
-				<div class="mCustomScrollbar">
-					<ul>
-						<li class="nav-item dropdown">
-							<a href="02-RecommendPost.html" style="color: #000 !important;">여행 추천지</a>
-						</li>
-						<li class="nav-item dropdown dropdown-has-megamenu">
-							<a href="97-BlogPostBoard.html" style="color: #000 !important;">블로그</a>
-						</li>
-						<li class="nav-item">
-							<a href="55-HoneyTipBoard.html" style="color: #000 !important;">꿀팁 게시판</a>
-						</li>
-						<li class="nav-item">
-							<a href="#" style="color: #000 !important;">전국 날씨예보</a>
-						</li>
-						<li class="close-responsive-menu js-close-responsive-menu">
-							<svg class="olymp-close-icon"><use xlink:href="#olymp-close-icon"></use></svg>
-						</li>
-						<li class="nav-item js-expanded-menu">
-							<a href="#" class="menu-link"><img src="img/menu-bar.png" style="width: 26px; height: 26px; filter: none;"></a>
-						</li>
-						<li class="lang-set-item">
-							<a href="#" class="change-lang" id="language-toggle">
-									<img src="img/changeLang.png" style="width: 26px; height: 26px; filter: none;">
-							</a>
-							<!-- 언어 선택 탭 (기본적으로 숨겨짐) -->
-							<ul id="language-tabs" class="language-tabs" style="display: none;">
+				</div>
+
+				<a href="#" class="open-responsive-menu js-open-responsive-menu">
+					<svg class="olymp-menu-icon">
+						<use xlink:href="#olymp-menu-icon"></use></svg>
+				</a>
+
+				<div class="nav nav-pills nav1 header-menu">
+					<div class="mCustomScrollbar">
+						<ul>
+							<li class="nav-item dropdown"><a
+								href="02-RecommendPost.html" style="color: #000 !important;">여행
+									추천지</a></li>
+							<li class="nav-item dropdown dropdown-has-megamenu"><a
+								href="97-BlogPostBoard.html" style="color: #000 !important;">블로그</a>
+							</li>
+							<li class="nav-item"><a href="55-HoneyTipBoard.html"
+								style="color: #000 !important;">꿀팁 게시판</a></li>
+							<li class="nav-item"><a href="#"
+								style="color: #000 !important;">전국 날씨예보</a></li>
+							<li class="close-responsive-menu js-close-responsive-menu">
+								<svg class="olymp-close-icon">
+									<use xlink:href="#olymp-close-icon"></use></svg>
+							</li>
+							<li class="nav-item js-expanded-menu"><a href="#"
+								class="menu-link"><img src="/resources/img/menu-bar.png"
+									style="width: 26px; height: 26px; filter: none;"></a></li>
+							<li class="lang-set-item"><a href="#" class="change-lang"
+								id="language-toggle"> <img
+									src="/resources/img/changeLang.png"
+									style="width: 26px; height: 26px; filter: none;">
+							</a> <!-- 언어 선택 탭 (기본적으로 숨겨짐) -->
+								<ul id="language-tabs" class="language-tabs"
+									style="display: none;">
 									<li><a href="#" id="english">English</a></li>
 									<li><a href="#" id="korean">한국어</a></li>
-							</ul>
-					</li>
-					<li class="login-set-item">
-						<a href="#" class="login-user">
-								<img src="img/login-user.png" class="login-user-menu" style="filter: none;">
-						</a>
-						<!-- 드롭다운 메뉴 -->
-						<ul class="login-drop-menu" style="display: none;">
-								<li><a href="01-ManagerPage-MyPage.html">마이페이지</a></li>
-								<li><a href="03-Myblog.html">내 블로그</a></li>
-								<li><a href="logout.html">로그아웃</a></li>
+								</ul></li>
+							<li class="login-set-item"><a href="#" class="login-user">
+									<img src="/resources/img/login-user.png"
+									class="login-user-menu" style="filter: none;">
+							</a> <!-- 드롭다운 메뉴 -->
+								<ul class="login-drop-menu" style="display: none;">
+									<li><a href="01-ManagerPage-MyPage.html">마이페이지</a></li>
+									<li><a href="03-Myblog.html">내 블로그</a></li>
+									<li><a href="logout.html">로그아웃</a></li>
+								</ul></li>
 						</ul>
-				</li>
-						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
 
-<!-- ... end Header Standard Landing  -->
-<div class="header-spacer--standard"></div>
+	<!-- ... end Header Standard Landing  -->
+	<div class="header-spacer--standard"></div>
 
 
 
 
-<!-- 메인 영역 -->
-<!--추천 장소 이름(중앙) + 오른쪽에 목록/이전글/다음글 -->
-<div class="container mt-4">
-  <div class="d-flex justify-content-center position-relative">
-   
-    <h2 class="fw-bold mb-0 text-center">추천 장소 이름</h2>
-   
-    <div style="position:absolute; right:0; top:50%; transform:translateY(-50%);">
-      <a href="#" class="text-decoration-none me-3">목록</a>
-      <a href="#" class="text-decoration-none me-3">이전글</a>
-      <a href="#" class="text-decoration-none">다음글</a>
-    </div>
-  </div>
-</div>
-<hr class="mb-4">
+	<!-- 메인 영역 -->
+	<!--추천 장소 이름(중앙) + 오른쪽에 목록/이전글/다음글 -->
+	<div class="container mt-4">
+		<div class="d-flex justify-content-center position-relative">
 
-<!--  지도 API 들어갈 자리 (중앙)-->
-<div class="container mb-4 text-center">
-  <p class="mb-2">[ 여기 지도 API 들어갈 섹션 ]</p>
-  <!-- 임시 크기 박스 (원한다면 main.css에 정의해서 UI 맞춰도 됨) -->
-  <div class="bg-light mx-auto" style="max-width: 600px; height: 300px;">
-    <!-- 실제 지도/iframe/script를 여기에 삽입 -->
-  </div>
-</div>
+			<h2 class="fw-bold mb-0 text-center">${dto.title }</h2>
+		</div>
+	</div>
+	<hr class="mb-4">
+
+	<!--  지도 API 들어갈 자리 (중앙)-->
+	<!--<div class="container mb-4 text-center">
+  <p class="mb-2">[ 여기 지도 API 들어갈 섹션 ]</p>-->
+	<!-- 임시 크기 박스 (원한다면 main.css에 정의해서 UI 맞춰도 됨) -->
+	<!--<div class="bg-light mx-auto" style="max-width: 600px; height: 300px;">-->
+	<!-- 실제 지도/iframe/script를 여기에 삽입 -->
+	<!-- </div>
+</div>-->
 
 
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-12 col-lg-8">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-12 col-lg-8">
 
-      <div class="ui-block p-4">
-        <article class="hentry post post-standard-details">
-          
-          
-          <div class="row">
-            
-            <div class="col-md-4 mb-3">
-              <div class="post-thumb">
-                <img src="img/post__thumb2.webp" alt="post image" class="img-fluid" loading="lazy">
-              </div>
-            </div>
-            
-            <div class="col-md-8">
-              <p>
-                Body text for whatever you'd like to say. Add main takeaway points,
-                quotes, anecdotes, or even a very very short story.
-              </p>
-              <p>
-                There are many variations of passages of Lorem Ipsum available,
-                but the majority have suffered alteration in some form.
-              </p>
-            </div>
-          </div><!-- row 끝 -->
+				<div class="ui-block p-4">
+					<article class="hentry post post-standard-details">
 
-          <!-- 태그 (중앙) -->
-          <div class="my-3 text-center">
-            <ul class="list-inline mb-0">
-              <li class="list-inline-item"><a href="#">#태그</a></li>
-              <li class="list-inline-item"><a href="#">#태그</a></li>
-              <li class="list-inline-item"><a href="#">#태그</a></li>
-              <li class="list-inline-item"><a href="#">#태그</a></li>
-            </ul>
-          </div>
 
-          <!-- 좋아요 / 싫어요 (오른쪽 하단) -->
-          <div class="d-flex justify-content-end">
-            <button type="button" class="btn btn-sm btn-outline-primary me-2">좋아요</button>
-            <button type="button" class="btn btn-sm btn-outline-danger">싫어요</button>
-          </div>
+						<div class="row">
+							<input class="form-control" type="hidden" name="travelBoardNo"
+								value="${dto.travelBoardNo }">
+							<div class="col-md-4 mb-3"></div>
 
-        </article><!-- .post-standard-details -->
-      </div><!-- .ui-block -->
+							<div class="col-md-8">
+								<div id="editor" style="display: none;">${dto.content}</div>
+							</div>
+							<div id="viewer"></div>
+						</div>
+						<!-- row 끝 -->
 
-    </div><!-- col-8 -->
-  </div><!-- row -->
-</div><!-- container -->
+						<!-- 태그 (중앙) -->
+						<div class="my-3 text-center">
+							<ul class="list-inline mb-0">
+								<li class="list-inline-item"><a href="#">#태그</a></li>
+								<li class="list-inline-item"><a href="#">#태그</a></li>
+								<li class="list-inline-item"><a href="#">#태그</a></li>
+								<li class="list-inline-item"><a href="#">#태그</a></li>
+							</ul>
+						</div>
 
-			
-			<!-- 하단 푸터 -->
-			<footer class="py-4 mt-5">
-				<div class="container text-center">
-					<p class="mb-1">이용약관 | 개인정보처리방침 | 주소 | 연락처</p>
-					<small>&copy; 2025. All rights reserved.</small>
+						<!-- 좋아요 / 싫어요 (오른쪽 하단) -->
+						<div class="d-flex justify-content-end">
+
+							<button id="likeButton${dto.travelBoardNo}"
+								onclick="toggleLike(${dto.travelBoardNo})"
+								class="btn-sm btn-outline-primary me-2">${isliked ? '좋아요 취소' : '좋아요'}</button>
+							<button id="unlikeButton${dto.travelBoardNo}"
+								onclick="toggleunLike(${dto.travelBoardNo})" 
+								class="btn-sm btn-outline-danger">${isunliked ? '싫어요 취소' : '싫어요'}</button>
+							<div>
+								<a href="/travel/list" class="text-decoration-none me-3">목록</a>
+								<c:if test="${dto.email == user.email }">
+									<!-- 임시로 해놓은거  이메일로 수정필요 0307 -->
+									<a href="/travel/modify?travelBoardNo=${dto.travelBoardNo }"
+										class="text-decoration-none me-3">수정</a>
+								</c:if>
+							</div>
+						</div>
+
+					</article>
+					<!-- .post-standard-details -->
 				</div>
-			</footer>
-			
-			<script src="Bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-			
-		
+				<!-- .ui-block -->
 
-<!-- JS Scripts -->
-<script src="js/jQuery/jquery-3.5.1.min.js"></script>
+			</div>
+			<!-- col-8 -->
+		</div>
+		<!-- row -->
+	</div>
+	<!-- container -->
 
-<script src="js/libs/jquery.mousewheel.min.js"></script>
-<script src="js/libs/perfect-scrollbar.min.js"></script>
-<script src="js/libs/imagesloaded.pkgd.min.js"></script>
-<script src="js/libs/material.min.js"></script>
-<script src="js/libs/moment.min.js"></script>
-<script src="js/libs/daterangepicker.min.js"></script>
-<script src="js/libs/isotope.pkgd.min.js"></script>
-<script src="js/libs/ajax-pagination.min.js"></script>
-<script src="js/libs/jquery.magnific-popup.min.js"></script>
 
-<script src="js/main.js"></script>
-<script src="js/libs-init/libs-init.js"></script>
+	<!-- 하단 푸터 -->
+	<footer class="py-4 mt-5">
+		<div class="container text-center">
+			<p class="mb-1">이용약관 | 개인정보처리방침 | 주소 | 연락처</p>
+			<small>&copy; 2025. All rights reserved.</small>
+		</div>
+	</footer>
 
-<script src="Bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/resources/Bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- SVG icons loader -->
-<script src="js/svg-loader.js"></script>
-<!-- /SVG icons loader -->
 
-<!-- 다국어JSON파일 불러오기 -->
-<script>
+
+	<!-- JS Scripts -->
+	<script src="/resources/js/jQuery/jquery-3.5.1.min.js"></script>
+
+	<script src="/resources/js/libs/jquery.mousewheel.min.js"></script>
+	<script src="/resources/js/libs/perfect-scrollbar.min.js"></script>
+	<script src="/resources/js/libs/imagesloaded.pkgd.min.js"></script>
+	<script src="/resources/js/libs/material.min.js"></script>
+	<script src="/resources/js/libs/moment.min.js"></script>
+	<script src="/resources/js/libs/daterangepicker.min.js"></script>
+	<script src="/resources/js/libs/isotope.pkgd.min.js"></script>
+	<script src="/resources/js/libs/ajax-pagination.min.js"></script>
+	<script src="/resources/js/libs/jquery.magnific-popup.min.js"></script>
+
+	<script src="/resources/js/main.js"></script>
+	<script src="/resources/js/libs-init/libs-init.js"></script>
+
+	<script src="/resources/Bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+	<!-- SVG icons loader -->
+	<script src="/resources/js/svg-loader.js"></script>
+	<!-- /SVG icons loader -->
+
+	<!-- 다국어JSON파일 불러오기 -->
+	<script>
 	document.getElementById('language-toggle').addEventListener('click', function(event) {
 			event.preventDefault();
 			const languageTabs = document.getElementById('language-tabs');
@@ -352,9 +377,38 @@
 	});
 	
 	</script>
+	<script>    
+	 $(function(){
+	    	ToView();
+	    	
+	    });
+	    
+	    /*토스트 UI */
+		const content = [].join('\n');
+	    
+		 
+	    
+	    const editor = new toastui.Editor({
+	           el: document.querySelector('#editor'),	
+	       });
+	    
+	    /*토스트 UI 뷰어 */	
+	    const viewer = toastui.Editor.factory({
+	        el: document.querySelector('#viewer'),
+	        viewer: true,
+	        height: '500px',
+	        initialEditType : 'wysiwyg',
+	        initialValue: content
+	        
+	    });
+	
+	    function ToView(){
+	        viewer.setMarkdown(editor.getHTML());
+	    };
+	
+</script>
 
-
-<script>
+	<script>
 	window.addEventListener('scroll', function () {
 			const header = document.getElementById('header--standard');
 			if (window.scrollY > 50) { // 50px 이상 스크롤 시
@@ -365,5 +419,72 @@
 	});
 	
 	</script>
+	<script>
+function toggleLike(travelBoardNo) {
+	
+    var email = '${user.email}';  // 세션에서 사용자 ID 가져오기 (예시)
+
+    console.log(email);
+    
+    if (!email) {
+        alert("로그인 후 좋아요를 누를 수 있습니다.");
+        return;  // 로그인되지 않으면 더 이상 진행하지 않음
+    }
+    
+    $.ajax({
+        url: '/travel/like',
+        type: 'POST',
+        data: { travelBoardNo: travelBoardNo },
+        success: function() {
+        	var currentLikeCount = parseInt($('#likeCount').text().replace('좋아요: ', ''));
+        	console.log("성공");
+            // 좋아요 버튼 상태 변경
+            let likeButton = document.getElementById("likeButton" + travelBoardNo);
+            if (likeButton.textContent == "좋아요") {
+                likeButton.textContent = '좋아요 취소';
+                currentLikeCount += 1;
+                $('#likeCount').html('좋아요: ' + currentLikeCount); 
+            } else {
+                likeButton.textContent = '좋아요';
+                currentLikeCount -= 1;
+                $('#likeCount').html('좋아요: ' + currentLikeCount); 
+            }
+        }
+    });
+}
+function toggleunLike(travelBoardNo) {
+	
+    var email = '${user.email}';  // 세션에서 사용자 ID 가져오기 (예시)
+
+    console.log(email);
+    
+    if (!email) {
+        alert("로그인 후 싫어요를 누를 수 있습니다.");
+        return;  // 로그인되지 않으면 더 이상 진행하지 않음
+    }
+    
+    $.ajax({
+        url: '/travel/unlike',
+        type: 'POST',
+        data: { travelBoardNo: travelBoardNo },
+        success: function() {
+        	var unLikeCount = parseInt($('#unlikeCount').text().replace('싫어요: ', ''));
+        	console.log("성공");
+            // 좋아요 버튼 상태 변경
+            let unlikeButton = document.getElementById("unlikeButton" + travelBoardNo);
+            if (unlikeButton.textContent == "싫어요") {
+            	unlikeButton.textContent = '싫어요 취소';
+                unLikeCount += 1;
+                $('#unlikeCount').html('싫어요: ' + unLikeCount); 
+            } else {
+            	unlikeButton.textContent = '싫어요';
+                unLikeCount -= 1;
+                $('#unlikeCount').html('싫어요: ' + unLikeCount); 
+            }
+        }
+    });
+}
+</script>
+
 </body>
 </html>

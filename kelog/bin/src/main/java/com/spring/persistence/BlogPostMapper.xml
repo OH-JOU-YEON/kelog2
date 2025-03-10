@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.spring.persistence.BlogPostMapper">
+
+ <!--  작성자 추가 해야함 -->
+<insert id="insert">
+	INSERT INTO blogPost (title, content, nickName) VALUES(#{title},#{content},#{nickName});
+</insert>
+
+<select id="read">
+	SELECT * FROM blogPost WHERE blogPostNo = #{blogPostNo}
+</select>
+
+<update id="update">
+	UPDATE blogPost SET title = #{title}, content = #{content} WHERE blogPostNo = #{blogPostNo}
+</update>
+
+<update id="upLikecount">
+	UPDATE blogPost SET likeCnt = likeCnt + 1 WHERE blogPostNo = #{blogPostNo}
+</update>	
+
+<update id="unLikecount">
+	UPDATE blogPost SET likeCnt = likeCnt - 1 WHERE blogPostNo = #{blogPostNo}
+</update>
+
+<select id="isLike" resultType="boolean">
+	SELECT COUNT(1) > 0 FROM liketable WHERE userno = #{uno} AND bloglikeno = #{blogPostNo}
+</select>
+
+<insert id="addlike">
+    INSERT INTO liketable (userno, bloglikeno) VALUES (#{uno}, #{blogPostNo})
+</insert>
+
+<delete id="removelike">
+    DELETE FROM liketable WHERE userno = #{uno} AND bloglikeno = #{blogPostNo}
+</delete>
+
+<insert id="insertReport">
+	INSERT INTO report (blogPostNo, email, reportReason) VALUES(#{blogPostNo},#{email},#{reportReason})
+</insert>
+
+
+
+</mapper>
