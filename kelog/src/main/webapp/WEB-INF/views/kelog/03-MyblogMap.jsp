@@ -2,426 +2,331 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <title>Profile + Calendar + Form + 옆에 탭버튼</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-	<title>지도API</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="Bootstrap/dist/css/bootstrap.css">
+  <!-- main.css (CalendarAndEvents + ProfilePage 스타일) -->
+  <link rel="stylesheet" href="css/main.css">
 
-	<!-- Required meta tags always come first -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
+  <!-- 달력에 필요한 라이브러리 (moment, fullcalendar 등) -->
+  <script src="js/libs/moment.min.js"></script>
+  <script src="js/libs/fullcalendar.min.js"></script>
+  <script src="js/main.js"></script>
 
+  <style>
+    body {
+      background-color: #edf2f6;
+    }
+    .banner {
+      position: relative;
+      margin-bottom: 2rem;
+      overflow: hidden;
+    }
+    .banner img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      display: block;
+    }
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 4rem;
+    }
 
-	<!-- Theme Font -->
-	<link rel="preload" type="text/css" href="/resources/css/theme-font.min.css" as="style">
+    .profile-column {
+      padding-right: 2rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+      padding: 20px;
+      margin-top: 25px;
+    }
+    .profile-card,
+    .calendar-card {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+      margin-bottom: 3rem;
+      margin-top: 1rem;
+    }
+    .profile-card .card-header,
+    .calendar-card .card-header {
+      padding: 10px 16px;
+      border-bottom: 1px solid #ddd;
+      font-weight: 600;
+      background-color: #f2f2f2;
+    }
+    .profile-card .card-body,
+    .calendar-card .card-body {
+      padding: 16px;
+    }
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" type="text/css" href="/resources/Bootstrap/dist/css/bootstrap.css">
+    .right-column {
+      display: flex;
+      align-items: flex-start;
+      padding-left: 3rem;
+      margin-top: 25px;
+    }
 
-	<!-- Main Styles CSS -->
-	<link rel="stylesheet" type="text/css" href="/resources/css/main.css">
+    .tab-content-wrapper {
+      flex: 1;
+    }
+    .tab-content {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+      padding: 30px 30px 68px 30px;
+      position: relative;
+      left: 20px;
+    }
 
-	<!-- Main RTL CSS -->
-	<!--<link rel="stylesheet" type="text/css" href="css/rtl.min.css">-->
+    .ui-tabs {
+      list-style: none;
+      margin: 0 0 0 1rem;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .ui-tabs li a {
+      display: block;
+      text-decoration: none;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px 16px;
+      background: #f2f2f2;
+      transition: background 0.2s;
+      color: #333;
+      font-size: 14px;
+      text-align: center;
+    }
+    .ui-tabs li a:hover {
+      background: #e2e2e2;
+    }
+    .ui-tabs li.active a {
+      background: #fff;
+      font-weight: 600;
+      border-right-color: #ccc;
+    }
 
+    .create-post-form .form-label {
+      font-weight: 600;
+    }
+
+    @media (max-width: 991px) {
+      .right-column {
+        flex-direction: row;
+        padding-left: 0;
+        flex-wrap: nowrap;
+      }
+      .tab-content-wrapper {
+        flex: 3;
+        width: auto;
+        min-width: 0;
+      }
+      .tab-content {
+        padding: 15px;
+        left: 0;
+        width: 100%;
+      }
+      .ui-tabs {
+        margin: 0 0 0 1rem;
+        flex: 1;
+        width: auto;
+      }
+      .ui-tabs li a {
+        padding: 6px 10px;
+        font-size: 11px;
+      }
+    }
+  </style>
 </head>
-<body class="page-has-left-panels page-has-right-panels">
 
+<body>
+  <!-- 헤더 -->
+  <div class="header--standard header--standard-landing" id="header--standard">
+    <div class="container">
+      <div class="header--standard-wrap">
+        <a href="12-FavouritePage.html" class="logo"></a>
+          <div class="img-wrap">
+            <img loading="lazy" src="img/logo-colored-small.webp" width="34" height="34" alt="Olympus" class="logo-colored">
+          </div>
+          <div class="title-block">
+            <h6 class="logo-title">로고 들어갈 자리</h6>
+            <div class="sub-title">SOCIAL NETWORK</div>
+          </div>
+          
+        <a href="#" class="open-responsive-menu js-open-responsive-menu">
+          <svg class="olymp-menu-icon"><use xlink:href="#olymp-menu-icon"></use></svg>
+        </a>
+  
+        <div class="nav nav-pills nav1 header-menu">
+          <div class="mCustomScrollbar">
+            <ul>
+              <li class="nav-item"><a href="00-MainPage.html">메인 페이지</a></li>
+              <li class="nav-item dropdown"><a href="02-RecommendPost.html">여행 추천지</a></li>
+              <li class="nav-item dropdown dropdown-has-megamenu"><a href="97-BlogPostBoard.html">블로그 게시판</a></li>
+              <li class="nav-item"><a href="03-Myblog.html">내 블로그</a></li>
+              <li class="nav-item"><a href="55-HoneyTipBoard.html">꿀팁 게시판</a></li>
+              <li class="nav-item"><a href="#">전국 날씨예보</a></li>
+              <li class="close-responsive-menu js-close-responsive-menu">
+                <svg class="olymp-close-icon"><use xlink:href="#olymp-close-icon"></use></svg>
+              </li>
+              <li class="nav-item js-expanded-menu">
+                <a href="#" class="menu-link">
+                  <img src="img/menu-bar.png" style="width: 26px; height: 26px;">
+                </a>
+              </li>
+              <li class="lang-set-item">
+                <a href="#" class="change-lang">
+                  <img src="img/changeLang.png" style="width: 26px; height: 26px;">
+                </a>
+              </li>
+              <li class="login-set-item">
+                <a href="01-LoginPage.html" class="login-user">
+                  <img src="img/login-user.png" class="login-user-menu">
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<!-- Preloader -->
+  <!-- 배너 -->
+  <section class="banner">
+    <img src="img/mainBoard.jpg" alt="배너이미지">
+  </section>
 
-<div id="hellopreloader">
-	<div class="preloader">
-		<svg width="45" height="45" stroke="#fff">
-			<g fill="none" fill-rule="evenodd" stroke-width="2" transform="translate(1 1)">
-				<circle cx="22" cy="22" r="6" stroke="none">
-					<animate attributeName="r" begin="1.5s" calcMode="linear" dur="3s" repeatCount="indefinite" values="6;22"/>
-					<animate attributeName="stroke-opacity" begin="1.5s" calcMode="linear" dur="3s" repeatCount="indefinite" values="1;0"/>
-					<animate attributeName="stroke-width" begin="1.5s" calcMode="linear" dur="3s" repeatCount="indefinite" values="2;0"/>
-				</circle>
-				<circle cx="22" cy="22" r="6" stroke="none">
-					<animate attributeName="r" begin="3s" calcMode="linear" dur="3s" repeatCount="indefinite" values="6;22"/>
-					<animate attributeName="stroke-opacity" begin="3s" calcMode="linear" dur="3s" repeatCount="indefinite" values="1;0"/>
-					<animate attributeName="stroke-width" begin="3s" calcMode="linear" dur="3s" repeatCount="indefinite" values="2;0"/>
-				</circle>
-				<circle cx="22" cy="22" r="8">
-					<animate attributeName="r" begin="0s" calcMode="linear" dur="1.5s" repeatCount="indefinite" values="6;1;2;3;4;5;6"/>
-				</circle>
-			</g>
-		</svg>
+  <!-- 메인 컨테이너 -->
+  <div class="main-container">
+    <div class="row gx-5 align-items-start">
+      <!-- 왼쪽: 프로필 + 달력 -->
+      <div class="col-12 col-lg-3 mb-4 profile-column">
+        <div class="profile-card">
+          <div class="card-header">내 프로필</div>
+          <div class="card-body text-center">
+            <img src="img/author-page.webp" alt="profile" class="rounded-circle" 
+                 style="width:80px; height:80px; object-fit:cover;">
+            <h6 class="mt-2">닉네임(사용자 ID)</h6>
+            <p class="text-muted">간단한 자기소개 텍스트...</p>
+          </div>
+        </div>
+        <div class="calendar-card">
+          <div class="card-header">달력</div>
+          <div class="card-body">
+            <div id="calendar"></div>
+            <div class="events-list mt-3"></div>
+          </div>
+        </div>
+      </div>
 
-		<div class="text">Loading ...</div>
-	</div>
-</div>
+      <!-- 스프링 영역 -->
+      <div class="col-auto d-none d-lg-block spiral-container"></div>
 
-<!-- ... end Preloader -->
+      <!-- 오른쪽: 글쓰기 폼 + 탭 메뉴 -->
+      <div class="col-12 col-lg-9 mb-4 right-column">
+        <div class="tab-content-wrapper">
+          <div id="tab-map" class="tab-content" style="display:block;">
+            <form class="create-post-form">
+              <div class="mb-3">
+                <label for="nickname" class="form-label">지도 나오는곳</label>
+                
+              </div>
+             
+              
+              
+            </form>
+          </div>
+          <div id="tab-plan" class="tab-content" style="display:none;">
+            <p>달력 나오는곳</p>
+          </div>
+          <div id="tab-post" class="tab-content" style="display:none;">
+            <p>게시글</p>
+          </div>
+        </div>
 
+        <ul class="ui-tabs">
+          <li ><a href="#" onclick="showTab(event, 'tab-post')">게시글</a></li>
+          <li class="active"><a href="#" onclick="showTab(event, 'tab-map')">지도</a></li>
+          <li ><a href="#" onclick="showTab(event, 'tab-plan')">일정계획</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-<!-- Fixed Sidebar Left -->
+  <!-- 하단 푸터 -->
+  <footer class="py-4 mt-5">
+    <div class="container text-center">
+      <p class="mb-1">이용약관 | 개인정보처리방침 | 주소 | 연락처</p>
+      <small>© 2025. All rights reserved.</small>
+    </div>
+  </footer>
 
-<div class="header--standard header--standard-landing" id="header--standard">
-	<div class="container">
-		<div class="header--standard-wrap">
+  <!-- Bootstrap & jQuery -->
+  <script src="Bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/jQuery/jquery-3.5.1.min.js"></script>
+  <script src="js/libs/jquery.mousewheel.min.js"></script>
+  <script src="js/libs/perfect-scrollbar.min.js"></script>
+  <script src="js/libs/imagesloaded.pkgd.min.js"></script>
+  <script src="js/libs/material.min.js"></script>
+  <script src="js/libs/selectize.min.js"></script>
+  <script src="js/libs/isotope.pkgd.min.js"></script>
+  <script src="js/libs/ajax-pagination.min.js"></script>
+  <script src="js/libs/jquery.magnific-popup.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/libs-init/libs-init.js"></script>
+  <script src="js/svg-loader.js"></script>
 
-			<a href="12-FavouritePage.html" class="logo"></a>
-				<div class="img-wrap">
-					<img loading="lazy" src="/resources/img/logo-colored-small.webp" width="34" height="34" alt="Olympus" class="logo-colored">
-				</div>
-				<div class="title-block">
-					<h6 class="logo-title">로고 들어갈 자리</h6>
-					<div class="sub-title">SOCIAL NETWORK</div>
-				</div>
-				
-			<a href="#" class="open-responsive-menu js-open-responsive-menu">
-				<svg class="olymp-menu-icon"><use xlink:href="#olymp-menu-icon"></use></svg>
-			</a>
+  <script>
+    window.addEventListener('scroll', function () {
+      const header = document.getElementById('header--standard');
+      if (window.scrollY > 50) {
+        header.classList.add('header--scrolled');
+      } else {
+        header.classList.remove('header--scrolled');
+      }
+    });
 
-			<div class="nav nav-pills nav1 header-menu">
-				<div class="mCustomScrollbar">
-					<ul>
-						<li class="nav-item">
-							<a href="00-MainPage.html">메인 페이지</a>
-						</li>
-						<li class="nav-item dropdown">
-							<a href="02-RecommendPost.html">여행 추천지</a>
-						</li>
-						<li class="nav-item dropdown dropdown-has-megamenu">
-							<a href="97-BlogPostBoard.html">블로그 게시판</a>
-						</li>
-						<li class="nav-item">
-							<a href="03-Myblog.html">내 블로그</a>
-						</li>
-						<li class="nav-item">
-							<a href="55-HoneyTipBoard.html">꿀팁 게시판</a>
-						</li>
-						<li class="nav-item">
-							<a href="#">전국 날씨예보</a>
-						</li>
-						<li class="close-responsive-menu js-close-responsive-menu">
-							<svg class="olymp-close-icon"><use xlink:href="#olymp-close-icon"></use></svg>
-						</li>
-						<li class="nav-item js-expanded-menu">
-							<a href="#" class="menu-link"><img src="/resources/img/menu-bar.png" style="width: 26px; height: 26px;"></a>
-						</li>
-						<li class="lang-set-item">
-							<a href="#" class="change-lang"><img src="/resources/img/changeLang.png" style="width: 26px; height: 26px;"></a>
-						</li>
-						<li class="login-set-item">
-							<a href="01-LoginPage.html" class="login-user"><img src="/resources/img/login-user.png" class="login-user-menu"style="width: 26px; height: 26px;"></a>
-						</li>
-						</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- ... end Fixed Sidebar Left -->
+    document.addEventListener("DOMContentLoaded", function () {
+      var calendarEl = document.getElementById('calendar');
+      if (calendarEl) {
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          plugins: [ 'dayGrid' ],
+          defaultView: 'dayGridMonth',
+          header: {
+            left: 'prev',
+            center: 'title',
+            right: 'next'
+          },
+          events: [
+            { title: '이벤트1', start: '2024-12-10' },
+            { title: '이벤트2', start: '2024-12-25' }
+          ]
+        });
+        calendar.render();
+      }
+    });
 
-<div class="main-header-post" style="position: relative;">
-	<img loading="lazy" src="/resources/img/wall03_1920.jpg" alt="author" width="1229" height="480">
-	
-<!-- 3개의 탭 -->
-<div class="tabs" style="position: absolute; bottom: 10px; right: 10px; display: flex; z-index: 10;">
-	<a href="03-Myblog.html" class="btn btn-primary btn-md-2" style="background-color: #9edbff; border-color: #9eb3ff; margin-left: 5px;">게시물</a>
-	<a href="03-MyblogMap.html" class="btn btn-primary btn-md-2" style="background-color: #9edbff; border-color: #9eb3ff; margin-left: 5px;">지도</a>
-	<a href="03-MyblogExchange.html" class="btn btn-primary btn-md-2" style="background-color: #9edbff; border-color: #9eb3ff; margin-left: 5px;">일정</a>
-</div>
-</div>
-
-<!-- ... end Responsive Header-BP -->
-
-
-
-<div class="container">
-	<div class="row">
-
-		<!-- Main Content -->
-
-		<main class="col col-xl-8 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12" style="margin-left: 85px;">
-
-			<div class="ui-block">  <!-- <-----추후 div 구역으로 변환 Ajax 사용 -->
-				
-				<!-- News Feed Form  -->
-				
-				<div class="news-feed-form">
-					<!-- Nav tabs -->
-					<ul class="nav nav-tabs" style="justify-content: end;" role="tablist">
-						<li class="nav-item">
-							<a class="nav-link active inline-items" data-bs-toggle="tab" href="#home-1" role="tab" aria-expanded="true">
-				
-								<svg class="olymp-status-icon"><use xlink:href="#olymp-status-icon"></use></svg>
-				
-								<span>Status</span>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link inline-items" data-bs-toggle="tab" href="#profile-1" role="tab" aria-expanded="false">
-				
-								<svg class="olymp-multimedia-icon"><use xlink:href="#olymp-multimedia-icon"></use></svg>
-				
-								<span>Multimedia</span>
-							</a>
-						</li>
-				
-						<li class="nav-item">
-							<a class="nav-link inline-items" data-bs-toggle="tab" href="#blog" role="tab" aria-expanded="false">
-								<svg class="olymp-blog-icon"><use xlink:href="#olymp-blog-icon"></use></svg>
-				
-								<span>Blog Post</span>
-							</a>
-						</li>
-					</ul>
-				
-					<!-- Tab panes -->
-					
-				</div>
-			</div>
-		</main>
-
-		<!-- ... end Main Content -->
-
-
-		<!-- Left Sidebar -->
-
-		<aside class="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-6 col-12" style="margin-left: 40px;">
-			<div class="ui-block-weahter">
-				
-				<!-- W-Weather -->
-				
-				<div class="widget w-weather">
-					<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
-				
-					<div class="wethear-now inline-items">
-						<div class="temperature-sensor">64°</div>
-						<div class="max-min-temperature">
-							<span>58°</span>
-							<span>76°</span>
-						</div>
-				
-						<svg class="olymp-weather-partly-sunny-icon"><use xlink:href="#olymp-weather-partly-sunny-icon"></use></svg>
-					</div>
-				
-					<div class="wethear-now-description">
-						<div class="climate">Partly Sunny</div>
-						<span>Real Feel: <span>67°</span></span>
-						<span>Chance of Rain: <span>49%</span></span>
-					</div>
-				
-					<ul class="weekly-forecast">
-				
-						<li>
-							<div class="day">sun</div>
-							<svg class="olymp-weather-sunny-icon"><use xlink:href="#olymp-weather-sunny-icon"></use></svg>
-				
-							<div class="temperature-sensor-day">60°</div>
-						</li>
-				
-						<li>
-							<div class="day">mon</div>
-							<svg class="olymp-weather-partly-sunny-icon"><use xlink:href="#olymp-weather-partly-sunny-icon"></use></svg>
-							<div class="temperature-sensor-day">58°</div>
-						</li>
-				
-						<li>
-							<div class="day">tue</div>
-							<svg class="olymp-weather-cloudy-icon"><use xlink:href="#olymp-weather-cloudy-icon"></use></svg>
-				
-							<div class="temperature-sensor-day">67°</div>
-						</li>
-				
-						<li>
-							<div class="day">wed</div>
-							<svg class="olymp-weather-rain-icon"><use xlink:href="#olymp-weather-rain-icon"></use></svg>
-				
-							<div class="temperature-sensor-day">70°</div>
-						</li>
-				
-						<li>
-							<div class="day">thu</div>
-							<svg class="olymp-weather-storm-icon"><use xlink:href="#olymp-weather-storm-icon"></use></svg>
-				
-							<div class="temperature-sensor-day">58°</div>
-						</li>
-				
-						<li>
-							<div class="day">fri</div>
-							<svg class="olymp-weather-snow-icon"><use xlink:href="#olymp-weather-snow-icon"></use></svg>
-				
-							<div class="temperature-sensor-day">68°</div>
-						</li>
-				
-						<li>
-							<div class="day">sat</div>
-				
-							<svg class="olymp-weather-wind-icon-header"><use xlink:href="#olymp-weather-wind-icon-header"></use></svg>
-				
-							<div class="temperature-sensor-day">65°</div>
-						</li>
-				
-					</ul>
-				
-					<div class="date-and-place">
-						<h5 class="date">Saturday, March 26th</h5>
-						<div class="place">San Francisco, CA</div>
-					</div>
-				
-				</div>
-				
-				<!-- W-Weather -->			</div>
-
-			<div class="ui-block">
-				
-										<!------------------------------------- Full Calendar ----------------------------------------->
-
-										<div id="calendar" class="crumina-full-calendar">
-
-
-										</div>
-				
-										<!-- JS library for Full Calendar -->
-										<script src="/resources/js/libs/fullcalendar.min.js"></script>
-										<!-- ...end JS library for Full Calendar -->
-				
-										<!-- JS-init for Full Calendar -->
-										
-										<!-- ... end JS-init for Full Calendar -->
-				
-										<!------------------------------------- ... end Full Calendar ----------------------------------------->			</div>
-
-			
-		</aside>
-
-</div>
-</div>
-
-<!-- ... end Window-popup-CHAT for responsive min-width: 768px -->
-
-<!-- JS Scripts -->
-<script src="/resources/js/jQuery/jquery-3.5.1.min.js"></script>
-
-<script src="/resources/js/libs/jquery.mousewheel.min.js"></script>
-<script src="/resources/js/libs/perfect-scrollbar.min.js"></script>
-<script src="/resources/js/libs/imagesloaded.pkgd.min.js"></script>
-<script src="/resources/js/libs/material.min.js"></script>
-<script src="/resources/js/libs/selectize.min.js"></script>
-<script src="/resources/js/libs/isotope.pkgd.min.js"></script>
-<script src="/resources/js/libs/ajax-pagination.min.js"></script>
-<script src="/resources/js/libs/jquery.magnific-popup.min.js"></script>
-
-<script src="/resources/js/main.js"></script>
-<script src="/resources/js/libs-init/libs-init.js"></script>
-
-<script src="/resources/Bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- SVG icons loader -->
-<script src="/resources/js/svg-loader.js"></script>
-<!-- /SVG icons loader -->
-<script>
-	window.addEventListener('scroll', function () {
-			const header = document.getElementById('header--standard');
-			if (window.scrollY > 50) { // 50px 이상 스크롤 시
-					header.classList.add('header--scrolled');
-			} else { // 50px 미만이면
-					header.classList.remove('header--scrolled');
-			}
-	});
-	
-	</script>
-	<script>
-				
-		/* -----------------------------
-			 * FullCalendar Init
-			 * Script file: fullcalendar.min.js
-			 * https://fullcalendar.io/
-		* ---------------------------*/
-
-		fullCalendar = function () {
-			var calendarEl = document.getElementById('calendar');
-
-			var calendar = new FullCalendar.Calendar(calendarEl, {
-				plugins: ['interaction', 'dayGrid', 'timeGrid'],
-				defaultView: 'dayGridMonth',
-				defaultDate: '2019-05-07',
-				header: {
-					left: 'prev',
-					center: 'title',
-					right: 'next,dayGridMonth,timeGridWeek,timeGridDay'
-				},
-				buttonText: {
-					month: ' ',
-					week: ' ',
-					day: ' '
-				},
-				buttonIcons: {
-					prev: 'far fa-chevron-left',
-					next: 'far fa-chevron-right'
-				},
-
-				eventClick: function (info) {
-					var url = info.event.url;
-					var is_modal = url.match(/^modal\:(#[-\w]+)$/);
-					if (!is_modal) {
-						return;
-					}
-
-					info.jsEvent.preventDefault();
-					var modal = is_modal[1];
-
-					$(modal).modal('show');
-				},
-				events: [
-					{
-						title: 'Chris Greyson’s Bday',
-						start: '2019-05-08',
-						url: 'modal:#public-event'
-					},
-					{
-						title: 'Make Dinner Plans...',
-						start: '2019-05-08',
-						url: 'modal:#private-event'
-					},
-					{
-						title: 'Jenny’s Birthday...',
-						start: '2019-05-30',
-						url: 'modal:#private-event'
-					},
-					{
-						title: 'Videocall to talk...',
-						start: '2019-05-30',
-						url: 'modal:#public-event'
-					},
-					{
-						title: 'Breakfast at the...',
-						start: '2019-05-26',
-						url: 'modal:#public-event'
-					},
-					{
-						title: 'Send the new...',
-						start: '2019-05-26',
-						url: 'modal:#private-event'
-					},
-					{
-						title: 'Take Querty to the...',
-						start: '2019-05-26',
-						url: 'modal:#public-event'
-					}
-				]
-			});
-
-			calendar.render();
-		};
-
-		document.addEventListener("DOMContentLoaded", function () {
-			fullCalendar();
-		});
-
-	</script>
-<footer>
-	<p>쉿 아무말도하지마 나의 작은 아가고냥이</p>
-</footer>
-
+    function showTab(evt, tabId) {
+      evt.preventDefault();
+      const allContents = document.querySelectorAll('.tab-content');
+      allContents.forEach(c => c.style.display = 'none');
+      const allTabs = document.querySelectorAll('.ui-tabs li');
+      allTabs.forEach(li => li.classList.remove('active'));
+      document.getElementById(tabId).style.display = 'block';
+      evt.currentTarget.parentNode.classList.add('active');
+    }
+  </script>
 </body>
 </html>

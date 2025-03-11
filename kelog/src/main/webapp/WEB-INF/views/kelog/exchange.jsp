@@ -246,7 +246,7 @@
 
         <!-- 가계부 카드 (내 UI 설계서에 맞춘 디자인) -->
         <div class="ledger-card">
-          <div class="card-header">가계부</div>
+          <div class="card-header">가계부(업뎃예정)</div>
           <div class="card-body">
             <form class="ledger-form">
               <div class="mb-3">
