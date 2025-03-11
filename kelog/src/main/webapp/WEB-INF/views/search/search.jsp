@@ -227,37 +227,6 @@
           </nav>
         </div>
     
-        <!-- 오른쪽: 해시태그 섹션 2개 -->
-        <div class="col-4">
-          <!-- 첫 번째 해시태그 섹션 -->
-          <div class="ui-block p-3 mb-3">
-            <h5 class="fw-bold">#해시태그</h5>
-            <ul class="list-unstyled mt-3">
-              <li>#서울</li>
-              <li>#제주</li>
-              <li>#맛집</li>
-              <li>#카페</li>
-              <li>#국내여행</li>
-              <li>#해외여행</li>
-              <li>#사진명소</li>
-              <li>#여행팁</li>
-            </ul>
-          </div>
-    
-          <!-- 두 번째  섹션 -->
-          <div class="ui-block p-3">
-            <h5 class="fw-bold">#다른 해시태그</h5>
-            <ul class="list-unstyled mt-3">
-              <li>#산책</li>
-              <li>#힐링</li>
-              <li>#액티비티</li>
-              <li>#동물카페</li>
-              <li>#맛집탐방</li>
-              <li>#레저스포츠</li>
-            </ul>
-          </div>
-        </div>
-      </div>
 			
 			<!-- 하단 푸터 -->
 			<footer class="py-4 mt-5">
