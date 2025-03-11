@@ -5,22 +5,22 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 
-import com.spring.domain.TipReplyDTO;
+import com.spring.domain.ReplyDTO;
 
 public interface TipReplyMapper {
 	
 	// 특정 글의 댓글 전체 보이기
-	@Select("SELECT tipReplyNo, nickName, content, regDate FROM tipreply WHERE tipBoardNo = ${tipBoardNo} ORDER BY regDate DESC")
-	public List<TipReplyDTO> selectReply(int tipBoardNo);
+	@Select("SELECT replyNo, nickName, email, content, regDate FROM reply WHERE tipBoardNo = ${tipBoardNo} ORDER BY regDate DESC")
+	public List<ReplyDTO> selectReply(int tipBoardNo);
 
 	// 댓글 등록
-	public void insertReply(TipReplyDTO reply);
+	public void insertReply(ReplyDTO reply);
 
 	// 댓글 삭제
-	@Delete("DELETE FROM tipreply WHERE tipReplyNo =#{tipReplyNo}")
-	public void removeReply(int tipReplyNo);
+	@Delete("DELETE FROM reply WHERE replyNo =#{replyNo}")
+	public void removeReply(int replyNo);
 	
 	// 특정 댓글 한개 반환
-	@Select("SELECT tipReplyNo, nickName, content, regDate FROM tipreply WHERE tipReplyNo = ${tipReplyNo}")
-	public TipReplyDTO selectRep(int tipReplyNo);
+	@Select("SELECT replyNo, nickName, email, content, regDate FROM reply WHERE replyNo = ${replyNo}")
+	public ReplyDTO selectRep(int replyNo);
 }

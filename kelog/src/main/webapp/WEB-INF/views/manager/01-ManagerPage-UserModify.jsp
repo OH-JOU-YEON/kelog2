@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +12,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
 <!-- Theme Font -->
 <link rel="preload" type="text/css"
@@ -93,7 +93,35 @@
 						<use xlink:href="#olymp-menu-icon"></use></svg>
 				</a>
 
-				
+				<div class="nav nav-pills nav1 header-menu">
+					<div class="mCustomScrollbar">
+						<ul>
+							<li class="nav-item"><a href="00-MainPage.html">메인 페이지</a></li>
+							<li class="nav-item dropdown"><a
+								href="02-RecommendPost.html">여행 추천지</a></li>
+							<li class="nav-item dropdown dropdown-has-megamenu"><a
+								href="97-BlogPostBoard.html">블로그 게시판</a></li>
+							<li class="nav-item"><a href="03-Myblog.html">내 블로그</a></li>
+							<li class="nav-item"><a href="55-HoneyTipBoard.html">꿀팁
+									게시판</a></li>
+							<li class="nav-item"><a href="#">전국 날씨예보</a></li>
+							<li class="close-responsive-menu js-close-responsive-menu">
+								<svg class="olymp-close-icon">
+									<use xlink:href="#olymp-close-icon"></use></svg>
+							</li>
+							<li class="nav-item js-expanded-menu"><a href="#"
+								class="menu-link"><img src="/resources/img/menu-bar.png"
+									style="width: 26px; height: 26px;"></a></li>
+							<li class="lang-set-item"><a href="#" class="change-lang"><img
+									src="/resources/img/changeLang.png"
+									style="width: 26px; height: 26px;"></a></li>
+							<li class="login-set-item"><a href="01-LoginPage.html"
+								class="login-user"><img src="/resources/img/login-user.png"
+									class="login-user-menu" style="width: 26px; height: 26px;"></a>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -113,18 +141,14 @@
 					<!-- Tab panes -->
 					<div class="tab-content" id="registration-form-tabs-content">
 						<div class="tab-pane fade show active">
-							<form class="content" action="/user/create" method="post" enctype="multipart/form-data">
+							<form class="content">
 								<div class="row" style="justify-content: center;">
 									<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
 										
 										<div class="tab-content" id="my-infomation">
 											<div class="tab-pane fade show active">
-												<div class="title h6">회원 등록</div>
-												<div>
-													<img id="preview" alt="업로드된 파일"
-														src="${user.picture}"
-														style="width: 500px; display: block; margin: 0 auto;">
-												</div>
+												<div class="title h6">유저 정보 수정</div>
+												
 												<div class="row"
 													style="justify-content: center; display: flex; flex-direction: column; align-items: center;">
 													<!-- 아이디 입력 -->
@@ -149,15 +173,24 @@
 																style="display: flex; align-items: center; justify-content: space-between; white-space: nowrap;">
 																<p>
 																	사용자 닉네임 <input type="text" name="nickName"
-																		value="${user.name }"></input>
+																		value="${nickName }" readonly="readonly"></input>
 																</p>
 															</div>
+														
 															<div>
-																<label>profileImg</label> <input id="i_imageFileName"
-																	name="file" type="file" value="${user.picture }">
+																 <label>역할</label> <select name="role">
+													                <option value="admin" ${user.role == 'admin' ? 'selected' : ''}>admin</option>
+													                <option value="user" ${user.role == 'user' ? 'selected' : ''}>user</option>
+												                    </select>
 															</div>
-															<input type="hidden" name="profileImg" value="${user.picture}">
-															<input type="submit" value="생성">
+															<div>
+																 <label>활동여부</label>
+																 <p>활동중<input type="radio" name="activity" value="active" ${user.activity == 'active' ? 'checked' : ''}></p>
+           														 <p>활동중지<input type="radio" name="activity" value="inactive" ${user.activity == 'inactive' ? 'checked' : ''}></p>
+															</div>
+															<input name="uno" type="hidden" value="${user.uno }">
+															<button type="button" class="btn btn-purple btn-lg " data-oper="modify">수정</button>
+															<button type="button" class="btn btn-purple btn-lg " data-oper="read">취소</button>
 														</div>
 
 														<!-- 로그인 버튼 -->
@@ -222,17 +255,7 @@
 	</footer>
 	<script type="text/javascript">
 		$(function() {
-			$("#i_imageFileName").on("change", function(event) {
-				console.log(event);
-				var reader = new FileReader();
-
-				reader.onload = function(e) {
-					console.log(e);
-					$("#preview").attr("src", e.target.result).show();
-
-				}
-				reader.readAsDataURL(event.target.files[0]);
-			})
+		
 			var formObj = $("form");
 
 			$(".btn").on(
@@ -244,12 +267,11 @@
 						console.log(operation);
 
 						if (operation === "modify") {
-							formObj.attr("action", "/user/modify").attr(
-									"method", "post").attr("enctype",
-									"multipart/form-data");
+							formObj.attr("action", "/manager/01-ManagerPage-UserModify").attr(
+									"method", "post");
 						} else if (operation === "read") {
-							formObj.attr("action", "/user/read").attr("method",
-									"post");
+							formObj.attr("action", "/manager/01-ManagerPage").attr("method",
+									"get");
 						}
 						formObj.submit();
 					});

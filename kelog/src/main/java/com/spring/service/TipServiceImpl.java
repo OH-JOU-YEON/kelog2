@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.spring.domain.Criteria;
+import com.spring.domain.ReportDTO;
 import com.spring.domain.TipPostDTO;
 import com.spring.persistence.TipPostMapper;
 
@@ -84,8 +85,28 @@ public class TipServiceImpl implements TipService{
 
 	@Override
 	public void reportTipPost(int tipBoardNo, String email, String reportReason) {
-		// TODO Auto-generated method stub
+		ReportDTO dto = new ReportDTO();
+		dto.setTipBoardNo(tipBoardNo);
+		dto.setEmail(email);
+		dto.setReportReason(reportReason);
 		
+		mapper.insertTipReport(dto);
+		
+	}
+
+	@Override
+	public boolean isUserReportTipPost(String email, Integer tipBoardNo) {
+		return mapper.isReport(email,tipBoardNo);
+	}
+
+	@Override
+	public int upreportCnt(Integer tipBoardNo) {
+		return mapper.upreportCnt(tipBoardNo);
+	}
+
+	@Override
+	public int downreportCnt(Integer tipBoardNo) {
+		return mapper.downreportCnt(tipBoardNo);
 	}
 
 }

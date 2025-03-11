@@ -163,6 +163,7 @@ out.println(sbHtml);
 	<div class="row" style="justify-content: center;">
 		<div class="col col-lg-6 col-md-6 col-sm-12 col-12" >
 			<div class="form-group">
+			<input name ="email" class="material-input form-control"  type="hidden" value="${email }">
 			<label>Title</label>
 				<input name ="title" class="material-input form-control" placeholder="제목 입력"  type="text">
 		</div>

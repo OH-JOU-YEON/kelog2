@@ -17,6 +17,7 @@ public class BlogPostDTO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd a hh:mm:ss")
 	private Date regDate;
 	private String tag;
+	private int viewCnt;
 	private int likeCnt;
 	private int reportCnt;
 }

@@ -66,13 +66,16 @@ public class TipPostController {
 	public void get(@RequestParam("tipBoardNo") Integer tipBoardNo, Model model,HttpSession session) {
 		log.info("tipBoardNo :" + tipBoardNo);
 		Integer uno = (Integer) session.getAttribute("uno");
+		String email = (String) session.getAttribute("email");
 		if(uno == null) {
 			TipPostDTO dto = service.read(tipBoardNo);
 			log.info(dto);
 			model.addAttribute("dto", dto);
 		}else {
 			boolean isLiked = service.isUserLikedTipPost(uno, tipBoardNo);
+			boolean isReport = service.isUserReportTipPost(email,tipBoardNo);
 			session.setAttribute("isliked", isLiked);
+			session.setAttribute("isReport", isReport);
 			TipPostDTO dto = service.read(tipBoardNo);
 			log.info(dto);
 			model.addAttribute("dto", dto);
@@ -131,7 +134,7 @@ public class TipPostController {
 
 	        // 서비스 계층에서 신고 데이터 처리
 	        service.reportTipPost(tipBoardNo, email, reportReason);
-	        
+	        service.upreportCnt(tipBoardNo);
 	        // 신고 처리 후 해당 게시글 페이지로 리다이렉트
 	        return "redirect:/tip/read?tipBoardNo=" + tipBoardNo;
 	}
