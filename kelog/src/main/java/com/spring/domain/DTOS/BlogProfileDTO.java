@@ -3,7 +3,8 @@ package com.spring.domain.DTOS;
 import com.spring.domain.UserDTO;
 
 import lombok.Getter;
-
+import lombok.NoArgsConstructor;
+@NoArgsConstructor 
 @Getter 
 public class BlogProfileDTO {
 	

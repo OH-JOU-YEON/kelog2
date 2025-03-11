@@ -1,13 +1,19 @@
 package com.spring.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.domain.BlogPostAddressMappingDTO;
 import com.spring.domain.NavAddressDTO;
+import com.spring.domain.DTOS.Navs;
 import com.spring.persistence.BlogPostAddressMappingMapper;
 import com.spring.persistence.NavAddressMapper;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service 
 public class NavAddressService {
 	
@@ -16,6 +22,23 @@ public class NavAddressService {
 	
 	@Autowired
 	BlogPostAddressMappingMapper blogPostAddressMappingMapper; 
+	
+	
+	
+	
+	public void navMapping(List<Navs> navs, int blogPostId) {
+		
+		for(Navs na : navs) {
+			
+			NavAddressDTO navAdd = getNavAddress(na.getTitle(), na.getCoord().getQa().getLa(),na.getCoord().getQa().getMa()); 
+			
+			int addId = navAdd.getAddressNo(); 
+			
+			BlogPostAddressMappingDTO blogPostAddressMappingDTO = getBlogPostAddressMapping(blogPostId,addId); 
+			
+			log.info("블로그 포스트 주소가 매핑되었습니다 매핑된 주소 번호:"+ blogPostAddressMappingDTO.getAddressId());
+		}
+	}
 	
 	
 	

@@ -27,6 +27,9 @@ public interface BlogPostMapper {
 	@Select("SELECT * FROM blogPost ORDER BY blogPostNo DESC ")
 	public List<BlogPostDTO> readAll();
 	
+
+	@Select("SELECT * FROM blogPost WHERE title = #{title} ")
+	public BlogPostDTO findByTitle(String title); 
 	
 	@Select("SELECT * FROM blogPost WHERE blogNo = #{blogNo} ")
 	public List<BlogPostDTO> findAllByBlogNo(int blogNo, @Param("offset") int offset, @Param("limit") int limit);

@@ -3,6 +3,7 @@ package com.spring.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.domain.BlogPostDTO;
+import com.spring.domain.DTOS.BlogNoAndNickNameVO;
 import com.spring.domain.DTOS.BlogPostVO;
+import com.spring.persistence.BlogPostMapper;
 import com.spring.service.BlogService;
+import com.spring.service.BlogServiceImpl;
+import com.spring.service.HashTagService;
+import com.spring.service.NavAddressService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -28,7 +34,20 @@ import lombok.extern.log4j.Log4j;
 @RequiredArgsConstructor
 public class BlogPostController {
 	
+	@Autowired 
 	private final BlogService service;
+	
+	@Autowired
+	private final HashTagService hashTagService; 
+	
+	@Autowired 
+	private final NavAddressService navAddressService; 
+	
+	@Autowired
+	private final BlogServiceImpl blogService; 
+	
+	@Autowired
+	private final BlogPostMapper blogPostMapper; 
 
 	@GetMapping("/list")
 	public void list(Model model) {
@@ -50,6 +69,27 @@ public class BlogPostController {
         }
         
         String email = (String) session.getAttribute("email");
+        
+        BlogNoAndNickNameVO blogNoAndNickName = blogService.getblogNoAndNickName(email);
+        
+        //만들려고 하는 제목이랑 겹치는 다른 포스트 있나 검사(url을 포스트 타이틀로 생성하기 때문) 
+        
+        BlogPostDTO blogPostDTO = blogPostMapper.findByTitle(blogPostVO.getTitle()); 
+        
+        if(blogPostDTO != null) {
+        	
+        	return "redirect:/blog/list";
+        }
+        
+        blogPostDTO = new BlogPostDTO(blogNoAndNickName, blogPostVO.getTitle(), blogPostVO.getTitle()); 
+        
+        blogPostMapper.insert(blogPostDTO); 
+        
+        navAddressService.navMapping(blogPostVO.getNavs(), blogPostDTO.getBlogPostNo()); 
+        
+        hashTagService.makeHashTags(blogPostVO.getTag(), "blogNo", blogPostDTO.getBlogPostNo()); 
+        
+        
         
 
 		return "redirect:/blog/list";

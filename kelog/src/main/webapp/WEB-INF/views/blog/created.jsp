@@ -240,7 +240,7 @@
 
 	<div class="header--standard header--standard-landing"
 		id="header--standard">
-		<div class="container">
+		<div class="container" >
 			<div class="header--standard-wrap">
 
 				<a href="12-FavouritePage.html" class="logo"></a>
@@ -308,13 +308,13 @@
 	</div>
 
 
-	<div class="container" >
+	<div class="container"  >
 		<div class="row">
 
 			<!-- Main Content -->
 
 			<!-- Main Content Section -->
-			<div class="container">
+			<div class="container" >
 				<div class="row">
 					<main
 						class="col col-xl-8 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12"
@@ -824,7 +824,6 @@
               body: JSON.stringify(params),
             });
             console.log(params);
-            history.back;
           } catch (error) {
             console.error("저장 실패 : ", error);
             console.log(params);

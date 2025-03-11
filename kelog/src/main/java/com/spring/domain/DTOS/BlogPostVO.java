@@ -3,7 +3,9 @@ package com.spring.domain.DTOS;
 import java.util.List;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor 
 @Getter 
 public class BlogPostVO {
 	

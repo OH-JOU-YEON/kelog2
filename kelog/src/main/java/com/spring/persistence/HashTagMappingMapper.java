@@ -8,16 +8,15 @@ import com.spring.domain.HashTagMappingDTO;
 
 public interface HashTagMappingMapper {
 	
-	//저장
+
 	public HashTagMappingDTO insert(HashTagMappingDTO hashTagMappingDTO); 
 	
-	
-	//아이디로 삭제 
+
 	@Delete("DELETE FROM hashTagMapping WHERE indexNo = #{indexNo}")	
 	public int delete(int indexNo);
 	
 	
-	//태그 번호랑 블로그 번호로 검색 
+
 	
 	public HashTagMappingDTO findByHashNoAndBlogNo(int hashNo, int blogNo); 
 	
