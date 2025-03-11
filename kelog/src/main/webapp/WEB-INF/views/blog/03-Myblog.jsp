@@ -92,7 +92,7 @@
 							<a href="97-BlogPostBoard.html">블로그 게시판</a>
 						</li>
 						<li class="nav-item">
-							<a href="03-Myblog.html">내 블로그</a>
+							<a href=<c:out value="${presentURL}"/>>내 블로그</a>
 						</li>
 						<li class="nav-item">
 							<a href="55-HoneyTipBoard.html">꿀팁 게시판</a>
@@ -173,55 +173,11 @@
 				<a href="03-MyblogCreatePost.html" class="btn btn-primary btn-md-2" style="background-color: #9edbff; border-color: #9eb3ff;">글쓰기</a>
 			</div> 
 
-			<div class="ui-block">
-
-					
-				<article class="hentry post">
-				
-					<div class="post__author author vcard inline-items">
-						<img loading="lazy" src="#" alt="author" width="36" height="36">
-				
-						<div class="author-date">
-							<a class="h6 post__author-name fn" href="#">사용자 ID</a>
-							<div class="post__date">
-								<time class="published" datetime="2004-07-24T18:18">
-									9 hours ago
-								</time>
-							</div>
-						</div>
-				
-						<div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg>
-							<ul class="more-dropdown">
-								<li>
-									<a href="#">글 수정</a>
-								</li>
-								<li>
-									<a href="#">글 삭제</a>
-								</li>
-							</ul>
-						</div>
-				
-					</div>
-				
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempo incididunt ut
-						labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris consequat.
-					</p>
-				
-					<div class="post-additional-info inline-items">
-				
-						<a href="#" class="post-add-icon inline-items">
-							<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
-							<span>좋아요 카운팅</span>
-						</a>	
-					</div>	
-
-				</article>
-
-				</div>
+			
 
 
 			<div id="newsfeed-items-grid">
-
+			<c:forEach var="log" items="${blogs}">
 				<div class="ui-block">
 					
 					<article class="hentry post video">
@@ -230,43 +186,38 @@
 							<img loading="lazy" src="#" alt="author" width="42" height="42">
 					
 							<div class="author-date">
-								<a class="h6 post__author-name fn" href="#">사용자 ID</a>
+								<a class="h6 post__author-name fn" href="#"><c:out value="${profile.email}"/></a>
 								<div class="post__date">
 									<time class="published" datetime="2004-07-24T18:18">
-										2월 10일 08:11
+										<c:out value="${log.createDate}"/>
 									</time>
 								</div>
 							</div>
-					
+					<c:if test="${profile.mineOrNot eq true}">
 							<div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg>
 								<ul class="more-dropdown">
 									<li>
-										<a href="#">글 수정</a>
+										<a href="/modify">글 수정</a>
 									</li>
 									<li>
-										<a href="#">글 삭제</a>
+										<a href="/remove">글 삭제</a>
 									</li>
 								</ul>
 							</div>
-					
+					</c:if>
 						</div>
-					
-						<p>블로그 포스팅 글 들어갈 자리</p>
 					
 						<div class="post-video">
 							<div class="video-thumb">
-								<img loading="lazy" src="/resources/img/video-youtube1.webp" alt="photo" width="197" height="194">
-								<a href="https://youtube.com/watch?v=excVFQ2TWig" class="play-video">
-									<svg class="olymp-play-icon"><use xlink:href="#olymp-play-icon"></use></svg>
-								</a>
+								<img loading="lazy" src=<c:out value="${log.thumbnails}"/> alt="photo" width="197" height="194">
+								
 							</div>
 					
 							<div class="video-content">
-								<a href="#" class="h4 title">첨부된 동영상</a>
-								<p>Lorem ipsum dolor sit amet, consectetur ipisicing elit, sed do eiusmod tempor incididunt
-									ut labore et dolore magna aliqua...
+								<a href=<c:out value="${presentURL} + ${log.title} "/> >
+ class="h4 title">첨부된 동영상</a>
+								<p><c:out value="${log.preview}"/>
 								</p>
-								<a href="#" class="link-site">YOUTUBE.COM</a>
 							</div>
 						</div>
 					
@@ -274,7 +225,7 @@
 					
 							<a href="#" class="post-add-icon inline-items">
 								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
-								<span>좋아요 카운팅</span>
+								<span><c:out value="${log.likeCount}"/></span>
 							</a>
 						</div>
 					
@@ -282,52 +233,10 @@
 					
 					</article>
 				</div>
+				
+				</c:forEach>
 
-				<div class="ui-block">
-
-					
-					<article class="hentry post">
-					
-						<div class="post__author author vcard inline-items">
-							<img loading="lazy" src="#" alt="author" width="36" height="36">
-					
-							<div class="author-date">
-								<a class="h6 post__author-name fn" href="#">사용자 ID</a>
-								<div class="post__date">
-									<time class="published" datetime="2004-07-24T18:18">
-										9 hours ago
-									</time>
-								</div>
-							</div>
-					
-							<div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg>
-								<ul class="more-dropdown">
-									<li>
-										<a href="#">글 수정</a>
-									</li>
-									<li>
-										<a href="#">글 삭제</a>
-									</li>
-								</ul>
-							</div>
-					
-						</div>
-					
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempo incididunt ut
-							labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris consequat.
-						</p>
-					
-						<div class="post-additional-info inline-items">
-					
-							<a href="#" class="post-add-icon inline-items">
-								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
-								<span>좋아요 카운팅</span>
-							</a>	
-						</div>	
-	
-					</article>
-
-					</div>
+		
 				</div>
 		</main>
 	</form>
@@ -343,8 +252,7 @@
 				
 				<div class="widget w-weather">
 					<img src="/resources/img/BlogUser.png" style="width: 200px; height: 200px; border-radius: 100px;">
-					<h4 style="color: #fff;">사용자 ID</h4>
-					<h5 style="color: #fff;">소개글</h5>
+					<h4 style="color: #fff;"><c:out value="${profile.email}"/></h4>
 				</div>
 					<div class="wethear-now inline-items">
 						<div class="max-min-temperature">

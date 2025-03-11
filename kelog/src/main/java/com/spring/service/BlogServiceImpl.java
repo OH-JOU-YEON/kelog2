@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.domain.BlogDTO;
 import com.spring.domain.BlogPostDTO;
@@ -131,7 +132,11 @@ public class BlogServiceImpl implements BlogService {
 	}
 	
 	
-	public BlogDTO getBlogByBlogNameAndUno(String blogName,int uno) {
+	public BlogDTO getBlogByBlogNameAndUno(String blogName,String email) {
+		
+		UserDTO userDTO = usermapper.selectMember(email); 
+		
+		int uno = userDTO.getUno(); 
 		
 		BlogDTO blogDTO = blogMapper.findBlogByBlogName(blogName); 
 		
@@ -146,12 +151,14 @@ public class BlogServiceImpl implements BlogService {
 	}
 	
 	
-	public List<logDTO> getblogPosts(String blogName) {
-		
+	public List<logDTO> getblogPosts(String blogName,@RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+		int offset = page * size;
+        int limit = size;
 		BlogDTO blogDTO = blogMapper.findBlogByBlogName(blogName); 
 		
 		
-		return mapper.findAllByBlogNo(blogDTO.getBlogNo()).stream().map(s -> new logDTO(s)).collect(Collectors.toList()); 
+		return mapper.findAllByBlogNo(blogDTO.getBlogNo(),offset,limit).stream().map(s -> new logDTO(s)).collect(Collectors.toList()); 
 		
 	}
 

@@ -3,13 +3,14 @@ package com.spring.persistence;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.spring.domain.BlogPostDTO;
 import com.spring.domain.BlogReportDTO;
-import com.spring.domain.Criteria;
 
+@Mapper 
 public interface BlogPostMapper {
 	public void insert(BlogPostDTO dto);
 	
@@ -28,7 +29,7 @@ public interface BlogPostMapper {
 	
 	
 	@Select("SELECT * FROM blogPost WHERE blogNo = #{blogNo} ")
-	public List<BlogPostDTO> findAllByBlogNo(int blogNo, Criteria cri);
+	public List<BlogPostDTO> findAllByBlogNo(int blogNo, @Param("offset") int offset, @Param("limit") int limit);
 
 	// 좋아요
 	

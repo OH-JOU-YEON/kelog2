@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.spring.domain.BlogDTO;
 import com.spring.domain.Criteria;
 import com.spring.domain.DTOS.BlogProfileDTO;
 import com.spring.domain.DTOS.logDTO;
@@ -28,14 +29,24 @@ public class BlogController {
 	@GetMapping("/kelogs/{blogName}")
 	public String blogMapping(Model model, HttpServletRequest request, @PathVariable String blogName, Criteria cri) {
 		HttpSession session = request.getSession(false);
+		
+		
         
         String email = (String) session.getAttribute("email");
+        
+       BlogDTO blogDTO =   blogService.getBlogByBlogNameAndUno(blogName, email);
 		
 		BlogProfileDTO blogProfileDTO = blogService.getBlogProfileByBlogName(blogName, email); 
 		
 		model.addAttribute("profile", blogProfileDTO); 
 		
-		List<logDTO> blogs  = blogService.getblogPosts(blogName); 
+		List<logDTO> blogs  = blogService.getblogPosts(blogName,0,10); 
+		
+		model.addAttribute("blogs",blogs); 
+		
+		
+		
+		model.addAttribute("presentURL","kelogs/" + blogName ); 
 		
 		
 		return "Myblog";
