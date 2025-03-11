@@ -14,4 +14,12 @@
 		UPDATE user SET profileImg=#{profileImg}
 		WHERE uno = #{uno}
 	</update>
+<update id="usermodify">
+		UPDATE user SET role=#{role}, activity=#{activity}
+		WHERE uno = #{uno}
+	</update>
+	
+	<select id="findByNickname" >
+    SELECT COUNT(uno) FROM nicktable WHERE nickName = #{nickName}
+</select>
 </mapper>

@@ -12,7 +12,7 @@
 
     <div>${token}</div>
     <div>${user.email}</div>
-    <div>${user.nickName}</div>
+    <div>${nickName}</div>
     <div>
         <img src="/upload/${user.profileImg}"></img>
     </div>

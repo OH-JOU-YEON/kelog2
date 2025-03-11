@@ -18,5 +18,12 @@ public interface TipService extends GenericService<TipPostDTO, Integer> {
 	
 	public boolean isUserLikedTipPost(int uno, Integer tipBoardNo);
 	
+	// 신고확인
 	public void reportTipPost(int tipBoardNo, String email, String reportReason);
+	
+	public boolean isUserReportTipPost(String email, Integer tipBoardNo);
+	
+	public int upreportCnt(Integer tipBoardNo);
+	
+	public int downreportCnt(Integer tipBoardNo);
 }

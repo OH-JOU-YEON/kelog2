@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.spring.domain.TipReplyDTO;
+import com.spring.domain.ReplyDTO;
 import com.spring.persistence.TipReplyMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -18,24 +18,24 @@ public class TipReplyServiceImpl implements TipReplyService {
 	private final TipReplyMapper mapper;
 
 	@Override
-	public List<TipReplyDTO> listReply(int TipReplyNo) {
-		return mapper.selectReply(TipReplyNo);
+	public List<ReplyDTO> listReply(int tipBoardNo) {
+		return mapper.selectReply(tipBoardNo);
 	}
 
 	@Override
-	public int addReply(TipReplyDTO reply) {
+	public int addReply(ReplyDTO reply) {
 		mapper.insertReply(reply);
 		return reply.getTipBoardNo();
 	}
 
 	@Override
-	public TipReplyDTO selectReply(int TipReplyNo) {
-		return mapper.selectRep(TipReplyNo);
+	public ReplyDTO selectReply(int replyNo) {
+		return mapper.selectRep(replyNo);
 	}
 
 	@Override
-	public void deleteReply(int TipReplyNo) {
-		mapper.removeReply(TipReplyNo);
+	public void deleteReply(int replyNo) {
+		mapper.removeReply(replyNo);
 		
 	}
 

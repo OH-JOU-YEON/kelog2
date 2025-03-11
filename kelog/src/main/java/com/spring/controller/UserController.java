@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -43,7 +44,7 @@ public class UserController {
 	
 	@RequestMapping("/main")
 	public String main() {
-		return "/oauth/google/loginSuccess";
+		return "/00-MainPage";
 	}
 
 	
@@ -59,7 +60,7 @@ public class UserController {
 			session.setAttribute("nickName", nick);
 			session.setAttribute("uno", member.getUno());
             session.setAttribute("email", member.getEmail());
-			return "/oauth/google/loginSuccess";
+            return "/00-MainPage";
 		}else {
 			
 			return "/oauth/google/member";
@@ -77,7 +78,7 @@ public class UserController {
 			session.setAttribute("nickName", nick);
 			session.setAttribute("uno", member.getUno());
             session.setAttribute("email", member.getEmail());
-			return "redirect:/oauth/google/loginSuccess";
+            return "/00-MainPage";
 		}else {
 			// 로그인 실패
 			// 화면에서 로그인 실패 시 alert 띄우기 
@@ -135,7 +136,9 @@ public class UserController {
 		String Name = nickNameService.selectNickName(user.getUno());
 		session.setAttribute("user", user);
 		session.setAttribute("nickName", Name);
-		return "/oauth/google/loginSuccess";
+		session.setAttribute("uno", user.getUno());
+		session.setAttribute("email", user.getEmail());
+		return "/00-MainPage";
 
 	}
 	@GetMapping({ "/read", "/modify" })
@@ -219,6 +222,23 @@ public class UserController {
 		
 		return "redirect:/login/google/login.do";
 	}
-	
+	@PostMapping("/checkNickname")
+    @ResponseBody
+    public Map<String, Boolean> checkNickname(@RequestParam("nickName") String nickName) {
+        Map<String, Boolean> response = new HashMap<>();
+        int nick = userService.isNicknameTaken(nickName); // 중복이면 false
+        if(nick > 0) {
+        	boolean isAvailable = false;
+        	System.out.println("닉네임 확인: " + nickName + " -> 사용 가능: " + isAvailable);
+            response.put("available", isAvailable);
+            return response;
+        }else {
+        	boolean isAvailable = true;
+        	System.out.println("닉네임 확인: " + nickName + " -> 사용 가능: " + isAvailable);
+            response.put("available", isAvailable);
+            return response;
+        }
+        
+    }
 	
 }

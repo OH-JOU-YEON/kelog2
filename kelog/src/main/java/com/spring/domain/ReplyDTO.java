@@ -1,14 +1,21 @@
 package com.spring.domain;
 
-import java.sql.Timestamp;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 @Data
 public class ReplyDTO {
-	private int ReplyNo;
-	// 블로그 번호, 게시판 번호
-	private int Num;
+	private int replyNo;
+	private int blogPostNo;
+	private int tipBoardNo;
 	private String nickName;
+	private String email;
 	private String content;
-	private Timestamp regDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd a hh:mm:ss")
+	private Date regDate;
+	
+	
+	
 }

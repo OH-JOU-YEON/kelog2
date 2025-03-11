@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.spring.domain.Criteria;
+import com.spring.domain.ReportDTO;
 import com.spring.domain.TipPostDTO;
 
 
@@ -37,4 +38,13 @@ public interface TipPostMapper {
 	public int getTotalCount();
 
 	public List<TipPostDTO> listwithPasing(Criteria cri);
+
+	// 신고
+	public void insertTipReport(ReportDTO dto);
+
+	public boolean isReport(String email, Integer tipBoardNo);
+	
+	public int upreportCnt(Integer tipBoardNo);
+	
+	public int downreportCnt(Integer tipBoardNo);
 }

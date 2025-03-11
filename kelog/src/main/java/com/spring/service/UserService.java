@@ -15,4 +15,8 @@ public interface UserService extends GenericService<UserDTO, Integer> {
 
 	public List<UserDTO> listAll();
 
+	public int usermodify(UserDTO member);
+
+	public int isNicknameTaken(String nickName);
+
 }

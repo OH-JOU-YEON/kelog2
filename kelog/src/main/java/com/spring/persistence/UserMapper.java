@@ -1,5 +1,7 @@
 package com.spring.persistence;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 
@@ -23,4 +25,12 @@ public interface UserMapper {
 	
 	public int update(UserDTO dto);
 	
+
+	@Select("SELECT * FROM user")
+	public List<UserDTO> listAll();
+	
+	public int usermodify(UserDTO member);
+	
+	public int findByNickname(String nickName);
+
 }

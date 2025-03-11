@@ -47,7 +47,7 @@
 				</div>
 				<div class="form-group">
 					<label>신고자</label><input class="form-control" type="text"
-						readonly="readonly" name="nickName" value="${user.nickName}">
+						readonly="readonly" name="nickName" value="${nickName}">
 				</div>
 				<div class="form-group">
 					<label>신고 사유</label> <select name="reportReason">

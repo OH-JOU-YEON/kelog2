@@ -38,8 +38,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<UserDTO> listAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.listAll();
 	}
 
 
@@ -66,6 +65,16 @@ public class UserServiceImpl implements UserService {
 		UserDTO user = mapper.select(uno);
 		log.info("MemberService user: " + user);
 		return user;
+	}
+
+	@Override
+	public int usermodify(UserDTO member) {
+		return mapper.usermodify(member);
+	}
+
+	@Override
+	public int isNicknameTaken(String nickName) {
+		return mapper.findByNickname(nickName);
 	}
 
 }

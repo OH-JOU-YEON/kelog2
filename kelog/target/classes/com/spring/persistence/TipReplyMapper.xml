@@ -5,10 +5,10 @@
 
 <mapper namespace="com.spring.persistence.TipReplyMapper">
 
-	<insert id="insertReply" keyColumn="tipReplyNo" keyProperty="tipReplyNo" useGeneratedKeys="true" parameterType="TipReplyDTO">
-		INSERT INTO tipreply (tipBoardNo, nickName, content)
+	<insert id="insertReply" keyColumn="replyNo" keyProperty="replyNo" useGeneratedKeys="true" parameterType="ReplyDTO">
+		INSERT INTO reply (tipBoardNo, nickName, email, content)
 		VALUES
-		(#{tipBoardNo}, #{nickName}, #{content});
+		(#{tipBoardNo}, #{nickName}, #{email}, #{content});
 	</insert>
 
 

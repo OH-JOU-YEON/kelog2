@@ -302,7 +302,7 @@
 				style="background-color: #9edbff; border-color: #9eb3ff; margin-left: 5px;">게시물</a>
 			<a href="03-MyblogMap.html" class="btn btn-primary btn-md-2"
 				style="background-color: #9edbff; border-color: #9eb3ff; margin-left: 5px;">지도</a>
-			<a href="03-MyblogExchange.html" class="btn btn-primary btn-md-2"
+			<a href="/blog/exchange" class="btn btn-primary btn-md-2"
 				style="background-color: #9edbff; border-color: #9eb3ff; margin-left: 5px;">일정</a>
 		</div>
 	</div>
@@ -358,7 +358,7 @@
 											<div class="form-group">
 												<label>nickName</label> <input class="form-control"
 													name="nickName" readonly="readonly"
-													value="${user.nickName }">
+													value="${nickName }">
 											</div>
 											<div class="add-options-message">
 												<button type="button" id="submitBtn" class="btn btn-primary btn-md-2"

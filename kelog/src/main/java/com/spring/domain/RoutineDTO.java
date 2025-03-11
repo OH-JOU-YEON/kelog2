@@ -1,5 +1,14 @@
 package com.spring.domain;
 
-public class RoutineDTO {
+import java.sql.Date;
 
+import lombok.Data;
+@Data
+public class RoutineDTO {
+	
+	private int routineNo;
+    private String email;
+    private String content;
+    private Date eventDate;
+    
 }

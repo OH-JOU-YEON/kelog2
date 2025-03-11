@@ -9,6 +9,7 @@ import lombok.Data;
 public class TipPostDTO {
 	private int tipBoardNo;
 	private String nickName;
+	private String email;
 	private String title;
 	private String content;
 	@DateTimeFormat(pattern = "yyyy-MM-dd a hh:mm:ss")
@@ -18,9 +19,10 @@ public class TipPostDTO {
 	private int reportCnt;
 	
 	
-	public TipPostDTO(String nickName, String title, String content) {
+	public TipPostDTO(String nickName, String title, String email, String content) {
 		super();
 		this.nickName = nickName;
+		this.email = email;
 		this.title = title;
 		this.content = content;
 	}
