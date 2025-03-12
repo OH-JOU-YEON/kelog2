@@ -3,10 +3,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 
-<title>Company Page Blog Grid</title>
+<title>추천게시판</title>
 
 <!-- Required meta tags always come first -->
 <meta charset="utf-8">
@@ -127,17 +127,21 @@
 					<div class="other_festival" role="application">
 						<div class="blind">페스티벌 검색 리스트</div>
 
-						<div class="festival_ul_top" id="festival_ul_top" style="">
-							<ul class="tab_area">
-
-								<li id="tabFstvlList" class="active">
-									<button title="선택됨">최신순</button>
-								</li>
-
-								<li id="tabFstvlLikeOrderList">
-									<button>인기순</button>
-								</li>
-							</ul>
+						<div class="search-container"
+							style="display: flex; justify-content: flex-end; align-items: center; gap: 1em;">
+							<div style="margin-bottom: 25px; width: 250px;">
+								<label for="rowsPerPage">몇 줄씩 표시할지 선택</label> <select
+									id="rowsPerPage" class="selectAmount">
+									<option ${pageMaker.cri.amount == 9 ? "selected='selected'":''}
+										value="9">9개</option>
+									<option
+										${pageMaker.cri.amount == 12 ? "selected='selected'":''}
+										value="12">12개</option>
+									<option
+										${pageMaker.cri.amount == 30 ? "selected='selected'":''}
+										value="30">30개</option>
+								</select>
+							</div>
 						</div>
 
 
@@ -150,25 +154,8 @@
 								role="application">
 								<p class="blind">축제일순 리스트</p>
 								<ul class="other_festival_ul" id="fstvlList">
-									<c:forEach var="vo" items="${list }">
-										<li><a
-											href="/travel/read?travelBoardNo=${vo.travelBoardNo }">
-												<div class="other_festival_img  open">
-													<img
-														src="https://kfescdn.visitkorea.or.kr/kfes/upload/contents/db/300_220371a8-ec85-46b7-8bb0-30afa9a93a19_1.jpg"
-														alt="사진~">
-													<div class="sing_area">
-														<div class="blind">문화 관광 축제</div>
-													</div>
-												</div>
-												<div class="other_festival_content">
-													<strong><a
-														href="/travel/read?travelBoardNo=${vo.travelBoardNo }">${vo.title }</a></strong>
-													<div class="date">일정 날짜</div>
-													<div class="loc">위치~쓰기</div>
-												</div>
-										</a></li>
-									</c:forEach>
+									<!--  	<c:forEach var="vo" items="${list }"> -->
+									<!--	</c:forEach> -->
 								</ul>
 							</div>
 
@@ -218,21 +205,27 @@
 
 	<nav aria-label="Page navigation">
 		<ul class="pagination justify-content-center">
-			<li class="page-item disabled"><a class="page-link" href="#"
-				tabindex="-1">Previous</a></li>
-			<li class="page-item"><a class="page-link" href="#">1
-					<div class="ripple-container">
-						<div class="ripple ripple-on ripple-out"
-							style="left: -10.3833px; top: -16.8333px; background-color: rgb(255, 255, 255); transform: scale(16.7857);"></div>
-					</div>
-			</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#">...</a></li>
-			<li class="page-item"><a class="page-link" href="#">12</a></li>
-			<li class="page-item"><a class="page-link" href="#">Next</a></li>
+			<li class="page-item"><c:if test="${pageMaker.prev }">
+					<li class="paginate_button previous" tabindex="0"><a
+						href="${pageMaker.startPage - 1 }">Previous</a></li>
+				</c:if> <c:forEach var="num" begin="${pageMaker.startPage }"
+					end="${pageMaker.endPage }">
+					<li
+						class="paginate_button  ${pageMaker.cri.pageNum == num ? 'active':''}"
+						tabindex="0"><a href="${num }">${num}</a></li>
+				</c:forEach> <c:if test="${pageMaker.next }">
+					<li class="paginate_button next" tabindex="0"><a
+						href="${pageMaker.endPage + 1 }">next</a></li>
+				</c:if>
+				<form id="pageForm" action="/travel/list" method="get">
+					<input type="hidden" name="pageNum"
+						value="${pageMaker.cri.pageNum }"> <input type="hidden"
+						name="amount" value="${pageMaker.cri.amount }">
+				</form></li>
+
 		</ul>
 	</nav>
+
 
 	<!-- ... end Pagination -->
 
@@ -403,19 +396,80 @@ if (!document.querySelector('.change-lang').contains(event.target) && !languageT
 		}
 		$("#mymodal").modal("show");
 	}
+	function loadTable() {
+	    $.ajax({
+	        url: "/travel/getList",
+	        type: "post",
+	        data: {
+	            pageNum: $("#pageForm").find("input[name='pageNum']").val(),
+	            amount: $("#pageForm").find("input[name='amount']").val()
+	        },
+	        dataType: "json",
+	        success: function(data) {
+	            var festivalList = $("#fstvlList");
+	            festivalList.empty(); // 기존 리스트 비우기
+
+	            // 서버에서 반환된 데이터로 리스트 생성
+	            $.each(data, function(index, travellist) {
+	                let updateDate = new Date(travellist.regDate);
+	                var options = {
+	                    year: "numeric",
+	                    month: "2-digit",
+	                    day: "2-digit",
+	                    hour: "2-digit",
+	                    minute: "2-digit"
+	                };
+	                var formattedUpdateDate = updateDate.toLocaleString("ko-KR", options);
+
+	                var listItem = $("<li>").append(
+	                    $("<a>").attr("href", "/travel/read?travelBoardNo=" + travellist.travelBoardNo).append(
+	                        $("<div>").addClass("other_festival_img open").append(
+	                            $("<img>").attr("src", "https://kfescdn.visitkorea.or.kr/kfes/upload/contents/db/300_220371a8-ec85-46b7-8bb0-30afa9a93a19_1.jpg").attr("alt", "사진~")
+	                        ),
+	                        $("<div>").addClass("other_festival_content").append(
+	                            $("<strong>").append(
+	                                $("<a>").attr("href", "/travel/read?travelBoardNo=" + travellist.travelBoardNo).text(travellist.title)
+	                            ),
+	                            $("<div>").html(travellist.content),
+	                            $("<div>").text(formattedUpdateDate)
+	                        )
+	                    )
+	                );
+	                festivalList.append(listItem);
+	            });
+	        },
+	        error: function(e) {
+	            console.log(e);
+	        }
+	    });
+	}
 
 	$(document).ready(function() {
-		$("#regBtn").on("click", function() {
-			self.location = "/travel/created";
-		});
+	    loadTable(); // 페이지 로드 시 초기 리스트 불러오기
 
-		$(".close, .btn-secondary").on("click", function() {
-			$("#mymodal").modal("hide");
-		});
+	    $("#regBtn").on("click", function() {
+	        self.location = "/travel/created";
+	    });
 
-		var result = '${result}';
-		checkModal(result);
+	    // 페이지 번호 클릭 시
+	    let pageForm = $("#pageForm");
+	    $(".paginate_button a").on("click", function(e) {
+	        e.preventDefault();
+	        pageForm.find("input[name='pageNum']").val($(this).attr("href"));
+	        pageForm.submit();
+	        loadTable(); // 테이블 새로고침
+	    });
 
+	    // "몇 줄씩 표시할지 선택" 변경 시
+	    $(".selectAmount").on("change", function(e) {
+	        $("#pageForm").find("input[name='pageNum']").val(1); // 첫 페이지로 이동
+	        $("#pageForm").find("input[name='amount']").val(e.currentTarget.value);
+	        pageForm.submit();
+	        loadTable(); // 선택한 갯수에 맞춰 리스트 새로고침
+	    });
+
+	    var result = '${result}';
+	    checkModal(result);
 	});
 </script>
 

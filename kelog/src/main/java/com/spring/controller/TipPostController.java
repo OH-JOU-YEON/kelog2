@@ -32,9 +32,6 @@ public class TipPostController {
 	
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
-		log.info("list");
-		log.info("----controller in List----");
-		log.info(cri);
 		//전체 글의 갯수를 구하기위한 메서드 필요
 		int total = service.getTotal();
 		//페이징 처리를 위한 객체 생성
@@ -42,9 +39,6 @@ public class TipPostController {
 		
 		// model : view로 데이터를 전달 객체
 		model.addAttribute("pageMaker", pageDTO);
-		log.info("----controller out List----");
-		log.info(total);
-		log.info(pageDTO);
 	}
 	@ResponseBody //Ajax가 호출하는 메서드
 	@PostMapping("/getList")

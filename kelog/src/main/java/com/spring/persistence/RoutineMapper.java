@@ -6,13 +6,13 @@ import com.spring.domain.RoutineDTO;
 
 public interface RoutineMapper {
 
-	List<RoutineDTO> getEventsByUserId(String email);
+	public List<RoutineDTO> getEventsByEmail(String email);
 
-	void insert(RoutineDTO dto);
+	public void insert(RoutineDTO dto);
 
-	int modify(RoutineDTO dto);
+	public int update(RoutineDTO dto);
 	
-	int delete(int routineNo);
+	public int delete(int routineNo);
 
 
 }

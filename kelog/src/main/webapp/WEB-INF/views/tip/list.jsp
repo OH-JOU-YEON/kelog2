@@ -171,10 +171,6 @@
 		<div class="row">
 			<div class="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 m-auto">
 				<div class="search-container" style="display: flex; justify-content: flex-end; align-items: center; gap: 1em;">
-					<div style="display: flex; align-items: center;">
-						<input type="text" id="searchInput" placeholder="검색..." onkeyup="filterTable()" style="width: 250px;">
-					</div>
-					
 					<div style="margin-bottom: 25px; width: 250px;">
 						<label for="rowsPerPage">몇 줄씩 표시할지 선택</label>
 						<select id="rowsPerPage" class="selectAmount">

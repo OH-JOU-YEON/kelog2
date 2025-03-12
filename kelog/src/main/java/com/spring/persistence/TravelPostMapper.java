@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.spring.domain.Criteria;
 import com.spring.domain.TravelPostDTO;
 
 public interface TravelPostMapper {
@@ -49,6 +50,10 @@ public interface TravelPostMapper {
 	public int upunLikecount(Integer travelBoardNo);
 
 	public int ununLikecount(Integer travelBoardNo);
+
+	public int getTotalCount();
+
+	public List<TravelPostDTO> listwithPasing(Criteria cri);
 	
 	
 	

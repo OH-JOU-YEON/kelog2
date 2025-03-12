@@ -1,5 +1,7 @@
 package com.spring.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.spring.domain.Criteria;
+import com.spring.domain.PageDTO;
 import com.spring.domain.TravelPostDTO;
 import com.spring.service.TravelService;
 
@@ -27,10 +31,23 @@ public class TravelPostController {
 	private final TravelService service;
 
 	@GetMapping("/list")
-	public void list(Model model) {
+	public void list(Criteria cri, Model model) {
+		
+		int total = service.getTotal();
+		
+		PageDTO pageDTO = new PageDTO(cri, total);
+		
+		model.addAttribute("pageMaker", pageDTO);
 		model.addAttribute("list", service.listAll());
 	}
 
+	@PostMapping("/getList")
+	@ResponseBody
+	public List<TravelPostDTO> getList(Criteria cri){
+		return service.getList(cri);
+	}
+	
+	
 	@GetMapping("/created")
 	public void TravelPostGet() {
 

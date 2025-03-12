@@ -5,23 +5,28 @@
 
 <mapper namespace="com.spring.persistence.RoutineMapper">
 
-	<insert id="insert">
-		INSERT INTO routine (email, content, eventDate)
-		VALUES (#{email}, #{content}, #{eventDate})
-	</insert>
+   <insert id="insert">
+        INSERT INTO routine (content, eventDate, email)
+        VALUES (#{content}, #{eventDate}, #{email})
+    </insert>
+    
+    <!-- 일정 수정 -->
+    <update id="update">
+        UPDATE routine
+        SET content = #{content}, eventDate = #{eventDate}
+        WHERE routineNo = #{routineNo} AND email = #{email}
+    </update>
 
-	<select id="getEventsByUserId">
-		SELECT * FROM routine WHERE email = #{email}
-	</select>
+    <!-- 일정 삭제 -->
+    <delete id="delete" parameterType="int">
+        DELETE FROM routine WHERE routineNo = #{routineNo}
+    </delete>
 
-	<update id="modify">
-		UPDATE routine
-		SET content = #{content}, eventDate = #{eventDate}
-		WHERE routineNo = #{routineNo}
-	</update>
-
-	<delete id="delete">
-		DELETE FROM routine WHERE routineNo = #{routineNo}
-	</delete>
+    <!-- 특정 이메일에 해당하는 일정 목록 조회 -->
+    <select id="getEventsByEmail" parameterType="String">
+        SELECT routineNo, content, eventDate email
+        FROM routine
+        WHERE email = #{email}
+    </select>
 
 </mapper>

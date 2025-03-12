@@ -8,8 +8,11 @@ import com.spring.domain.TipPostDTO;
 public interface TipService extends GenericService<TipPostDTO, Integer> {
 	
 	public List<TipPostDTO> listAll(); 
+	
 	public int getTotal();
+	
 	public List<TipPostDTO> getList(Criteria cri);
+	
 	public int modify(TipPostDTO dto);
 	// 좋아요 확인 취소
 	public int unlikecount(Integer tipBoardNo, int uno);

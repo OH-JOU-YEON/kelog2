@@ -172,7 +172,7 @@
 					<p>Modal body text goes here.</p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" 
+					<button type="button" class="btn btn-secondary"
 						data-bs-dismiss="modal">Close</button>
 				</div>
 			</div>
@@ -676,17 +676,19 @@
 
 	<div
 		style="margin: 25px 25px 0 25px; background-color: #fff; display: flex; justify-content: end; position: relative;">
-		<form class="w-search" onsubmit="performSearch(event)">
-			<div class="form-group with-button is-empty">
-				<input id="search-input" class="form-control" type="text"
-					placeholder="검색..."> <a
-					style="position: absolute; right: 10px; top: 57%; transform: translateY(-50%); cursor: pointer;"
-					onclick="performSearch(event)"> <img
-					src="/resources/img/Search-icon.png" alt="#"
-					style="width: 18px; height: 18px;">
-				</a> <span class="material-input"></span>
-			</div>
-		</form>
+		<div>
+			<label for="rowsPerPage">몇 줄씩 표시할지 선택</label> <select
+				id="rowsPerPage" class="selectAmount">
+				<option ${pageMaker.cri.amount == 5 ? "selected='selected'":''}
+					value="5">5개</option>
+				<option ${pageMaker.cri.amount == 10 ? "selected='selected'":''}
+					value="10">10개</option>
+				<option ${pageMaker.cri.amount == 15 ? "selected='selected'":''}
+					value="15">15개</option>
+				<option ${pageMaker.cri.amount == 20 ? "selected='selected'":''}
+					value="20">20개</option>
+			</select>
+		</div>
 	</div>
 
 	<!-- ... end Main BlogV1 -->
@@ -709,11 +711,16 @@
 								</div>
 
 								<div class="post-content">
-									<a href="/blog/read?blogPostNo=${vo.blogPostNo }" class="h4 post-title">${vo.title }</a>
+									<a href="/blog/read?blogPostNo=${vo.blogPostNo }"
+										class="h4 post-title">${vo.title }</a>
 									<p>${vo.content }</p>
 									<div class="info">
-										<p>${vo.nickName}</p>&emsp;
-										<p><fmt:formatDate pattern="yyyy-MM-dd a hh:mm:ss" 	value="${vo.regDate }" /></p>
+										<p>${vo.nickName}</p>
+										&emsp;
+										<p>
+											<fmt:formatDate pattern="yyyy-MM-dd a hh:mm:ss"
+												value="${vo.regDate }" />
+										</p>
 									</div>
 								</div>
 
@@ -723,7 +730,7 @@
 						</div>
 					</div>
 				</c:forEach>
-			</div>					
+			</div>
 			<button id="regBtn" type="button" class="btn btn-primary btn-md-2">글등록</button>
 
 			<!-- Pagination -->
@@ -745,7 +752,7 @@
 					<li class="page-item"><a class="page-link" href="#">다음</a></li>
 				</ul>
 			</nav>
-		
+
 			<!-- ... end Pagination -->
 		</div>
 	</section>
@@ -789,7 +796,7 @@
 		}
 	}
 </script>
-<script type="text/javascript">
+	<script type="text/javascript">
 
 	function checkModal(result) {
 		if (result === '') {
@@ -836,7 +843,7 @@
 </script>
 	<!-- 신고 모달창부분 -->
 
-<script>
+	<script>
 // 모달 창과 관련된 요소 선택
 const reportModal = document.getElementById('reportModal');
 const closeModal = document.getElementById('closeModal');

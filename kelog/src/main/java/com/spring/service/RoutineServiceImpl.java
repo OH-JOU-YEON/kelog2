@@ -17,7 +17,7 @@ public class RoutineServiceImpl implements RoutineService {
 
 	@Override
 	public List<RoutineDTO> getdtoByEmail(String email) {
-		return mapper.getEventsByUserId(email);
+		return mapper.getEventsByEmail(email);
 	}
 
 	@Override
@@ -25,18 +25,18 @@ public class RoutineServiceImpl implements RoutineService {
 		mapper.insert(dto);
 	}
 
+
+	@Override
+	public int modify(RoutineDTO dto) {
+		return mapper.update(dto);
+		
+	}
+	
 	@Override
 	public int delete(int routineNo) {
 		return mapper.delete(routineNo);
 		
 	}
-
-	@Override
-	public int modify(RoutineDTO dto) {
-		return mapper.modify(dto);
-		
-	}
-	
 	
 	
 	

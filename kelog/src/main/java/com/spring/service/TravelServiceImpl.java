@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.spring.domain.Criteria;
 import com.spring.domain.TravelPostDTO;
 import com.spring.persistence.TravelPostMapper;
 
@@ -93,6 +94,17 @@ public class TravelServiceImpl implements TravelService {
     public void removeunLike(int uno, Integer travelBoardNo) {
         mapper.removeunlike(uno, travelBoardNo);
     }
+
+	@Override
+	public int getTotal() {
+		return mapper.getTotalCount();
+	}
+
+	@Override
+	public List<TravelPostDTO> getList(Criteria cri) {
+		List<TravelPostDTO> result = mapper.listwithPasing(cri);
+		return result;
+	}
 
     
 
