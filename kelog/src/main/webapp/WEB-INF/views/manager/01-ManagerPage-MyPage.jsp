@@ -376,53 +376,8 @@ loginButton.addEventListener('click', function(event) {
 	}
 	});
 	</script>
-<!-- 신고 모달창부분 -->
 
-<script>
-// 모달 창과 관련된 요소 선택
-const reportModal = document.getElementById('reportModal');
-const closeModal = document.getElementById('closeModal');
-const reportIcons = document.querySelectorAll('.reportIcon');  // class로 선택
-const cancelBtn = document.getElementById('cancelBtn');  // 취소 버튼 추가
 
-// 각 reportIcon에 클릭 이벤트 추가
-
-reportIcons.forEach(reportIcon => {
-    reportIcon.addEventListener('click', function() {
-        var email = '${email}';
-        
-          if (!email) {
-                alert("로그인 후 신고할 수 있습니다.");
-                return;  // 로그인되지 않으면 더 이상 진행하지 않음
-            }else {
-            	if(JSON.parse('${isReport}') ==true) {
-            		alert("이미 신고하신 게시글 입니다.");
-            		return;            		
-           	 	}else {
-                	reportModal.style.display = 'block';  // 모달을 열기
-           	 	}
-            }
-    });
-});
-
-// 모달 닫기 버튼 클릭 시 모달 닫기
-closeModal.addEventListener('click', function() {
-    reportModal.style.display = 'none';
-});
-
-// 취소 버튼 클릭 시 모달 닫기
-cancelBtn.addEventListener('click', function() {
-    reportModal.style.display = 'none';  // 모달 닫기
-});
-
-// 모달 바깥을 클릭하면 모달을 닫기
-window.addEventListener('click', function(event) {
-    if (event.target === reportModal) {
-        reportModal.style.display = 'none';
-    }
-});
-
-    </script>
 <script>
 	window.addEventListener('scroll', function () {
 			const header = document.getElementById('header--standard');

@@ -11,6 +11,9 @@
 		(#{tipBoardNo}, #{nickName}, #{email}, #{content});
 	</insert>
 
+	<insert id="reportTipreply" parameterType="hashMap">
+		INSERT INTO replyreport (tipBoardNo, replyNo, email, reportReason) VALUES (#{param1},#{param2},#{param3},#{param4})
+	</insert>
 
 
 

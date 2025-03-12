@@ -92,7 +92,7 @@ public class UserController {
 	@PostMapping("/create")
 	public String register(UserDTO member,@RequestParam("nickName") String nickName ,HttpSession session,@RequestParam("file") MultipartFile file, RedirectAttributes rttr) {
 		if (!file.isEmpty()) {
-			String uploadFolder = "C:\\upload"; // 업로드 경로 설정
+			String uploadFolder = "C:\\Users\\keduit\\Documents\\kelog\\kelog\\src\\main\\webapp\\resources\\img"; // 업로드 경로 설정
 			String originalFileName = file.getOriginalFilename(); // 실제 첨부된 파일이름
 			String uploadFileName = UUID.randomUUID().toString() + "_" + originalFileName;
 			
@@ -107,7 +107,7 @@ public class UserController {
 		} else {
             // 구글 프로필 사진 처리 (URL에서 이미지를 다운로드하여 변환)
             String imageUrl = member.getProfileImg(); // 구글 프로필 사진 URL
-            String uploadFolder = "C:\\upload"; // 업로드 경로
+            String uploadFolder = "C:\\Users\\keduit\\Documents\\kelog\\kelog\\src\\main\\webapp\\resources\\img"; // 업로드 경로
             String uploadFileName = UUID.randomUUID().toString() + ".jpg"; // JPG로 저장할 파일 이름 설정
 
             try {
@@ -162,7 +162,7 @@ public class UserController {
 	// 파라미터 자동수집
 	public String modify(@ModelAttribute UserDTO member,@RequestParam("nickName") String nickName ,HttpSession session,@RequestParam("file") MultipartFile file ,RedirectAttributes rttr) {
 		if (!file.isEmpty()) {
-			String uploadFolder = "C:\\upload"; // 업로드 경로 설정
+			String uploadFolder = "C:\\Users\\keduit\\Documents\\kelog\\kelog\\src\\main\\webapp\\resources\\img"; // 업로드 경로 설정
 			String originalFileName = file.getOriginalFilename(); // 실제 첨부된 파일이름
 
 			String oldFileName = member.getProfileImg();

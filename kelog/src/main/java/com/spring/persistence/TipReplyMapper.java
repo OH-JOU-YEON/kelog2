@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 
 import com.spring.domain.ReplyDTO;
+import com.spring.domain.ReplyReportDTO;
 
 public interface TipReplyMapper {
 	
@@ -23,4 +24,12 @@ public interface TipReplyMapper {
 	// 특정 댓글 한개 반환
 	@Select("SELECT replyNo, nickName, email, content, regDate FROM reply WHERE replyNo = ${replyNo}")
 	public ReplyDTO selectRep(int replyNo);
+
+	public void reportTipreply(int tipBoardNo, int replyNo, String email, String reportReason);
+	
+	@Select("SELECT * FROM replyreport")
+	public List<ReplyReportDTO> reportReplyAll();
+	
+	@Delete("DELETE FROM replyreport WHERE reportNo =#{reportNo}")
+	public int deleteReplyReport(Integer reportNo);
 }

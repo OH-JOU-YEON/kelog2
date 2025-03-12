@@ -6,7 +6,7 @@
 <mapper namespace="com.spring.persistence.TipPostMapper">
 
 	<insert id="insert">
-		INSERT INTO tipboard (title, content,nickName,email)
+		INSERT INTO tipboard (title, content, nickName, email)
 		VALUES(#{title},#{content},#{nickName},#{email});
 	</insert>
 

@@ -31,39 +31,39 @@
 </head>
 <body class="body-bg-white">
 
-<<div id="reportModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" id="closeModal">&times;</span>
-            <h2>게시글 신고</h2>
-            <form id="reportForm" method="post" action="/tip/report">
-                <input id="tipBoardNo" class="form-control" type="hidden" name="tipBoardNo"
-                    value="${dto.tipBoardNo }">
-                <div class="form-group">
-                    <label>게시판 제목</label><input class="form-control" type="text"
-                        readonly="readonly" name="title" value="${dto.title }">
-                </div>
-                <div class="form-group">
-                    <label>신고자</label><input class="form-control" type="text"
-                        readonly="readonly" name="nickName" value="${nickName}">
-                </div>
-                <div class="form-group">
-                    <label>신고 사유</label> <select name="reportReason">
-                  <option selected>::선택하세요::</option>
-								<option value="부적절한 언어사용">부적절한 언어사용</option>
-								<option value="선정적 콘텐츠">선정적 콘텐츠</option>
-								<option value="적절하지 못한 정보">적절하지 못한 정보</option>
-								<option value="개인정보노출">개인정보노출</option>
-								<option value="그외 부적절함">그외 부적절함</option>
-                    </select>
-                </div>
-
-                <div class="modal-actions">
-                    <button type="submit" class="btn btn-danger">신고</button>
-                    <button type="button" class="btn btn-secondary" id="cancelBtn">취소</button>
-                </div>
-            </form>
-        </div>
+<div id="reportModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" id="closeModal">×</span>
+        <h2 id="modalTitle">게시글 신고</h2>
+        <form id="reportForm" method="post" action="/tip/report">
+            <input id="modalTipBoardNo" class="form-control" type="hidden" name="tipBoardNo" value="${dto.tipBoardNo}">
+            <input id="modalReplyNo" class="form-control" type="hidden" name="replyNo" value="">
+            <div class="form-group">
+                <label>게시판 제목</label>
+                <input class="form-control" type="text" readonly="readonly" id="modalTitleInput" name="title" value="${dto.title}">
+            </div>
+            <div class="form-group">
+                <label>신고자</label>
+                <input class="form-control" type="text" readonly="readonly" name="nickName" value="${nickName}">
+            </div>
+            <div class="form-group">
+                <label>신고 사유</label>
+                <select name="reportReason" id="reportReason">
+                    <option selected>::선택하세요::</option>
+                    <option value="부적절한 언어사용">부적절한 언어사용</option>
+                    <option value="선정적 콘텐츠">선정적 콘텐츠</option>
+                    <option value="적절하지 못한 정보">적절하지 못한 정보</option>
+                    <option value="개인정보노출">개인정보노출</option>
+                    <option value="그외 부적절함">그외 부적절함</option>
+                </select>
+            </div>
+            <div class="modal-actions">
+                <button type="submit" class="btn btn-danger">신고</button>
+                <button type="button" class="btn btn-secondary" id="cancelBtn">취소</button>
+            </div>
+        </form>
     </div>
+</div>
 
 <!-- Preloader -->
 
@@ -299,152 +299,154 @@ function toggleLike(tipBoardNo) {
 
 </script>
 <script type="text/javascript">
-    function loadReplies() {
-    	
-        $.ajax({
-            url : "/tipreply/getreplies",
-            type : "post",
-            data : {
-                tipBoardNo : $("#tipBoardNo").val()
-            },
-            dataType : "json",
-            success : function(data) {
-                var commentList = $(".chat"); // 댓글 목록을 담을 요소
-                commentList.empty(); // 기존 댓글 삭제
+// 모달 창과 관련된 요소 선택
+const reportModal = document.getElementById('reportModal');
+const closeModal = document.getElementById('closeModal');
+const cancelBtn = document.getElementById('cancelBtn');
+const reportForm = document.getElementById('reportForm');
+const reportIcons = document.querySelectorAll('.reportIcon');
 
-                $.each(data, function(index, reply) {
-                    let updateDate = new Date(reply.regDate);
-                    var options = {
-                        year : "numeric",
-                        month : "2-digit",
-                        day : "2-digit",
-                        hour : "2-digit",
-                        minute : "2-digit"
-                    };
-                    var replyemail = reply.email;
+// 게시글 신고 버튼 이벤트
+reportIcons.forEach(reportIcon => {
+    reportIcon.addEventListener('click', function() {
+        var email = '${email}';
+        if (!email) {
+            alert("로그인 후 신고할 수 있습니다.");
+            return;
+        } else if (JSON.parse('${isReport}') == true) {
+            alert("이미 신고하신 게시글 입니다.");
+            return;
+        } else {
+            document.getElementById('modalTitle').textContent = "게시글 신고";
+            document.getElementById('modalTitleInput').value = "${dto.title}";
+            document.getElementById('modalTipBoardNo').value = "${dto.tipBoardNo}";
+            document.getElementById('modalReplyNo').value = ""; // 댓글 번호 초기화
+            reportForm.action = "/tip/report";
+            reportModal.style.display = 'block';
+        }
+    });
+});
+
+// 모달 닫기 이벤트
+closeModal.addEventListener('click', function() {
+    reportModal.style.display = 'none';
+});
+
+cancelBtn.addEventListener('click', function() {
+    reportModal.style.display = 'none';
+});
+
+window.addEventListener('click', function(event) {
+    if (event.target === reportModal) {
+        reportModal.style.display = 'none';
+    }
+});
+
+// 댓글 로드 및 신고 이벤트 추가
+function loadReplies() {
+    $.ajax({
+        url: "/tipreply/getreplies",
+        type: "post",
+        data: { tipBoardNo: $("#tipBoardNo").val() },
+        dataType: "json",
+        success: function(data) {
+            var commentList = $(".chat");
+            commentList.empty();
+
+            $.each(data, function(index, reply) {
+                let updateDate = new Date(reply.regDate);
+                var options = { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" };
+                var replyemail = reply.email;
+                var email = '${email}';
+                var formattedUpdateDate = updateDate.toLocaleString("ko-KR", options);
+                var ul = $("<ul>").addClass("comments-list style-3");
+                var commentItem = $("<li>").addClass("comment-item");
+
+              
+
+                var commentContent = $("<div>").addClass("comments-content");
+
+                var authorInfo = $("<div>").addClass("post__author author vcard");
+                var authorDate = $("<div>").addClass("author-date");
+                var authorName = $("<p>").addClass("h6 post__author-name fn").text(reply.nickName);
+                var postDate = $("<div>").addClass("post__date");
+                var time = $("<time>").addClass("published").attr("datetime", reply.regDate).text(formattedUpdateDate);
+                postDate.append(time);
+                authorDate.append(authorName).append(postDate);
+                authorInfo.append(authorDate);
+
+                var commentText = $("<p>").text(reply.content);
+
+                // 신고 링크 (모달 열기)
+                var reportLink = $("<a>").addClass("report").text("신고").css("margin-left", "10px").on("click", function(e) {
+                    e.preventDefault();
                     var email = '${email}';
-                    var formattedUpdateDate = updateDate.toLocaleString("ko-KR", options);
-                    var ul = $("<ul>").addClass("comments-list style-3");
-                    var commentItem = $("<li>").addClass("comment-item");
-
-                    var authorThumb = $("<div>").addClass("post__author-thumb");
-                    var authorImage = $("<img>").attr("loading", "lazy").attr("src", "/resources/img/avatar1.webp")
-                        .attr("alt", "author").attr("width", "92").attr("height", "92");
-                    authorThumb.append(authorImage);
-
-                    var commentContent = $("<div>").addClass("comments-content");
-
-                    var authorInfo = $("<div>").addClass("post__author author vcard");
-                    var authorDate = $("<div>").addClass("author-date");
-                    var authorName = $("<p>").addClass("h6 post__author-name fn").text(reply.nickName);
-                    var postDate = $("<div>").addClass("post__date");
-                    var time = $("<time>").addClass("published").attr("datetime", reply.regDate).text(formattedUpdateDate);
-                    postDate.append(time);
-                    authorDate.append(authorName).append(postDate);
-                    authorInfo.append(authorDate);
-
-                    var commentText = $("<p>").text(reply.content);
-
-                    // 신고 링크 추가 (모든 댓글에 표시)
-                    var reportLink = $("<a>").addClass("report").attr("href", "/tipreply/report?replyNo=" + reply.replyNo + "&tipBoardNo=" + $("#tipBoardNo").val()).text("신고").css("margin-left", "10px");
-
-                    // 삭제 링크는 본인 댓글에만 표시
-                    if (replyemail != email) {
-                        commentContent.append(authorInfo).append(commentText).append(reportLink);
-                    } else {
-                        var deleteLink = $("<a>").addClass("report").attr("href", "/tipreply/delete?replyNo=" + reply.replyNo + "&tipBoardNo=" + $("#tipBoardNo").val()).text("삭제");
-                        commentContent.append(authorInfo).append(commentText).append(deleteLink).append(reportLink);
+                    if (!email) {
+                        alert("로그인 후 신고할 수 있습니다.");
+                        return;
                     }
-
-                    commentItem.append(authorThumb).append(commentContent);
-                    ul.append(commentItem);
-                    commentList.append(ul); // 댓글 목록에 추가
+                    // 모달창 설정
+                    document.getElementById('modalTitle').textContent = "댓글 신고";
+                    document.getElementById('modalTitleInput').value = reply.content; // 댓글 내용
+                    document.getElementById('modalTipBoardNo').value = $("#tipBoardNo").val();
+                    document.getElementById('modalReplyNo').value = reply.replyNo; // replyNo 설정
+                    reportForm.action = "/tipreply/report";
+                    reportModal.style.display = 'block';
                 });
+
+                // 삭제 링크 (본인 댓글에만 표시)
+                if (replyemail === email) {
+                    var deleteLink = $("<a>").addClass("report").attr("href", "/tipreply/delete?replyNo=" + reply.replyNo + "&tipBoardNo=" + $("#tipBoardNo").val()).text("삭제").css("margin-left", "10px");
+                    commentContent.append(authorInfo).append(commentText).append(deleteLink).append(reportLink);
+                } else {
+                    commentContent.append(authorInfo).append(commentText).append(reportLink);
+                }
+
+                commentItem.append(commentContent);
+                ul.append(commentItem);
+                commentList.append(ul);
+            });
+        },
+        error: function(e) {
+            console.log(e);
+        }
+    });
+}
+
+$(document).ready(function() {
+    loadReplies();
+
+    $("#btn-chat").on("click", function(e) {
+        var email = '${email}';
+        if (!email) {
+            alert("로그인 후 댓글을 달 수 있습니다.");
+            return;
+        } 
+        const content = $('#btn-input').val().trim();
+	    if (!content || content === "<p><br></p>") { // 빈 HTML 태그도 체크
+	        alert("댓글을 입력해 주세요.");
+	        $('#btn-input').focus();
+	        return; // 제출 중단
+	    }
+        e.preventDefault();
+        $.ajax({
+            url: "/tipreply/register",
+            type: "post",
+            data: {
+                content: $("#btn-input").val(),
+                tipBoardNo: $("#tipBoardNo").val()
             },
-            error : function(e) {
+            dataType: "json",
+            success: function(data) {
+                $("#btn-input").val("");
+                loadReplies();
+            },
+            error: function(e) {
                 console.log(e);
             }
         });
-    };
-
-    $(document).ready(function() {
-        loadReplies();
-     
-        $("#btn-chat").on("click", function(e) {
-        	   var email = '${email}';  // 세션에서 사용자 ID 가져오기 (예시)
-
-          	    console.log(email);
-          	    
-          	    if (!email) {
-          	        alert("로그인 후 댓글을 달 수 있습니다.");
-          	        return;  // 로그인되지 않으면 더 이상 진행하지 않음
-          	    }
-            e.preventDefault();
-            $.ajax({
-                url : "/tipreply/register",
-                type : "post",
-                data : {
-                    content : $("#btn-input").val(),
-                    tipBoardNo : $("#tipBoardNo").val()
-                },
-                dataType : "json",
-                success : function(data) {
-                    let updateDate = new Date(data.regDate);
-                    var options = {
-                        year : "numeric",
-                        month : "2-digit",
-                        day : "2-digit",
-                        hour : "2-digit",
-                        minute : "2-digit"
-                    };
-                    // 댓글 목록 갱신
-                    loadReplies();  // 댓글 목록을 새로 불러옵니다.
-
-                    // 댓글 입력 후 입력칸 초기화
-                    $("#btn-input").val("");  // 댓글 입력란 초기화
-                    var formattedUpdateDate = updateDate.toLocaleString("ko-KR", options);
-                    
-                    var commentList = $(".chat");
-                    var ul = $("<ul>").addClass("comments-list style-3");
-                    var commentItem = $("<li>").addClass("comment-item");
-
-                    var authorThumb = $("<div>").addClass("post__author-thumb");
-                    var authorImage = $("<img>").attr("loading", "lazy").attr("src", "/resources/img/avatar1.webp")
-                        .attr("alt", "author").attr("width", "92").attr("height", "92");
-                    authorThumb.append(authorImage);
-
-                    var commentContent = $("<div>").addClass("comments-content");
-
-                    var authorInfo = $("<div>").addClass("post__author author vcard");
-                    var authorDate = $("<div>").addClass("author-date");
-                    var authorName = $("<p>").addClass("h6 post__author-name fn").text(reply.nickName);
-                    var postDate = $("<div>").addClass("post__date");
-                    var time = $("<time>").addClass("published").attr("datetime", reply.regDate).text(formattedUpdateDate);
-                    postDate.append(time);
-                    authorDate.append(authorName).append(postDate);
-                    authorInfo.append(authorDate);
-
-                    var commentText = $("<p>").text(data.content);
-
-                 	var email ='${email}';
-                    var replyemail = reply.email;
-                    if(replyemail != email) {
-                    commentContent.append(authorInfo).append(commentText);                    	
-                    }else{
-                        var deleteLink = $("<a>").addClass("report").attr("href", "/tipreply/delete?replyNo=" + reply.replyNo + "&tipBoardNo=" + $("#tipBoardNo").val()).text("삭제");
-                        commentContent.append(authorInfo).append(commentText).append(deleteLink);
-                    }
-
-                    ul.append(commentItem);
-                    commentList.append(ul); // 댓글 목록에 추가
-
-                },
-                error : function(e) {
-                    console.log(e);
-                }
-            });
-        });
     });
+});
 </script>
 <script>
 	$(function() {ToView();
@@ -618,51 +620,7 @@ document.getElementById('mypage').addEventListener('click', function(event) {
     });
 });
 </script>
-<script>
-// 모달 창과 관련된 요소 선택
-const reportModal = document.getElementById('reportModal');
-const closeModal = document.getElementById('closeModal');
-const reportIcons = document.querySelectorAll('.reportIcon');  // class로 선택
-const cancelBtn = document.getElementById('cancelBtn');  // 취소 버튼 추가
 
-// 각 reportIcon에 클릭 이벤트 추가
-
-reportIcons.forEach(reportIcon => {
-    reportIcon.addEventListener('click', function() {
-        var email = '${email}';
-        
-          if (!email) {
-                alert("로그인 후 신고할 수 있습니다.");
-                return;  // 로그인되지 않으면 더 이상 진행하지 않음
-            }else {
-            	if(JSON.parse('${isReport}') ==true) {
-            		alert("이미 신고하신 게시글 입니다.");
-            		return;            		
-           	 	}else {
-                	reportModal.style.display = 'block';  // 모달을 열기
-           	 	}
-            }
-    });
-});
-
-// 모달 닫기 버튼 클릭 시 모달 닫기
-closeModal.addEventListener('click', function() {
-    reportModal.style.display = 'none';
-});
-
-// 취소 버튼 클릭 시 모달 닫기
-cancelBtn.addEventListener('click', function() {
-    reportModal.style.display = 'none';  // 모달 닫기
-});
-
-// 모달 바깥을 클릭하면 모달을 닫기
-window.addEventListener('click', function(event) {
-    if (event.target === reportModal) {
-        reportModal.style.display = 'none';
-    }
-});
-
-    </script>
 	<script>
 		window.addEventListener('scroll', function () {
 				const header = document.getElementById('header--standard');

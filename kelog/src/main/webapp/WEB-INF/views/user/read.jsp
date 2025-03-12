@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +16,7 @@
 	<!-- Theme Font -->
 	<link rel="preload" type="text/css" href="/resources/css/theme-font.min.css" as="style">
 
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 	<!-- Bootstrap CSS -->
 
 	<link rel="stylesheet" type="text/css" href="/resources/Bootstrap/dist/css/bootstrap.css">
