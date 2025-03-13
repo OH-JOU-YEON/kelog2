@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.spring.domain.ReplyDTO;
+import com.spring.domain.ReplyReportDTO;
 import com.spring.persistence.TipReplyMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -37,6 +38,22 @@ public class TipReplyServiceImpl implements TipReplyService {
 	public void deleteReply(int replyNo) {
 		mapper.removeReply(replyNo);
 		
+	}
+
+	@Override
+	public void reportTipreply(int tipBoardNo, int replyNo, String email, String reportReason) {
+		mapper.reportTipreply(tipBoardNo,replyNo,email,reportReason);
+		
+	}
+
+	@Override
+	public List<ReplyReportDTO> reportReplyAll() {
+		return mapper.reportReplyAll();
+	}
+
+	@Override
+	public int deleteReplyReport(Integer reportNo) {
+		return mapper.deleteReplyReport(reportNo);
 	}
 
 

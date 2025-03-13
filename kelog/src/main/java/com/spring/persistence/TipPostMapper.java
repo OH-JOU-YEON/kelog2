@@ -47,4 +47,10 @@ public interface TipPostMapper {
 	public int upreportCnt(Integer tipBoardNo);
 	
 	public int downreportCnt(Integer tipBoardNo);
+	
+	@Delete("DELETE FROM report WHERE reportNo = #{reportNo}")	
+	public int deleteReport(Integer reportNo);
+
+	@Select("SELECT * FROM report")
+	public List<ReportDTO> reportListAll();
 }

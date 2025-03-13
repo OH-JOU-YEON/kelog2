@@ -1,8 +1,6 @@
 package com.spring.controller;
 
-import java.io.File;
 import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,8 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.spring.domain.ReplyReportDTO;
+import com.spring.domain.ReportDTO;
 import com.spring.domain.UserDTO;
 import com.spring.service.NickNameService;
+import com.spring.service.TipReplyService;
+import com.spring.service.TipService;
 import com.spring.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -31,6 +33,8 @@ public class ManagerController {
 	
 	private final UserService userservice;
 	private final NickNameService nickNameService;
+	private final TipService tipservice;
+	private final TipReplyService tipreplyservice;
 	
 	@GetMapping("/01-ManagerPage")
 	public void list(Model model) {
@@ -82,7 +86,44 @@ public class ManagerController {
 	    System.out.println("반환된 리스트: " + list); // 서버 로그 확인
 	    return list;
 	}
+	@ResponseBody
+	@PostMapping("/getPostList")
+	public List<ReportDTO> getPostList(HttpSession session) {
+		List<ReportDTO> list = tipservice.reportListAll();
+	    System.out.println("반환된 리스트: " + list); // 서버 로그 확인
+	    return list;
+	}
+	@ResponseBody
+	@PostMapping("/getReplyList")
+	public List<ReplyReportDTO> getReplyList(HttpSession session) {
+		List<ReplyReportDTO> list = tipreplyservice.reportReplyAll();
+	    System.out.println("반환된 리스트: " + list); // 서버 로그 확인
+	    return list;
+	}
+	@GetMapping("/01-ManagerPage-Post-remove")
+	public String delete(@RequestParam("reportNo") Integer reportNo, RedirectAttributes rttr) {
+		int deleteRow = tipservice.deleteReport(reportNo);
+		log.info("delete deleteRow: " + deleteRow);
+		rttr.addFlashAttribute("result", "del");
+		return "redirect:/manager/01-ManagerPage-Post";
+	}
+	@GetMapping("/01-ManagerPage-Reply-remove")
+	public String remove(@RequestParam("reportNo") Integer reportNo, RedirectAttributes rttr) {
+		int deleteRow = tipreplyservice.deleteReplyReport(reportNo);
+		log.info("delete deleteRow: " + deleteRow);
+		rttr.addFlashAttribute("result", "del");
+		return "redirect:/manager/01-ManagerPage-Reply";
+	}
 	@GetMapping("/01-ManagerPage-Post")
 	public void mngPost(Model model) {
 	}
+	@GetMapping("/01-ManagerPage-Reply")
+	public void mngReply(Model model) {
+	}
+	@GetMapping("/replydelete")
+	public String removeReply(@RequestParam("replyNo") Integer replyNo) {
+		tipreplyservice.deleteReply(replyNo);
+		return "/manager/01-ManagerPage-Reply";
+	}
+
 }

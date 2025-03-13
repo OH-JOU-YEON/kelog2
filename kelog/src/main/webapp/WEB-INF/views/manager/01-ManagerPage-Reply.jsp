@@ -2,12 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
 	<title>Landing Page</title>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
 	<!-- Required meta tags always come first -->
 	<meta charset="utf-8">
@@ -83,36 +83,62 @@
 			<div class="nav nav-pills nav1 header-menu">
 				<div class="mCustomScrollbar">
 					<ul>
-						<li class="nav-item">
-							<a href="00-MainPage.html">메인 페이지</a>
-						</li>
-						<li class="nav-item dropdown">
-							<a href="02-RecommendPost.html">여행 추천지</a>
-						</li>
-						<li class="nav-item dropdown dropdown-has-megamenu">
-							<a href="97-BlogPostBoard.html">블로그 게시판</a>
-						</li>
-						<li class="nav-item">
-							<a href="03-Myblog.html">내 블로그</a>
-						</li>
-						<li class="nav-item">
-							<a href="55-HoneyTipBoard.html">꿀팁 게시판</a>
-						</li>
-						<li class="nav-item">
-							<a href="#">전국 날씨예보</a>
-						</li>
-						<li class="close-responsive-menu js-close-responsive-menu">
-							<svg class="olymp-close-icon"><use xlink:href="#olymp-close-icon"></use></svg>
-						</li>
-						<li class="nav-item js-expanded-menu">
-							<a href="#" class="menu-link"><img src="/resources/img/menu-bar.png" style="width: 26px; height: 26px;"></a>
-						</li>
-						<li class="lang-set-item">
-							<a href="#" class="change-lang"><img src="/resources/img/changeLang.png" style="width: 26px; height: 26px;"></a>
-						</li>
-						<li class="login-set-item">
-							<a href="01-LoginPage.html" class="login-user"><img src="/resources/img/login-user.png" class="login-user-menu"style="width: 26px; height: 26px;"></a>
-						</li>
+						<li class="nav-item dropdown"><a
+								href="02-RecommendPost.html" style="color: #000 !important;">여행
+									추천지</a></li>
+							<li class="nav-item dropdown dropdown-has-megamenu"><a
+								href="97-BlogPostBoard.html" style="color: #000 !important;">블로그</a>
+							</li>
+							<li class="nav-item"><a href="/tip/list"
+								style="color: #000 !important;">꿀팁 게시판</a></li>
+							<li class="nav-item"><a href="#"
+								style="color: #000 !important;">전국 날씨예보</a></li>
+							<li class="close-responsive-menu js-close-responsive-menu">
+								<svg class="olymp-close-icon">
+									<use xlink:href="#olymp-close-icon"></use></svg>
+							</li>
+							<li class="nav-item js-expanded-menu"><a href="#"
+								class="menu-link"><img src="/resources/img/menu-bar.png"
+									style="width: 26px; height: 26px; filter: none;"></a></li>
+							<li class="lang-set-item"><a href="#" class="change-lang"
+								id="language-toggle"> <img
+									src="/resources/img/changeLang.png"
+									style="width: 26px; height: 26px; filter: none;">
+							</a> <!-- 언어 선택 탭 (기본적으로 숨겨짐) -->
+								<ul id="language-tabs" class="language-tabs"
+									style="display: none;">
+									<li><a href="#" id="english">English</a></li>
+									<li><a href="#" id="korean">한국어</a></li>
+								</ul></li>
+							<li class="login-set-item">
+							<c:choose>
+							    <c:when test="${email == null}">
+							        <a href="/login/google/login.do" class="login-user">
+							            <img src="/resources/img/login-user.png"
+							                style="width: 31px; height: 31px; filter: none;">
+							        </a>
+							    </c:when>
+							
+							    <c:otherwise>
+							        <a href="#" class="login-user">
+							            <img src="/resources/img/login-user.png"
+							                class="login-user-menu" style="filter: none;">
+							        </a>
+							        <ul class="login-drop-menu" style="display: none;">
+							        	<c:choose>
+							        		<c:when test="${user.role == 'user'}">
+							            <li><a href="/user/read?uno=${user.uno }" id="mypage">마이페이지</a></li>
+							            	</c:when>
+							            	<c:otherwise>
+							            	<li><a href="/manager/01-ManagerPage-MyPage?uno=${user.uno }" id="mypage">마이페이지</a></li>
+							            	</c:otherwise>
+							            </c:choose>
+							            <li><a href="03-Myblog.html">내 블로그</a></li>
+							            <li><a href="/login/google/revoke/token?token=${token}">로그아웃</a></li>
+							        </ul>
+							    </c:otherwise>
+							</c:choose>	
+							</li>
 						</ul>
 				</div>
 			</div>
@@ -140,30 +166,15 @@
 											<div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
 												<div class="admin-container">
 													<div class="tabs" style="display: flex; justify-content: flex-end; gap: 10px;">
-															<a href="01-ManagerPage-MyPage.html" class="btn btn-primary btn-md-2" id="tab-mypage">마이페이지</a>
-															<a href="01-ManagerPage.html" class="btn btn-primary btn-md-2" id="tab-user">회원관리</a>
-															<a href="01-ManagerPage-Post.html" class="btn btn-primary btn-md-2" id="tab-cpost">게시물 관리</a>
-															<a href="01-ManagerPage-Reply.html" class="btn btn-primary btn-md-2" id="tab-reply">댓글 관리</a>
-															<a href="01-ManagerPage-CreatePost.html" class="btn btn-primary btn-md-2" id="tab-createpost">글쓰기</a>
+															<a href="/manager/01-ManagerPage-MyPage?uno=${user.uno }" class="btn btn-primary btn-md-2" id="tab-member">마이페이지</a>
+															<a href="/manager/01-ManagerPage" class="btn btn-primary btn-md-2" id="tab-post">회원관리</a>
+															<a href="/manager/01-ManagerPage-Post" class="btn btn-primary btn-md-2" id="tab-comment">게시물 관리</a>
+															<a href="/manager/01-ManagerPage-Reply" class="btn btn-primary btn-md-2" id="tab-write">댓글 관리</a>
 													</div>
 											</div>
 			
 													<!-- 비밀번호 입력 -->
-													<div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12" style="display: flex; justify-content: center;">
-															<div class="member-management" id="member-management">
-																	<!-- 검색 및 회원 명단 -->
-																	<div class="search-box" style="display: flex; align-items: center; gap: 10px; height: 50px;">
-																			<!-- 검색 조건 셀렉트 박스 -->
-																			<select id="search-type" style="padding: 5px;">
-																					<option value="id">회원 ID</option>
-																					<option value="email">회원 이메일</option>
-																					<option value="report">신고횟수</option>
-																			</select>
-																			<input type="text" placeholder="검색어를 입력하세요" id="search-member" style="padding: 5px;"/>
-																			<button class="btn btn-primary btn-sm-2" onclick="searchMember()" style="white-space: nowrap;">검색</button>
-																	</div>
-																	</div>
-													</div>
+													
 											</div>
 											</div>
 							</form>    
@@ -171,60 +182,19 @@
 			</div>
 			<div class="row" style="justify-content: center; display: flex;">
 				<div class="col col-8 col-xl-6 col-lg-6 col-md-6 col-sm-12">
-					<ul class="table-careers">
+					<ul class="table-careers reportreply">
 						<li class="head" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-							<span style="flex: 0 0 120px; text-align: start;">회원 번호</span>
-							<span style="flex: 0 0 120px; text-align: start;">회원 ID</span>
-							<span style="flex: 0 0 120px; text-align: center;">이메일</span>
-							<span class="create-date" style="flex: 0 0 120px; text-align: end;">신고누적횟수</span>
+							<span style="flex: 0 0 120px; text-align: center;">신고 번호</span>
+							<span style="flex: 0 0 120px; text-align: center;">게시글 번호</span>
+							<span style="flex: 0 0 120px; text-align: center;">댓글번호</span>
+							<span style="flex: 0 0 120px; text-align: center;">신고자 이메일</span>
+							<span style="flex: 0 0 120px; text-align: center;">신고 사유</span>
+							<span style="flex: 0 0 120px; text-align: center;">신고 삭제</span>
+							<span class="create-date" style="flex: 0 0 120px; text-align: end;">댓글 삭제</span>
 							<span style="display: flex; justify-content: flex-end;">
 							</span>
 					</li>
-					<li style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-						<span class="tipBoardNo">1</span>
-						<span class="userId-bold">nsxno123</span>
-						<span class="title-bold">nsxno123@naver.com</span>
-						<span class="date">66회</span>
-						<a href="#">
-							<button class="btn btn-primary btn-md-2" style="width: 50px; height: 40px; white-space: nowrap; text-align: start;">삭제</button>
-					</a>
-					</li>
-					<li style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-						<span class="tipBoardNo">1</span>
-						<span class="userId-bold">nsxno123</span>
-						<span class="title-bold">nsxno123@naver.com</span>
-						<span class="date">66회</span>
-						<a href="#">
-							<button class="btn btn-primary btn-md-2" style="width: 50px; height: 40px; white-space: nowrap; text-align: start;">삭제</button>
-					</a>
-					</li>
-					<li style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-						<span class="tipBoardNo">1</span>
-						<span class="userId-bold">nsxno123</span>
-						<span class="title-bold">nsxno123@naver.com</span>
-						<span class="date">66회</span>
-						<a href="#">
-							<button class="btn btn-primary btn-md-2" style="width: 50px; height: 40px; white-space: nowrap; text-align: start;">삭제</button>
-					</a>
-					</li>
-					<li style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-						<span class="tipBoardNo">1</span>
-						<span class="userId-bold">nsxno123</span>
-						<span class="title-bold">nsxno123@naver.com</span>
-						<span class="date">66회</span>
-						<a href="#">
-							<button class="btn btn-primary btn-md-2" style="width: 50px; height: 40px; white-space: nowrap; text-align: start;">삭제</button>
-					</a>
-					</li>
-					<li style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-						<span class="tipBoardNo">1</span>
-						<span class="userId-bold">nsxno123</span>
-						<span class="title-bold">nsxno123@naver.com</span>
-						<span class="date">66회</span>
-						<a href="#">
-							<button class="btn btn-primary btn-md-2" style="width: 50px; height: 40px; white-space: nowrap; text-align: start;">삭제</button>
-					</a>
-					</li>
+					
 					</ul>
 				</div>
 			</div>
@@ -233,8 +203,198 @@
 			</div>
 			</div>
 
+				<script type="text/javascript">
+$(document).ready(function() {
+    loadTable();
+});
+
+function loadTable() {
+    $.ajax({
+        url: "/manager/getReplyList",
+        type: "post",
+        dataType: "json",
+        success: function(data) {
+            var boardContainer = $(".reportreply");
+
+            $.each(data, function(index, replyreport) {
+                var itemContainer = $("<div>").css({
+                    "display": "flex",
+                    "justify-content": "space-between",
+                    "align-items": "center",
+                    "width": "100%",
+                    "border-bottom": "1px solid #ddd",
+                    "padding": "10px 0"
+                });
+
+                itemContainer.append($("<span>").addClass("reportNo").css({"flex":" 0 0 120px", "text-align": "center	"}).text(replyreport.reportNo));
+                itemContainer.append($("<span>").addClass("blogPostNo").text(replyreport.blogPostNo || ""));
+                itemContainer.append($("<span>").addClass("tipBoardNo").text(replyreport.tipBoardNo || ""));
+                itemContainer.append($("<span>").addClass("replyNo").css({"flex":" 0 0 120px", "text-align": "center"}).text(replyreport.replyNo));
+                itemContainer.append($("<span>").addClass("email").css({"flex":" 0 0 120px", "text-align": "center"}).text(replyreport.email));
+                itemContainer.append($("<span>").addClass("reportReason").css({"flex":" 0 0 120px", "text-align": "center"}).text(replyreport.reportReason));
+
+                // 신고 삭제 버튼
+                var editButton = $("<button>").addClass("btn btn-primary btn-md-2")
+                    .css({
+                    	"flex":" 0 0 120px", "text-align": "center"
+                    })
+                    .text("신고 삭제");
+
+                var editLink = $("<a>").attr("href", "/manager/01-ManagerPage-Reply-remove?reportNo=" + replyreport.reportNo)
+                    .append(editButton)
+                    .on("click", function() {
+                        console.log("신고 삭제 링크 클릭됨: /manager/01-ManagerPage-Reply-remove?reportNo=" + replyreport.reportNo);
+                    });
+                itemContainer.append(editLink);
+
+                // 게시글 삭제 버튼
+                var deleteButton = $("<button>").addClass("btn btn-danger btn-md-2")
+                    .css({
+                        "width": "50px",
+                        "height": "40px",
+                        "white-space": "nowrap",
+                        "text-align": "start",
+                        "margin-left": "10px" // 버튼 간 간격 추가
+                    })
+                    .text("댓글 삭제");
+
+                var deleteLink;
+                if (replyreport.blogPostNo) {
+                    deleteLink = $("<a>").attr("href", "/manager/post/removeBlog?postId=" + replyreport.blogPostNo)
+                        .append(deleteButton)
+                        .on("click", function(e) {
+                            console.log("댓글 삭제 링크 클릭됨: /manager/post/removeBlog?postId=" + replyreport.blogPostNo);
+                            if (!confirm("정말로 댓글을 삭제하시겠습니까?")) {
+                                e.preventDefault();
+                            }
+                        });
+                } else if (replyreport.tipBoardNo) {
+                    deleteLink = $("<a>").attr("href", "/manager/replydelete?replyNo=" + replyreport.replyNo)
+                        .append(deleteButton)
+                        .on("click", function(e) {
+                            console.log("댓글 삭제 링크 클릭됨: /manager/replydelete?replyNo=" + replyreport.replyNo);
+                            if (!confirm("정말로 댓글을 삭제하시겠습니까?")) {
+                                e.preventDefault();
+                            }
+                        });
+                } else {
+                    deleteButton.prop("disabled", true).text("삭제 불가"); // 게시글 ID 없으면 비활성화
+                    deleteLink = $("<span>").append(deleteButton);
+                }
+                itemContainer.append(deleteLink);
+
+                boardContainer.append(itemContainer);
+            });
+        },
+        error: function(e) {
+            console.log("AJAX 오류:", e.status, e.statusText);
+        }
+    });
+}
+</script>
+						<script>
+	document.getElementById('language-toggle').addEventListener('click', function(event) {
+			event.preventDefault();
+			const languageTabs = document.getElementById('language-tabs');
 			
-				
+			// 로그인 드롭다운이 열려 있으면 닫기
+			const dropdownMenu = document.querySelector('.login-drop-menu');
+			if (dropdownMenu.style.display === 'block') {
+					dropdownMenu.style.display = 'none';
+			}
+	
+			// 언어 탭이 열려 있으면 닫고, 그렇지 않으면 열기
+			if (languageTabs.style.display === 'block') {
+					languageTabs.style.display = 'none';
+			} else {
+					languageTabs.style.display = 'block';
+			}
+	});
+	
+	document.getElementById('english').addEventListener('click', function(event) {
+			event.preventDefault();
+			setLanguage('en');
+			loadLanguage('en');
+	});
+	
+	document.getElementById('korean').addEventListener('click', function(event) {
+			event.preventDefault();
+			setLanguage('kr');
+			loadLanguage('kr');
+	});
+	
+	function setLanguage(language) {
+			// 선택된 언어 강조
+			const tabs = document.querySelectorAll('.language-tabs li a');
+			tabs.forEach(tab => {
+					tab.classList.remove('selected'); // 기존 선택 해제
+			});
+	
+			if (language === 'en') {
+					document.getElementById('english').classList.add('selected'); // 영어 선택시 강조
+			} else if (language === 'kr') {
+					document.getElementById('korean').classList.add('selected'); // 한국어 선택시 강조
+			}
+	}
+	
+	function loadLanguage(language) {
+			const filePath = `path/to/lang/${language}.json`;  // 언어 파일 경로
+	
+			// Fetch JSON 파일
+			fetch(filePath)
+					.then(response => response.json())
+					.then(data => {
+							// JSON 데이터를 사용하여 페이지 텍스트를 변경
+							updatePageText(data);
+					})
+					.catch(error => console.error('Error loading language file:', error));
+	
+			// 언어 탭 닫기
+			document.getElementById('language-tabs').style.display = 'none';
+	}
+	
+	function updatePageText(data) {
+			// JSON 파일에서 불러온 데이터로 페이지 내용을 업데이트
+			document.querySelector('.logo-title').textContent = data.logoTitle;
+			document.querySelector('.sub-title').textContent = data.subTitle;
+			document.querySelector('.title').textContent = data.recommendedPosts;
+			document.querySelector('.post-title').textContent = data.postTitle;
+			document.querySelector('.post-content').textContent = data.postContent;
+	}
+	// 로그인 버튼과 드롭다운 메뉴 가져오기
+	const loginButton = document.querySelector('.login-user');
+const loginDropdownMenu = document.querySelector('.login-drop-menu');
+var email = '${email}'; // JSP에서 가져온 email 값
+
+loginButton.addEventListener('click', function(event) {
+    if (email) { // email이 있을 때만 드롭다운 토글
+        event.preventDefault(); // 로그인 상태일 때만 기본 동작 방지
+        const languageTabs = document.getElementById('language-tabs');
+        if (languageTabs.style.display === 'block') {
+            languageTabs.style.display = 'none';
+        }
+        const isMenuVisible = loginDropdownMenu.style.display === 'block';
+        loginDropdownMenu.style.display = isMenuVisible ? 'none' : 'block';
+    }
+    // email이 null이면 기본 동작(href 이동)이 실행됨
+});
+		
+	// 페이지 클릭 시 드롭다운 메뉴 숨기기 (드롭다운 외부 클릭 시)
+	document.addEventListener('click', function(event) {
+		if(email != null){	
+		// 클릭한 곳이 로그인 버튼이나 드롭다운 메뉴가 아니면 드롭다운 숨기기
+			if (!loginButton.contains(event.target) && !loginDropdownMenu.contains(event.target)) {
+					loginDropdownMenu.style.display = 'none';
+			}
+	
+			// 클릭한 곳이 언어 버튼이나 드롭다운 메뉴가 아니면 언어 드롭다운 메뉴 숨기기
+			const languageTabs = document.getElementById('language-tabs');
+			if (!document.querySelector('.change-lang').contains(event.target) && !languageTabs.contains(event.target)) {
+					languageTabs.style.display = 'none';
+			}
+	}
+	});
+	</script>
 			
 			<!-- ... end Login-Registration Form  -->
 

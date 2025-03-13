@@ -171,6 +171,10 @@
 		<div class="row">
 			<div class="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 m-auto">
 				<div class="search-container" style="display: flex; justify-content: flex-end; align-items: center; gap: 1em;">
+					<div style="display: flex; align-items: center;">
+						<input type="text" id="searchInput" placeholder="검색..." onkeyup="filterTable()" style="width: 250px;">
+					</div>
+					
 					<div style="margin-bottom: 25px; width: 250px;">
 						<label for="rowsPerPage">몇 줄씩 표시할지 선택</label>
 						<select id="rowsPerPage" class="selectAmount">
@@ -232,110 +236,93 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		function checkModal(result) {
-			if (result === '') {
-				return;
+function checkModal(result) {
+    if (result === '') {
+        return;
+    } else if (result === 'mod') {
+        $(".modal-body").html("정상적으로 수정되었습니다.");
+    } else if (result === 'del') {
+        $(".modal-body").html("정상적으로 삭제되었습니다.");
+    } else if (parseInt(result) > 0) {
+        $(".modal-body").html("게시글 " + parseInt(result) + "번이 등록되었습니다.");
+    }
+}
 
-			} else if (result === 'mod') {
+function loadTable() {
+    $.ajax({
+        url: "/tip/getList",
+        type: "post",
+        data: {
+            pageNum: $("#pageForm").find("input[name='pageNum']").val(),
+            amount: $("#pageForm").find("input[name='amount']").val()
+        },
+        dataType: "json",
+        success: function(data) {
+            var boardTbody = $("table tbody");
+            boardTbody.empty(); // 기존 테이블 데이터 비우기
 
-				$(".modal-body").html("정상적으로 수정되었습니다.")
+            $.each(data, function(index, tiplist) {
+                let updateDate = new Date(tiplist.regDate);
+                var options = {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                    hour: "2-digit",
+                    minute: "2-digit"
+                };
+                var formattedUpdateDate = updateDate.toLocaleString("ko-KR", options);
 
-			} else if (result === 'del') {
+                var row = $("<tr>");
+                row.append($("<td>").text(tiplist.tipBoardNo));
+                var readLink = $("<a>").attr("href", "/tip/read?tipBoardNo=" + tiplist.tipBoardNo).text(tiplist.title);
+                row.append($("<td>").append(readLink));
 
-				$(".modal-body").html("정상적으로 삭제되었습니다.")
+                // content 길이 제한 (예: 20자까지만 표시)
+                var maxLength = 20; // 최대 길이 설정
+                var shortContent = tiplist.content.length > maxLength 
+                    ? tiplist.content.slice(0, maxLength) + "..." 
+                    : tiplist.content;
+                row.append($("<td>").html(shortContent));
 
-			} else if (parseInt(result) > 0) {
+                row.append($("<td>").text(tiplist.nickName));
+                row.append($("<td>").text(formattedUpdateDate));
+                boardTbody.append(row);
+            });
+        },
+        error: function(e) {
+            console.log(e);
+        }
+    });
+}
 
-				$(".modal-body")
-						.html("게시글 " + parseInt(result) + "번이 등록되었습니다.")
-			}
-		}
-		function loadTable() {
-			$.ajax({
-				url : "/tip/getList",
-				type : "post",
-				data : {
-					pageNum : $("#pageForm").find("input[name='pageNum']")
-							.val(),
-					amount : $("#pageForm").find("input[name='amount']").val()
+$(document).ready(function() {
+    loadTable();
 
-				},
-				dataType : "json",
-				success : function(data) {
-					var boardTbody = $("table tbody");
-					boardTbody.empty();// 기존에 쓰여있는 테이블 데이터 비우기
+    $("#regBtn").on("click", function() {
+        self.location = "/tip/created";
+    });
 
-					$.each(data,
-							function(index, tiplist) {
-								let updateDate = new Date(tiplist.regDate)
-								// numeric : 연도를 숫자,2-digit : 두자리 숫자 형식 표시
-								var options = {
-									year : "numeric",
-									month : "2-digit",
-									day : "2-digit",
-									hour : "2-digit",
-									minute : "2-digit"
-								};
-								var formattedUpdateDate = updateDate
-										.toLocaleString("ko-KR", options);
+    $(".close, .btn-secondary").on("click", function() {
+        $("#mymodal").modal("hide");
+    });
 
-								var row = $("<tr>");
-								row.append($("<td>").text(tiplist.tipBoardNo));
-								var readLink = $("<a>").attr("href",
-										"/tip/read?tipBoardNo=" + tiplist.tipBoardNo).text(
-												tiplist.title);
+    var result = '${result}';
+    checkModal(result);
 
-								row.append($("<td>").append(readLink));
-								row.append($("<td>").html(tiplist.content));
+    let pageForm = $("#pageForm");
+    $(".paginate_button a").on("click", function(e) {
+        e.preventDefault();
+        pageForm.find("input[name='pageNum']").val($(this).attr("href"));
+        pageForm.submit();
+    });
 
-								row.append($("<td>").text(tiplist.nickName));
-								row.append($("<td>").text(formattedUpdateDate));
-								boardTbody.append(row);
-							});
-
-				},
-				error : function(e) {
-					console.log(e)
-				}
-
-			})
-		}
-		$(document).ready(function() {
-			loadTable();
-			
-			$("#regBtn").on("click", function() {
-				self.location = "/tip/created";
-			});
-
-			$(".close, .btn-secondary").on("click", function() {
-				$("#mymodal").modal("hide");
-			});
-
-			var result = '${result}';
-			checkModal(result);
-			$(".close, .btn-secondary").on("click", function() {
-				$("#myModal").modal("hide");
-			});
-			// pageeNum, amount가 담겨있는 form 태그 찾기
-			let pageForm = $("#pageForm");
-			$(".paginate_button a").on("click", function(e){
-				// 기존에 a태그가 가진 기능(이벤트) 지우기
-				e.preventDefault();
-				// pageNum 값을 클라인트가 클릭한 a태그의 href속성값으로 변경
-				pageForm.find("input[name='pageNum']").val($(this).attr("href"));
-				pageForm.submit();
-			})
-			var result = '${result}';
-			checkModal(result);
-
-			$(".selectAmount").on("change",function(e) {
-				$("#pageForm").find("input[name='pageNum']").val(1); // 사용자의 페이지를 1페이지로 
-					$("#pageForm").find("input[name='amount']").val(e.currentTarget.value);
-				pageForm.submit();
-							});
-			
-		});
-	</script>
+    $(".selectAmount").on("change", function(e) {
+        $("#pageForm").find("input[name='pageNum']").val(1);
+        $("#pageForm").find("input[name='amount']").val(e.currentTarget.value);
+        pageForm.submit();
+    });
+});
+</script>
 
 	<script>
 document.getElementById('language-toggle').addEventListener('click', function(event) {

@@ -109,4 +109,14 @@ public class TipServiceImpl implements TipService{
 		return mapper.downreportCnt(tipBoardNo);
 	}
 
+	@Override
+	public int deleteReport(Integer reportNo) {
+		return mapper.deleteReport(reportNo);
+	}
+
+	@Override
+	public List<ReportDTO> reportListAll() {
+		return mapper.reportListAll();
+	}
+
 }

@@ -2,13 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
 	<title>Landing Page</title>
 
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 	<!-- Required meta tags always come first -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -63,7 +63,7 @@
 
 <!-- Header Standard Landing  -->
 
-<div class="header--standard header--standard-landing" id="header--standard">
+<<div class="header--standard header--standard-landing" id="header--standard">
 	<div class="container">
 		<div class="header--standard-wrap">
 
@@ -83,36 +83,62 @@
 			<div class="nav nav-pills nav1 header-menu">
 				<div class="mCustomScrollbar">
 					<ul>
-						<li class="nav-item">
-							<a href="00-MainPage.html">메인 페이지</a>
-						</li>
-						<li class="nav-item dropdown">
-							<a href="02-RecommendPost.html">여행 추천지</a>
-						</li>
-						<li class="nav-item dropdown dropdown-has-megamenu">
-							<a href="97-BlogPostBoard.html">블로그 게시판</a>
-						</li>
-						<li class="nav-item">
-							<a href="03-Myblog.html">내 블로그</a>
-						</li>
-						<li class="nav-item">
-							<a href="55-HoneyTipBoard.html">꿀팁 게시판</a>
-						</li>
-						<li class="nav-item">
-							<a href="#">전국 날씨예보</a>
-						</li>
-						<li class="close-responsive-menu js-close-responsive-menu">
-							<svg class="olymp-close-icon"><use xlink:href="#olymp-close-icon"></use></svg>
-						</li>
-						<li class="nav-item js-expanded-menu">
-							<a href="#" class="menu-link"><img src="/resources/img/menu-bar.png" style="width: 26px; height: 26px;"></a>
-						</li>
-						<li class="lang-set-item">
-							<a href="#" class="change-lang"><img src="/resources/img/changeLang.png" style="width: 26px; height: 26px;"></a>
-						</li>
-						<li class="login-set-item">
-							<a href="01-LoginPage.html" class="login-user"><img src="/resources/img/login-user.png" class="login-user-menu"style="width: 26px; height: 26px;"></a>
-						</li>
+						<li class="nav-item dropdown"><a
+								href="02-RecommendPost.html" style="color: #000 !important;">여행
+									추천지</a></li>
+							<li class="nav-item dropdown dropdown-has-megamenu"><a
+								href="97-BlogPostBoard.html" style="color: #000 !important;">블로그</a>
+							</li>
+							<li class="nav-item"><a href="/tip/list"
+								style="color: #000 !important;">꿀팁 게시판</a></li>
+							<li class="nav-item"><a href="#"
+								style="color: #000 !important;">전국 날씨예보</a></li>
+							<li class="close-responsive-menu js-close-responsive-menu">
+								<svg class="olymp-close-icon">
+									<use xlink:href="#olymp-close-icon"></use></svg>
+							</li>
+							<li class="nav-item js-expanded-menu"><a href="#"
+								class="menu-link"><img src="/resources/img/menu-bar.png"
+									style="width: 26px; height: 26px; filter: none;"></a></li>
+							<li class="lang-set-item"><a href="#" class="change-lang"
+								id="language-toggle"> <img
+									src="/resources/img/changeLang.png"
+									style="width: 26px; height: 26px; filter: none;">
+							</a> <!-- 언어 선택 탭 (기본적으로 숨겨짐) -->
+								<ul id="language-tabs" class="language-tabs"
+									style="display: none;">
+									<li><a href="#" id="english">English</a></li>
+									<li><a href="#" id="korean">한국어</a></li>
+								</ul></li>
+							<li class="login-set-item">
+							<c:choose>
+							    <c:when test="${email == null}">
+							        <a href="/login/google/login.do" class="login-user">
+							            <img src="/resources/img/login-user.png"
+							                style="width: 31px; height: 31px; filter: none;">
+							        </a>
+							    </c:when>
+							
+							    <c:otherwise>
+							        <a href="#" class="login-user">
+							            <img src="/resources/img/login-user.png"
+							                class="login-user-menu" style="filter: none;">
+							        </a>
+							        <ul class="login-drop-menu" style="display: none;">
+							        	<c:choose>
+							        		<c:when test="${user.role == 'user'}">
+							            <li><a href="/user/read?uno=${user.uno }" id="mypage">마이페이지</a></li>
+							            	</c:when>
+							            	<c:otherwise>
+							            	<li><a href="/manager/01-ManagerPage-MyPage?uno=${user.uno }" id="mypage">마이페이지</a></li>
+							            	</c:otherwise>
+							            </c:choose>
+							            <li><a href="03-Myblog.html">내 블로그</a></li>
+							            <li><a href="/login/google/revoke/token?token=${token}">로그아웃</a></li>
+							        </ul>
+							    </c:otherwise>
+							</c:choose>	
+							</li>
 						</ul>
 				</div>
 			</div>
@@ -141,10 +167,9 @@
 												<div class="admin-container">
 													<div class="tabs" style="display: flex; justify-content: flex-end; gap: 10px;">
 															<a href="/manager/01-ManagerPage-MyPage?uno=${user.uno }" class="btn btn-primary btn-md-2" id="tab-member">마이페이지</a>
-															<a href="01-ManagerPage.html" class="btn btn-primary btn-md-2" id="tab-post">회원관리</a>
-															<a href="01-ManagerPage-Post.html" class="btn btn-primary btn-md-2" id="tab-comment">게시물 관리</a>
-															<a href="01-ManagerPage-Reply.html" class="btn btn-primary btn-md-2" id="tab-write">댓글 관리</a>
-															<a href="01-ManagerPage-CreatePost.html" class="btn btn-primary btn-md-2" id="tab-mypage">글쓰기</a>
+															<a href="/manager/01-ManagerPage" class="btn btn-primary btn-md-2" id="tab-post">회원관리</a>
+															<a href="/manager/01-ManagerPage-Post" class="btn btn-primary btn-md-2" id="tab-comment">게시물 관리</a>
+															<a href="/manager/01-ManagerPage-Reply" class="btn btn-primary btn-md-2" id="tab-write">댓글 관리</a>
 													</div>
 											</div>
 											
@@ -388,53 +413,7 @@ document.addEventListener('click', function(event) {
 }
 });
 </script>
-<!-- 신고 모달창부분 -->
 
-<script>
-//모달 창과 관련된 요소 선택
-const reportModal = document.getElementById('reportModal');
-const closeModal = document.getElementById('closeModal');
-const reportIcons = document.querySelectorAll('.reportIcon');  // class로 선택
-const cancelBtn = document.getElementById('cancelBtn');  // 취소 버튼 추가
-
-//각 reportIcon에 클릭 이벤트 추가
-
-reportIcons.forEach(reportIcon => {
-reportIcon.addEventListener('click', function() {
-    var email = '${email}';
-    
-      if (!email) {
-            alert("로그인 후 신고할 수 있습니다.");
-            return;  // 로그인되지 않으면 더 이상 진행하지 않음
-        }else {
-        	if(JSON.parse('${isReport}') ==true) {
-        		alert("이미 신고하신 게시글 입니다.");
-        		return;            		
-       	 	}else {
-            	reportModal.style.display = 'block';  // 모달을 열기
-       	 	}
-        }
-});
-});
-
-//모달 닫기 버튼 클릭 시 모달 닫기
-closeModal.addEventListener('click', function() {
-reportModal.style.display = 'none';
-});
-
-//취소 버튼 클릭 시 모달 닫기
-cancelBtn.addEventListener('click', function() {
-reportModal.style.display = 'none';  // 모달 닫기
-});
-
-//모달 바깥을 클릭하면 모달을 닫기
-window.addEventListener('click', function(event) {
-if (event.target === reportModal) {
-    reportModal.style.display = 'none';
-}
-});
-
-</script>
 <script>
 	window.addEventListener('scroll', function () {
 			const header = document.getElementById('header--standard');
