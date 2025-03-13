@@ -19,7 +19,7 @@
 		UPDATE travelpost SET title = #{title}, content = #{content} WHERE
 		travelBoardNo = #{travelBoardNo}
 	</update>
-	<select id="listwithPasing" parameterType="Criteria"
+	<select id="listwithPasing" parameterType="Criteria2"
 		resultType="TravelPostDTO">
 		SELECT * FROM travelpost ORDER BY travelBoardNo DESC LIMIT #{start},#{amount};
 	</select>

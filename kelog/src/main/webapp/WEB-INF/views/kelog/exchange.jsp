@@ -6,22 +6,21 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>Profile + Calendar + Form + 옆에 탭버튼</title>
+<title>일정</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-
+<!-- jQuery (버전 3.x 이상) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="/resources/Bootstrap/dist/css/bootstrap.css">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="/resources/Bootstrap/dist/css/bootstrap.css">
+
 <!-- main.css (CalendarAndEvents + ProfilePage 스타일) -->
 <link rel="stylesheet" href="/resources/css/main.css">
 
-<!-- 달력에 필요한 라이브러리 (moment, fullcalendar 등) -->
-<script src="/resources/js/jQuery/jquery-3.5.1.min.js"></script>
-<script src="/resources/js/libs/moment.min.js"></script>
-<script src="/resources/js/libs/fullcalendar.min.js"></script>
-<script src="/resources/js/main.js"></script>
+
 
 <style>
 body {
@@ -297,7 +296,6 @@ body {
 						<div id="calendar"></div>
 						<div class="events-list mt-3"></div>
 						<!-- 추가 버튼 (+) -->
-						<!-- <button class="calendar-btn" onclick="addEvent()">+</button> -->
 					</div>
 
 					<!-- 지도 탭 -->
@@ -321,35 +319,6 @@ body {
 			</div>
 		</div>
 	</div>
-	<div id="eventModal" class="modal">
-		<div class="modal-content">
-			<span class="close-btn" id="closeModal">&times;</span>
-			<h2>일정 관리</h2>
-			<form id="eventForm">
-				<input type="hidden" name="eventId" id="eventId">
-
-				<div class="form-group">
-					<label for="eventTitle">일정 제목</label> <input type="text"
-						name="eventTitle" id="eventTitle" required>
-				</div>
-
-				<div class="form-group">
-					<label for="eventDate">일정 날짜</label> <input type="date"
-						name="eventDate" id="eventDate" required>
-				</div>
-
-				<div id="deleteEvent" style="display: none;">
-					<button type="button" class="btn btn-danger" id="deleteButton">일정
-						삭제</button>
-				</div>
-
-				<div>
-					<button type="submit" class="btn btn-success" id="saveButton">저장</button>
-					<button type="button" class="btn btn-secondary" id="cancelBtn">취소</button>
-				</div>
-			</form>
-		</div>
-	</div>
 	<!-- 하단 푸터 -->
 	<footer class="py-4 mt-5">
 		<div class="container text-center">
@@ -357,10 +326,40 @@ body {
 			<small>© 2025. All rights reserved.</small>
 		</div>
 	</footer>
+<div id="eventModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" id="closeModal">&times;</span>
+        <h2>일정 관리</h2>
+        <form id="eventForm">
+            <input type="hidden" name="routineNo" id="routineNo">
+
+            <div class="form-group">
+                <label for="eventcontent">일정 내용</label>
+                <input type="text" name="eventcontent" id="eventcontent" required>
+            </div>
+
+            <div class="form-group">
+                <label for="eventDate">일정 날짜</label>
+                <input type="date" name="eventDate" id="eventDate" required>
+            </div>
+
+            <div id="deleteEvent" style="display: none;">
+                <button type="button" class="btn btn-danger" id="deleteButton">일정 삭제</button>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-success" id="saveButton">저장</button>
+                <button type="button" class="btn btn-secondary" id="cancelBtn">취소</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 	<!-- Bootstrap & jQuery -->
-	<script src="/resources/js/jQuery/jquery-3.5.1.min.js"></script>
-	<script src="/resources/Bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/resources/js/libs/moment.min.js"></script>
+	<script src="/resources/js/libs/fullcalendar.min.js"></script>
+	<script src="/resources/js/main.js"></script>	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
 	<script src="/resources/js/libs/jquery.mousewheel.min.js"></script>
 	<script src="/resources/js/libs/perfect-scrollbar.min.js"></script>
 	<script src="/resources/js/libs/imagesloaded.pkgd.min.js"></script>
@@ -368,11 +367,135 @@ body {
 	<script src="/resources/js/libs/isotope.pkgd.min.js"></script>
 	<script src="/resources/js/libs/ajax-pagination.min.js"></script>
 	<script src="/resources/js/libs/jquery.magnific-popup.min.js"></script>
-	<script src="/resources/js/main.js"></script>
 	<script src="/resources/js/libs-init/libs-init.js"></script>
 	<script src="/resources/js/svg-loader.js"></script>
+	
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function () {
+    var calendarEl = document.getElementById('calendar');
 
-	<script>
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        plugins: ['interaction', 'dayGrid', 'timeGrid'],
+        timeZone: 'Asia/Seoul',
+        defaultView: 'dayGridMonth',
+        defaultDate: new Date(),
+        header: {
+            left: 'prev',
+            center: 'title',
+            right: 'next,dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        buttonIcons: {
+            prev: 'far fa-chevron-left',
+            next: 'far fa-chevron-right'
+        },
+
+        eventClick: function (info) {
+            var event = info.event;
+            showEventModal(event);  // 일정 클릭 시 모달 열기
+        },
+
+        dateClick: function (info) {
+            openEventModal(info.dateStr);  // 날짜 클릭 시 모달 열기
+        },
+
+        events: [
+        	   <c:forEach var="event" items="${dto}">
+               {
+            	   id: 	  '${event.routineNo}',	
+                   title: '${event.content}',
+                   start: '${event.eventDate}',
+                   allDay: true
+               },
+           </c:forEach>
+        ]
+    });
+
+    calendar.render();
+
+    // 일정 추가 모달 열기
+    function openEventModal(date) {
+        $('#eventcontent').val('');  // 기존 내용 초기화
+        $('#eventDate').val(date);  // 클릭한 날짜로 설정
+        $('#routineNo').val('');  // routineNo 초기화
+
+        $('#deleteEvent').hide();  // 삭제 버튼 숨기기
+        $('#saveButton').show();   // 저장 버튼 보이기
+        $('#eventModal').show();   // 모달 열기
+    }
+
+    // 일정 삭제 모달 열기
+    function showEventModal(event) {
+        $('#eventcontent').val(event.title);  // 기존 일정 내용 표시
+        $('#eventDate').val(event.start.toISOString().split('T')[0]);  // 일정 날짜 표시
+
+        $('#routineNo').val(event.id);  // 일정 ID 저장 (삭제용)
+        $('#deleteEvent').show();  // 삭제 버튼 보이기
+        $('#saveButton').hide();   // 저장 버튼 숨기기
+        $('#eventModal').show();   // 모달 열기
+    }
+
+    // 일정 저장 (새 일정 추가)
+    $('#eventForm').on('submit', function (e) {
+        e.preventDefault();
+        var eventContent = $('#eventcontent').val();
+        var eventDate = $('#eventDate').val();
+
+        // 새로운 일정 추가
+        $.ajax({
+            url: '/kelog/addEvent', // 서버에 추가 요청
+            type: 'POST',
+            data: {
+                content: eventContent,
+                eventDate: eventDate
+            },
+            success: function(response) {
+                calendar.addEvent({
+                    title: eventContent,
+                    start: eventDate,
+                    allDay: true
+                });
+                $('#eventModal').hide();  // 모달 닫기
+            },
+            error: function(error) {
+                alert("일정 추가 실패!");
+            }
+        });
+    });
+
+    // 일정 삭제
+    $('#deleteButton').on('click', function () {
+        var routineNo = $('#routineNo').val();
+        console.log(routineNo);
+        $.ajax({
+            url: '/kelog/deleteEvent', // 서버에 삭제 요청
+            type: 'POST',
+            data: { routineNo: routineNo },
+            success: function(response) {
+                var event = calendar.getEventById(routineNo);
+                event.remove();  // 해당 일정 삭제
+                $('#eventModal').hide();  // 모달 닫기
+            },
+            error: function(error) {
+                alert("일정 삭제 실패!");
+            }
+        });
+    });
+
+    // 취소 버튼
+    $('#cancelBtn').on('click', function () {
+        $('#eventModal').hide();  // 모달 닫기
+    });
+
+    // 모달 닫기 버튼 (X)
+    $('#closeModal').on('click', function () {
+        $('#eventModal').hide();  // 모달 닫기
+    });
+});
+
+</script>
+
+
+<script>
     // 스크롤 시 헤더 색상 변경
     window.addEventListener('scroll', function () {
       const header = document.getElementById('header--standard');
@@ -383,65 +506,6 @@ body {
       }
     });
 
-    document.addEventListener("DOMContentLoaded", function () {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          plugins: ['dayGrid'],
-          defaultView: 'dayGridMonth',
-          events: '/kelog/getEvents', // 서버에서 일정을 받아오기 위한 URL
-          dateClick: function(info) {
-            // 날짜 클릭 시 모달 창에 해당 날짜 표시
-            document.getElementById('eventDate').value = info.dateStr;
-            $('#eventModal').modal('show'); // 모달 창 보이기
-          }
-        });
-        calendar.render();
-      });
-
-      // 일정 등록 및 수정
-      document.getElementById('eventForm').onsubmit = function(event) {
-        event.preventDefault();
-        const formData = new FormData(this);
-        const url = document.getElementById('eventId').value ? '/kelog/updateEvent' : '/kelog/addEvent';
-        
-        fetch(url, {
-          method: 'POST',
-          body: formData
-        }).then(response => {
-          if (response.ok) {
-            $('#eventModal').modal('hide');
-            location.reload(); // 페이지 새로고침
-          }
-        });
-      };
-
-      // 일정 삭제
-      document.getElementById('deleteButton').onclick = function() {
-        const eventId = document.getElementById('routineNo').value;
-        fetch('/kelog/deleteEvent?routineNo=' + routineNo, {
-          method: 'POST'
-        }).then(response => {
-          if (response.ok) {
-            $('#eventModal').modal('hide');
-            location.reload(); // 페이지 새로고침
-          }
-        });
-      };
-    // 탭 전환 함수
-    function showTab(evt, tabId) {
-      evt.preventDefault();
-      const allContents = document.querySelectorAll('.tab-content');
-      allContents.forEach(c => c.style.display = 'none');
-      const allTabs = document.querySelectorAll('.ui-tabs li');
-      allTabs.forEach(li => li.classList.remove('active'));
-      document.getElementById(tabId).style.display = 'block';
-      evt.currentTarget.parentNode.classList.add('active');
-    }
-
-    // 추가 버튼 클릭 시 동작 (예시)
-    function addEvent() {
-      alert('추가 버튼 클릭됨');
-    }
   </script>
 </body>
 </html>

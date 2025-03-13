@@ -3,13 +3,14 @@ package com.spring.service;
 import java.util.List;
 
 import com.spring.domain.Criteria;
+import com.spring.domain.Criteria2;
 import com.spring.domain.TravelPostDTO;
 
 public interface TravelService extends GenericService<TravelPostDTO, Integer> {
 
 	public int getTotal();	
 	
-	public List<TravelPostDTO> getList(Criteria cri);
+	public List<TravelPostDTO> getList(Criteria2 cri);
 	
 	public List<TravelPostDTO> listAll();
 

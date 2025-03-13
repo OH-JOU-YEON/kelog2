@@ -10,8 +10,8 @@ public interface RoutineService{
 
 	public void created(RoutineDTO dto);
 
-	public int delete(int routineNo);
-
 	public int modify(RoutineDTO dto);
+	
+	public int delete(int routineNo);
 
 }

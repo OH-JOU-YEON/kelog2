@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.domain.Criteria;
+import com.spring.domain.Criteria2;
 import com.spring.domain.TravelPostDTO;
 
 public interface TravelPostMapper {
@@ -53,7 +54,7 @@ public interface TravelPostMapper {
 
 	public int getTotalCount();
 
-	public List<TravelPostDTO> listwithPasing(Criteria cri);
+	public List<TravelPostDTO> listwithPasing(Criteria2 cri);
 	
 	
 	

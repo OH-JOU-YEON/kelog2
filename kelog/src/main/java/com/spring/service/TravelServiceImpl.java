@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.spring.domain.Criteria;
+import com.spring.domain.Criteria2;
 import com.spring.domain.TravelPostDTO;
 import com.spring.persistence.TravelPostMapper;
 
@@ -101,7 +102,7 @@ public class TravelServiceImpl implements TravelService {
 	}
 
 	@Override
-	public List<TravelPostDTO> getList(Criteria cri) {
+	public List<TravelPostDTO> getList(Criteria2 cri) {
 		List<TravelPostDTO> result = mapper.listwithPasing(cri);
 		return result;
 	}

@@ -44,12 +44,8 @@
 
 				<a href="12-FavouritePage.html" class="logo"></a>
 				<div class="img-wrap">
-					<img loading="lazy" src="/resources/img/logo-colored-small.webp"
-						width="34" height="34" alt="Olympus" class="logo-colored">
-				</div>
-				<div class="title-block">
-					<h6 class="logo-title">로고 들어갈 자리</h6>
-
+					<img loading="lazy" src="/resources/img/logokelog.png"
+						width="140" height="34" alt="Olympus" class="logo-colored">
 				</div>
 
 				<a href="#" class="open-responsive-menu js-open-responsive-menu">
@@ -430,7 +426,7 @@ if (!document.querySelector('.change-lang').contains(event.target) && !languageT
 	                            $("<strong>").append(
 	                                $("<a>").attr("href", "/travel/read?travelBoardNo=" + travellist.travelBoardNo).text(travellist.title)
 	                            ),
-	                            $("<div>").html(travellist.content),
+	                         <!--   $("<div>").html(travellist.content),-->
 	                            $("<div>").text(formattedUpdateDate)
 	                        )
 	                    )

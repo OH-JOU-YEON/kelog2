@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.spring.domain.Criteria;
+import com.spring.domain.Criteria2;
 import com.spring.domain.PageDTO;
+import com.spring.domain.PageDTO2;
 import com.spring.domain.TravelPostDTO;
 import com.spring.service.TravelService;
 
@@ -31,11 +32,11 @@ public class TravelPostController {
 	private final TravelService service;
 
 	@GetMapping("/list")
-	public void list(Criteria cri, Model model) {
+	public void list(Criteria2 cri, Model model) {
 		
 		int total = service.getTotal();
 		
-		PageDTO pageDTO = new PageDTO(cri, total);
+		PageDTO2 pageDTO = new PageDTO2(cri, total);
 		
 		model.addAttribute("pageMaker", pageDTO);
 		model.addAttribute("list", service.listAll());
@@ -43,7 +44,7 @@ public class TravelPostController {
 
 	@PostMapping("/getList")
 	@ResponseBody
-	public List<TravelPostDTO> getList(Criteria cri){
+	public List<TravelPostDTO> getList(Criteria2 cri){
 		return service.getList(cri);
 	}
 	
