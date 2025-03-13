@@ -280,157 +280,109 @@ out.println(sbHtml);
 	</script>
 
 
-						<script>
-	document.getElementById('language-toggle').addEventListener('click', function(event) {
-			event.preventDefault();
-			const languageTabs = document.getElementById('language-tabs');
-			
-			// 로그인 드롭다운이 열려 있으면 닫기
-			const dropdownMenu = document.querySelector('.login-drop-menu');
-			if (dropdownMenu.style.display === 'block') {
-					dropdownMenu.style.display = 'none';
-			}
-	
-			// 언어 탭이 열려 있으면 닫고, 그렇지 않으면 열기
-			if (languageTabs.style.display === 'block') {
-					languageTabs.style.display = 'none';
-			} else {
-					languageTabs.style.display = 'block';
-			}
-	});
-	
-	document.getElementById('english').addEventListener('click', function(event) {
-			event.preventDefault();
-			setLanguage('en');
-			loadLanguage('en');
-	});
-	
-	document.getElementById('korean').addEventListener('click', function(event) {
-			event.preventDefault();
-			setLanguage('kr');
-			loadLanguage('kr');
-	});
-	
-	function setLanguage(language) {
-			// 선택된 언어 강조
-			const tabs = document.querySelectorAll('.language-tabs li a');
-			tabs.forEach(tab => {
-					tab.classList.remove('selected'); // 기존 선택 해제
-			});
-	
-			if (language === 'en') {
-					document.getElementById('english').classList.add('selected'); // 영어 선택시 강조
-			} else if (language === 'kr') {
-					document.getElementById('korean').classList.add('selected'); // 한국어 선택시 강조
-			}
-	}
-	
-	function loadLanguage(language) {
-			const filePath = `path/to/lang/${language}.json`;  // 언어 파일 경로
-	
-			// Fetch JSON 파일
-			fetch(filePath)
-					.then(response => response.json())
-					.then(data => {
-							// JSON 데이터를 사용하여 페이지 텍스트를 변경
-							updatePageText(data);
-					})
-					.catch(error => console.error('Error loading language file:', error));
-	
-			// 언어 탭 닫기
-			document.getElementById('language-tabs').style.display = 'none';
-	}
-	
-	function updatePageText(data) {
-			// JSON 파일에서 불러온 데이터로 페이지 내용을 업데이트
-			document.querySelector('.logo-title').textContent = data.logoTitle;
-			document.querySelector('.sub-title').textContent = data.subTitle;
-			document.querySelector('.title').textContent = data.recommendedPosts;
-			document.querySelector('.post-title').textContent = data.postTitle;
-			document.querySelector('.post-content').textContent = data.postContent;
-	}
-	// 로그인 버튼과 드롭다운 메뉴 가져오기
-	const loginButton = document.querySelector('.login-user');
+	<script>
+document.getElementById('language-toggle').addEventListener('click', function(event) {
+    event.preventDefault();
+    const languageTabs = document.getElementById('language-tabs');
+    
+    // 로그인 드롭다운이 열려 있으면 닫기 (선택적)
+    const dropdownMenu = document.querySelector('.login-drop-menu');
+    if (dropdownMenu && dropdownMenu.style.display === 'block') {
+        dropdownMenu.style.display = 'none';
+    }
+
+    // 언어 탭 토글 (email 체크 없이 항상 동작)
+    if (languageTabs.style.display === 'block') {
+        languageTabs.style.display = 'none';
+    } else {
+        languageTabs.style.display = 'block';
+    }
+});
+
+document.getElementById('english').addEventListener('click', function(event) {
+    event.preventDefault();
+    setLanguage('en');
+    loadLanguage('en');
+});
+
+document.getElementById('korean').addEventListener('click', function(event) {
+    event.preventDefault();
+    setLanguage('kr');
+    loadLanguage('kr');
+});
+
+function setLanguage(language) {
+    const tabs = document.querySelectorAll('.language-tabs li a');
+    tabs.forEach(tab => {
+        tab.classList.remove('selected');
+    });
+
+    if (language === 'en') {
+        document.getElementById('english').classList.add('selected');
+    } else if (language === 'kr') {
+        document.getElementById('korean').classList.add('selected');
+    }
+}
+
+function loadLanguage(language) {
+    const filePath = `path/to/lang/${language}.json`;
+    fetch(filePath)
+        .then(response => response.json())
+        .then(data => {
+            updatePageText(data);
+        })
+        .catch(error => console.error('Error loading language file:', error));
+
+    document.getElementById('language-tabs').style.display = 'none';
+}
+
+function updatePageText(data) {
+    document.querySelector('.logo-title').textContent = data.logoTitle;
+    document.querySelector('.sub-title').textContent = data.subTitle;
+    document.querySelector('.title').textContent = data.recommendedPosts;
+    document.querySelector('.post-title').textContent = data.postTitle;
+    document.querySelector('.post-content').textContent = data.postContent;
+}
+
+// 로그인 버튼과 드롭다운 메뉴 가져오기
+const loginButton = document.querySelector('.login-user');
 const loginDropdownMenu = document.querySelector('.login-drop-menu');
 var email = '${email}'; // JSP에서 가져온 email 값
 
-loginButton.addEventListener('click', function(event) {
-    if (email) { // email이 있을 때만 드롭다운 토글
-        event.preventDefault(); // 로그인 상태일 때만 기본 동작 방지
-        const languageTabs = document.getElementById('language-tabs');
-        if (languageTabs.style.display === 'block') {
-            languageTabs.style.display = 'none';
+if (loginButton) {
+    loginButton.addEventListener('click', function(event) {
+        if (email) { // email이 있을 때만 드롭다운 토글
+            event.preventDefault();
+            const languageTabs = document.getElementById('language-tabs');
+            if (languageTabs.style.display === 'block') {
+                languageTabs.style.display = 'none';
+            }
+            const isMenuVisible = loginDropdownMenu.style.display === 'block';
+            loginDropdownMenu.style.display = isMenuVisible ? 'none' : 'block';
         }
-        const isMenuVisible = loginDropdownMenu.style.display === 'block';
-        loginDropdownMenu.style.display = isMenuVisible ? 'none' : 'block';
+        // email이 null이면 기본 동작(href 이동)이 실행됨
+    });
+}
+
+// 페이지 클릭 시 드롭다운 메뉴 숨기기 (email 체크 제거)
+document.addEventListener('click', function(event) {
+    const languageTabs = document.getElementById('language-tabs');
+    const dropdownMenu = document.querySelector('.login-drop-menu');
+
+    // 언어 탭 외부 클릭 시 닫기
+    if (!document.querySelector('.change-lang').contains(event.target) && 
+        !languageTabs.contains(event.target)) {
+        languageTabs.style.display = 'none';
     }
-    // email이 null이면 기본 동작(href 이동)이 실행됨
+
+    // 로그인 드롭다운 외부 클릭 시 닫기 (email이 있을 때만 적용)
+    if (email && dropdownMenu && 
+        !loginButton.contains(event.target) && 
+        !dropdownMenu.contains(event.target)) {
+        dropdownMenu.style.display = 'none';
+    }
 });
-		
-	// 페이지 클릭 시 드롭다운 메뉴 숨기기 (드롭다운 외부 클릭 시)
-	document.addEventListener('click', function(event) {
-		if(email != null){	
-		// 클릭한 곳이 로그인 버튼이나 드롭다운 메뉴가 아니면 드롭다운 숨기기
-			if (!loginButton.contains(event.target) && !loginDropdownMenu.contains(event.target)) {
-					loginDropdownMenu.style.display = 'none';
-			}
-	
-			// 클릭한 곳이 언어 버튼이나 드롭다운 메뉴가 아니면 언어 드롭다운 메뉴 숨기기
-			const languageTabs = document.getElementById('language-tabs');
-			if (!document.querySelector('.change-lang').contains(event.target) && !languageTabs.contains(event.target)) {
-					languageTabs.style.display = 'none';
-			}
-	}
-	});
-	</script>
-
-
-
-
-
-
-
-<!-- Section Call To Action Animation -->
-
-
-<!-- ... end Section Call To Action Animation -->
-
-<!-- Window-popup Restore Password -->
-
-<!-- ... end Window-popup Restore Password -->
-
-
-
-
-<!-- Footer Full Width -->
-
-
-<!-- ... end Footer Full Width -->
-
-
-
-<!-- Window-popup-CHAT for responsive min-width: 768px -->
-
-
-<!-- ... end Window-popup-CHAT for responsive min-width: 768px -->
-
-
-
-
-
-
-
-<!-- Edit My Poll Popup -->
-
-
-
-<!-- ... end Edit My Poll Popup -->
-
-<!-- Window Popup Main Search -->
-
-
-
-<!-- ... end Window Popup Main Search -->
+</script>
 
 <!-- JS Scripts -->
 <script src="/resources/js/jQuery/jquery-3.5.1.min.js"></script>

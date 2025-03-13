@@ -181,6 +181,11 @@ out.println(sbHtml);
 									<label for="title" class="form-label fw-bold">제목</label> 
 									<input class="form-control" id="title" name="title" placeholder="제목을 입력하세요">
 								</div>
+								<!-- 해시태그 -->
+								<div class="mb-3">
+									<label for="tag" class="form-label fw-bold">해시태그</label> 
+									<input class="form-control" id="tag" name="tag" placeholder="해시태그를 입력해주세요">
+								</div>								
 								<!-- 내용 -->
 								<div class="mb-3">
 									<label for="content" class="form-label fw-bold">내용</label>
@@ -279,20 +284,26 @@ $('#submitBtn').on('click', function() {
 	// 에디터의 HTML 값을 숨겨진 textarea에 저장
 	$('#content').val(editor.getHTML());
 
-	// 디버깅용 콘솔 로그
-	console.log("전송할 Title:", $("textarea[name='title']").val());
-	console.log("전송할 Content:", $('#content').val());
+	const title = $('#title').val().trim();
+    const content = $('#content').val().trim();
 
+	if (!title) {
+        alert("제목을 입력해 주세요.");
+        $('#title').focus();
+        return; // 제출 중단
+    }
+    if (!content || content === "<p><br></p>") { // 빈 HTML 태그도 체크
+        alert("내용을 입력해 주세요.");
+        editor.focus();
+        return; // 제출 중단
+    }
 	// 폼 제출
 	$("#fom").submit();
 });
 </script>
 
-
-
-
 		<!-- 다국어JSON파일 불러오기 -->
-		<script>
+<script>
 	document.getElementById('language-toggle').addEventListener('click', function(event) {
 			event.preventDefault();
 			const languageTabs = document.getElementById('language-tabs');

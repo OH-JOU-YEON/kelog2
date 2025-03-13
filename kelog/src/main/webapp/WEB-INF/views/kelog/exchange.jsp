@@ -210,13 +210,11 @@ body {
 				<div class="nav nav-pills nav1 header-menu">
 					<div class="mCustomScrollbar">
 						<ul>
-							<li class="nav-item"><a href="00-MainPage.html">메인 페이지</a></li>
-							<li class="nav-item dropdown"><a href="travel/list">여행
+							<li class="nav-item dropdown"><a href="/travel/list">여행
 									추천지</a></li>
 							<li class="nav-item dropdown dropdown-has-megamenu"><a
 								href="/blog/list">블로그 게시판</a></li>
-							<li class="nav-item"><a href="03-Myblog.html">내 블로그</a></li>
-							<li class="nav-item"><a href="tip/list">꿀팁 게시판</a></li>
+							<li class="nav-item"><a href="/tip/list">꿀팁 게시판</a></li>
 							<li class="nav-item"><a href="#">전국 날씨예보</a></li>
 							<li class="close-responsive-menu js-close-responsive-menu">
 								<svg class="olymp-close-icon">
@@ -540,7 +538,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     // 금액 변환: (입력 금액 / 선택 통화의 EUR 환율) * KRW 환율
                     var convertedAmount = (amount / eurToCurrency) * eurToKrw;
 
-                    $('#result').text(convertedAmount.toFixed(0)+" KRW(원)");
+                    $('#result').text(convertedAmount.toFixed(0)+" 원(KRW)");
                     $('#error').hide();
                 } else {
                     $('#error').text('환율 데이터를 가져오지 못했습니다: ' + response.error.info).show();

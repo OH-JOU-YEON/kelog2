@@ -77,10 +77,6 @@
 				<div class="img-wrap">
 					<img loading="lazy" src="/resources/img/logo-colored-small.webp" width="34" height="34" alt="Olympus" class="logo-colored">
 				</div>
-				<div class="title-block">
-					<h6 class="logo-title">로고 들어갈 자리</h6>
-					<div class="sub-title">SOCIAL NETWORK</div>
-				</div>
 				
 			<a href="#" class="open-responsive-menu js-open-responsive-menu">
 				<svg class="olymp-menu-icon"><use xlink:href="#olymp-menu-icon"></use></svg>
@@ -298,8 +294,7 @@
 <footer>
 	<p>쉿 아무말도하지마 나의 작은 아가고냥이</p>
 </footer>
-</script>
-						<script>
+<script>
 	document.getElementById('language-toggle').addEventListener('click', function(event) {
 			event.preventDefault();
 			const languageTabs = document.getElementById('language-tabs');

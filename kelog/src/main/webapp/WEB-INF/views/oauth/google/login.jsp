@@ -100,10 +100,10 @@
 				<div class="mCustomScrollbar">
 					<ul>
 						<li class="nav-item dropdown"><a
-								href="02-RecommendPost.html" style="color: #000 !important;">여행
-									추천지</a></li>
+								href="/travel/list" style="color: #000 !important;">추천
+								 게시판</a></li>
 							<li class="nav-item dropdown dropdown-has-megamenu"><a
-								href="97-BlogPostBoard.html" style="color: #000 !important;">블로그</a>
+								href="/blog/list" style="color: #000 !important;">블로그 게시판</a>
 							</li>
 							<li class="nav-item"><a href="/tip/list"
 								style="color: #000 !important;">꿀팁 게시판</a></li>
@@ -160,8 +160,7 @@
 			</div>
 		</div>
 	</div>
-</div>
-
+	</div>
 
 	<!-- ... end Header Standard Landing  -->
 	<div class="header-spacer--standard"></div>
@@ -278,6 +277,109 @@
 			</div>
 		</div>
 	</div>
+	<script>
+document.getElementById('language-toggle').addEventListener('click', function(event) {
+    event.preventDefault();
+    const languageTabs = document.getElementById('language-tabs');
+    
+    // 로그인 드롭다운이 열려 있으면 닫기 (선택적)
+    const dropdownMenu = document.querySelector('.login-drop-menu');
+    if (dropdownMenu && dropdownMenu.style.display === 'block') {
+        dropdownMenu.style.display = 'none';
+    }
+
+    // 언어 탭 토글 (email 체크 없이 항상 동작)
+    if (languageTabs.style.display === 'block') {
+        languageTabs.style.display = 'none';
+    } else {
+        languageTabs.style.display = 'block';
+    }
+});
+
+document.getElementById('english').addEventListener('click', function(event) {
+    event.preventDefault();
+    setLanguage('en');
+    loadLanguage('en');
+});
+
+document.getElementById('korean').addEventListener('click', function(event) {
+    event.preventDefault();
+    setLanguage('kr');
+    loadLanguage('kr');
+});
+
+function setLanguage(language) {
+    const tabs = document.querySelectorAll('.language-tabs li a');
+    tabs.forEach(tab => {
+        tab.classList.remove('selected');
+    });
+
+    if (language === 'en') {
+        document.getElementById('english').classList.add('selected');
+    } else if (language === 'kr') {
+        document.getElementById('korean').classList.add('selected');
+    }
+}
+
+function loadLanguage(language) {
+    const filePath = `path/to/lang/${language}.json`;
+    fetch(filePath)
+        .then(response => response.json())
+        .then(data => {
+            updatePageText(data);
+        })
+        .catch(error => console.error('Error loading language file:', error));
+
+    document.getElementById('language-tabs').style.display = 'none';
+}
+
+function updatePageText(data) {
+    document.querySelector('.logo-title').textContent = data.logoTitle;
+    document.querySelector('.sub-title').textContent = data.subTitle;
+    document.querySelector('.title').textContent = data.recommendedPosts;
+    document.querySelector('.post-title').textContent = data.postTitle;
+    document.querySelector('.post-content').textContent = data.postContent;
+}
+
+// 로그인 버튼과 드롭다운 메뉴 가져오기
+const loginButton = document.querySelector('.login-user');
+const loginDropdownMenu = document.querySelector('.login-drop-menu');
+var email = '${email}'; // JSP에서 가져온 email 값
+
+if (loginButton) {
+    loginButton.addEventListener('click', function(event) {
+        if (email) { // email이 있을 때만 드롭다운 토글
+            event.preventDefault();
+            const languageTabs = document.getElementById('language-tabs');
+            if (languageTabs.style.display === 'block') {
+                languageTabs.style.display = 'none';
+            }
+            const isMenuVisible = loginDropdownMenu.style.display === 'block';
+            loginDropdownMenu.style.display = isMenuVisible ? 'none' : 'block';
+        }
+        // email이 null이면 기본 동작(href 이동)이 실행됨
+    });
+}
+
+// 페이지 클릭 시 드롭다운 메뉴 숨기기 (email 체크 제거)
+document.addEventListener('click', function(event) {
+    const languageTabs = document.getElementById('language-tabs');
+    const dropdownMenu = document.querySelector('.login-drop-menu');
+
+    // 언어 탭 외부 클릭 시 닫기
+    if (!document.querySelector('.change-lang').contains(event.target) && 
+        !languageTabs.contains(event.target)) {
+        languageTabs.style.display = 'none';
+    }
+
+    // 로그인 드롭다운 외부 클릭 시 닫기 (email이 있을 때만 적용)
+    if (email && dropdownMenu && 
+        !loginButton.contains(event.target) && 
+        !dropdownMenu.contains(event.target)) {
+        dropdownMenu.style.display = 'none';
+    }
+});
+</script>
 	<script>
     const onClickGoogleLogin = (e) => {
         window.location.replace('${src}')

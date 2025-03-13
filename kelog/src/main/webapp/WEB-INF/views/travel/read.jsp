@@ -166,16 +166,6 @@
 	</div>
 	<hr class="mb-4">
 
-	<!--  지도 API 들어갈 자리 (중앙)-->
-	<!--<div class="container mb-4 text-center">
-  <p class="mb-2">[ 여기 지도 API 들어갈 섹션 ]</p>-->
-	<!-- 임시 크기 박스 (원한다면 main.css에 정의해서 UI 맞춰도 됨) -->
-	<!--<div class="bg-light mx-auto" style="max-width: 600px; height: 300px;">-->
-	<!-- 실제 지도/iframe/script를 여기에 삽입 -->
-	<!-- </div>
-</div>-->
-
-
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-12 col-lg-8">
@@ -198,23 +188,21 @@
 
 						<!-- 태그 (중앙) -->
 						<div class="my-3 text-center">
-							<ul class="list-inline mb-0">
-								<li class="list-inline-item"><a href="#">#태그</a></li>
-								<li class="list-inline-item"><a href="#">#태그</a></li>
-								<li class="list-inline-item"><a href="#">#태그</a></li>
-								<li class="list-inline-item"><a href="#">#태그</a></li>
-							</ul>
+							<h6 class="fw-bold mb-0 text-left">${dto.tag }</h6>
 						</div>
 
 						<!-- 좋아요 / 싫어요 (오른쪽 하단) -->
 						<div class="d-flex justify-content-end">
 
-							<button id="likeButton${dto.travelBoardNo}"
-								onclick="toggleLike(${dto.travelBoardNo})"
-								class="btn-sm btn-outline-primary me-2">${isliked ? '좋아요 취소' : '좋아요'}</button>
-							<button id="unlikeButton${dto.travelBoardNo}"
-								onclick="toggleunLike(${dto.travelBoardNo})" 
-								class="btn-sm btn-outline-danger">${isunliked ? '싫어요 취소' : '싫어요'}</button>
+		<p id="likeCount">좋아요: ${dto.likeCnt}</p>
+        <!-- 좋아요 버튼을 이미지로 변경 -->
+        <button id="likeButton${dto.travelBoardNo}" onclick="toggleLike(${dto.travelBoardNo})" style="border: none; background: none; cursor: pointer;">
+            <img src="/resources/img/${isliked ? 'like-filled.png' : 'like-ep.png'}" alt="좋아요" style="width: 24px; height: 24px;">
+        </button>
+        <p id=unlikeCnt>싫어요: ${dto.dislikeCnt}</p>
+    <button id="unlikeButton${dto.travelBoardNo}" onclick="toggleunLike(${dto.travelBoardNo})" style="border: none; background: none; cursor: pointer;">
+            <img src="/resources/img/${isunliked ? 'unlike-filled.png' : 'unlike-ep.png'}" alt="싫어요" style="width: 24px; height: 24px;">
+        </button>
 							<div>
 								<a href="/travel/list" class="text-decoration-none me-3">목록</a>
 								<c:if test="${dto.email == user.email }">
@@ -436,19 +424,19 @@ function toggleLike(travelBoardNo) {
         type: 'POST',
         data: { travelBoardNo: travelBoardNo },
         success: function() {
-        	var currentLikeCount = parseInt($('#likeCount').text().replace('좋아요: ', ''));
-        	console.log("성공");
-            // 좋아요 버튼 상태 변경
+            var currentLikeCount = parseInt($('#likeCount').text().replace('좋아요: ', ''));
             let likeButton = document.getElementById("likeButton" + travelBoardNo);
-            if (likeButton.textContent == "좋아요") {
-                likeButton.textContent = '좋아요 취소';
+            let likeImg = likeButton.querySelector('img');
+
+            // 이미지와 좋아요 수 변경
+            if (likeImg.src.includes('like-ep.png')) {
+                likeImg.src = '/resources/img/like-filled.png'; // 채워진 좋아요 이미지
                 currentLikeCount += 1;
-                $('#likeCount').html('좋아요: ' + currentLikeCount); 
             } else {
-                likeButton.textContent = '좋아요';
+                likeImg.src = '/resources/img/like-ep.png'; // 빈 좋아요 이미지
                 currentLikeCount -= 1;
-                $('#likeCount').html('좋아요: ' + currentLikeCount); 
             }
+            $('#likeCount').html('좋아요: ' + currentLikeCount); 
         }
     });
 }
@@ -468,20 +456,19 @@ function toggleunLike(travelBoardNo) {
         type: 'POST',
         data: { travelBoardNo: travelBoardNo },
         success: function() {
-        	var unLikeCount = parseInt($('#unlikeCount').text().replace('싫어요: ', ''));
-        	console.log("성공");
-            // 좋아요 버튼 상태 변경
-            let unlikeButton = document.getElementById("unlikeButton" + travelBoardNo);
-            if (unlikeButton.textContent == "싫어요") {
-            	unlikeButton.textContent = '싫어요 취소';
-                unLikeCount += 1;
-                $('#unlikeCount').html('싫어요: ' + unLikeCount); 
+            var currentUnLikeCount = parseInt($('#unlikeCount').text().replace('싫어요: ', '')); // 'unlikeCount' 요소에서 현재 싫어요 수 가져오기
+            let unlikeButton = document.getElementById("unlikeButton" + travelBoardNo); // unlike 버튼 요소 가져오기
+            let unlikeImg = unlikeButton.querySelector('img'); // 버튼 내 이미지 요소 가져오기
+
+            if (unlikeImg.src.includes('unlike-ep.png')) {
+                unlikeImg.src = '/resources/img/unlike-filled.png'; // 싫어요 활성화 이미지로 변경
+                currentUnLikeCount += 1; // 싫어요 수 증가
             } else {
-            	unlikeButton.textContent = '싫어요';
-                unLikeCount -= 1;
-                $('#unlikeCount').html('싫어요: ' + unLikeCount); 
+                unlikeImg.src = '/resources/img/unlike-ep.png'; // 싫어요 비활성화 이미지로 변경
+                currentUnLikeCount -= 1; // 싫어요 수 감소
             }
-        }
+            $('#unlikeCnt').html('싫어요: ' + currentUnLikeCount); // 업데이트된 싫어요 수 표시
+        }       
     });
 }
 </script>
