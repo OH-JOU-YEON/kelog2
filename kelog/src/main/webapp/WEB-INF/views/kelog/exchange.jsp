@@ -12,9 +12,12 @@
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <!-- jQuery (버전 3.x 이상) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="/resources/Bootstrap/dist/css/bootstrap.css">
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet"
+	href="/resources/Bootstrap/dist/css/bootstrap.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Bootstrap CSS -->
 
 <!-- main.css (CalendarAndEvents + ProfilePage 스타일) -->
@@ -208,13 +211,12 @@ body {
 					<div class="mCustomScrollbar">
 						<ul>
 							<li class="nav-item"><a href="00-MainPage.html">메인 페이지</a></li>
-							<li class="nav-item dropdown"><a
-								href="02-RecommendPost.html">여행 추천지</a></li>
+							<li class="nav-item dropdown"><a href="travel/list">여행
+									추천지</a></li>
 							<li class="nav-item dropdown dropdown-has-megamenu"><a
-								href="97-BlogPostBoard.html">블로그 게시판</a></li>
+								href="/blog/list">블로그 게시판</a></li>
 							<li class="nav-item"><a href="03-Myblog.html">내 블로그</a></li>
-							<li class="nav-item"><a href="55-HoneyTipBoard.html">꿀팁
-									게시판</a></li>
+							<li class="nav-item"><a href="tip/list">꿀팁 게시판</a></li>
 							<li class="nav-item"><a href="#">전국 날씨예보</a></li>
 							<li class="close-responsive-menu js-close-responsive-menu">
 								<svg class="olymp-close-icon">
@@ -253,8 +255,25 @@ body {
 				<div class="profile-card">
 					<div class="card-header">환율</div>
 					<div class="card-body text-center">
-						<!-- 추후 JS로 환율 API 연동할 자리 -->
-						<p class="text-muted">환율정보가 표시될 영역 (준비중)</p>
+						<div class="exchange-rate-form">
+							<div class="mb-3">
+								<label for="currency-select" class="form-label">통화 선택</label> <select
+									id="currency-select" class="form-control">
+									<option value="USD">USD (달러)</option>
+									<option value="JPY">JPY (엔)</option>
+									<option value="CNY">CNY (위안)</option>
+									<option value="EUR">EUR (유로)</option>
+								</select>
+							</div>
+							<div class="mb-3">
+								<label for="amount-input" class="form-label">금액 입력</label> <input
+									type="number" id="amount-input" class="form-control"
+									placeholder="금액을 입력하세요" step="1">
+							</div>
+							<button id="convert-btn" class="btn btn-primary">변환</button>
+							<p id="result" class="mt-3 text-success"></p>
+							<p id="error" class="mt-3 text-danger" style="display: none;"></p>
+						</div>
 					</div>
 				</div>
 
@@ -326,40 +345,42 @@ body {
 			<small>© 2025. All rights reserved.</small>
 		</div>
 	</footer>
-<div id="eventModal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" id="closeModal">&times;</span>
-        <h2>일정 관리</h2>
-        <form id="eventForm">
-            <input type="hidden" name="routineNo" id="routineNo">
+	<div id="eventModal" class="modal">
+		<div class="modal-content">
+			<span class="close-btn" id="closeModal">&times;</span>
+			<h2>일정 관리</h2>
+			<form id="eventForm">
+				<input type="hidden" name="routineNo" id="routineNo">
 
-            <div class="form-group">
-                <label for="eventcontent">일정 내용</label>
-                <input type="text" name="eventcontent" id="eventcontent" required>
-            </div>
+				<div class="form-group">
+					<label for="eventcontent">일정 내용</label> <input type="text"
+						name="eventcontent" id="eventcontent" required>
+				</div>
 
-            <div class="form-group">
-                <label for="eventDate">일정 날짜</label>
-                <input type="date" name="eventDate" id="eventDate" required>
-            </div>
+				<div class="form-group">
+					<label for="eventDate">일정 날짜</label> <input type="date"
+						name="eventDate" id="eventDate" required>
+				</div>
 
-            <div id="deleteEvent" style="display: none;">
-                <button type="button" class="btn btn-danger" id="deleteButton">일정 삭제</button>
-            </div>
+				<div id="deleteEvent" style="display: none;">
+					<button type="button" class="btn btn-danger" id="deleteButton">일정
+						삭제</button>
+				</div>
 
-            <div>
-                <button type="submit" class="btn btn-success" id="saveButton">저장</button>
-                <button type="button" class="btn btn-secondary" id="cancelBtn">취소</button>
-            </div>
-        </form>
-    </div>
-</div>
+				<div>
+					<button type="submit" class="btn btn-success" id="saveButton">저장</button>
+					<button type="button" class="btn btn-secondary" id="cancelBtn">취소</button>
+				</div>
+			</form>
+		</div>
+	</div>
 
 	<!-- Bootstrap & jQuery -->
 	<script src="/resources/js/libs/moment.min.js"></script>
 	<script src="/resources/js/libs/fullcalendar.min.js"></script>
-	<script src="/resources/js/main.js"></script>	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+	<script src="/resources/js/main.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
 	<script src="/resources/js/libs/jquery.mousewheel.min.js"></script>
 	<script src="/resources/js/libs/perfect-scrollbar.min.js"></script>
 	<script src="/resources/js/libs/imagesloaded.pkgd.min.js"></script>
@@ -369,8 +390,8 @@ body {
 	<script src="/resources/js/libs/jquery.magnific-popup.min.js"></script>
 	<script src="/resources/js/libs-init/libs-init.js"></script>
 	<script src="/resources/js/svg-loader.js"></script>
-	
-<script type="text/javascript">
+
+	<script type="text/javascript">
 document.addEventListener("DOMContentLoaded", function () {
     var calendarEl = document.getElementById('calendar');
 
@@ -381,12 +402,8 @@ document.addEventListener("DOMContentLoaded", function () {
         defaultDate: new Date(),
         header: {
             left: 'prev',
-            center: 'title',
-            right: 'next,dayGridMonth,timeGridWeek,timeGridDay'
-        },
-        buttonIcons: {
-            prev: 'far fa-chevron-left',
-            next: 'far fa-chevron-right'
+            right: 'today next',
+            center: 'title'
         },
 
         eventClick: function (info) {
@@ -493,9 +510,54 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 </script>
+	<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function () {
+    // 환율 변환 버튼 이벤트
+    $('#convert-btn').on('click', function () {
+        var currency = $('#currency-select').val(); // 선택된 통화
+        var amount = $('#amount-input').val(); // 입력된 금액
+        
+        if (!amount || amount <= 0) {
+            $('#error').text('유효한 금액을 입력해주세요.').show();
+            $('#result').text('');
+            return;
+        }
 
+        // Fixer.io API 호출
+        $.ajax({
+            url: 'http://data.fixer.io/api/latest',
+            type: 'GET',
+            data: {
+                access_key: '84ad9fb350351d2793a6c591d14cecce', // Fixer.io에서 발급받은 API 키로 교체
+                symbols: 'USD,JPY,CNY,EUR,KRW' // 필요한 통화만 요청
+            },
+            success: function (response) {
+                if (response.success) {
+                    var rates = response.rates;
+                    var eurToKrw = rates.KRW; // EUR -> KRW 환율
+                    var eurToCurrency = rates[currency]; // EUR -> 선택된 통화 환율
 
-<script>
+                    // 금액 변환: (입력 금액 / 선택 통화의 EUR 환율) * KRW 환율
+                    var convertedAmount = (amount / eurToCurrency) * eurToKrw;
+
+                    $('#result').text(convertedAmount.toFixed(0)+" KRW(원)");
+                    $('#error').hide();
+                } else {
+                    $('#error').text('환율 데이터를 가져오지 못했습니다: ' + response.error.info).show();
+                    $('#result').text('');
+                }
+            },
+            error: function (xhr, status, error) {
+                $('#error').text('API 요청 실패: 네트워크 오류').show();
+                $('#result').text('');
+            }
+        });
+    });
+});
+
+</script>
+
+	<script>
     // 스크롤 시 헤더 색상 변경
     window.addEventListener('scroll', function () {
       const header = document.getElementById('header--standard');

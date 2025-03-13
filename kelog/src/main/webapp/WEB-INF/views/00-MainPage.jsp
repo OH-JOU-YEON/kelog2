@@ -3,7 +3,6 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +13,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-
+	
+	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 	<!-- Theme Font -->
 	<link rel="preload" type="text/css" href="/resources/css/theme-font.min.css" as="style">
 
@@ -473,7 +473,6 @@
 
 <!-- JS Scripts -->
 <script src="/resources/js/jQuery/jquery-3.5.1.min.js"></script>
-
 <script src="/resources/js/libs/jquery.mousewheel.min.js"></script>
 <script src="/resources/js/libs/perfect-scrollbar.min.js"></script>
 <script src="/resources/js/libs/imagesloaded.pkgd.min.js"></script>
