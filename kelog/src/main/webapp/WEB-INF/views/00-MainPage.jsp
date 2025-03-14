@@ -604,9 +604,13 @@ document.addEventListener('click', function(event) {
 	});
 	</script>
 
-<footer>
-	<p>쉿 아무말도하지마 나의 작은 아가고냥이</p>
-</footer>
+	<!-- 하단 푸터 -->
+	<footer class="py-4 mt-5">
+		<div class="container text-center">
+			<p class="mb-1">이용약관 | 개인정보처리방침 | 주소 | 연락처</p>
+			<small>&copy; 2025. All rights reserved.</small>
+		</div>
+	</footer>
 </body>
 
 </html>

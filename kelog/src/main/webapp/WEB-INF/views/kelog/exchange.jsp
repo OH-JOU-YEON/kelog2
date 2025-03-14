@@ -312,7 +312,6 @@ body {
 						<!-- 달력 들어갈 DIV -->
 						<div id="calendar"></div>
 						<div class="events-list mt-3"></div>
-						<!-- 추가 버튼 (+) -->
 					</div>
 
 					<!-- 지도 탭 -->

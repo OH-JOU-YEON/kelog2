@@ -168,8 +168,8 @@ li {
 									<option ${pageMaker.cri.amount == 9 ? "selected='selected'":''}
 										value="9">9개</option>
 									<option
-										${pageMaker.cri.amount == 12 ? "selected='selected'":''}
-										value="12">12개</option>
+										${pageMaker.cri.amount == 15 ? "selected='selected'":''}
+										value="15">15개</option>
 									<option
 										${pageMaker.cri.amount == 30 ? "selected='selected'":''}
 										value="30">30개</option>

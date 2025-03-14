@@ -456,7 +456,7 @@ function toggleunLike(travelBoardNo) {
         type: 'POST',
         data: { travelBoardNo: travelBoardNo },
         success: function() {
-            var currentUnLikeCount = parseInt($('#unlikeCount').text().replace('싫어요: ', '')); // 'unlikeCount' 요소에서 현재 싫어요 수 가져오기
+            var currentUnLikeCount = parseInt($('#unlikeCnt').text().replace('싫어요: ', '')); // 'unlikeCount' 요소에서 현재 싫어요 수 가져오기
             let unlikeButton = document.getElementById("unlikeButton" + travelBoardNo); // unlike 버튼 요소 가져오기
             let unlikeImg = unlikeButton.querySelector('img'); // 버튼 내 이미지 요소 가져오기
 
