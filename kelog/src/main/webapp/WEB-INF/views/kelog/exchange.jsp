@@ -197,10 +197,6 @@ body {
 					<img loading="lazy" src="/resources/img/logo-colored-small.webp"
 						width="34" height="34" alt="Olympus" class="logo-colored">
 				</div>
-				<div class="title-block">
-					<h6 class="logo-title">로고 들어갈 자리</h6>
-					<div class="sub-title">SOCIAL NETWORK</div>
-				</div>
 
 				<a href="#" class="open-responsive-menu js-open-responsive-menu">
 					<svg class="olymp-menu-icon">
@@ -456,7 +452,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // 새로운 일정 추가
         $.ajax({
-            url: '/kelog/addEvent', // 서버에 추가 요청
+            url: '/kelogs/addEvent', // 서버에 추가 요청
             type: 'POST',
             data: {
                 content: eventContent,
@@ -481,7 +477,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var routineNo = $('#routineNo').val();
         console.log(routineNo);
         $.ajax({
-            url: '/kelog/deleteEvent', // 서버에 삭제 요청
+            url: '/kelogs/deleteEvent', // 서버에 삭제 요청
             type: 'POST',
             data: { routineNo: routineNo },
             success: function(response) {

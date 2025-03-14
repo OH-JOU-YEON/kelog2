@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/kelog/*")
+@RequestMapping("/kelogs/*")
 public class RoutineController {
 
 	private final RoutineService service;
@@ -36,7 +36,7 @@ public class RoutineController {
 			List<RoutineDTO> dto = service.getdtoByEmail(email);
 			model.addAttribute("dto", dto);
 		}
-		return "/kelog/exchange"; // 일정 페이지
+		return "/kelogs/exchange"; // 일정 페이지
 	}
 
 	// 일정 저장
@@ -51,7 +51,7 @@ public class RoutineController {
 			dto.setContent(content);
 		    dto.setEventDate(Timestamp.valueOf(eventDate + " 00:00:00")); // 날짜 형식 처리
 			service.created(dto); // 일정 저장
-			return "redirect:/kelog/exchange"; // 일정 추가 후 리다이렉트
+			return "redirect:/kelogs/exchange"; // 일정 추가 후 리다이렉트
 		}
 
 		return "redirect:/kelog/exchange"; // 로그인 안 된 경우 리다이렉트

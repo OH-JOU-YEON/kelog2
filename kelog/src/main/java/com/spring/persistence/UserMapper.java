@@ -32,5 +32,10 @@ public interface UserMapper {
 	public int usermodify(UserDTO member);
 	
 	public int findByNickname(String nickName);
+	
+	@Select("SELECT * FROM user, nicktable WHERE user.uno = nicktable.uno and nickName LIKE #{nickName} ")
+	public List<UserDTO> finduserByNickName(String nickName);
+	
+	public List<UserDTO> findByEmail(String email);
 
 }

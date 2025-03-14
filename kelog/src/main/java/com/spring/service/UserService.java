@@ -19,4 +19,8 @@ public interface UserService extends GenericService<UserDTO, Integer> {
 
 	public int isNicknameTaken(String nickName);
 
+	public List<UserDTO> findUsersByNickName(String keyword);
+
+	public List<UserDTO> findUsersByEmail(String keyword);
+
 }

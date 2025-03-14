@@ -77,4 +77,11 @@ public class UserServiceImpl implements UserService {
 		return mapper.findByNickname(nickName);
 	}
 
+	public List<UserDTO> findUsersByNickName(String nickName) {
+        return mapper.finduserByNickName("%" + nickName + "%"); // LIKE 검색
+    }
+
+    public List<UserDTO> findUsersByEmail(String email) {
+        return mapper.findByEmail("%" + email + "%"); // LIKE 검색
+    }
 }

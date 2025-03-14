@@ -63,18 +63,15 @@
 
 <!-- Header Standard Landing  -->
 
-<<div class="header--standard header--standard-landing" id="header--standard">
+<div class="header--standard header--standard-landing" id="header--standard">
 	<div class="container">
 		<div class="header--standard-wrap">
 
 			<a href="12-FavouritePage.html" class="logo"></a>
 				<div class="img-wrap">
-					<img loading="lazy" src="/resources/img/logo-colored-small.webp" width="34" height="34" alt="Olympus" class="logo-colored">
+					<img loading="lazy" src="/resources/img/logokelog.png" width="34" height="34" alt="Olympus" class="logo-colored">
 				</div>
-				<div class="title-block">
-					<h6 class="logo-title">로고 들어갈 자리</h6>
-					<div class="sub-title">SOCIAL NETWORK</div>
-				</div>
+
 				
 			<a href="#" class="open-responsive-menu js-open-responsive-menu">
 				<svg class="olymp-menu-icon"><use xlink:href="#olymp-menu-icon"></use></svg>
@@ -160,7 +157,6 @@
 				<!-- Tab panes -->
 				<div class="tab-content" id="registration-form-tabs-content">
 					<div class="tab-pane fade show active">
-							<form class="content">
 									<div class="row" style="justify-content: center; display: flex;">
 											<!-- 아이디 입력 -->
 											<div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
@@ -181,9 +177,8 @@
 																	<div class="search-box" style="display: flex; align-items: center; gap: 10px; height: 50px;">
 																			<!-- 검색 조건 셀렉트 박스 -->
 																			<select id="search-type" style="padding: 5px;">
-																					<option value="id">회원 ID</option>
+																					<option value="nickName">닉네임</option>
 																					<option value="email">회원 이메일</option>
-																					<option value="report">신고횟수</option>
 																			</select>
 																			<input type="text" placeholder="검색어를 입력하세요" id="search-member" style="padding: 5px;"/>
 																			<button class="btn btn-primary btn-sm-2" onclick="searchMember()" style="white-space: nowrap;">검색</button>
@@ -192,7 +187,6 @@
 													</div>
 											</div>
 											</div>
-							</form>    
 					</div>
 			</div>
 			<div class="row" style="justify-content: center; display: flex;">
@@ -214,60 +208,163 @@
 			</div>
 			</div>
 
-			
-				<script type="text/javascript">
-				$(document).ready(function() {
-				    loadTable();
-				});
+<script type="text/javascript">
+$(document).ready(function() {
+    loadTable(); // 페이지 로드 시 전체 회원 목록 표시
+});
 
-				function loadTable() {
-				    $.ajax({
-				        url: "/manager/getList",
-				        type: "post",
-				        dataType: "json",
-				        success: function(data) {
-				            var boardContainer = $(".userlist");
+// 탭 로드 함수
+function loadMyPage() {
+    alert("마이페이지로 이동하려면 별도 구현이 필요합니다.");
+    // 예: window.location.href = "/manager/01-ManagerPage-MyPage?uno=${user.uno}";
+}
 
-				            $.each(data, function(index, u) {
-				                var itemContainer = $("<div>").css({
-				                    "display": "flex",
-				                    "justify-content": "space-between",
-				                    "align-items": "center",
-				                    "width": "100%",
-				                    "border-bottom": "1px solid #ddd",
-				                    "padding": "10px 0"
-				                });
+function loadTable() {
+    $.ajax({
+        url: "/manager/getList",
+        type: "post",
+        dataType: "json",
+        success: function(data) {
+            renderUserList(data);
+        },
+        error: function(e) {
+            console.log("AJAX 오류:", e.status, e.statusText);
+            alert("회원 목록을 불러오는 데 실패했습니다.");
+        }
+    });
+}
 
-				                itemContainer.append($("<span>").addClass("uno").text(u.uno));
-				                itemContainer.append($("<span>").addClass("email").text(u.email));
-				                itemContainer.append($("<span>").addClass("role").text(u.role));
-				                itemContainer.append($("<span>").addClass("activity").text(u.activity));
+function loadPosts() {
+    $.ajax({
+        url: "/manager/getPosts",
+        type: "post",
+        dataType: "json",
+        success: function(data) {
+            renderPostList(data);
+        },
+        error: function(e) {
+            console.log("게시물 AJAX 오류:", e.status, e.statusText);
+            alert("게시물 목록을 불러오는 데 실패했습니다.");
+        }
+    });
+}
 
-				                var editButton = $("<button>").addClass("btn btn-primary btn-md-2")
-				                    .css({
-				                        "width": "50px",
-				                        "height": "40px",
-				                        "white-space": "nowrap",
-				                        "text-align": "start"
-				                    })
-				                    .text("수정");
+function loadReplies() {
+    $.ajax({
+        url: "/manager/getReplies",
+        type: "post",
+        dataType: "json",
+        success: function(data) {
+            renderReplyList(data);
+        },
+        error: function(e) {
+            console.log("댓글 AJAX 오류:", e.status, e.statusText);
+            alert("댓글 목록을 불러오는 데 실패했습니다.");
+        }
+    });
+}
 
-				                var editLink = $("<a>").attr("href", "/manager/01-ManagerPage-UserModify?uno=" + u.uno)
-				                    .append(editButton)
-				                    .on("click", function() {
-				                        console.log("수정 링크 클릭됨: /manager/01-ManagerPage-UserModify?uno=" + u.uno);
-				                    });
-				                itemContainer.append(editLink);
+// 검색 함수
+function searchMember() {
+    var searchType = $("#search-type").val(); // "nickName" 또는 "email"
+    var searchKeyword = $("#search-member").val().trim();
 
-				                boardContainer.append(itemContainer);
-				            });
-				        },
-				        error: function(e) {
-				            console.log("AJAX 오류:", e.status, e.statusText);
-				        }
-				    });
-				}
+    console.log("Search Type:", searchType); // 디버깅용 로그
+    console.log("Search Keyword:", searchKeyword); // 디버깅용 로그
 
+    if (!searchKeyword) {
+        loadTable();
+        return;
+    }
+
+    $.ajax({
+        url: "/manager/searchMember",
+        type: "post",
+        data: {
+            searchType: searchType,
+            keyword: searchKeyword
+        },
+        dataType: "json",
+        success: function(data) {
+            console.log("Response Data:", data); // 서버 응답 확인
+            renderUserList(data);
+        },
+        error: function(e) {
+            console.log("검색 AJAX 오류:", e.status, e.statusText);
+            alert("검색 중 오류가 발생했습니다.");
+        }
+    });
+}
+
+// 회원 리스트 렌더링
+function renderUserList(data) {
+    var boardContainer = $(".userlist");
+    boardContainer.empty();
+
+    var header = $('<li class="head" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">')
+        .append('<span style="flex: 0 0 120px; text-align: start;">회원 번호</span>')
+        .append('<span style="flex: 0 0 120px; text-align: start;">회원 이메일</span>')
+        .append('<span style="flex: 0 0 120px; text-align: center;">역할</span>')
+        .append('<span class="create-date" style="flex: 0 0 120px; text-align: end;">활동여부</span>')
+        .append('<span style="display: flex; justify-content: flex-end;"></span>');
+    boardContainer.append(header);
+
+    if (data.length === 0) {
+        var noResult = $("<li>").text("검색 결과가 없습니다.").css({
+            "padding": "10px",
+            "text-align": "center"
+        });
+        boardContainer.append(noResult);
+        return;
+    }
+
+    $.each(data, function(index, u) {
+        var itemContainer = $("<li>").css({
+            "display": "flex",
+            "justify-content": "space-between",
+            "align-items": "center",
+            "width": "100%",
+            "border-bottom": "1px solid #ddd",
+            "padding": "10px 0"
+        });
+
+        itemContainer.append($("<span>").css("flex", "0 0 120px").addClass("uno").text(u.uno));
+        itemContainer.append($("<span>").css("flex", "0 0 120px").addClass("email").text(u.email));
+        itemContainer.append($("<span>").css("flex", "0 0 120px").addClass("role").text(u.role));
+        itemContainer.append($("<span>").css("flex", "0 0 120px").addClass("activity").text(u.activity));
+
+        var editButton = $("<button>").addClass("btn btn-primary btn-md-2")
+            .css({
+                "width": "50px",
+                "height": "40px",
+                "white-space": "nowrap",
+                "text-align": "start"
+            })
+            .text("수정");
+
+        var editLink = $("<a>").attr("href", "/manager/01-ManagerPage-UserModify?uno=" + u.uno)
+            .append(editButton)
+            .on("click", function() {
+                console.log("수정 링크 클릭됨: /manager/01-ManagerPage-UserModify?uno=" + u.uno);
+            });
+        itemContainer.append(editLink);
+
+        boardContainer.append(itemContainer);
+    });
+}
+
+// 게시물 및 댓글 렌더링 (예시)
+function renderPostList(data) {
+    var boardContainer = $(".userlist");
+    boardContainer.empty();
+    boardContainer.append('<li>게시물 관리 탭 - 서버에서 데이터를 받아 렌더링해야 합니다.</li>');
+}
+
+function renderReplyList(data) {
+    var boardContainer = $(".userlist");
+    boardContainer.empty();
+    boardContainer.append('<li>댓글 관리 탭 - 서버에서 데이터를 받아 렌더링해야 합니다.</li>');
+}
 </script>
 			
 			<!-- ... end Login-Registration Form  -->

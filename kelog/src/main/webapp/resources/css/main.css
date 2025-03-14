@@ -131,16 +131,7 @@ if the page has a “left panel”, add a class for BODY -- ".page-has-left-pane
 if the page has a “right panel”, add a class for BODY -- ".page-has-right-panels"
 
 */
-@font-face {
-  font-family: 'Ownglyph_wiseelist-Rg';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2501-1@1.1/Ownglyph_wiseelist-Rg.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-}
 
-body {
-  font-family: 'Ownglyph_wiseelist-Rg', sans-serif;
-}
 
 
 .header {
@@ -4628,7 +4619,9 @@ fieldset[disabled] .checkbox, fieldset[disabled] .checkbox input[type=checkbox],
 .pagination {
   margin-top: 40px;
   margin-bottom: 40px;
-  flex-wrap: wrap; }
+  flex-wrap: wrap; 
+  gap: 20px;
+  }
   .pagination .page-item {
     font-size: 12px;
     font-weight: 700;

@@ -187,7 +187,7 @@
 						<div id="viewer"></div>
 					</div>
 					<a href="/blog/list" class="btn btn-primary btn-md" style="margin-left: 600px;">목록</a>
-					<c:if test="${dto.nickName == user.nickName }">
+					<c:if test="${dto.email == user.email }">
 						<a href="/blog/modify?blogPostNo=${dto.blogPostNo }"
 							class="btn btn-primary btn-md">수정하기</a>
 					</c:if>

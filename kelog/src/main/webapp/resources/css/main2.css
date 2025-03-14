@@ -131,15 +131,16 @@ if the page has a “left panel”, add a class for BODY -- ".page-has-left-pane
 if the page has a “right panel”, add a class for BODY -- ".page-has-right-panels"
 
 */
-@font-face {
-  font-family: 'Ownglyph_wiseelist-Rg';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2501-1@1.1/Ownglyph_wiseelist-Rg.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-}
-
 
 /*내가 추가한 CSS*/
+
+/* ============================= */
+/* FIX: Override for dropdown menu */
+/* ============================= */
+
+/* 1) 부모 <ul>만 flex, 자식 <ul>은 block */
+
+
 
 .my-container {
   max-width: 960px; 

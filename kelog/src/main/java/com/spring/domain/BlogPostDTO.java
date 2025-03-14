@@ -24,6 +24,10 @@ public class BlogPostDTO {
 	private int likeCnt;
 	private int reportCnt;
 	
+	public BlogPostDTO() {
+		
+	}
+	
 	public BlogPostDTO(BlogNoAndNickNameVO blogNoAndNickName, String title, String content) {
 		
 		this.blogNo = blogNoAndNickName.getBlogNo(); 

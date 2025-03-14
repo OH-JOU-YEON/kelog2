@@ -19,12 +19,13 @@ public class TipPostDTO {
 	private int reportCnt;
 	
 	
-	public TipPostDTO(String nickName, String title, String email, String content) {
+	public TipPostDTO(String nickName, String title, String email, String content, String tag) {
 		super();
 		this.nickName = nickName;
 		this.email = email;
 		this.title = title;
 		this.content = content;
+		this.tag = tag;
 	}
 	
 	

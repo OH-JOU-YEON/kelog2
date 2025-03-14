@@ -55,7 +55,7 @@ footer .footer_inner .footer_bottom .family_f_logo .mo{display: none;}
 footer .footer_inner .footer_bottom .family_f_logo li{margin-right: 30px;}
 footer .footer_inner .footer_bottom .family_f_logo li:last-child{margin-right: 0;}
 
-.wrap > section:first-of-type{padding-top: 130px;}
+/*.wrap > section:first-of-type{padding-top: 130px;}*/
 /* no visual festival */
 .wrap.no_visual{/*padding-top: 85px;*/ position: relative;}
 

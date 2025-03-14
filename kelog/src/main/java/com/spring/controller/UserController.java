@@ -41,12 +41,10 @@ public class UserController {
 	private final UserService userService;
 	private final NickNameService nickNameService;
 	
-	
 	@RequestMapping("/main")
 	public String main() {
-		return "/00-MainPage";
+		return "/main";
 	}
-
 	
 	
 	@GetMapping("/login")

@@ -10,16 +10,20 @@
 		VALUES(#{email},#{profileImg})
 	</insert>
 
-<update id="update">
+	<update id="update">
 		UPDATE user SET profileImg=#{profileImg}
-		WHERE uno = #{uno}
+		WHERE uno =
+		#{uno}
 	</update>
-<update id="usermodify">
+	<update id="usermodify">
 		UPDATE user SET role=#{role}, activity=#{activity}
 		WHERE uno = #{uno}
 	</update>
-	
-	<select id="findByNickname" >
-    SELECT COUNT(uno) FROM nicktable WHERE nickName = #{nickName}
-</select>
+
+	<select id="findByNickname">
+		SELECT COUNT(uno) FROM nicktable WHERE nickName = #{nickName}
+	</select>
+	<select id="findByEmail">
+		SELECT * FROM user WHERE email LIKE #{email}
+	</select>
 </mapper>

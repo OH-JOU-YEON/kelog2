@@ -29,8 +29,8 @@ out.println(sbHtml);
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 
 <!-- Theme Font -->
-<link rel="preload" type="text/css" href="/resources/css/theme-font.min.css"
-	as="style">
+<link rel="preload" type="text/css"
+	href="/resources/css/theme-font.min.css" as="style">
 
 <!-- Bootstrap CSS -->
 
@@ -99,8 +99,8 @@ out.println(sbHtml);
 
 				<a href="12-FavouritePage.html" class="logo"></a>
 				<div class="img-wrap">
-					<img loading="lazy" src="/resources/img/logo-colored-small.webp" width="34"
-						height="34" alt="Olympus" class="logo-colored">
+					<img loading="lazy" src="/resources/img/logo-colored-small.webp"
+						width="34" height="34" alt="Olympus" class="logo-colored">
 				</div>
 				<div class="title-block">
 					<h6 class="logo-title">로고 들어갈 자리</h6>
@@ -133,7 +133,8 @@ out.println(sbHtml);
 								class="menu-link"><img src="/resources/img/menu-bar.png"
 									style="width: 26px; height: 26px; filter: none;"></a></li>
 							<li class="lang-set-item"><a href="#" class="change-lang"
-								id="language-toggle"> <img src="/resources/img/changeLang.png"
+								id="language-toggle"> <img
+									src="/resources/img/changeLang.png"
 									style="width: 26px; height: 26px; filter: none;">
 							</a> <!-- 언어 선택 탭 (기본적으로 숨겨짐) -->
 								<ul id="language-tabs" class="language-tabs"
@@ -142,8 +143,8 @@ out.println(sbHtml);
 									<li><a href="#" id="korean">한국어</a></li>
 								</ul></li>
 							<li class="login-set-item"><a href="#" class="login-user">
-									<img src="/resources/img/login-user.png" class="login-user-menu"
-									style="filter: none;">
+									<img src="/resources/img/login-user.png"
+									class="login-user-menu" style="filter: none;">
 							</a> <!-- 드롭다운 메뉴 -->
 								<ul class="login-drop-menu" style="display: none;">
 									<li><a href="01-ManagerPage-MyPage.html">마이페이지</a></li>
@@ -174,19 +175,27 @@ out.println(sbHtml);
 						<!-- 내부 폼 -->
 						<div class="ui-block p-4">
 							<h3 class="text-center mb-4">추천 여행지 글쓰기</h3>
-								<!-- 제목 -->
+							<!-- 제목 -->
 							<form role="form">
 								<input type="hidden" name="email" value="${user.email}">
-								<input class="form-control" name="travelBoardNo" type="hidden" value="${dto.travelBoardNo}">
+								<input class="form-control" name="travelBoardNo" type="hidden"
+									value="${dto.travelBoardNo}">
 								<div class="mb-3">
-									<label for="title" class="form-label fw-bold">제목</label> 
-									<input class="form-control" id="title" name="title" value="${dto.title }">
+									<label for="title" class="form-label fw-bold">제목</label> <input
+										class="form-control" id="title" name="title"
+										value="${dto.title }">
 								</div>
+								<div class="mb-3">
+									<label for="tag" class="form-label fw-bold">해시태그</label> <input
+										class="form-control" id="tag" name="tag"
+										value="${dto.tag }">
+								</div>
+
 								<!-- 내용 -->
 								<div class="mb-3">
 									<label for="content" class="form-label fw-bold">내용</label>
-									<textarea class="form-control" id="content" name="content" rows="5"
-										style="display: none;"></textarea>
+									<textarea class="form-control" id="content" name="content"
+										rows="5" style="display: none;"></textarea>
 								</div>
 								<div id="editor">${dto.content }</div>
 								<div class="mb-3">
@@ -201,9 +210,12 @@ out.println(sbHtml);
 						-->
 								<!-- 등록/취소 버튼 (오른쪽 하단) -->
 								<div class="d-flex justify-content-end">
-									<button type="button" class="btn btn-sm btn-primary me-2" data-oper="modify">수정</button>
-									<button type="button" class="btn btn-sm btn-primary me-2" data-oper="remove">삭제</button>
-									<button type="button" class="btn btn-sm btn-secondary" data-oper="list">취소</button>
+									<button type="button" class="btn btn-sm btn-primary me-2"
+										data-oper="modify">수정</button>
+									<button type="button" class="btn btn-sm btn-primary me-2"
+										data-oper="remove">삭제</button>
+									<button type="button" class="btn btn-sm btn-secondary"
+										data-oper="list">취소</button>
 								</div>
 							</form>
 						</div>
@@ -244,9 +256,9 @@ out.println(sbHtml);
 		<!-- SVG icons loader -->
 		<script src="/resources/js/svg-loader.js"></script>
 		<!-- /SVG icons loader -->
-		
-		
-<script type="text/javascript">
+
+
+		<script type="text/javascript">
 $(function(){
 	var formObj = $("form");
 	
@@ -267,9 +279,9 @@ $(function(){
 		formObj.submit();
 	});
 });
-</script>		
-		
-<script type="text/javascript">
+</script>
+
+		<script type="text/javascript">
 	const editor = new toastui.Editor({
 	    el: document.querySelector('#editor'),      // 에디터를 적용할 요소 (컨테이너)
 	    height: '500px',                             // 에디터 영역의 높이 값 (OOOpx || auto)
@@ -409,7 +421,7 @@ $(function(){
 	</script>
 
 
-<script>
+		<script>
 	window.addEventListener('scroll', function () {
 			const header = document.getElementById('header--standard');
 			if (window.scrollY > 50) { // 50px 이상 스크롤 시

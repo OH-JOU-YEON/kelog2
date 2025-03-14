@@ -1,5 +1,6 @@
 package com.spring.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -124,6 +125,25 @@ public class ManagerController {
 	public String removeReply(@RequestParam("replyNo") Integer replyNo) {
 		tipreplyservice.deleteReply(replyNo);
 		return "/manager/01-ManagerPage-Reply";
+	}
+	
+	@PostMapping("/searchMember")
+	@ResponseBody
+	public List<UserDTO> searchMember(@RequestParam("searchType") String searchType,
+	                               @RequestParam("keyword") String keyword) {
+	    System.out.println("Search Type: " + searchType); // 디버깅용 로그
+	    System.out.println("Keyword: " + keyword); // 디버깅용 로그
+
+	    if ("nickName".equals(searchType)) {
+	        List<UserDTO> users = userservice.findUsersByNickName("%" + keyword + "%");
+	        System.out.println("NickName Search Result: " + users); // 결과 확인
+	        return users;
+	    } else if ("email".equals(searchType)) {
+	        List<UserDTO> users = userservice.findUsersByEmail("%" + keyword + "%");
+	        System.out.println("Email Search Result: " + users); // 결과 확인
+	        return users;
+	    }
+	    return Collections.emptyList();
 	}
 
 }

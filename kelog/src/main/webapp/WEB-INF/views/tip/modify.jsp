@@ -10,210 +10,233 @@
 <html lang="en">
 <head>
 
-	<title>꿀팁 게시판</title>
+<title>꿀팁 게시판</title>
 
-	<!-- Required meta tags always come first -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
+<!-- Required meta tags always come first -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
 
-	<!-- Theme Font -->
-	<link rel="preload" type="text/css" href="/resources/css/theme-font.min.css" as="style">
+<!-- Theme Font -->
+<link rel="preload" type="text/css"
+	href="/resources/css/theme-font.min.css" as="style">
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" type="text/css" href="/resources/Bootstrap/dist/css/bootstrap.css">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" type="text/css"
+	href="/resources/Bootstrap/dist/css/bootstrap.css">
 
-	<!-- Main Styles CSS -->
-	<link rel="stylesheet" type="text/css" href="/resources/css/main.css">
-	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-	<!-- Main RTL CSS -->
-	<!--<link rel="stylesheet" type="text/css" href="css/rtl.min.css">-->
-	<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
-	<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+<!-- Main Styles CSS -->
+<link rel="stylesheet" type="text/css" href="/resources/css/main.css">
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<!-- Main RTL CSS -->
+<!--<link rel="stylesheet" type="text/css" href="css/rtl.min.css">-->
+<link rel="stylesheet"
+	href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
+<script
+	src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 </head>
 <body class="body-bg-white">
 
 
-<!-- Preloader -->
+	<!-- Preloader -->
 
-<div id="hellopreloader">
-	<div class="preloader">
-		<svg width="45" height="45" stroke="#fff">
-			<g fill="none" fill-rule="evenodd" stroke-width="2" transform="translate(1 1)">
+	<div id="hellopreloader">
+		<div class="preloader">
+			<svg width="45" height="45" stroke="#fff">
+			<g fill="none" fill-rule="evenodd" stroke-width="2"
+					transform="translate(1 1)">
 				<circle cx="22" cy="22" r="6" stroke="none">
-					<animate attributeName="r" begin="1.5s" calcMode="linear" dur="3s" repeatCount="indefinite" values="6;22"/>
-					<animate attributeName="stroke-opacity" begin="1.5s" calcMode="linear" dur="3s" repeatCount="indefinite" values="1;0"/>
-					<animate attributeName="stroke-width" begin="1.5s" calcMode="linear" dur="3s" repeatCount="indefinite" values="2;0"/>
+					<animate attributeName="r" begin="1.5s" calcMode="linear" dur="3s"
+					repeatCount="indefinite" values="6;22" />
+					<animate attributeName="stroke-opacity" begin="1.5s"
+					calcMode="linear" dur="3s" repeatCount="indefinite" values="1;0" />
+					<animate attributeName="stroke-width" begin="1.5s"
+					calcMode="linear" dur="3s" repeatCount="indefinite" values="2;0" />
 				</circle>
 				<circle cx="22" cy="22" r="6" stroke="none">
-					<animate attributeName="r" begin="3s" calcMode="linear" dur="3s" repeatCount="indefinite" values="6;22"/>
-					<animate attributeName="stroke-opacity" begin="3s" calcMode="linear" dur="3s" repeatCount="indefinite" values="1;0"/>
-					<animate attributeName="stroke-width" begin="3s" calcMode="linear" dur="3s" repeatCount="indefinite" values="2;0"/>
+					<animate attributeName="r" begin="3s" calcMode="linear" dur="3s"
+					repeatCount="indefinite" values="6;22" />
+					<animate attributeName="stroke-opacity" begin="3s"
+					calcMode="linear" dur="3s" repeatCount="indefinite" values="1;0" />
+					<animate attributeName="stroke-width" begin="3s" calcMode="linear"
+					dur="3s" repeatCount="indefinite" values="2;0" />
 				</circle>
 				<circle cx="22" cy="22" r="8">
-					<animate attributeName="r" begin="0s" calcMode="linear" dur="1.5s" repeatCount="indefinite" values="6;1;2;3;4;5;6"/>
+					<animate attributeName="r" begin="0s" calcMode="linear" dur="1.5s"
+					repeatCount="indefinite" values="6;1;2;3;4;5;6" />
 				</circle>
 			</g>
 		</svg>
 
-		<div class="text">Loading ...</div>
+			<div class="text">Loading ...</div>
+		</div>
 	</div>
-</div>
 
-<!-- ... end Preloader -->
+	<!-- ... end Preloader -->
 
-<!-- Stunning header -->
+	<!-- Stunning header -->
 
-<div class="stunning-header bg-primary-opacity" style="height: 500px;">
+	<div class="stunning-header bg-primary-opacity" style="height: 500px;">
 
-	
-	<!-- Header Standard Landing  -->
-	
-	<div class="header--standard header--standard-landing" id="header--standard">
-	<div class="container">
-		<div class="header--standard-wrap">
 
-			<a href="12-FavouritePage.html" class="logo"></a>
-				<div class="img-wrap">
-					<img loading="lazy" src="/resources/img/logo-colored-small.webp" width="34" height="34" alt="Olympus" class="logo-colored">
-				</div>
-				
-			<a href="#" class="open-responsive-menu js-open-responsive-menu">
-				<svg class="olymp-menu-icon"><use xlink:href="#olymp-menu-icon"></use></svg>
-			</a>
+		<!-- Header Standard Landing  -->
 
-			<div class="nav nav-pills nav1 header-menu">
-				<div class="mCustomScrollbar">
-					<ul>
-						<li class="nav-item dropdown"><a
-								href="02-RecommendPost.html" style="color: #000 !important;">여행
-									추천지</a></li>
-							<li class="nav-item dropdown dropdown-has-megamenu"><a
-								href="97-BlogPostBoard.html" style="color: #000 !important;">블로그</a>
-							</li>
-							<li class="nav-item"><a href="/tip/list"
-								style="color: #000 !important;">꿀팁 게시판</a></li>
-							<li class="nav-item"><a href="#"
-								style="color: #000 !important;">전국 날씨예보</a></li>
-							<li class="close-responsive-menu js-close-responsive-menu">
-								<svg class="olymp-close-icon">
+		<div class="header--standard header--standard-landing"
+			id="header--standard">
+			<div class="container">
+				<div class="header--standard-wrap">
+
+					<a href="12-FavouritePage.html" class="logo"></a>
+					<div class="img-wrap">
+						<img loading="lazy" src="/resources/img/logo-colored-small.webp"
+							width="34" height="34" alt="Olympus" class="logo-colored">
+					</div>
+
+					<a href="#" class="open-responsive-menu js-open-responsive-menu">
+						<svg class="olymp-menu-icon">
+							<use xlink:href="#olymp-menu-icon"></use></svg>
+					</a>
+
+					<div class="nav nav-pills nav1 header-menu">
+						<div class="mCustomScrollbar">
+							<ul>
+								<li class="nav-item dropdown"><a
+									href="02-RecommendPost.html" style="color: #000 !important;">여행
+										추천지</a></li>
+								<li class="nav-item dropdown dropdown-has-megamenu"><a
+									href="97-BlogPostBoard.html" style="color: #000 !important;">블로그</a>
+								</li>
+								<li class="nav-item"><a href="/tip/list"
+									style="color: #000 !important;">꿀팁 게시판</a></li>
+								<li class="nav-item"><a href="#"
+									style="color: #000 !important;">전국 날씨예보</a></li>
+								<li class="close-responsive-menu js-close-responsive-menu">
+									<svg class="olymp-close-icon">
 									<use xlink:href="#olymp-close-icon"></use></svg>
-							</li>
-							<li class="nav-item js-expanded-menu"><a href="#"
-								class="menu-link"><img src="/resources/img/menu-bar.png"
-									style="width: 26px; height: 26px; filter: none;"></a></li>
-							<li class="lang-set-item"><a href="#" class="change-lang"
-								id="language-toggle"> <img
-									src="/resources/img/changeLang.png"
-									style="width: 26px; height: 26px; filter: none;">
-							</a> <!-- 언어 선택 탭 (기본적으로 숨겨짐) -->
-								<ul id="language-tabs" class="language-tabs"
-									style="display: none;">
-									<li><a href="#" id="english">English</a></li>
-									<li><a href="#" id="korean">한국어</a></li>
-								</ul></li>
-							<li class="login-set-item">
-							<c:choose>
-							    <c:when test="${email == null}">
-							        <a href="/login/google/login.do" class="login-user">
-							            <img src="/resources/img/login-user.png"
-							                style="width: 31px; height: 31px; filter: none;">
-							        </a>
-							    </c:when>
-							
-							    <c:otherwise>
-							        <a href="#" class="login-user">
-							            <img src="/resources/img/login-user.png"
-							                class="login-user-menu" style="filter: none;">
-							        </a>
-							        <ul class="login-drop-menu" style="display: none;">
-							        	<c:choose>
-							        		<c:when test="${user.role == 'user'}">
-							            <li><a href="/user/read?uno=${user.uno }" id="mypage">마이페이지</a></li>
-							            	</c:when>
-							            	<c:otherwise>
-							            	<li><a href="/manager/01-ManagerPage-MyPage?uno=${user.uno }" id="mypage">마이페이지</a></li>
-							            	</c:otherwise>
-							            </c:choose>
-							            <li><a href="03-Myblog.html">내 블로그</a></li>
-							            <li><a href="/login/google/revoke/token?token=${token}">로그아웃</a></li>
-							        </ul>
-							    </c:otherwise>
-							</c:choose>	
-							</li>
-						</ul>
+								</li>
+								<li class="nav-item js-expanded-menu"><a href="#"
+									class="menu-link"><img src="/resources/img/menu-bar.png"
+										style="width: 26px; height: 26px; filter: none;"></a></li>
+								<li class="lang-set-item"><a href="#" class="change-lang"
+									id="language-toggle"> <img
+										src="/resources/img/changeLang.png"
+										style="width: 26px; height: 26px; filter: none;">
+								</a> <!-- 언어 선택 탭 (기본적으로 숨겨짐) -->
+									<ul id="language-tabs" class="language-tabs"
+										style="display: none;">
+										<li><a href="#" id="english">English</a></li>
+										<li><a href="#" id="korean">한국어</a></li>
+									</ul></li>
+								<li class="login-set-item"><c:choose>
+										<c:when test="${email == null}">
+											<a href="/login/google/login.do" class="login-user"> <img
+												src="/resources/img/login-user.png"
+												style="width: 31px; height: 31px; filter: none;">
+											</a>
+										</c:when>
+
+										<c:otherwise>
+											<a href="#" class="login-user"> <img
+												src="/resources/img/login-user.png" class="login-user-menu"
+												style="filter: none;">
+											</a>
+											<ul class="login-drop-menu" style="display: none;">
+												<c:choose>
+													<c:when test="${user.role == 'user'}">
+														<li><a href="/user/read?uno=${user.uno }" id="mypage">마이페이지</a></li>
+													</c:when>
+													<c:otherwise>
+														<li><a
+															href="/manager/01-ManagerPage-MyPage?uno=${user.uno }"
+															id="mypage">마이페이지</a></li>
+													</c:otherwise>
+												</c:choose>
+												<li><a href="03-Myblog.html">내 블로그</a></li>
+												<li><a href="/login/google/revoke/token?token=${token}">로그아웃</a></li>
+											</ul>
+										</c:otherwise>
+									</c:choose></li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
-	
-	<!-- ... end Header Standard Landing  -->
-	<div class="header-spacer--standard"></div>
 
-	<div class="stunning-header-content">
-		<h1 class="stunning-header-title">꿀팁 게시판</h1>
-		<ul class="breadcrumbs">
-				<li class="breadcrumbs-item active">
-						<span>게시글 수정</span>
-				</li>
-		</ul>
-</div>
+		<!-- ... end Header Standard Landing  -->
+		<div class="header-spacer--standard"></div>
 
-	<div class="content-bg-wrap stunning-header-bg1"></div>
-</div>
-
-<!-- End Stunning header -->
-<form role="form">
-<div class="container mt-5">
-	<div class="row">
-			<!-- Title Input -->
-			<div class="col-md-8 offset-md-2">
-			<input class="form-control" name="tipBoardNo" type="hidden" value="${dto.tipBoardNo}">
-					<div class="form-group">
-							<label for="post-title">제목</label>
-							<input class="form-control" name="title"
-							 id="post-title" type="text" placeholder="게시글 제목" value="${dto.title }">
-					</div>
-			</div>
-	</div>
-
-	<!-- Content Editor -->
-	<div class="row">
-			<div class="col-md-8 offset-md-2">
-					<div class="form-group">
-							<label for="post-content">내용</label>
-							<textarea class="form-control" class="content" name="content" id="content" rows="10" style="display:none;"></textarea>
-					</div>
-					<div id="editor" >${dto.content }</div>
-			</div>
-	</div>
-
-	<!-- File Upload -->
-	<div class="col-md-8 offset-md-2">
-		<div class="form-group">
-				<label for="post-title">닉네임</label>
-				<input class="form-control" name="nickName" type="text"	value="${dto.nickName }">
+		<div class="stunning-header-content">
+			<h1 class="stunning-header-title">꿀팁 게시판</h1>
+			<ul class="breadcrumbs">
+				<li class="breadcrumbs-item active"><span>게시글 수정</span></li>
+			</ul>
 		</div>
-</div>
-<div class="col-md-8 offset-md-2">
-	<div class="form-group">
-			<label for="post-title">작성일</label>
-			<input class="form-control" name="regDate" disabled="disabled" value="${dto.regDate }">
+
+		<div class="content-bg-wrap stunning-header-bg1"></div>
 	</div>
-</div>
-	<!-- Buttons -->
-	<div class="row">
-			<div class="col-md-8 offset-md-2 d-flex justify-content-between">
-					<button class="btn btn-primary btn-md" type="button" data-oper="modify">수정</button>
-					<button class="btn btn-primary btn-md" type="button" data-oper="remove">삭제</button>
-					<button class="btn btn-secondary btn-md" type="button" data-oper="list">취소</button>
+
+	<!-- End Stunning header -->
+	<form role="form">
+		<div class="container mt-5">
+			<div class="row">
+				<!-- Title Input -->
+				<div class="col-md-8 offset-md-2">
+					<input class="form-control" name="tipBoardNo" type="hidden"
+						value="${dto.tipBoardNo}">
+					<div class="form-group">
+						<label for="post-title">제목</label> <input class="form-control"
+							name="title" id="post-title" type="text" placeholder="게시글 제목"
+							value="${dto.title }">
+					</div>
+					<div class="form-group">
+						<label for="tag">해시태그</label> <input class="form-control"
+							name="tag" id="post-tag" type="text" placeholder="해시태그"
+							value="${dto.tag }">
+					</div>
+				</div>
 			</div>
-	</div>
-</div>
-</form>
-<!-- ... end Window Popup Main Search -->
-<script type="text/javascript">
+
+			<!-- Content Editor -->
+			<div class="row">
+				<div class="col-md-8 offset-md-2">
+					<div class="form-group">
+						<label for="post-content">내용</label>
+						<textarea class="form-control" class="content" name="content"
+							id="content" rows="10" style="display: none;"></textarea>
+					</div>
+					<div id="editor">${dto.content }</div>
+				</div>
+			</div>
+
+			<!-- File Upload -->
+			<div class="col-md-8 offset-md-2">
+				<div class="form-group">
+					<label for="nickName">닉네임</label> <input class="form-control"
+						name="nickName" type="text" value="${dto.nickName }">
+				</div>
+			</div>
+			<div class="col-md-8 offset-md-2">
+				<div class="form-group">
+					<label for="regDate">작성일</label> <input class="form-control"
+						name="regDate" disabled="disabled" value="${dto.regDate }">
+				</div>
+			</div>
+			<!-- Buttons -->
+			<div class="row">
+				<div class="col-md-8 offset-md-2 d-flex justify-content-between">
+					<button class="btn btn-primary btn-md" type="button"
+						data-oper="modify">수정</button>
+					<button class="btn btn-primary btn-md" type="button"
+						data-oper="remove">삭제</button>
+					<button class="btn btn-secondary btn-md" type="button"
+						data-oper="list">취소</button>
+				</div>
+			</div>
+		</div>
+	</form>
+	<!-- ... end Window Popup Main Search -->
+	<script type="text/javascript">
 	$(function(){
 		var formObj = $("form");
 		
@@ -266,29 +289,29 @@
 	});
 	
 	</script>
-	
-<!-- JS Scripts -->
-<script src="/resources/js/jQuery/jquery-3.5.1.min.js"></script>
 
-<script src="/resources/js/libs/jquery.mousewheel.min.js"></script>
-<script src="/resources/js/libs/perfect-scrollbar.min.js"></script>
-<script src="/resources/js/libs/imagesloaded.pkgd.min.js"></script>
-<script src="/resources/js/libs/material.min.js"></script>
-<script src="/resources/js/libs/moment.min.js"></script>
-<script src="/resources/js/libs/daterangepicker.min.js"></script>
-<script src="/resources/js/libs/isotope.pkgd.min.js"></script>
-<script src="/resources/js/libs/ajax-pagination.min.js"></script>
-<script src="/resources/js/libs/jquery.magnific-popup.min.js"></script>
-<script src="/resources/js/libs/aos.min.js"></script>
+	<!-- JS Scripts -->
+	<script src="/resources/js/jQuery/jquery-3.5.1.min.js"></script>
 
-<script src="/resources/js/main.js"></script>
-<script src="/resources/js/libs-init/libs-init.js"></script>
+	<script src="/resources/js/libs/jquery.mousewheel.min.js"></script>
+	<script src="/resources/js/libs/perfect-scrollbar.min.js"></script>
+	<script src="/resources/js/libs/imagesloaded.pkgd.min.js"></script>
+	<script src="/resources/js/libs/material.min.js"></script>
+	<script src="/resources/js/libs/moment.min.js"></script>
+	<script src="/resources/js/libs/daterangepicker.min.js"></script>
+	<script src="/resources/js/libs/isotope.pkgd.min.js"></script>
+	<script src="/resources/js/libs/ajax-pagination.min.js"></script>
+	<script src="/resources/js/libs/jquery.magnific-popup.min.js"></script>
+	<script src="/resources/js/libs/aos.min.js"></script>
 
-<script src="/resources/Bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/resources/js/main.js"></script>
+	<script src="/resources/js/libs-init/libs-init.js"></script>
 
-<!-- SVG icons loader -->
-<script src="/resources/js/svg-loader.js"></script>
-<!-- /SVG icons loader -->
+	<script src="/resources/Bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+	<!-- SVG icons loader -->
+	<script src="/resources/js/svg-loader.js"></script>
+	<!-- /SVG icons loader -->
 
 
 	<!-- 하단 푸터 -->
@@ -298,7 +321,7 @@
 			<small>&copy; 2025. All rights reserved.</small>
 		</div>
 	</footer>
-<script>
+	<script>
 	document.getElementById('language-toggle').addEventListener('click', function(event) {
 			event.preventDefault();
 			const languageTabs = document.getElementById('language-tabs');
@@ -401,7 +424,7 @@ loginButton.addEventListener('click', function(event) {
 	}
 	});
 	</script>
-<script>
+	<script>
 	window.addEventListener('scroll', function () {
 			const header = document.getElementById('header--standard');
 			if (window.scrollY > 50) { // 50px 이상 스크롤 시

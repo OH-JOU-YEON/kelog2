@@ -9,111 +9,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>꿀팁 게시글</title>
-	<!-- Required meta tags always come first -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>꿀팁 게시글</title>
+<!-- Required meta tags always come first -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
 
-	<!-- Theme Font -->
-	<link rel="preload" type="text/css" href="/resources/css/theme-font.min.css" as="style">
+<!-- Theme Font -->
+<link rel="preload" type="text/css"
+	href="/resources/css/theme-font.min.css" as="style">
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" type="text/css" href="/resources/Bootstrap/dist/css/bootstrap.css">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" type="text/css"
+	href="/resources/Bootstrap/dist/css/bootstrap.css">
 
-	<!-- Main Styles CSS -->
-	<link rel="stylesheet" type="text/css" href="/resources/css/main.css">
-	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-	<!-- Main RTL CSS -->
-	<!--<link rel="stylesheet" type="text/css" href="css/rtl.min.css">-->
+<!-- Main Styles CSS -->
+<link rel="stylesheet" type="text/css" href="/resources/css/main.css">
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<!-- Main RTL CSS -->
+<!--<link rel="stylesheet" type="text/css" href="css/rtl.min.css">-->
 
 </head>
 <body class="body-bg-white">
 
-<div id="reportModal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" id="closeModal">×</span>
-        <h2 id="modalTitle">게시글 신고</h2>
-        <form id="reportForm" method="post" action="/tip/report">
-            <input id="modalTipBoardNo" class="form-control" type="hidden" name="tipBoardNo" value="${dto.tipBoardNo}">
-            <input id="modalReplyNo" class="form-control" type="hidden" name="replyNo" value="">
-            <div class="form-group">
-                <label>게시판 제목</label>
-                <input class="form-control" type="text" readonly="readonly" id="modalTitleInput" name="title" value="${dto.title}">
-            </div>
-            <div class="form-group">
-                <label>신고자</label>
-                <input class="form-control" type="text" readonly="readonly" name="nickName" value="${nickName}">
-            </div>
-            <div class="form-group">
-                <label>신고 사유</label>
-                <select name="reportReason" id="reportReason">
-                    <option selected>::선택하세요::</option>
-                    <option value="부적절한 언어사용">부적절한 언어사용</option>
-                    <option value="선정적 콘텐츠">선정적 콘텐츠</option>
-                    <option value="적절하지 못한 정보">적절하지 못한 정보</option>
-                    <option value="개인정보노출">개인정보노출</option>
-                    <option value="그외 부적절함">그외 부적절함</option>
-                </select>
-            </div>
-            <div class="modal-actions">
-                <button type="submit" class="btn btn-danger">신고</button>
-                <button type="button" class="btn btn-secondary" id="cancelBtn">취소</button>
-            </div>
-        </form>
-    </div>
-</div>
+	<div id="reportModal" class="modal">
+		<div class="modal-content">
+			<span class="close-btn" id="closeModal">×</span>
+			<h2 id="modalTitle">게시글 신고</h2>
+			<form id="reportForm" method="post" action="/tip/report">
+				<input id="modalTipBoardNo" class="form-control" type="hidden"
+					name="tipBoardNo" value="${dto.tipBoardNo}"> <input
+					id="modalReplyNo" class="form-control" type="hidden" name="replyNo"
+					value="">
+				<div class="form-group">
+					<label>게시판 제목</label> <input class="form-control" type="text"
+						readonly="readonly" id="modalTitleInput" name="title"
+						value="${dto.title}">
+				</div>
+				<div class="form-group">
+					<label>신고자</label> <input class="form-control" type="text"
+						readonly="readonly" name="nickName" value="${nickName}">
+				</div>
+				<div class="form-group">
+					<label>신고 사유</label> <select name="reportReason" id="reportReason">
+						<option selected>::선택하세요::</option>
+						<option value="부적절한 언어사용">부적절한 언어사용</option>
+						<option value="선정적 콘텐츠">선정적 콘텐츠</option>
+						<option value="적절하지 못한 정보">적절하지 못한 정보</option>
+						<option value="개인정보노출">개인정보노출</option>
+						<option value="그외 부적절함">그외 부적절함</option>
+					</select>
+				</div>
+				<div class="modal-actions">
+					<button type="submit" class="btn btn-danger">신고</button>
+					<button type="button" class="btn btn-secondary" id="cancelBtn">취소</button>
+				</div>
+			</form>
+		</div>
+	</div>
 
-<!-- Preloader -->
+	<!-- Preloader -->
 
-<div id="hellopreloader">
-	<div class="preloader">
-		<svg width="45" height="45" stroke="#fff">
-			<g fill="none" fill-rule="evenodd" stroke-width="2" transform="translate(1 1)">
+	<div id="hellopreloader">
+		<div class="preloader">
+			<svg width="45" height="45" stroke="#fff">
+			<g fill="none" fill-rule="evenodd" stroke-width="2"
+					transform="translate(1 1)">
 				<circle cx="22" cy="22" r="6" stroke="none">
-					<animate attributeName="r" begin="1.5s" calcMode="linear" dur="3s" repeatCount="indefinite" values="6;22"/>
-					<animate attributeName="stroke-opacity" begin="1.5s" calcMode="linear" dur="3s" repeatCount="indefinite" values="1;0"/>
-					<animate attributeName="stroke-width" begin="1.5s" calcMode="linear" dur="3s" repeatCount="indefinite" values="2;0"/>
+					<animate attributeName="r" begin="1.5s" calcMode="linear" dur="3s"
+					repeatCount="indefinite" values="6;22" />
+					<animate attributeName="stroke-opacity" begin="1.5s"
+					calcMode="linear" dur="3s" repeatCount="indefinite" values="1;0" />
+					<animate attributeName="stroke-width" begin="1.5s"
+					calcMode="linear" dur="3s" repeatCount="indefinite" values="2;0" />
 				</circle>
 				<circle cx="22" cy="22" r="6" stroke="none">
-					<animate attributeName="r" begin="3s" calcMode="linear" dur="3s" repeatCount="indefinite" values="6;22"/>
-					<animate attributeName="stroke-opacity" begin="3s" calcMode="linear" dur="3s" repeatCount="indefinite" values="1;0"/>
-					<animate attributeName="stroke-width" begin="3s" calcMode="linear" dur="3s" repeatCount="indefinite" values="2;0"/>
+					<animate attributeName="r" begin="3s" calcMode="linear" dur="3s"
+					repeatCount="indefinite" values="6;22" />
+					<animate attributeName="stroke-opacity" begin="3s"
+					calcMode="linear" dur="3s" repeatCount="indefinite" values="1;0" />
+					<animate attributeName="stroke-width" begin="3s" calcMode="linear"
+					dur="3s" repeatCount="indefinite" values="2;0" />
 				</circle>
 				<circle cx="22" cy="22" r="8">
-					<animate attributeName="r" begin="0s" calcMode="linear" dur="1.5s" repeatCount="indefinite" values="6;1;2;3;4;5;6"/>
+					<animate attributeName="r" begin="0s" calcMode="linear" dur="1.5s"
+					repeatCount="indefinite" values="6;1;2;3;4;5;6" />
 				</circle>
 			</g>
 		</svg>
 
-		<div class="text">Loading ...</div>
+			<div class="text">Loading ...</div>
+		</div>
 	</div>
-</div>
-<!-- ... end Preloader -->
+	<!-- ... end Preloader -->
 
-<!-- Header Standard Landing  -->
+	<!-- Header Standard Landing  -->
 
-<div class="header--standard header--standard-landing" id="header--standard">
-	<div class="container">
-		<div class="header--standard-wrap">
+	<div class="header--standard header--standard-landing"
+		id="header--standard">
+		<div class="container">
+			<div class="header--standard-wrap">
 
-			<a href="12-FavouritePage.html" class="logo"></a>
+				<a href="12-FavouritePage.html" class="logo"></a>
 				<div class="img-wrap">
-					<img loading="lazy" src="/resources/img/logo-colored-small.webp" width="34" height="34" alt="Olympus" class="logo-colored">
+					<img loading="lazy" src="/resources/img/logo-colored-small.webp"
+						width="34" height="34" alt="Olympus" class="logo-colored">
 				</div>
 				<div class="title-block">
 					<h6 class="logo-title">로고 들어갈 자리</h6>
 					<div class="sub-title">SOCIAL NETWORK</div>
 				</div>
-				
-			<a href="#" class="open-responsive-menu js-open-responsive-menu">
-				<svg class="olymp-menu-icon"><use xlink:href="#olymp-menu-icon"></use></svg>
-			</a>
 
-			<div class="nav nav-pills nav1 header-menu">
-				<div class="mCustomScrollbar">
-					<ul>
-						<li class="nav-item dropdown"><a
+				<a href="#" class="open-responsive-menu js-open-responsive-menu">
+					<svg class="olymp-menu-icon">
+						<use xlink:href="#olymp-menu-icon"></use></svg>
+				</a>
+
+				<div class="nav nav-pills nav1 header-menu">
+					<div class="mCustomScrollbar">
+						<ul>
+							<li class="nav-item dropdown"><a
 								href="02-RecommendPost.html" style="color: #000 !important;">여행
 									추천지</a></li>
 							<li class="nav-item dropdown dropdown-has-megamenu"><a
@@ -140,130 +155,144 @@
 									<li><a href="#" id="english">English</a></li>
 									<li><a href="#" id="korean">한국어</a></li>
 								</ul></li>
-							<li class="login-set-item">
-							<c:choose>
-							    <c:when test="${email == null}">
-							        <a href="/login/google/login.do" class="login-user">
-							            <img src="/resources/img/login-user.png"
-							                style="width: 31px; height: 31px; filter: none;">
-							        </a>
-							    </c:when>
-							
-							    <c:otherwise>
-							        <a href="#" class="login-user">
-							            <img src="/resources/img/login-user.png"
-							                class="login-user-menu" style="filter: none;">
-							        </a>
-							        <ul class="login-drop-menu" style="display: none;">
-							        	<c:choose>
-							        		<c:when test="${user.role == 'user'}">
-							            <li><a href="/user/read?uno=${user.uno }" >마이페이지</a></li>
-							            	</c:when>
-							            	<c:otherwise>
-							            	<li><a href="/manager/01-ManagerPage-MyPage?uno=${user.uno }" >마이페이지</a></li>
-							            	</c:otherwise>
-							            </c:choose>
-							            <li><a href="03-Myblog.html">내 블로그</a></li>
-							            <li><a href="/login/google/revoke/token?token=${token}">로그아웃</a></li>
-							        </ul>
-							    </c:otherwise>
-							</c:choose>	
-							</li>
+							<li class="login-set-item"><c:choose>
+									<c:when test="${email == null}">
+										<a href="/login/google/login.do" class="login-user"> <img
+											src="/resources/img/login-user.png"
+											style="width: 31px; height: 31px; filter: none;">
+										</a>
+									</c:when>
+
+									<c:otherwise>
+										<a href="#" class="login-user"> <img
+											src="/resources/img/login-user.png" class="login-user-menu"
+											style="filter: none;">
+										</a>
+										<ul class="login-drop-menu" style="display: none;">
+											<c:choose>
+												<c:when test="${user.role == 'user'}">
+													<li><a href="/user/read?uno=${user.uno }">마이페이지</a></li>
+												</c:when>
+												<c:otherwise>
+													<li><a
+														href="/manager/01-ManagerPage-MyPage?uno=${user.uno }">마이페이지</a></li>
+												</c:otherwise>
+											</c:choose>
+											<li><a href="03-Myblog.html">내 블로그</a></li>
+											<li><a href="/login/google/revoke/token?token=${token}">로그아웃</a></li>
+										</ul>
+									</c:otherwise>
+								</c:choose></li>
 						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
-<!-- ... end Header Standard Landing  -->
-<div class="main-header-post">
-	<img loading="lazy" src="/resources/img/wall03_1920.jpg" alt="author" width="1229" height="480">
-</div>
+	<!-- ... end Header Standard Landing  -->
+	<div class="main-header-post">
+		<img loading="lazy" src="/resources/img/wall03_1920.jpg" alt="author"
+			width="1229" height="480">
+	</div>
 
 
-<div class="container negative-margin-top150 mb60">
-	<div class="row">
-		<div class="col col-xl-8 m-auto col-lg-12 col-md-12 col-sm-12 col-12">
+	<div class="container negative-margin-top150 mb60">
+		<div class="row">
+			<div class="col col-xl-8 m-auto col-lg-12 col-md-12 col-sm-12 col-12">
 
-			<div class="ui-block">
-				<!-- Single Post -->
-				<article class="hentry blog-post single-post single-post-v1">	
-					<input class="form-control" id="tipBoardNo" type="hidden" name="tipBoardNo"
-						value="${dto.tipBoardNo }">
-					<a href="/tip/list" class="post-category bg-primary">꿀팁 게시판</a>
-					<c:if test="${dto.email == email }">
-					<a class="btn btn-primary btn-md" href="/tip/modify?tipBoardNo=${dto.tipBoardNo }" id="editPostBtn" style="margin-left: 950px;">수정하기</a>
-					</c:if>
-					<div class="author-date">
-						<div class="author-thumb">
-							<img alt="author" src="/resources/img/friend-harmonic7.webp" class="avatar">
-						</div>
-						<p class="h6 post__author-name fn" >${dto.nickName}</p>
-						<div class="post__date">
-							<div class="form-group">
-								<label>RegDate</label> <input class="form-control" name="regDate"
-									readonly="readonly" value="${formattedRegDate }">
+				<div class="ui-block">
+					<!-- Single Post -->
+					<article class="hentry blog-post single-post single-post-v1">
+						<input class="form-control" id="tipBoardNo" type="hidden"
+							name="tipBoardNo" value="${dto.tipBoardNo }"> <a
+							href="/tip/list" class="post-category bg-primary">꿀팁 게시판</a>
+						<c:if test="${dto.email == email }">
+							<a class="btn btn-primary btn-md"
+								href="/tip/modify?tipBoardNo=${dto.tipBoardNo }"
+								id="editPostBtn" style="margin-left: 950px;">수정하기</a>
+						</c:if>
+						<div class="author-date">
+							<div class="author-thumb">
+								<img alt="author" src="/resources/img/friend-harmonic7.webp"
+									class="avatar">
+							</div>
+							<p class="h6 post__author-name fn">${dto.nickName}</p>
+							<div class="post__date">
+								<div class="form-group">
+									<label>RegDate</label> <input class="form-control"
+										name="regDate" readonly="readonly"
+										value="${formattedRegDate }">
+								</div>
 							</div>
 						</div>
-					</div>
-				
-					<div class="post-content-wrap">
-						<div class="form-group">
-							<label>Title</label> <input class="form-control" name="title"
-								readonly="readonly" value="${dto.title }">
-						</div>
+
+						<div class="post-content-wrap">
+							<div class="form-group">
+								<label>Title</label> <input class="form-control" name="title"
+									readonly="readonly" value="${dto.title }">
+							</div>
 
 							<div class="form-group">
 								<label>Content</label>
-								<div id="editor" >${dto.content}</div>
+								<div id="editor">${dto.content}</div>
 							</div>
 							<div id="viewer"></div>
-					</div>
-				
-				<p id="likeCount">좋아요: ${dto.likeCnt}</p>
-        <!-- 좋아요 버튼을 이미지로 변경 -->
-        <button id="likeButton${dto.tipBoardNo}" onclick="toggleLike(${dto.tipBoardNo})" style="border: none; background: none; cursor: pointer;">
-            <img src="/resources/img/${isliked ? 'like-filled.png' : 'like-ep.png'}" alt="좋아요" style="width: 24px; height: 24px;">
-        </button>
-					<div class="Report reportIcon">
-                        <img src="/resources/img/Report-icon.png"
-                            style="width: 22px; height: 22px; margin-bottom: 20px; margin-right: 20px;">
-                    </div>
-				</article>
-				<!-- ... end Single Post -->
+						</div>
+						<!-- 태그 (중앙) -->
+						<div class="my-3">
+							<h6 class="fw-bold mb-0 text-left">${dto.tag }</h6>
+						</div>
+						<p id="likeCount">좋아요: ${dto.likeCnt}</p>
+						<!-- 좋아요 버튼을 이미지로 변경 -->
+						<button id="likeButton${dto.tipBoardNo}"
+							onclick="toggleLike(${dto.tipBoardNo})"
+							style="border: none; background: none; cursor: pointer;">
+							<img
+								src="/resources/img/${isliked ? 'like-filled.png' : 'like-ep.png'}"
+								alt="좋아요" style="width: 24px; height: 24px;">
+						</button>
+						<div class="Report reportIcon">
+							<img src="/resources/img/Report-icon.png"
+								style="width: 22px; height: 22px; margin-bottom: 20px; margin-right: 20px;">
+						</div>
+					</article>
+					<!-- ... end Single Post -->
 
-			</div>
-			
-				<div class="crumina-module crumina-heading with-title-decoration">
-					<h5 class="heading-title" style="position: relative;">댓글
-					</h5>
-					
 				</div>
-			
+
+				<div class="crumina-module crumina-heading with-title-decoration">
+					<h5 class="heading-title" style="position: relative;">댓글</h5>
+
+				</div>
+
 				<div class="row">
 					<div class="col col-12 col-xl-4 col-lg-4 col-md-4 col-sm-12">
 						<div class="form-group label-floating">
-							<label class="control-label">사용자 ID</label>
-							<input class="form-control" value="${nickName}" type="text" readonly="readonly">
+							<label class="control-label">사용자 ID</label> <input
+								class="form-control" value="${nickName}" type="text"
+								readonly="readonly">
 						</div>
 					</div>
 					<div class="col col-10 col-xl-10 col-lg-10 col-md-10 col-sm-10">
 						<div class="form-group d-flex">
-							<input type="hidden" value="${email }" name="email">
-							<input type="text" id="btn-input" class="form-control" placeholder="댓글 입력" style="flex: 1; height: 60px;"></input>
-							<span class="input-group-btn"><button id="btn-chat" class="btn btn-primary btn-lg" style="margin-left: 10px; height: 58px; background-color: #9edbff; border-color: #9eb3ff;">등록</button></span>
+							<input type="hidden" value="${email }" name="email"> <input
+								type="text" id="btn-input" class="form-control"
+								placeholder="댓글 입력" style="flex: 1; height: 60px;"></input> <span
+								class="input-group-btn"><button id="btn-chat"
+									class="btn btn-primary btn-lg"
+									style="margin-left: 10px; height: 58px; background-color: #9edbff; border-color: #9eb3ff;">등록</button></span>
 						</div>
+					</div>
 				</div>
+				<table>
+					<tbody class="chat">
+					</tbody>
+				</table>
 			</div>
-		<table>
-			<tbody class="chat">
-			</tbody>
-		</table>
 		</div>
 	</div>
-</div>
-<script>
+	<script>
 function toggleLike(tipBoardNo) {
     var email = '${email}'; // 세션에서 사용자 ID 가져오기
 
@@ -297,7 +326,7 @@ function toggleLike(tipBoardNo) {
     });
 }
 </script>
-<script type="text/javascript">
+	<script type="text/javascript">
 // 모달 창과 관련된 요소 선택
 const reportModal = document.getElementById('reportModal');
 const closeModal = document.getElementById('closeModal');
@@ -447,7 +476,7 @@ $(document).ready(function() {
     });
 });
 </script>
-<script>
+	<script>
 	$(function() {ToView();
 	});
 
@@ -472,28 +501,28 @@ $(document).ready(function() {
 		viewer.setMarkdown(editor.getHTML());
 	};
 </script>
-<!-- JS Scripts -->
-<script src="/resources/js/jQuery/jquery-3.5.1.min.js"></script>
-<script src="/resources/js/libs/jquery.mousewheel.min.js"></script>
-<script src="/resources/js/libs/perfect-scrollbar.min.js"></script>
-<script src="/resources/js/libs/imagesloaded.pkgd.min.js"></script>
-<script src="/resources/js/libs/material.min.js"></script>
-<script src="/resources/js/libs/moment.min.js"></script>
-<script src="/resources/js/libs/daterangepicker.min.js"></script>
-<script src="/resources/js/libs/isotope.pkgd.min.js"></script>
-<script src="/resources/js/libs/ajax-pagination.min.js"></script>
-<script src="/resources/js/libs/jquery.magnific-popup.min.js"></script>
-<script src="/resources/js/libs/aos.min.js"></script>
-<script src="/resources/js/main.js"></script>
-<script src="/resources/js/libs-init/libs-init.js"></script>
+	<!-- JS Scripts -->
+	<script src="/resources/js/jQuery/jquery-3.5.1.min.js"></script>
+	<script src="/resources/js/libs/jquery.mousewheel.min.js"></script>
+	<script src="/resources/js/libs/perfect-scrollbar.min.js"></script>
+	<script src="/resources/js/libs/imagesloaded.pkgd.min.js"></script>
+	<script src="/resources/js/libs/material.min.js"></script>
+	<script src="/resources/js/libs/moment.min.js"></script>
+	<script src="/resources/js/libs/daterangepicker.min.js"></script>
+	<script src="/resources/js/libs/isotope.pkgd.min.js"></script>
+	<script src="/resources/js/libs/ajax-pagination.min.js"></script>
+	<script src="/resources/js/libs/jquery.magnific-popup.min.js"></script>
+	<script src="/resources/js/libs/aos.min.js"></script>
+	<script src="/resources/js/main.js"></script>
+	<script src="/resources/js/libs-init/libs-init.js"></script>
 
-<script src="/resources/Bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/resources/Bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- SVG icons loader -->
-<script src="/resources/js/svg-loader.js"></script>
-<!-- /SVG icons loader -->
-<!-- 다국어JSON파일 불러오기 -->
-<script>
+	<!-- SVG icons loader -->
+	<script src="/resources/js/svg-loader.js"></script>
+	<!-- /SVG icons loader -->
+	<!-- 다국어JSON파일 불러오기 -->
+	<script>
 document.getElementById('language-toggle').addEventListener('click', function(event) {
     event.preventDefault();
     const languageTabs = document.getElementById('language-tabs');
@@ -596,8 +625,8 @@ document.addEventListener('click', function(event) {
     }
 });
 </script>
-<!-- 신고 모달창부분 -->
-<script>
+	<!-- 신고 모달창부분 -->
+	<script>
 document.getElementById('mypage').addEventListener('click', function(event) {
     event.preventDefault(); // 기본 링크 동작 방지
 
