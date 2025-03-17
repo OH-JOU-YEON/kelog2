@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.spring.domain.BlogDTO;
 import com.spring.domain.Criteria;
+import com.spring.domain.NavAddressDTO;
 import com.spring.domain.DTOS.BlogProfileDTO;
 import com.spring.domain.DTOS.logDTO;
 import com.spring.service.BlogServiceImpl;
@@ -40,7 +41,7 @@ public class BlogController {
 		
 		model.addAttribute("profile", blogProfileDTO); 
 		
-		List<logDTO> blogs  = blogService.getblogPosts(blogName,0,10); 
+		List<logDTO> blogs  = blogService.getblogPosts(blogName); 
 		
 		model.addAttribute("blogs",blogs); 
 		
@@ -55,6 +56,10 @@ public class BlogController {
 	
 	@GetMapping("/kelogs/{blogName}/myMap")
 	public String myMapMapping(Model model, HttpServletRequest request, @PathVariable String blogName) {
+		
+		List<NavAddressDTO> navs = blogService.getblogNavs(blogName); 
+		
+		model.addAttribute("navs", navs); 
 		
 		
 		return "MyblogMap"; 

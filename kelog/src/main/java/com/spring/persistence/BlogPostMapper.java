@@ -32,7 +32,7 @@ public interface BlogPostMapper {
 	public BlogPostDTO findByTitle(String title); 
 	
 	@Select("SELECT * FROM blogPost WHERE blogNo = #{blogNo} ")
-	public List<BlogPostDTO> findAllByBlogNo(int blogNo, @Param("offset") int offset, @Param("limit") int limit);
+	public List<BlogPostDTO> findAllByBlogNo(int blogNo);
 
 	// 좋아요
 	

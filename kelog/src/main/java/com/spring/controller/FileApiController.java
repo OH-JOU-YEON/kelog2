@@ -1,26 +1,22 @@
 package com.spring.controller;
-
 import java.io.File;
 import java.io.IOException;
-import java.util.UUID;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import lombok.extern.log4j.Log4j;
-
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.UUID;
+
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import lombok.extern.log4j.Log4j;
 
 
-@Controller
+@Controller 
 @Log4j
 public class FileApiController {
 	// 파일을 업로드할 디렉터리 경로
@@ -32,8 +28,9 @@ public class FileApiController {
      * @return 업로드된 파일명
      *
      */
-    @ResponseBody
-    @PostMapping("tui-editor/image-upload")
+    
+    @ResponseBody 
+    @PostMapping("/editor/image-upload")
     public String uploadEditorImage(@RequestParam final MultipartFile image) {
         if (image.isEmpty()) {
             return "";
@@ -60,6 +57,11 @@ public class FileApiController {
             // 파일 저장 (write to disk)
             File uploadFile = new File(fileFullPath);
             image.transferTo(uploadFile);
+            
+            uploadFile.setWritable(true); 
+            uploadFile.setReadable(true); 
+            uploadFile.setExecutable(true); 
+            
             return saveFilename;
 
         } catch (IOException e) {
@@ -73,14 +75,16 @@ public class FileApiController {
      * @param filename 디스크에 업로드된 파일명
      * @return image byte array
      */
-    @GetMapping(value = "image-print", produces = { MediaType.IMAGE_GIF_VALUE, MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE })
+    @ResponseBody 
+    @GetMapping(value = "/editor/image-print", produces = { MediaType.IMAGE_GIF_VALUE, MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE })
     public byte[] printEditorImage(@RequestParam final String filename) {
         // 업로드된 파일의 전체 경로
         String fileFullPath = Paths.get(uploadDir, filename).toString();
-        log.info(fileFullPath);
+        System.out.println(fileFullPath); 
 
         // 파일이 없는 경우 예외 throw
         File uploadedFile = new File(fileFullPath);
+       System.out.println(uploadedFile); 
         if (!uploadedFile.exists()) {
             throw new RuntimeException();
         }

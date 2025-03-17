@@ -1,6 +1,8 @@
 package com.spring.service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,14 +10,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.domain.BlogDTO;
+import com.spring.domain.BlogPostAddressMappingDTO;
 import com.spring.domain.BlogPostDTO;
 import com.spring.domain.BlogReportDTO;
+import com.spring.domain.NavAddressDTO;
 import com.spring.domain.UserDTO;
 import com.spring.domain.DTOS.BlogNoAndNickNameVO;
 import com.spring.domain.DTOS.BlogProfileDTO;
 import com.spring.domain.DTOS.logDTO;
 import com.spring.persistence.BlogMapper;
+import com.spring.persistence.BlogPostAddressMappingMapper;
 import com.spring.persistence.BlogPostMapper;
+import com.spring.persistence.NavAddressMapper;
 import com.spring.persistence.NickNameMapper;
 import com.spring.persistence.UserMapper;
 
@@ -37,6 +43,14 @@ public class BlogServiceImpl implements BlogService {
 	
 	@Autowired
 	private final NickNameMapper nickNameMapper; 
+	
+	@Autowired
+	private final BlogPostAddressMappingMapper blogPostAddressMappingMapper; 
+	
+	@Autowired
+	private final NavAddressMapper navAddressMapper; 
+	
+	
 
 	@Override
 	public void created(BlogPostDTO dto) {
@@ -113,6 +127,36 @@ public class BlogServiceImpl implements BlogService {
 		
 	}
 	
+	public List<NavAddressDTO> getblogNavs(String blogName) {
+		
+		BlogDTO blogDTO = blogMapper.findBlogByBlogName(blogName); 
+		
+		int blogNo = blogDTO.getBlogNo(); 
+		
+		List<BlogPostDTO> postList = mapper.findAllByBlogNo(blogNo); 
+		
+		Set<NavAddressDTO> navs = new HashSet<>(); 
+		
+		
+		for(BlogPostDTO post : postList) {
+			
+			int postId = post.getBlogPostNo(); 
+			
+			List<BlogPostAddressMappingDTO> address = blogPostAddressMappingMapper.getAddressList(postId);
+			
+			for(BlogPostAddressMappingDTO add : address) {
+				
+				navs.add(navAddressMapper.selectByAddressNo(add.getAddressId())); 
+			}
+			
+			
+		}
+		
+		return navs.stream().collect(Collectors.toList());
+		
+		
+	}
+	
 	
 	public BlogProfileDTO getBlogProfileByBlogName(String blogName,String email) {
 		
@@ -151,14 +195,12 @@ public class BlogServiceImpl implements BlogService {
 	}
 	
 	
-	public List<logDTO> getblogPosts(String blogName,@RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-		int offset = page * size;
-        int limit = size;
+	public List<logDTO> getblogPosts(String blogName) {
+		
 		BlogDTO blogDTO = blogMapper.findBlogByBlogName(blogName); 
 		
 		
-		return mapper.findAllByBlogNo(blogDTO.getBlogNo(),offset,limit).stream().map(s -> new logDTO(s)).collect(Collectors.toList()); 
+		return mapper.findAllByBlogNo(blogDTO.getBlogNo()).stream().map(s -> new logDTO(s)).collect(Collectors.toList()); 
 		
 	}
 
