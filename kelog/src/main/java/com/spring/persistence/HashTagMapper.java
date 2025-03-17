@@ -18,7 +18,7 @@ public interface HashTagMapper {
 	@Select("SELECT FROM hashTag WHERE hashName = #{hashName}")
 	public HashTagDTO findHashTagByHashName(String hashName); 
 	
-	public List<HashMap<String,Integer>> findHashTagNoByHashNameLike(String hashName); 
+	public List<HashTagDTO> findHashTagNoByHashNameLike(String hashName); 
 	
 
 	
