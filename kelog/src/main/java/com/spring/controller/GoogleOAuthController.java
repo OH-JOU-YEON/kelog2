@@ -121,7 +121,7 @@ public class GoogleOAuthController {
         result.put("result", "success");
         result.put("resultJson", resultJson);
         session.invalidate();
-        return "/00-MainPage";
+        return "/main";
  
     }
  

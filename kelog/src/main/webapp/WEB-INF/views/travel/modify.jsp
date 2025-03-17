@@ -198,7 +198,12 @@ out.println(sbHtml);
 										rows="5" style="display: none;"></textarea>
 								</div>
 								<div id="editor">${dto.content }</div>
-
+								
+								<div class="mb-3">
+									<label for="thumbnail" class="form-label fw-bold">썸네일</label> <input
+										type="file" class="form-control" id="thumbnail"
+										name="thumbnail">
+								</div>
 								<!-- 태그 
 						<div class="mb-3">
 							<label for="topicTags" class="form-label fw-bold">태그</label>

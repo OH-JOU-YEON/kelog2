@@ -1,7 +1,13 @@
 package com.spring.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.List;
+import java.util.UUID;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -12,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.domain.Criteria2;
@@ -55,8 +62,47 @@ public class TravelPostController {
 	}
 
 	@PostMapping("/created")
-	public String created(TravelPostDTO dto) {
+	public String created(@RequestParam("file") MultipartFile file, TravelPostDTO dto) {
+		
+		if (!file.isEmpty()) {
+			String uploadFolder = "C:\\Users\\keduit\\Documents\\kelog\\kelog\\src\\main\\webapp\\resources\\img"; // 업로드 경로 설정
+			String originalFileName = file.getOriginalFilename(); // 실제 첨부된 파일이름
+			String uploadFileName = UUID.randomUUID().toString() + "_" + originalFileName;
+			
+			try {
+				File saveFile = new File(uploadFolder, uploadFileName);
+				file.transferTo(saveFile);
+				dto.setThumbnail(uploadFileName);
+				
+			} catch (Exception e) {
+				log.error(e.getMessage());
+			}
+		} else {
+            // 구글 프로필 사진 처리 (URL에서 이미지를 다운로드하여 변환)
+            String imageUrl = dto.getThumbnail(); // 구글 프로필 사진 URL
+            String uploadFolder = "C:\\Users\\keduit\\Documents\\kelog\\kelog\\src\\main\\webapp\\resources\\img"; // 업로드 경로
+            String uploadFileName = UUID.randomUUID().toString() + ".jpg"; // JPG로 저장할 파일 이름 설정
 
+            try {
+                // 이미지 다운로드 및 변환
+                URL url = new URL(imageUrl);
+                BufferedImage image = ImageIO.read(url);
+
+                if (image != null) {
+                    // 이미지를 JPG 형식으로 저장
+                    File outputFile = new File(uploadFolder, uploadFileName);
+                    ImageIO.write(image, "JPG", outputFile);
+                    dto.setThumbnail(uploadFileName); // 프로필 이미지 이름 설정
+                    log.info("Google profile image saved as JPG.");
+                } else {
+                    log.error("Failed to download image from URL.");
+                }
+            } catch (IOException e) {
+                log.error("Error while downloading or converting the image: " + e.getMessage());
+            }
+        }
+		
+		
 		service.created(dto);
 
 		return "redirect:/travel/list";
@@ -83,7 +129,48 @@ public class TravelPostController {
 	}
 
 	@PostMapping("/modify")
-	public String modify(@ModelAttribute TravelPostDTO dto, RedirectAttributes rttr) {
+	public String modify(@ModelAttribute TravelPostDTO dto, RedirectAttributes rttr, @RequestParam("file") MultipartFile file) {
+		
+		if (!file.isEmpty()) {
+			String uploadFolder = "C:\\Users\\keduit\\Documents\\kelog\\kelog\\src\\main\\webapp\\resources\\img"; // 업로드 경로 설정
+			String originalFileName = file.getOriginalFilename(); // 실제 첨부된 파일이름
+			String uploadFileName = UUID.randomUUID().toString() + "_" + originalFileName;
+			
+			try {
+				File saveFile = new File(uploadFolder, uploadFileName);
+				file.transferTo(saveFile);
+				dto.setThumbnail(uploadFileName);
+				
+			} catch (Exception e) {
+				log.error(e.getMessage());
+			}
+		} else {
+            // 구글 프로필 사진 처리 (URL에서 이미지를 다운로드하여 변환)
+            String imageUrl = dto.getThumbnail(); // 구글 프로필 사진 URL
+            String uploadFolder = "C:\\Users\\keduit\\Documents\\kelog2\\kelog\\src\\main\\webapp\\resources\\img"; // 업로드 경로
+            String uploadFileName = UUID.randomUUID().toString() + ".jpg"; // JPG로 저장할 파일 이름 설정
+
+            try {
+                // 이미지 다운로드 및 변환
+                URL url = new URL(imageUrl);
+                BufferedImage image = ImageIO.read(url);
+
+                if (image != null) {
+                    // 이미지를 JPG 형식으로 저장
+                    File outputFile = new File(uploadFolder, uploadFileName);
+                    ImageIO.write(image, "JPG", outputFile);
+                    dto.setThumbnail(uploadFileName); // 프로필 이미지 이름 설정
+                    log.info("Google profile image saved as JPG.");
+                } else {
+                    log.error("Failed to download image from URL.");
+                }
+            } catch (IOException e) {
+                log.error("Error while downloading or converting the image: " + e.getMessage());
+            }
+        }
+		
+		
+		
 		int updateRow = service.modify(dto);
 		log.info("modify updateRow: " + updateRow);
 		rttr.addFlashAttribute("result", "mod");

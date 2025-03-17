@@ -83,14 +83,12 @@
 
 				<a href="12-FavouritePage.html" class="logo"></a>
 				<div class="img-wrap">
-					<a href="#">
-                        <img loading="lazy"
-                             src="/resources/img/logokelog.png"
-                             width="140" height="34"
-                             alt="Logo" class="logo-colored">
-                    </a>
+					<a href="#"> <img loading="lazy"
+						src="/resources/img/logokelog.png" width="140" height="34"
+						alt="Logo" class="logo-colored">
+					</a>
 				</div>
-				
+
 
 				<a href="#" class="open-responsive-menu js-open-responsive-menu">
 					<svg class="olymp-menu-icon">
@@ -160,18 +158,19 @@
 						<!-- 내부 폼 -->
 						<div class="ui-block p-4">
 							<h3 class="text-center mb-4">추천 여행지 글쓰기</h3>
-							
-							
-						
-							<form id="fom" action="/travel/created" method="post">
+
+
+
+							<form id="fom" action="/travel/created" method="post"
+								enctype="multipart/form-data">
 								<input type="hidden" name="email" value="${user.email}">
-								
+
 								<div class="mb-3">
 									<label>닉네임</label> <input readonly="readonly"
 										class="form-control" name="nickName" value="${nickName }"
-										style=" background-color: #ffffff; border: none;">
+										style="background-color: #ffffff; border: none;">
 								</div>
-								
+
 								<div class="mb-3">
 									<label for="title" class="form-label fw-bold">제목</label> <input
 										class="form-control" id="title" name="title"
@@ -190,13 +189,18 @@
 										rows="5" style="display: none;"></textarea>
 								</div>
 								<div id="editor"></div>
-								
-								<!-- 태그 
-						<div class="mb-3">
-							<label for="topicTags" class="form-label fw-bold">태그</label>
-							<input type="text" class="form-control" id="topicTags" placeholder="태그를 입력하세요 (예: #맛집 #카페)">
-						</div>
-						-->
+
+								<div class="mb-3">
+									<label class="form-label fw-bold">썸네일</label> 
+									<input id="i_imageFileName" class="form-control" name="file"
+										type="file" value="${dto.thumbnail}">
+								</div>
+								<div>
+									<img id="preview" alt="업로드된 파일" src=""
+										style="width: 500px; display: block; margin: 0 auto;">
+								</div>
+								<input type="hidden" name="thumbnail" value="${dto.thumbnail}">
+
 								<!-- 등록/취소 버튼 (오른쪽 하단) -->
 								<div class="row">
 									<div class="col-12 d-flex justify-content-end"
@@ -248,7 +252,7 @@
 		<!-- SVG icons loader -->
 		<script src="/resources/js/svg-loader.js"></script>
 		<!-- /SVG icons loader -->
-<script type="text/javascript">
+		<script type="text/javascript">
       const editor = new toastui.Editor({
         el: document.querySelector("#editor"), // 에디터를 적용할 요소 (컨테이너)
         height: "500px", // 에디터 영역의 높이 값 (OOOpx || auto)
@@ -296,7 +300,7 @@
           }
       });
 </script>
-<script type="text/javascript">
+		<script type="text/javascript">
 // 폼 제출 전에 Editor의 내용을 textarea에 저장
 $('#submitBtn').on('click', function() {
 	// 에디터의 HTML 값을 숨겨진 textarea에 저장
@@ -319,7 +323,20 @@ $('#submitBtn').on('click', function() {
 	$("#fom").submit();
 });
 </script>
-
+		<script type="text/javascript">
+$(function() {
+// 이미지 미리보기
+$("#i_imageFileName").on("change", function(event) {
+    console.log(event);
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        console.log(e);
+        $("#preview").attr("src", e.target.result).show();
+    }
+    reader.readAsDataURL(event.target.files[0]);
+});
+});
+</script>
 		<!-- 다국어JSON파일 불러오기 -->
 		<script>
 	document.getElementById('language-toggle').addEventListener('click', function(event) {

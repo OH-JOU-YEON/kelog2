@@ -6,8 +6,6 @@
 <html lang="ko">
 <head>
 <style type="text/css">
-
-
 .other_festival_img {
 	width: 100%; /* 이미지 영역 너비 */
 	height: auto; /* 이미지 높이 자동 조정 */
@@ -27,38 +25,35 @@
 
 /* 글쓰기 링크 스타일 */
 .write-link {
-    text-decoration: none;
-    color: #333;
-    margin-right: 5px;
-    /* 버튼 모양을 원하시면:
+	text-decoration: none;
+	color: #333;
+	margin-right: 5px;
+	/* 버튼 모양을 원하시면:
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 6px 12px;
     */
 }
+
 .write-link:hover {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
 /* 셀렉트 화살표 커스텀 */
 .selectAmount {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 5px 30px 5px 8px; 
-    outline: none;
-    background: url("/resources/img/down-arrow.png") no-repeat 95% 50% / 16px auto; 
-    /* ↑ 사용하실 화살표 이미지를 이 경로로 넣으세요. 크기에 맞춰 조정 */
-    appearance: none;          /* Firefox, Edge 등 */
-    -webkit-appearance: none;  /* Chrome, Safari */
-    background-color: #fff;    /* 셀렉트 배경 */
-    cursor: pointer;
-    width: auto; /* 너무 길어지지 않도록 auto */
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 5px 30px 5px 8px;
+	outline: none;
+	background: url("/resources/img/down-arrow.png") no-repeat 95% 50%/16px
+		auto;
+	/* ↑ 사용하실 화살표 이미지를 이 경로로 넣으세요. 크기에 맞춰 조정 */
+	appearance: none; /* Firefox, Edge 등 */
+	-webkit-appearance: none; /* Chrome, Safari */
+	background-color: #fff; /* 셀렉트 배경 */
+	cursor: pointer;
+	width: auto; /* 너무 길어지지 않도록 auto */
 }
-
-
-
-
-
 </style>
 <title>추천게시판</title>
 
@@ -85,42 +80,41 @@
 <body>
 
 	<!-- Header Standard Landing -->
-  <div class="header--standard header--standard-landing" id="header--standard">
-    <div class="container">
-      <div class="header--standard-wrap">
-        <a href="12-FavouritePage.html" class="logo"></a>
-        <div class="img-wrap">
+	<div class="header--standard header--standard-landing"
+		id="header--standard">
+		<div class="container">
+			<div class="header--standard-wrap">
+				<a href="12-FavouritePage.html" class="logo"></a>
+				<div class="img-wrap">
 					<a href="#"><img loading="lazy"
 						src="/resources/img/logokelog.png" width="140" height="34"
 						alt="Olympus" class="logo-colored"></a>
 				</div>
-        <div class="title-block">
-        </div>
-        <a href="#" class="open-responsive-menu js-open-responsive-menu">
-          <svg class="olymp-menu-icon">
+				<div class="title-block"></div>
+				<a href="#" class="open-responsive-menu js-open-responsive-menu">
+					<svg class="olymp-menu-icon">
             <use xlink:href="#olymp-menu-icon"></use>
           </svg>
-        </a>
-        <div class="nav nav-pills nav1 header-menu">
-          <div class="mCustomScrollbar">
-          <ul>
-						<li class="nav-item dropdown"><a
-								href="/travel/list" style="color: #000 !important;">여행 추천지</a></li>
-						<li class="nav-item dropdown dropdown-has-megamenu"><a
-								href="/blog/list" style="color: #000 !important;">블로그</a>
-						</li>
-						<li class="nav-item"><a href="/tip/list"
+				</a>
+				<div class="nav nav-pills nav1 header-menu">
+					<div class="mCustomScrollbar">
+						<ul>
+							<li class="nav-item dropdown"><a href="/travel/list"
+								style="color: #000 !important;">여행 추천지</a></li>
+							<li class="nav-item dropdown dropdown-has-megamenu"><a
+								href="/blog/list" style="color: #000 !important;">블로그</a></li>
+							<li class="nav-item"><a href="/tip/list"
 								style="color: #000 !important;">꿀팁 게시판</a></li>
-						<li class="nav-item"><a href="#"
+							<li class="nav-item"><a href="#"
 								style="color: #000 !important;">전국 날씨예보</a></li>
-						<li class="close-responsive-menu js-close-responsive-menu">
-							<svg class="olymp-close-icon">
+							<li class="close-responsive-menu js-close-responsive-menu">
+								<svg class="olymp-close-icon">
 								<use xlink:href="#olymp-close-icon"></use></svg>
-						</li>
-						<li class="nav-item js-expanded-menu"><a href="#"
+							</li>
+							<li class="nav-item js-expanded-menu"><a href="#"
 								class="menu-link"><img src="/resources/img/menu-bar.png"
 									style="width: 26px; height: 26px; filter: none;"></a></li>
-						<li class="lang-set-item"><a href="#" class="change-lang"
+							<li class="lang-set-item"><a href="#" class="change-lang"
 								id="language-toggle"> <img
 									src="/resources/img/changeLang.png"
 									style="width: 26px; height: 26px; filter: none;">
@@ -130,43 +124,42 @@
 									<li><a href="/travel_en/list" id="english">English</a></li>
 									<li><a href="/travel/list" id="korean">한국어</a></li>
 								</ul></li>
-								
-						<li class="login-set-item">
-							<c:choose>
-							    <c:when test="${email == null}">
-							        <a href="/login/google/login.do" class="login-user">
-							            <img src="/resources/img/login-user.png"
-							                style="width: 31px; height: 31px; filter: none;">
-							        </a>
-							    </c:when>
-							    <c:otherwise>
-							        <a href="#" class="login-user">
-							            <img src="/resources/img/login-user.png"
-							                class="login-user-menu" style="filter: none;">
-							        </a>
-							        <ul class="login-drop-menu" style="display: none;">
-							        	<c:choose>
-							        		<c:when test="${user.role == 'user'}">
-							            <li><a href="/user/read?uno=${user.uno }" >마이페이지</a></li>
-							        		</c:when>
-							        		<c:otherwise>
-							        		<li><a href="/manager/01-ManagerPage-MyPage?uno=${user.uno }" >마이페이지</a></li>
-							        		</c:otherwise>
-							        	</c:choose>
-							            <li><a href="03-Myblog.html">내 블로그</a></li>
-							            <li><a href="/login/google/revoke/token?token=${token}">로그아웃</a></li>
-							        </ul>
-							    </c:otherwise>
-							</c:choose>	
-						</li>
-					</ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- ... end Header Standard Landing -->
-  <div class="header-spacer--standard"></div>
+
+							<li class="login-set-item"><c:choose>
+									<c:when test="${email == null}">
+										<a href="/login/google/login.do" class="login-user"> <img
+											src="/resources/img/login-user.png"
+											style="width: 31px; height: 31px; filter: none;">
+										</a>
+									</c:when>
+									<c:otherwise>
+										<a href="#" class="login-user"> <img
+											src="/resources/img/login-user.png" class="login-user-menu"
+											style="filter: none;">
+										</a>
+										<ul class="login-drop-menu" style="display: none;">
+											<c:choose>
+												<c:when test="${user.role == 'user'}">
+													<li><a href="/user/read?uno=${user.uno }">마이페이지</a></li>
+												</c:when>
+												<c:otherwise>
+													<li><a
+														href="/manager/01-ManagerPage-MyPage?uno=${user.uno }">마이페이지</a></li>
+												</c:otherwise>
+											</c:choose>
+											<li><a href="03-Myblog.html">내 블로그</a></li>
+											<li><a href="/login/google/revoke/token?token=${token}">로그아웃</a></li>
+										</ul>
+									</c:otherwise>
+								</c:choose></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ... end Header Standard Landing -->
+	<div class="header-spacer--standard"></div>
 
 	<script src="/resources/js/lib/comm.js"></script>
 
@@ -175,43 +168,41 @@
 			<section class="other_list type2" role="region">
 				<div class="inner">
 					<div class="other_festival" role="application">
-                    <!-- 상단: 오른쪽 정렬 (글쓰기 + 셀렉트) -->
-                    <div style="
-                        display: flex;
-                        justify-content: flex-end; /* 오른쪽 정렬 */
-                        align-items: center;
-                        gap: 10px;
-                        margin-bottom: 20px;
-                    ">
-                      	<c:if test="${user.role == 'admin'}">
+						<!-- 상단: 오른쪽 정렬 (글쓰기 + 셀렉트) -->
+						<div
+							style="display: flex; justify-content: flex-end; /* 오른쪽 정렬 */ align-items: center; gap: 10px; margin-bottom: 20px;">
+							<c:if test="${user.role == 'admin'}">
 								<a href="/travel/created"
 									class="text-decoration-none d-flex align-items-center"
-									style="margin-left: 15px;"> 
-									<img src="/resources/img/writing.png" alt="글쓰기 아이콘"
-								    style="width: 18px; height: 18px;
-									margin-right: 5px;">글쓰기
+									style="margin-left: 15px;"> <img
+									src="/resources/img/writing.png" alt="글쓰기 아이콘"
+									style="width: 18px; height: 18px; margin-right: 5px;">글쓰기
 								</a>
 							</c:if>
-                        
 
-                        <select id="rowsPerPage" class="btn-item selectAmount" style=" cursor: pointer; flex: none; padding: 10px 15px; width: auto;">
-                            <option ${pageMaker.cri.amount == 9 ? "selected='selected'":''} value="9">9개</option>
-                            <option ${pageMaker.cri.amount == 15 ? "selected='selected'":''} value="15">15개</option>
-                            <option ${pageMaker.cri.amount == 30 ? "selected='selected'":''} value="30">30개</option>
-                        </select>
-                    </div>
-                     <hr style="margin-top: 10px; clear: both;">
+
+							<select id="rowsPerPage" class="btn-item selectAmount"
+								style="cursor: pointer; flex: none; padding: 10px 15px; width: auto;">
+								<option ${pageMaker.cri.amount == 9 ? "selected='selected'":''}
+									value="9">9개</option>
+								<option ${pageMaker.cri.amount == 15 ? "selected='selected'":''}
+									value="15">15개</option>
+								<option ${pageMaker.cri.amount == 30 ? "selected='selected'":''}
+									value="30">30개</option>
+							</select>
+						</div>
+						<hr style="margin-top: 10px; clear: both;">
 
 						<div class="tab_cont_area">
 							<div class="tab_cont active" aria-expanded="true"
 								role="application">
 								<p class="blind">축제일순 리스트</p>
 								<ul class="other_festival_ul" id="fstvlList">
-								
-								
+
+
 									<!-- 리스트 항목 -->
-									
-									
+
+
 								</ul>
 							</div>
 						</div>
@@ -244,28 +235,23 @@
 	<!-- Pagination -->
 	<nav aria-label="Page navigation">
 		<ul class="pagination justify-content-center">
-			<li class="page-item">
-        <c:if test="${pageMaker.prev }">
-          <li class="paginate_button previous" tabindex="0">
-            <a href="${pageMaker.startPage - 1 }">Previous</a>
-          </li>
-        </c:if>
-        <c:forEach var="num" begin="${pageMaker.startPage }"
+			<li class="page-item"><c:if test="${pageMaker.prev }">
+					<li class="paginate_button previous" tabindex="0"><a
+						href="${pageMaker.startPage - 1 }">Previous</a></li>
+				</c:if> <c:forEach var="num" begin="${pageMaker.startPage }"
 					end="${pageMaker.endPage }">
-					<li class="paginate_button ${pageMaker.cri.pageNum == num ? 'active':''}" tabindex="0">
-            <a href="${num }">${num}</a>
-          </li>
-				</c:forEach>
-        <c:if test="${pageMaker.next }">
-          <li class="paginate_button next" tabindex="0">
-            <a href="${pageMaker.endPage + 1 }">next</a>
-          </li>
-        </c:if>
+					<li
+						class="paginate_button ${pageMaker.cri.pageNum == num ? 'active':''}"
+						tabindex="0"><a href="${num }">${num}</a></li>
+				</c:forEach> <c:if test="${pageMaker.next }">
+					<li class="paginate_button next" tabindex="0"><a
+						href="${pageMaker.endPage + 1 }">next</a></li>
+				</c:if>
 				<form id="pageForm" action="/travel/list" method="get">
-					<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
-          <input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-				</form>
-      </li>
+					<input type="hidden" name="pageNum"
+						value="${pageMaker.cri.pageNum }"> <input type="hidden"
+						name="amount" value="${pageMaker.cri.amount }">
+				</form></li>
 		</ul>
 	</nav>
 	<!-- ... end Pagination -->
@@ -339,22 +325,40 @@
 	                    minute: "2-digit"
 	                };
 	                var formattedUpdateDate = updateDate.toLocaleString("ko-KR", options);
-
-	                var listItem = $("<li>").append(
-	                	    $("<div>").addClass("other_festival_img open").append(
-	                	        $("<a>").attr("href", "/travel/read?travelBoardNo=" + travellist.travelBoardNo).append(
-	                	            $("<img>").attr("src", "https://kfescdn.visitkorea.or.kr/kfes/upload/contents/db/300_220371a8-ec85-46b7-8bb0-30afa9a93a19_1.jpg").attr("alt", "사진~")
-	                	        )
-	                	    ),
-	                	    $("<div>").addClass("other_festival_content").append(
-	                	        $("<strong>").append(
-	                	            $("<a>").attr("href", "/travel/read?travelBoardNo=" + travellist.travelBoardNo).text(travellist.title)
-	                	        ),
-	                	        $("<div>").text(travellist.tag),
-	                	        $("<div>").text(formattedUpdateDate)
-	                	    )
-	                	);
+	                console.log(travellist.thumbnail);
+	                if(travellist.thumbnail == null){
+		                var listItem = $("<li>").append(
+		                	    $("<div>").addClass("other_festival_img open").append(
+		                	        $("<a>").attr("href", "/travel/read?travelBoardNo=" + travellist.travelBoardNo).append(
+		                	            $("<img>").attr("src", "/resources/img/logokelog.png").attr("alt", "사진")
+		                	        )
+		                	    ),
+		                	    $("<div>").addClass("other_festival_content").append(
+		                	        $("<strong>").append(
+		                	            $("<a>").attr("href", "/travel/read?travelBoardNo=" + travellist.travelBoardNo).text(travellist.title)
+		                	        ),
+		                	        $("<div>").text(travellist.tag),
+		                	        $("<div>").text(formattedUpdateDate)
+		                	    )
+		                	);
+		                festivalList.append(listItem);
+	            }else{
+	            	  var listItem = $("<li>").append(
+		                	    $("<div>").addClass("other_festival_img open").append(
+		                	        $("<a>").attr("href", "/travel/read?travelBoardNo=" + travellist.travelBoardNo).append(
+		                	            $("<img>").attr("src", "/upload/"+ travellist.thumbnail).attr("alt", "사진")
+		                	        )
+		                	    ),
+		                	    $("<div>").addClass("other_festival_content").append(
+		                	        $("<strong>").append(
+		                	            $("<a>").attr("href", "/travel/read?travelBoardNo=" + travellist.travelBoardNo).text(travellist.title)
+		                	        ),
+		                	        $("<div>").text(travellist.tag),
+		                	        $("<div>").text(formattedUpdateDate)
+		                	    )
+		                	);
 	                festivalList.append(listItem);
+	            }
 	            });
 	        },
 	        error: function(e) {
@@ -483,7 +487,7 @@ document.addEventListener('click', function(event) {
     }
 });
 </script>
-<script>
+	<script>
 window.addEventListener('scroll', function () {
 const header = document.getElementById('header--standard');
 if (window.scrollY > 50) {

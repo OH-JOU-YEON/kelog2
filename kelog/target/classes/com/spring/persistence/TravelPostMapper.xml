@@ -6,8 +6,8 @@
 <mapper namespace="com.spring.persistence.TravelPostMapper">
 
 	<insert id="insert">
-		INSERT INTO travelpost (title, content, nickName, email, tag)
-		VALUES(#{title},#{content},#{nickName},#{email},#{tag});
+		INSERT INTO travelpost (title, content, nickName, email,thumbnail ,tag)
+		VALUES(#{title},#{content},#{nickName},#{email},#{thumbnail},#{tag});
 	</insert>
 
 	<select id="read">
@@ -15,7 +15,7 @@
 	</select>
 
 	<update id="update">
-		UPDATE travelpost SET title = #{title}, content = #{content}, tag = #{tag} WHERE
+		UPDATE travelpost SET title = #{title}, content = #{content}, thumbnail = #{thumbnail}, tag = #{tag} WHERE
 		travelBoardNo = #{travelBoardNo}
 	</update>
 	<select id="listwithPasing" parameterType="Criteria2"

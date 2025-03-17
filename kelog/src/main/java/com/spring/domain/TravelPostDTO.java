@@ -13,6 +13,7 @@ public class TravelPostDTO {
 	private String content;
 	private String nickName;
 	private String email;
+	private String thumbnail;
 	@DateTimeFormat(pattern = "yyyy-MM-dd a hh:mm:ss")
 	private Date regDate;
 	private String tag;
