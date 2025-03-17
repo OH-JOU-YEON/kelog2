@@ -106,7 +106,7 @@
                                                 <li><a href="/manager/01-ManagerPage-MyPage?uno=${user.uno}" id="mypage">마이페이지</a></li>
                                             </c:otherwise>
                                         </c:choose>
-                                        <li><a href="03-Myblog.html">내 블로그</a></li>
+                                        <li><a href="/Myblog">내 블로그</a></li>
                                         <li><a href="/login/google/revoke/token?token=${token}">로그아웃</a></li>
                                     </ul>
                                 </c:otherwise>

@@ -42,6 +42,14 @@
 	INSERT INTO report (blogPostNo, email, reportReason) VALUES(#{blogPostNo},#{email},#{reportReason})
 </insert>
 
+<select id="listwithPasing" parameterType="Criteria2"
+	resultType="BlogPostDTO">
+	SELECT * FROM blogpost ORDER BY blogPostNo DESC LIMIT #{start},#{amount};
+</select>
+
+<select id="getTotalCount" resultType="int">
+	SELECT COUNT(blogPostNo) FROM blogpost;
+</select>
 
 
 </mapper>

@@ -1,5 +1,7 @@
 package com.spring.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.domain.BlogPostDTO;
+import com.spring.domain.Criteria2;
+import com.spring.domain.PageDTO2;
+import com.spring.domain.TravelPostDTO;
 import com.spring.domain.DTOS.BlogNoAndNickNameVO;
 import com.spring.domain.DTOS.BlogPostVO;
 import com.spring.persistence.BlogPostMapper;
@@ -50,10 +55,23 @@ public class BlogPostController {
 	private final BlogPostMapper blogPostMapper; 
 
 	@GetMapping("/list")
-	public void list(Model model) {
+	public void list(Criteria2 cri, Model model) {
+		
+		int total = service.getTotal();
+		
+		PageDTO2 pageDTO = new PageDTO2(cri, total);
+		
+		model.addAttribute("pageMaker", pageDTO);
 		model.addAttribute("list", service.listAll());
 	}
 
+	@PostMapping("/getList")
+	@ResponseBody
+	public List<BlogPostDTO> getList(Criteria2 cri){
+		return service.getList(cri);
+	}
+	
+	
 	@GetMapping("/created")
 	public void blogPostGet() {
 

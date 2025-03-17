@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.spring.domain.Criteria;
 import com.spring.domain.PageDTO;
 import com.spring.domain.TipPostDTO;
+import com.spring.persistence.UserMapper;
 import com.spring.service.TipService;
 
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,7 @@ import lombok.extern.log4j.Log4j;
 public class TipPostController {
 
 	private final TipService service;
+	private final UserMapper usermapper;
 	
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
@@ -65,6 +67,9 @@ public class TipPostController {
 	@GetMapping({ "/read", "/modify" })
 	public void get(@RequestParam("tipBoardNo") Integer tipBoardNo, Model model,HttpSession session) {
 		log.info("tipBoardNo :" + tipBoardNo);
+		String writeremail= service.getwriteremail(tipBoardNo);
+		String writerImage = usermapper.getwriterImage(writeremail);
+		session.setAttribute("writerImage",writerImage);
 		Integer uno = (Integer) session.getAttribute("uno");
 		String email = (String) session.getAttribute("email");
 		if(uno == null) {
@@ -87,7 +92,7 @@ public class TipPostController {
 		int updateRow = service.modify(dto);
 		log.info("modify updateRow: " + updateRow);
 		rttr.addFlashAttribute("result", "mod");
-		return "redirect:/tip/list";
+		return "redirect:/tip/read?tipBoardNo="+dto.getTipBoardNo();
 	}
 	@PostMapping("/remove")
 	public String delete(@RequestParam("tipBoardNo") Integer tipBoardNo, RedirectAttributes rttr) {

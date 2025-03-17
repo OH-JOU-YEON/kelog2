@@ -172,12 +172,9 @@
 
 	<main role="main" id="mainTab">
 		<div class="wrap">
-			<!-- 축제 리스트 -->
 			<section class="other_list type2" role="region">
 				<div class="inner">
 					<div class="other_festival" role="application">
-                    <div class="blind">페스티벌 검색 리스트</div>
-
                     <!-- 상단: 오른쪽 정렬 (글쓰기 + 셀렉트) -->
                     <div style="
                         display: flex;
@@ -186,10 +183,8 @@
                         gap: 10px;
                         margin-bottom: 20px;
                     ">
-                      
-                        
                       	<c:if test="${user.role == 'admin'}">
-								<a href=""/travel/created"
+								<a href="/travel/created"
 									class="text-decoration-none d-flex align-items-center"
 									style="margin-left: 15px;"> 
 									<img src="/resources/img/writing.png" alt="글쓰기 아이콘"
@@ -208,27 +203,21 @@
                      <hr style="margin-top: 10px; clear: both;">
 
 						<div class="tab_cont_area">
-							<!-- 축제일순 리스트 -->
 							<div class="tab_cont active" aria-expanded="true"
 								role="application">
 								<p class="blind">축제일순 리스트</p>
 								<ul class="other_festival_ul" id="fstvlList">
+								
+								
 									<!-- 리스트 항목 -->
+									
+									
 								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
 			</section>
-			<!--// 축제 리스트 -->
-
-			<div class="loading">
-				<div class="loading_start" aria-live="assertive" role="alert">
-					<div class="blind">please wait while we gather your
-						information, Loading...</div>
-					<img src="/resources/img/loading.svg" alt="로딩 이미지">
-				</div>
-			</div>
 		</div>
 	</main>
 	<div id="mymodal" class="modal" tabindex="-1">

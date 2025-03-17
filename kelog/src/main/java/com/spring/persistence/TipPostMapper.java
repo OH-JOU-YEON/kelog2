@@ -12,45 +12,48 @@ import com.spring.domain.TipPostDTO;
 
 
 public interface TipPostMapper {
-	
-	public void insert(TipPostDTO dto);
-	
-	@Select("SELECT * FROM tipboard ORDER BY tipBoardNo DESC")
-	public List<TipPostDTO> readAll();
-	
-	public TipPostDTO read(int tipBoardNo);
-	
-	public int update(TipPostDTO dto);
-	
-	@Delete("DELETE FROM tipboard WHERE tipBoardNo = #{tipBoardNo}")	
-	public int delete(int tipBoardNo);
 
-	public void addlike(@Param("uno") int uno, @Param("tipBoardNo") Integer tipBoardNo);
+    public void insert(TipPostDTO dto);
 
-	public void removelike(@Param("uno") int uno, @Param("tipBoardNo") Integer tipBoardNo);
+    @Select("SELECT * FROM tipboard ORDER BY tipBoardNo DESC")
+    public List<TipPostDTO> readAll();
 
-	public boolean isLike(@Param("uno") int uno, @Param("tipBoardNo") Integer tipBoardNo);
-	
-	public int upLikecount(Integer tipBoardNo);
+    public TipPostDTO read(int tipBoardNo);
 
-	public int unLikecount(Integer tipBoardNo);
+    public int update(TipPostDTO dto);
 
-	public int getTotalCount();
+    @Delete("DELETE FROM tipboard WHERE tipBoardNo = #{tipBoardNo}")
+    public int delete(int tipBoardNo);
 
-	public List<TipPostDTO> listwithPasing(Criteria cri);
+    public void addlike(@Param("uno") int uno, @Param("tipBoardNo") Integer tipBoardNo);
 
-	// 신고
-	public void insertTipReport(ReportDTO dto);
+    public void removelike(@Param("uno") int uno, @Param("tipBoardNo") Integer tipBoardNo);
 
-	public boolean isReport(String email, Integer tipBoardNo);
-	
-	public int upreportCnt(Integer tipBoardNo);
-	
-	public int downreportCnt(Integer tipBoardNo);
-	
-	@Delete("DELETE FROM report WHERE reportNo = #{reportNo}")	
-	public int deleteReport(Integer reportNo);
+    public boolean isLike(@Param("uno") int uno, @Param("tipBoardNo") Integer tipBoardNo);
 
-	@Select("SELECT * FROM report")
-	public List<ReportDTO> reportListAll();
+    public int upLikecount(Integer tipBoardNo);
+
+    public int unLikecount(Integer tipBoardNo);
+
+    public int getTotalCount();
+
+    public List<TipPostDTO> listwithPasing(Criteria cri);
+
+    // 신고
+    public void insertTipReport(ReportDTO dto);
+
+    public boolean isReport(String email, Integer tipBoardNo);
+
+    public int upreportCnt(Integer tipBoardNo);
+
+    public int downreportCnt(Integer tipBoardNo);
+
+    @Delete("DELETE FROM report WHERE reportNo = #{reportNo}")
+    public int deleteReport(Integer reportNo);
+
+    @Select("SELECT * FROM report")
+    public List<ReportDTO> reportListAll();
+
+    @Select("SELECT email FROM tipboard WHERE tipBoardNo = #{tipBoardNo}")
+    public String getwriteremail(Integer tipBoardNo);
 }

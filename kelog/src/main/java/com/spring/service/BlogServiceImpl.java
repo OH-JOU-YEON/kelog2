@@ -13,6 +13,7 @@ import com.spring.domain.BlogDTO;
 import com.spring.domain.BlogPostAddressMappingDTO;
 import com.spring.domain.BlogPostDTO;
 import com.spring.domain.BlogReportDTO;
+import com.spring.domain.Criteria2;
 import com.spring.domain.NavAddressDTO;
 import com.spring.domain.UserDTO;
 import com.spring.domain.DTOS.BlogNoAndNickNameVO;
@@ -202,6 +203,17 @@ public class BlogServiceImpl implements BlogService {
 		
 		return mapper.findAllByBlogNo(blogDTO.getBlogNo()).stream().map(s -> new logDTO(s)).collect(Collectors.toList()); 
 		
+	}
+
+	@Override
+	public int getTotal() {
+		return mapper.getTotalCount();
+	}
+
+	@Override
+	public List<BlogPostDTO> getList(Criteria2 cri) {
+		List<BlogPostDTO> result = mapper.listwithPasing(cri);
+		return result;
 	}
 
 }

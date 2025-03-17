@@ -106,9 +106,5 @@ public class TravelServiceImpl implements TravelService {
 		List<TravelPostDTO> result = mapper.listwithPasing(cri);
 		return result;
 	}
-
-    
-
-    
     
 }

@@ -4,6 +4,51 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
+
+<style>
+    .btn-group {
+        display: flex;
+        border: 1px solid #ccc;
+        border-radius: 2px;
+        overflow: hidden;
+        width: fit-content;
+    }
+
+    .btn-item {
+        flex: 1;
+        text-align: center;
+        padding: 10px 15px;
+        cursor: pointer;
+        background: #fff;
+        font-size: 12px;
+        font-weight:bold;
+        transition: background 0.3s, color 0.3s;
+        color: #0f0f0f99;
+        
+    }
+    
+  
+
+    /* 버튼 경계선 */
+    .btn-item:not(:last-child) {
+        border-right: 1px solid #ccc;
+    }
+
+    /* 호버 효과 */
+    .btn-item:hover {
+        background: #f0f0f0;
+    }
+
+ 
+    .selectAmount {
+        font-size: 14px;
+        padding: 10px 15px;
+        width: auto;
+    }
+</style>
+
+	
+
 <head>
 
 	<title>꿀팁 게시판</title>
@@ -17,10 +62,11 @@
 	<link rel="preload" type="text/css" href="/resources/css/theme-font.min.css" as="style">
 
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" type="text/css" href="/resources/Bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="/resources/Bootstrap/dist/css/bootstrap2.css">
 
 	<!-- Main Styles CSS -->
-	<link rel="stylesheet" type="text/css" href="/resources/css/main.css">
+
+	<link rel="stylesheet" type="text/css" href="/resources/css/main2.css">
 	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 	<!-- Main RTL CSS -->
 	<!--<link rel="stylesheet" type="text/css" href="css/rtl.min.css">-->
@@ -70,43 +116,49 @@
 
 			<a href="12-FavouritePage.html" class="logo"></a>
 				<div class="img-wrap">
-					<img loading="lazy" src="/resources/img/logo-colored-small.webp" width="34" height="34" alt="Olympus" class="logo-colored">
+					 <a href="#">
+                        <img loading="lazy"
+                             src="/resources/img/logokelog.png"
+                             width="140" height="34"
+                             alt="Logo" class="logo-colored">
+                    </a>
 				</div>
+				
 				
 			<a href="#" class="open-responsive-menu js-open-responsive-menu">
 				<svg class="olymp-menu-icon"><use xlink:href="#olymp-menu-icon"></use></svg>
 			</a>
 
 			<div class="nav nav-pills nav1 header-menu">
-				<div class="mCustomScrollbar">
-					<ul>
+				 <div class="mCustomScrollbar">
+          <ul>
 						<li class="nav-item dropdown"><a
-								href="/travel/list" style="color: #000 !important;">추천
-								 게시판</a></li>
-							<li class="nav-item dropdown dropdown-has-megamenu"><a
-								href="/blog/list" style="color: #000 !important;">블로그 게시판</a>
-							</li>
-							<li class="nav-item"><a href="/tip/list"
+								href="/travel/list" style="color: #000 !important;">여행 추천지</a></li>
+						<li class="nav-item dropdown dropdown-has-megamenu"><a
+								href="/blog/list" style="color: #000 !important;">블로그</a>
+						</li>
+						<li class="nav-item"><a href="/tip/list"
 								style="color: #000 !important;">꿀팁 게시판</a></li>
-							<li class="nav-item"><a href="#"
+						<li class="nav-item"><a href="#"
 								style="color: #000 !important;">전국 날씨예보</a></li>
-							<li class="close-responsive-menu js-close-responsive-menu">
-								<svg class="olymp-close-icon">
-									<use xlink:href="#olymp-close-icon"></use></svg>
-							</li>
-							<li class="nav-item js-expanded-menu"><a href="#"
+						<li class="close-responsive-menu js-close-responsive-menu">
+							<svg class="olymp-close-icon">
+								<use xlink:href="#olymp-close-icon"></use></svg>
+						</li>
+						<li class="nav-item js-expanded-menu"><a href="#"
 								class="menu-link"><img src="/resources/img/menu-bar.png"
 									style="width: 26px; height: 26px; filter: none;"></a></li>
-							<li class="lang-set-item"><a href="#" class="change-lang"
+						<li class="lang-set-item"><a href="#" class="change-lang"
 								id="language-toggle"> <img
 									src="/resources/img/changeLang.png"
 									style="width: 26px; height: 26px; filter: none;">
-							</a> <!-- 언어 선택 탭 (기본적으로 숨겨짐) -->
+							</a>
 								<ul id="language-tabs" class="language-tabs"
 									style="display: none;">
-									<li><a href="#" id="english">English</a></li>
-									<li><a href="#" id="korean">한국어</a></li>
+									<li><a href="/travel_en/list" id="english">English</a></li>
+									<li><a href="/travel/list" id="korean">한국어</a></li>
 								</ul></li>
+								
 							<li class="login-set-item">
 							<c:choose>
 							    <c:when test="${email == null}">
@@ -161,73 +213,74 @@
 
 <!-- End Stunning header -->
 
+<div class="container">
+  <div class="row justify-content-center" style="padding-bottom: 10px;">
+    <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
+    
+      <div class="outer-border" style="max-width:1000px; margin: auto; position: relative;">
+        <!-- 글쓰기 버튼 & rowsPerPage  -->
+        <div class="btn-group" style="margin-top: 10px; float: right; white-space: nowrap; margin-bottom: 10px;">
+          <a href="/tip/created" id="writeBtn" class="btn-item" style="flex: none; padding: 10px 25px;">글쓰기</a>
+          <select id="rowsPerPage" class="btn-item selectAmount" style="border: none; background: white; cursor: pointer; flex: none; padding: 10px 15px; width: auto;">
+            <option ${pageMaker.cri.amount == 5 ? "selected='selected'":''} value="5">5개</option>
+            <option ${pageMaker.cri.amount == 10 ? "selected='selected'":''} value="10">10개</option>
+            <option ${pageMaker.cri.amount == 15 ? "selected='selected'":''} value="15">15개</option>
+            <option ${pageMaker.cri.amount == 20 ? "selected='selected'":''} value="20">20개</option>
+          </select>
+        </div>
+        <hr style="margin-top: 10px; clear: both;">
+        
+        <div class="desktop-only table-responsive mx-auto" style="max-width:1000px;">
+          <table class="honeyPost" style="width: 100%;">
+            <thead>
+              <tr>
+                <th style="min-width: 50px;">번호</th>
+                <th style="min-width: 80px;">제목</th>
+                <th style="min-width: 150px;">내용</th>
+                 <th style="min-width: 150px;">닉네임</th>
+                <th style="min-width: 100px;">작성일자</th>
+              </tr>
+            </thead>
+            <tbody id="honeyPostBody">
+            
+            </tbody>
+          </table>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
-		<div class="row">
-			<div class="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 m-auto">
-				<div class="search-container" style="display: flex; justify-content: flex-end; align-items: center; gap: 1em;">
-					<div style="display: flex; align-items: center;">
-						<input type="text" id="searchInput" placeholder="검색..." onkeyup="filterTable()" style="width: 250px;">
-					</div>
-					
-					<div style="margin-bottom: 25px; width: 250px;">
-						<label for="rowsPerPage">몇 줄씩 표시할지 선택</label>
-						<select id="rowsPerPage" class="selectAmount">
-							<option ${pageMaker.cri.amount == 5 ? "selected='selected'":''}
-							value="5">5개</option>
-						<option ${pageMaker.cri.amount == 10 ? "selected='selected'":''}
-							value="10">10개</option>
-						<option ${pageMaker.cri.amount == 15 ? "selected='selected'":''}
-							value="15">15개</option>
-						<option ${pageMaker.cri.amount == 20 ? "selected='selected'":''}
-							value="20">20개</option>
-						</select>
-					</div>
-				</div>
-				
-		
-
-				<table class="honeyPost">
-					<thead>
-					<tr>
-						<th>TipBoardNo</th>
-						<th>TITLE</th>
-						<th>CONTENT</th>
-						<th>NICKNAME</th>
-						<th>REGDATE</th>
-					</tr>
-					</thead>
-					<tbody>
-					
-					</tbody>
-			</table>
-			<div style="margin-top: 1em; float: right;">
-				<a href="/tip/created" id="writeBtn" class="btn btn-primary" style="background-color: #9edbff; border-color: #9eb3ff;">글쓰기</a>
-			</div>
-			<div class="pull-right">
-				<ul class="pagination">
-					<c:if test="${pageMaker.prev }">
-						<li class="paginate_button previous" tabindex="0"><a
-							href="${pageMaker.startPage - 1 }">Previous</a></li>
-					</c:if>
-					<c:forEach var="num" begin="${pageMaker.startPage }"
-						end="${pageMaker.endPage }">
-						<li
-							class="paginate_button  ${pageMaker.cri.pageNum == num ? 'active':''}"
-							tabindex="0"><a href="${num }">${num}</a></li>
-					</c:forEach>
-					<c:if test="${pageMaker.next }">
-						<li class="paginate_button next" tabindex="0"><a
-							href="${pageMaker.endPage + 1 }">next</a></li>
-					</c:if>
-				</ul>
-			</div>
-			<form id="pageForm" action="/tip/list" method="get">
-				<input type="hidden" name="pageNum"
-					value="${pageMaker.cri.pageNum }"> <input type="hidden"
-					name="amount" value="${pageMaker.cri.amount }">
-			</form>
+			<!-- Pagination -->
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        <li class="page-item">
+            <c:if test="${pageMaker.prev}">
+                <li class="paginate_button previous" tabindex="0">
+                    <a href="${pageMaker.startPage - 1}">Previous</a>
+                </li>
+            </c:if>
+            <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+                <li class="paginate_button ${pageMaker.cri.pageNum == num ? 'active':''}" tabindex="0">
+                    <a href="${num}">${num}</a>
+                </li>
+            </c:forEach>
+            <c:if test="${pageMaker.next}">
+                <li class="paginate_button next" tabindex="0">
+                    <a href="${pageMaker.endPage + 1}">next</a>
+                </li>
+            </c:if>
+            <form id="pageForm" action="/tip/list" method="get">
+                <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+                <input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+            </form>
+        </li>
+    </ul>
+</nav>
+<!-- ... end Pagination -->
 			
 		</div>
 	</div>
@@ -354,17 +407,6 @@ document.getElementById('language-toggle').addEventListener('click', function(ev
     }
 });
 
-document.getElementById('english').addEventListener('click', function(event) {
-    event.preventDefault();
-    setLanguage('en');
-    loadLanguage('en');
-});
-
-document.getElementById('korean').addEventListener('click', function(event) {
-    event.preventDefault();
-    setLanguage('kr');
-    loadLanguage('kr');
-});
 
 function setLanguage(language) {
     const tabs = document.querySelectorAll('.language-tabs li a');
@@ -495,53 +537,6 @@ if (event.target === reportModal) {
 		});
 		
 	</script>
-
-
-
-
-
-
-
-
-
-<!-- Section Call To Action Animation -->
-
-
-<!-- ... end Section Call To Action Animation -->
-
-<!-- Window-popup Restore Password -->
-
-<!-- ... end Window-popup Restore Password -->
-
-
-
-
-<!-- Footer Full Width -->
-
-
-<!-- ... end Footer Full Width -->
-
-
-
-<!-- Window-popup-CHAT for responsive min-width: 768px -->
-
-
-<!-- ... end Window-popup-CHAT for responsive min-width: 768px -->
-
-
-
-
-
-
-
-<!-- Edit My Poll Popup -->
-
-
-
-<!-- ... end Edit My Poll Popup -->
-
-<!-- Window Popup Main Search -->
-
 
 
 <!-- ... end Window Popup Main Search -->

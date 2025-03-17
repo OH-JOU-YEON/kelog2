@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 
 import com.spring.domain.BlogPostDTO;
 import com.spring.domain.BlogReportDTO;
+import com.spring.domain.Criteria2;
 
 @Mapper 
 public interface BlogPostMapper {
@@ -47,5 +48,9 @@ public interface BlogPostMapper {
 	public int unLikecount(Integer blogPostNo);
 
 	public void insertReport(BlogReportDTO dto);
+
+	public int getTotalCount();
+
+	public List<BlogPostDTO> listwithPasing(Criteria2 cri);
 
 }

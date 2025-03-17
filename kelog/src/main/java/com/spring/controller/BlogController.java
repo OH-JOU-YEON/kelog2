@@ -50,7 +50,7 @@ public class BlogController {
 		model.addAttribute("presentURL","kelogs/" + blogName ); 
 		
 		
-		return "Myblog";
+		return "blog/03-Myblog";
 		
 	}
 	
@@ -69,8 +69,27 @@ public class BlogController {
 	@GetMapping("/kelogs/{blogName}/logs")
 	public String logMapping(Model model, HttpServletRequest request, @PathVariable String blogName) {
 		
-		return "Myblog"; 
+		return "blog/03-Myblog"; 
 		
+	}
+	
+	@GetMapping("/Myblog")
+	public String myBlogRedirect(HttpServletRequest request) {
+	    HttpSession session = request.getSession(false);
+	    if (session == null) {
+	        return "redirect:/login"; // 세션이 없으면 로그인 페이지로 이동
+	    }
+
+	    String email = (String) session.getAttribute("email");
+	    if (email == null) {
+	        return "redirect:/login"; // 이메일 정보가 없으면 로그인 필요
+	    }
+
+	    // 내 블로그가 존재하는지 확인 (없으면 자동 생성)
+	    BlogDTO blogDTO = blogService.getBlogByBlogNameAndUno(email + "_blog", email);
+
+	    // 내 블로그 페이지로 이동
+	    return "redirect:/kelogs/" + blogDTO.getBlogName();
 	}
 	
 	

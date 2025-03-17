@@ -119,4 +119,9 @@ public class TipServiceImpl implements TipService{
 		return mapper.reportListAll();
 	}
 
+	@Override
+	public String getwriteremail(Integer tipBoardNo) {
+		return mapper.getwriteremail(tipBoardNo);
+	}
+
 }

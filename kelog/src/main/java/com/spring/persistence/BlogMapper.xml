@@ -5,11 +5,8 @@
   
 <mapper namespace="com.spring.persistence.BlogMapper">
 
-<insert id="insert" parameterType = "com.spring.domain.BlogDTO" useGeneratedKeys="true" keyProperty="blogNo">
-INSERT INTO blog VALUES (uno = #{uno}, blogName = #{blogName});
+<insert id="insert" parameterType="com.spring.domain.BlogDTO" useGeneratedKeys="true" keyProperty="blogNo">
+    INSERT INTO blog (uno, blogName) VALUES (#{uno}, #{blogName});
 </insert>
-
-
-
 
 </mapper>

@@ -287,74 +287,79 @@
 			<small>&copy; 2025. All rights reserved.</small>
 		</div>
 	</footer>
-	<script type="text/javascript">
-		$(function() {
-			$("#i_imageFileName").on("change", function(event) {
-				console.log(event);
-				var reader = new FileReader();
+<script type="text/javascript">
+$(function() {
+    // 닉네임 중복 여부를 저장하는 변수
+    let isNicknameAvailable = false;
 
-				reader.onload = function(e) {
-					console.log(e);
-					$("#preview").attr("src", e.target.result).show();
+    // 이미지 미리보기
+    $("#i_imageFileName").on("change", function(event) {
+        console.log(event);
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            console.log(e);
+            $("#preview").attr("src", e.target.result).show();
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    });
 
-				}
-				reader.readAsDataURL(event.target.files[0]);
-			})
-			var formObj = $("form");
+    // 닉네임 중복 확인
+    $("#checkNicknameBtn").on("click", function() {
+        var nickname = $("#nickName").val().trim();
+        var feedback = $("#nicknameFeedback");
 
-			$(".BNT").on(
-					"click",
-					function(e) {
-						e.preventDefault(); // 기존에 갖고있는 이벤트 무효화
+        if (nickname === "") {
+            feedback.text("닉네임을 입력하세요.").removeClass("available").addClass("taken");
+            isNicknameAvailable = false;
+            return;
+        }
 
-						let operation = $(this).data("oper");
-						console.log(operation);
+        $.ajax({
+            url: "/user/checkNickname",
+            type: "post",
+            data: { nickName: nickname },
+            dataType: "json",
+            success: function(response) {
+                if (response.available || $("#nickName").val() == '${nickName}') {
+                    feedback.text("사용 가능한 닉네임입니다.").removeClass("taken").addClass("available");
+                    isNicknameAvailable = true;
+                } else {
+                    feedback.text("이미 사용 중인 닉네임입니다.").removeClass("available").addClass("taken");
+                    isNicknameAvailable = false;
+                }
+            },
+            error: function(e) {
+                console.log("AJAX 오류:", e);
+                feedback.text("확인 중 오류가 발생했습니다.").removeClass("available").addClass("taken");
+                isNicknameAvailable = false;
+            }
+        });
+    });
 
-						if (operation === "modify") {
-							formObj.attr("action", "/user/modify").attr(
-									"method", "post").attr("enctype",
-									"multipart/form-data");
-						} else if (operation === "read") {
-							formObj.attr("action", "/user/read").attr("method",
-									"post");
-						}
-						formObj.submit();
-					});
-			$("#checkNicknameBtn").on("click", function() {
-		        var nickname = $("#nickName").val().trim();
-		        var feedback = $("#nicknameFeedback");
-		        var modifyBtn = $("#modifyBtn");
+    // 폼 제출 이벤트
+    var formObj = $("form");
+    $(".BNT").on("click", function(e) {
+        e.preventDefault(); // 기본 동작 방지
+        let operation = $(this).data("oper");
+        console.log(operation);
 
-		        if (nickname === "") {
-		            feedback.text("닉네임을 입력하세요.").removeClass("available").addClass("taken");
-		            modifyBtn.prop("disabled", true);
-		            return;
-		        }
-
-		        $.ajax({
-		            url: "/user/checkNickname",
-		            type: "post",
-		            data: { nickName: nickname },
-		            dataType: "json",
-		            success: function(response) {
-		                if (response.available) {
-		                    feedback.text("사용 가능한 닉네임입니다.").removeClass("taken").addClass("available");
-		                    modifyBtn.prop("disabled", false);
-		                } else {
-		                    feedback.text("이미 사용 중인 닉네임입니다.").removeClass("available").addClass("taken");
-		                    modifyBtn.prop("disabled", true);
-		                }
-		            },
-		            error: function(e) {
-		                console.log("AJAX 오류:", e);
-		                feedback.text("확인 중 오류가 발생했습니다.").removeClass("available").addClass("taken");
-		                modifyBtn.prop("disabled", true);
-		            }
-		        });
-		    });
-		});
-			
-	</script>
+        if (operation === "modify") {
+            if (!isNicknameAvailable) {
+                alert("사용 가능한 닉네임을 입력하세요.");
+                return; // 제출 중단
+            }
+            formObj.attr("action", "/user/modify")
+                   .attr("method", "post")
+                   .attr("enctype", "multipart/form-data");
+            formObj.submit();
+        } else if (operation === "read") {
+            formObj.attr("action", "/user/read")
+                   .attr("method", "post");
+            formObj.submit();
+        }
+    });
+});
+</script>
 		<script>
 	document.getElementById('language-toggle').addEventListener('click', function(event) {
 			event.preventDefault();
@@ -458,53 +463,8 @@ loginButton.addEventListener('click', function(event) {
 	}
 	});
 	</script>
-<!-- 신고 모달창부분 -->
 
-<script>
-// 모달 창과 관련된 요소 선택
-const reportModal = document.getElementById('reportModal');
-const closeModal = document.getElementById('closeModal');
-const reportIcons = document.querySelectorAll('.reportIcon');  // class로 선택
-const cancelBtn = document.getElementById('cancelBtn');  // 취소 버튼 추가
 
-// 각 reportIcon에 클릭 이벤트 추가
-
-reportIcons.forEach(reportIcon => {
-    reportIcon.addEventListener('click', function() {
-        var email = '${email}';
-        
-          if (!email) {
-                alert("로그인 후 신고할 수 있습니다.");
-                return;  // 로그인되지 않으면 더 이상 진행하지 않음
-            }else {
-            	if(JSON.parse('${isReport}') ==true) {
-            		alert("이미 신고하신 게시글 입니다.");
-            		return;            		
-           	 	}else {
-                	reportModal.style.display = 'block';  // 모달을 열기
-           	 	}
-            }
-    });
-});
-
-// 모달 닫기 버튼 클릭 시 모달 닫기
-closeModal.addEventListener('click', function() {
-    reportModal.style.display = 'none';
-});
-
-// 취소 버튼 클릭 시 모달 닫기
-cancelBtn.addEventListener('click', function() {
-    reportModal.style.display = 'none';  // 모달 닫기
-});
-
-// 모달 바깥을 클릭하면 모달을 닫기
-window.addEventListener('click', function(event) {
-    if (event.target === reportModal) {
-        reportModal.style.display = 'none';
-    }
-});
-
-    </script>
 	<script>
 		window.addEventListener('scroll', function() {
 			const header = document.getElementById('header--standard');
