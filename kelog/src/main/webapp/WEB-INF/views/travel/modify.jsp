@@ -17,6 +17,45 @@ sbHtml.append("}");
 
 out.println(sbHtml);
 %>
+
+
+<style>
+.btn-group {
+	display: flex;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	overflow: hidden;
+	width: fit-content;
+}
+
+.btn-item, .btn-item a {
+	flex: 1;
+	text-align: center;
+	padding: 10px 20px;
+	cursor: pointer;
+	background: #fff;
+	font-size: 12px;
+	font-weight: bold;
+	transition: background 0.3s, color 0.3s;
+	text-decoration: none;
+	color: inherit;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* 버튼 경계선 */
+.btn-item:not(:last-child) {
+	border-right: 1px solid #ccc;
+}
+
+/* 호버 효과 */
+.btn-item:hover {
+	background: #f0f0f0;
+}
+}
+</style>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,52 +84,10 @@ out.println(sbHtml);
 	href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
 <script
 	src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
-<!-- Main RTL CSS -->
-<!--<link rel="stylesheet" type="text/css" href="css/rtl.min.css">-->
 
 </head>
 
 <body class="landing-page">
-
-
-	<!-- Preloader -->
-
-	<div id="hellopreloader">
-		<div class="preloader">
-			<svg width="45" height="45" stroke="#fff">
-			<g fill="none" fill-rule="evenodd" stroke-width="2"
-					transform="translate(1 1)">
-				<circle cx="22" cy="22" r="6" stroke="none">
-					<animate attributeName="r" begin="1.5s" calcMode="linear" dur="3s"
-					repeatCount="indefinite" values="6;22" />
-					<animate attributeName="stroke-opacity" begin="1.5s"
-					calcMode="linear" dur="3s" repeatCount="indefinite" values="1;0" />
-					<animate attributeName="stroke-width" begin="1.5s"
-					calcMode="linear" dur="3s" repeatCount="indefinite" values="2;0" />
-				</circle>
-				<circle cx="22" cy="22" r="6" stroke="none">
-					<animate attributeName="r" begin="3s" calcMode="linear" dur="3s"
-					repeatCount="indefinite" values="6;22" />
-					<animate attributeName="stroke-opacity" begin="3s"
-					calcMode="linear" dur="3s" repeatCount="indefinite" values="1;0" />
-					<animate attributeName="stroke-width" begin="3s" calcMode="linear"
-					dur="3s" repeatCount="indefinite" values="2;0" />
-				</circle>
-				<circle cx="22" cy="22" r="8">
-					<animate attributeName="r" begin="0s" calcMode="linear" dur="1.5s"
-					repeatCount="indefinite" values="6;1;2;3;4;5;6" />
-				</circle>
-			</g>
-		</svg>
-
-			<div class="text">Loading ...</div>
-		</div>
-	</div>
-
-	<!-- ... end Preloader -->
-
-
-	<!-- Header Standard Landing  -->
 
 	<div class="header--standard header--standard-landing"
 		id="header--standard">
@@ -181,16 +178,19 @@ out.println(sbHtml);
 								<input class="form-control" name="travelBoardNo" type="hidden"
 									value="${dto.travelBoardNo}">
 								<div class="mb-3">
+									<label>닉네임</label> <input readonly="readonly"
+										class="form-control" name="nickName" value="${nickName }"
+										style="width: auto; background-color: #ffffff; border: none;">
+								</div>
+								<div class="mb-3">
 									<label for="title" class="form-label fw-bold">제목</label> <input
 										class="form-control" id="title" name="title"
 										value="${dto.title }">
 								</div>
 								<div class="mb-3">
 									<label for="tag" class="form-label fw-bold">해시태그</label> <input
-										class="form-control" id="tag" name="tag"
-										value="${dto.tag }">
+										class="form-control" id="tag" name="tag" value="${dto.tag }">
 								</div>
-
 								<!-- 내용 -->
 								<div class="mb-3">
 									<label for="content" class="form-label fw-bold">내용</label>
@@ -198,24 +198,27 @@ out.println(sbHtml);
 										rows="5" style="display: none;"></textarea>
 								</div>
 								<div id="editor">${dto.content }</div>
-								<div class="mb-3">
-									<label>닉네임</label> <input readonly="readonly"
-										class="form-control" name="nickName" value="${nickName }">
-								</div>
+
 								<!-- 태그 
 						<div class="mb-3">
 							<label for="topicTags" class="form-label fw-bold">태그</label>
 							<input type="text" class="form-control" id="topicTags" placeholder="태그를 입력하세요 (예: #맛집 #카페)">
 						</div>
 						-->
-								<!-- 등록/취소 버튼 (오른쪽 하단) -->
-								<div class="d-flex justify-content-end">
-									<button type="button" class="btn btn-sm btn-primary me-2"
-										data-oper="modify">수정</button>
-									<button type="button" class="btn btn-sm btn-primary me-2"
-										data-oper="remove">삭제</button>
-									<button type="button" class="btn btn-sm btn-secondary"
-										data-oper="list">취소</button>
+
+
+
+								<!-- 버튼 영역 -->
+								<div class="row">
+									<div class="col-12 d-flex justify-content-end"
+										style="margin-top: 20px; gap: 15px; padding-bottom: 50px; width: 100%;">
+
+										<div class="btn-group" style="margin-left: auto;">
+											<div class="btn-item" data-oper="modify">수정</div>
+											<div class="btn-item" data-oper="remove">삭제</div>
+											<div class="btn-item " data-oper="list">취소</div>
+										</div>
+									</div>
 								</div>
 							</form>
 						</div>
@@ -234,35 +237,36 @@ out.println(sbHtml);
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<!-- JS Scripts -->
-		<script src="/resources/js/jQuery/jquery-3.5.1.min.js"></script>
+	<!-- JS Scripts -->
+	<script src="/resources/js/jQuery/jquery-3.5.1.min.js"></script>
 
-		<script src="/resources/js/libs/jquery.mousewheel.min.js"></script>
-		<script src="/resources/js/libs/perfect-scrollbar.min.js"></script>
-		<script src="/resources/js/libs/imagesloaded.pkgd.min.js"></script>
-		<script src="/resources/js/libs/material.min.js"></script>
-		<script src="/resources/js/libs/moment.min.js"></script>
-		<script src="/resources/js/libs/daterangepicker.min.js"></script>
-		<script src="/resources/js/libs/isotope.pkgd.min.js"></script>
-		<script src="/resources/js/libs/ajax-pagination.min.js"></script>
-		<script src="/resources/js/libs/jquery.magnific-popup.min.js"></script>
+	<script src="/resources/js/libs/jquery.mousewheel.min.js"></script>
+	<script src="/resources/js/libs/perfect-scrollbar.min.js"></script>
+	<script src="/resources/js/libs/imagesloaded.pkgd.min.js"></script>
+	<script src="/resources/js/libs/material.min.js"></script>
+	<script src="/resources/js/libs/moment.min.js"></script>
+	<script src="/resources/js/libs/daterangepicker.min.js"></script>
+	<script src="/resources/js/libs/isotope.pkgd.min.js"></script>
+	<script src="/resources/js/libs/ajax-pagination.min.js"></script>
+	<script src="/resources/js/libs/jquery.magnific-popup.min.js"></script>
 
-		<script src="/resources/js/main.js"></script>
-		<script src="/resources/js/libs-init/libs-init.js"></script>
+	<script src="/resources/js/main.js"></script>
+	<script src="/resources/js/libs-init/libs-init.js"></script>
 
-		<script src="/resources/Bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/resources/Bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-		<!-- SVG icons loader -->
-		<script src="/resources/js/svg-loader.js"></script>
-		<!-- /SVG icons loader -->
+	<!-- SVG icons loader -->
+	<script src="/resources/js/svg-loader.js"></script>
+	<!-- /SVG icons loader -->
 
 
-		<script type="text/javascript">
+	<script type="text/javascript">
 $(function(){
 	var formObj = $("form");
 	
-	$(".btn").on("click",function(e){
+	$(".btn-item").on("click",function(e){
 		e.preventDefault(); // 기존에 갖고있는 이벤트 무효화
 		
 		let operation = $(this).data("oper");
@@ -281,41 +285,58 @@ $(function(){
 });
 </script>
 
-		<script type="text/javascript">
-	const editor = new toastui.Editor({
-	    el: document.querySelector('#editor'),      // 에디터를 적용할 요소 (컨테이너)
-	    height: '500px',                             // 에디터 영역의 높이 값 (OOOpx || auto)
-	    initialEditType: 'markdown',                 // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
-	    initialValue: '',                            // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
-	    previewStyle: 'vertical',                    // 마크다운 프리뷰 스타일 (tab || vertical)
-	    placeholder: '내용을 입력해 주세요.',
-	    hooks: {
-	        async addImageBlobHook(blob, callback) {
-	          try {
-	            const formData = new FormData();
-	            formData.append("image", blob);
-	            const response = await fetch("/tui-editor/image-upload", {
-	              method: "POST",
-	              body: formData,
-	            });
-	
-	            const filename = await response.text();
-	            console.log("서버에 저장된 파일명 : ", filename);
-	
-	            const imageUrl = `C:/tui-editor/image-print?filename=${filename}`;
-	            callback(imageUrl, "image alt attribute");
-	          } catch (error) {
-	            console.error("업로드 실패 : ", error);
-	          }
-	          
-	        }
-	    }
-	});
+	<script type="text/javascript">
+      const editor = new toastui.Editor({
+        el: document.querySelector("#editor"), // 에디터를 적용할 요소 (컨테이너)
+        height: "500px", // 에디터 영역의 높이 값 (OOOpx || auto)
+        initialEditType: "markdown", // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
+        initialValue: "", // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
+        placeholder: '내용을 입력해 주세요',
+        previewStyle: "vertical", // 마크다운 프리뷰 스타일 (tab || vertical)
+        toolbarItems: [
+          ["heading", "bold", "italic", "strike"],
+          ["hr", "quote"],
+          ["ul", "ol", "task", "indent", "outdent"],
+          ["table", "image", "link"],
+          ["code", "codeblock"],
+          ["scrollSync"],
+ 
+        ],
+        hooks: {
+            async addImageBlobHook(blob, callback) {
+              // 이미지 업로드 로직 커스텀
+              try {
+                /*
+                 * 1. 에디터에 업로드한 이미지를 FormData 객체에 저장
+                 *    (이때, 컨트롤러 uploadEditorImage 메서드의 파라미터인 'image'와 formData에 append 하는 key('image')값은 동일해야 함)
+                 */
+                const formData = new FormData();
+                formData.append("image", blob);
+
+                // 2. FileApiController - uploadEditorImage 메서드 호출
+                const response = await fetch("/editor/image-upload", {
+                  method: "POST",
+                  body: formData,
+                });
+
+                // 3. 컨트롤러에서 전달받은 디스크에 저장된 파일명
+                const filename = await response.text();
+                console.log("서버에 저장된 파일명 : ", filename);
+
+                // 4. addImageBlobHook의 callback 함수를 통해, 디스크에 저장된 이미지를 에디터에 렌더링
+                const imageUrl ="/editor/image-print?filename=" + filename;
+                callback(imageUrl, "image alt attribute");
+              } catch (error) {
+                console.error("업로드 실패 : ", error);
+              }
+            },
+          }
+      });
 </script>
 
 
-		<!-- 다국어JSON파일 불러오기 -->
-		<script>
+	<!-- 다국어JSON파일 불러오기 -->
+	<script>
 	document.getElementById('language-toggle').addEventListener('click', function(event) {
 			event.preventDefault();
 			const languageTabs = document.getElementById('language-tabs');
@@ -421,7 +442,7 @@ $(function(){
 	</script>
 
 
-		<script>
+	<script>
 	window.addEventListener('scroll', function () {
 			const header = document.getElementById('header--standard');
 			if (window.scrollY > 50) { // 50px 이상 스크롤 시
@@ -432,7 +453,5 @@ $(function(){
 	});
 	
 </script>
-</body>
-</html>
 </body>
 </html>

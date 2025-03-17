@@ -283,37 +283,113 @@ $(function(){
 		}
 		formObj.submit();
 	});
-	const editor = new toastui.Editor({
-	    el: document.querySelector('#editor'),      // 에디터를 적용할 요소 (컨테이너)
-	    height: '500px',                             // 에디터 영역의 높이 값 (OOOpx || auto)
-	    initialEditType: 'markdown',                 // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
-	    initialValue: '',                            // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
-	    previewStyle: 'vertical',                    // 마크다운 프리뷰 스타일 (tab || vertical)
-	    placeholder: '내용을 입력해 주세요.',
-	    hooks: {
-	        async addImageBlobHook(blob, callback) {
-	          try {
-	            const formData = new FormData();
-	            formData.append("image", blob);
-	            const response = await fetch("/tui-editor/image-upload", {
-	              method: "POST",
-	              body: formData,
-	            });
+</script>
+<script type="text/javascript">
+      const container = document.createElement("div");
+      container.setAttribute("class", ".toastui-editor-popup-body");
 
-	            const filename = await response.text();
-	            console.log("서버에 저장된 파일명 : ", filename);
+      container.setAttribute("style", "width : 58rem; height : 28rem");
 
-	            const imageUrl = `C:/tui-editor/image-print?filename=${filename}`;
-	            callback(imageUrl, "image alt attribute");
-	          } catch (error) {
-	            console.error("업로드 실패 : ", error);
-	          }
-	          
-	        }
-	    }
-	});
-});
+      const menu = document.createElement("div");
+      menu.setAttribute("id", "menu_wrap");
+      menu.setAttribute("class", "bg_white");
 
+      container.appendChild(menu);
+
+      const option = document.createElement("div");
+      option.setAttribute("class", "option");
+
+      menu.appendChild(option);
+
+      const wrapDiv = document.createElement("div");
+
+      option.appendChild(wrapDiv);
+
+      const form = document.createElement("form");
+      form.setAttribute("onsubmit", "searchPlaces(); return false");
+
+      wrapDiv.appendChild(form);
+
+      const formInput = document.createElement("input");
+      formInput.setAttribute("placeholder", "키워드를 입력하세요");
+      formInput.setAttribute("id", "keyword");
+      formInput.setAttribute("size", "15");
+      formInput.setAttribute("contenteditable", "true");
+      formInput.setAttribute("name", "keyword");
+
+      form.appendChild(formInput);
+
+      const hr = document.createElement("hr");
+
+      option.appendChild(hr);
+
+      let buttonText = document.createTextNode("검색하기");
+
+      const submitButton = document.createElement("button");
+      submitButton.setAttribute("type", "submit");
+      submitButton.appendChild(buttonText);
+
+      form.appendChild(submitButton);
+
+      const page = document.createElement("div");
+      page.setAttribute("id", "pagination");
+
+      const placeList = document.createElement("ul");
+      placeList.setAttribute("id", "placesList");
+
+      option.appendChild(placeList);
+      option.appendChild(page);
+
+      const editor = new toastui.Editor({
+        el: document.querySelector("#editor"), // 에디터를 적용할 요소 (컨테이너)
+        height: "500px", // 에디터 영역의 높이 값 (OOOpx || auto)
+        initialEditType: "markdown", // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
+        initialValue: "", // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
+        placeholder: '내용을 입력해 주세요',
+        previewStyle: "vertical", // 마크다운 프리뷰 스타일 (tab || vertical)
+        toolbarItems: [
+          ["heading", "bold", "italic", "strike"],
+          ["hr", "quote"],
+          ["ul", "ol", "task", "indent", "outdent"],
+          ["table", "image", "link"],
+          ["code", "codeblock"],
+          ["scrollSync"],
+ 
+        ],
+        hooks: {
+            async addImageBlobHook(blob, callback) {
+              // 이미지 업로드 로직 커스텀
+              try {
+                /*
+                 * 1. 에디터에 업로드한 이미지를 FormData 객체에 저장
+                 *    (이때, 컨트롤러 uploadEditorImage 메서드의 파라미터인 'image'와 formData에 append 하는 key('image')값은 동일해야 함)
+                 */
+                const formData = new FormData();
+                formData.append("image", blob);
+
+                // 2. FileApiController - uploadEditorImage 메서드 호출
+                const response = await fetch("/editor/image-upload", {
+                  method: "POST",
+                  body: formData,
+                });
+
+                // 3. 컨트롤러에서 전달받은 디스크에 저장된 파일명
+                const filename = await response.text();
+                console.log("서버에 저장된 파일명 : ", filename);
+
+                // 4. addImageBlobHook의 callback 함수를 통해, 디스크에 저장된 이미지를 에디터에 렌더링
+                const imageUrl ="/editor/image-print?filename=" + filename;
+                callback(imageUrl, "image alt attribute");
+              } catch (error) {
+                console.error("업로드 실패 : ", error);
+              }
+            },
+          }
+      });
+
+      document
+        .querySelector(".toastui-editor-toolbar-maps")
+        .setAttribute("onclick", "relayout()");
 </script>
 </body>
 </html>

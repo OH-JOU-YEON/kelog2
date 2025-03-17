@@ -28,39 +28,6 @@
 </head>
 <body class="landing-page">
 
-  <!-- Preloader -->
-  <div id="hellopreloader">
-    <div class="preloader">
-      <svg width="45" height="45" stroke="#fff">
-        <g fill="none" fill-rule="evenodd" stroke-width="2" transform="translate(1 1)">
-          <circle cx="22" cy="22" r="6" stroke="none">
-            <animate attributeName="r" begin="1.5s" calcMode="linear" dur="3s"
-                     repeatCount="indefinite" values="6;22" />
-            <animate attributeName="stroke-opacity" begin="1.5s" calcMode="linear" dur="3s"
-                     repeatCount="indefinite" values="1;0" />
-            <animate attributeName="stroke-width" begin="1.5s" calcMode="linear" dur="3s"
-                     repeatCount="indefinite" values="2;0" />
-          </circle>
-          <circle cx="22" cy="22" r="6" stroke="none">
-            <animate attributeName="r" begin="3s" calcMode="linear" dur="3s"
-                     repeatCount="indefinite" values="6;22" />
-            <animate attributeName="stroke-opacity" begin="3s" calcMode="linear" dur="3s"
-                     repeatCount="indefinite" values="1;0" />
-            <animate attributeName="stroke-width" begin="3s" calcMode="linear" dur="3s"
-                     repeatCount="indefinite" values="2;0" />
-          </circle>
-          <circle cx="22" cy="22" r="8">
-            <animate attributeName="r" begin="0s" calcMode="linear" dur="1.5s"
-                     repeatCount="indefinite" values="6;1;2;3;4;5;6" />
-          </circle>
-        </g>
-      </svg>
-      <div class="text">Loading ...</div>
-    </div>
-  </div>
-  <!-- ... end Preloader -->
-
-  <!-- Header Standard Landing -->
   <div class="header--standard header--standard-landing" id="header--standard">
     <div class="container">
       <div class="header--standard-wrap">
@@ -190,20 +157,70 @@
             <div class="d-flex justify-content-between align-items-center">
               <!-- 왼쪽: 수정 버튼 (작성자와 로그인 사용자가 일치할 때) -->
               <div class="text-start">
-                <c:if test="${dto.email == user.email}">
-                  <a href="/travel/modify?travelBoardNo=${dto.travelBoardNo}" class="text-decoration-none">수정</a>
-                </c:if>
+                <!-- 수정  -->
+							<c:if test="${dto.email == email}">
+								<a href="/travel/modify?travelBoardNo=${dto.travelBoardNo}"
+									class="text-decoration-none d-flex align-items-center"
+									style="margin-left: 15px;"> 
+									<img src="/resources/img/edit.png" alt="수정 아이콘"
+								    style="width: 18px; height: 18px;
+									margin-right: 5px;"> 수정
+								</a>
+							</c:if>
+                
+                
               </div>
-              <!-- 오른쪽: 좋아요/싫어요 버튼 -->
-              <div class="text-end d-flex align-items-center" style="padding-top: 30px;">
-                <p id="likeCount" class="mb-0 me-2">좋아요: ${dto.likeCnt}</p>
-                <button id="likeButton${dto.travelBoardNo}" onclick="toggleLike(${dto.travelBoardNo})" style="border: none; background: none; cursor: pointer;">
-                  <img src="/resources/img/${isliked ? 'like-filled.png' : 'like-ep.png'}" alt="좋아요" style="width: 24px; height: 24px;">
-                </button>
-                <p id="unlikeCnt" class="mb-0 ms-3 me-2">싫어요: ${dto.dislikeCnt}</p>
-                <button id="unlikeButton${dto.travelBoardNo}" onclick="toggleunLike(${dto.travelBoardNo})" style="border: none; background: none; cursor: pointer;">
-                  <img src="/resources/img/${isunliked ? 'unlike-filled.png' : 'unlike-ep.png'}" alt="싫어요" style="width: 24px; height: 24px;">
-                </button>
+              <div
+							style="display: flex; align-items: center; justify-content: flex-end; margin-top: 20px;">
+
+							<!-- 좋아요 -->
+							<div style="display: flex; align-items: center;">
+								<!-- 좋아요 카운트 (아이콘 왼쪽 정렬) -->
+								<span style="font-size: 14px; color: #666; margin-right: 8px;">
+									<span id="likeCount">${dto.likeCnt}</span>
+								</span>
+
+								<!-- 좋아요 버튼 (아래 좋아요 텍스트 추가) -->
+								<button id="likeButton${dto.travelBoardNo}"
+									onclick="toggleLike(${dto.travelBoardNo})"
+									style="border: none; background: none; cursor: pointer; display: flex; flex-direction: column; align-items: center;">
+									<img
+										src="/resources/img/${isliked ? 'like-filled.png' : 'like-ep.png'}"
+										alt="좋아요" style="width: 24px; height: 24px;"> <span
+										style="font-size: 12px; color: #666;">좋아요</span>
+									<!-- 아이콘 아래에 좋아요 텍스트 -->
+								</button>
+							</div>
+
+							<!-- 싫어요 -->
+							
+							<div style="display: flex; align-items: center;">
+								<!-- 싫어요 카운트 (아이콘 왼쪽 정렬) -->
+								<span style="font-size: 14px; color: #666; margin-right: 8px;">
+									<span id="unlikeCnt">${dto.dislikeCnt}</span>
+								</span>
+
+								<!-- 싫어요 버튼 (아래 싫어요 텍스트 추가) -->
+								<button id="unlikeButton${dto.travelBoardNo}"
+									onclick="toggleunLike(${dto.travelBoardNo})"
+									style="border: none; background: none; cursor: pointer; display: flex; flex-direction: column; align-items: center;">
+									<img
+										src="/resources/img/${isunliked  ? 'unlike-filled.png' : 'unlike-ep.png'}"
+										alt="싫어요" style="width: 24px; height: 24px;"> <span
+										style="font-size: 12px; color: #666;">싫어요</span>
+									<!-- 아이콘 아래에 싫어요 텍스트 -->
+								</button>
+							</div>
+							
+							
+							
+							
+						</div>
+
+							
+                
+                
+                
               </div>
             </div>
           </article>
@@ -331,7 +348,7 @@
             likeImg.src = '/resources/img/like-ep.png';
             currentLikeCount -= 1;
           }
-          $('#likeCount').html('좋아요: ' + currentLikeCount);
+          $('#likeCount').html(currentLikeCount);
         }
       });
     }
@@ -356,7 +373,7 @@
             unlikeImg.src = '/resources/img/unlike-ep.png';
             currentUnLikeCount -= 1;
           }
-          $('#unlikeCnt').html('싫어요: ' + currentUnLikeCount);
+          $('#unlikeCnt').html(currentUnLikeCount);
         }
       });
     }

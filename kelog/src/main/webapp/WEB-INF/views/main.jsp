@@ -310,7 +310,6 @@
 <script src="/resources/js/libs/perfect-scrollbar.min.js"></script>
 <script src="/resources/js/libs/imagesloaded.pkgd.min.js"></script>
 <script src="/resources/js/libs/material.min.js"></script>
-<script src="/resources/js/libs/selectize.min.js"></script>
 <script src="/resources/js/libs/isotope.pkgd.min.js"></script>
 <script src="/resources/js/libs/ajax-pagination.min.js"></script>
 <script src="/resources/js/libs/jquery.magnific-popup.min.js"></script>

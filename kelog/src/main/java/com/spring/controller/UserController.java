@@ -58,7 +58,7 @@ public class UserController {
 			session.setAttribute("nickName", nick);
 			session.setAttribute("uno", member.getUno());
             session.setAttribute("email", member.getEmail());
-            return "/00-MainPage";
+            return "/main";
 		}else {
 			
 			return "/oauth/google/member";
@@ -76,7 +76,7 @@ public class UserController {
 			session.setAttribute("nickName", nick);
 			session.setAttribute("uno", member.getUno());
             session.setAttribute("email", member.getEmail());
-            return "/00-MainPage";
+            return "/main";
 		}else {
 			// 로그인 실패
 			// 화면에서 로그인 실패 시 alert 띄우기 
@@ -136,7 +136,7 @@ public class UserController {
 		session.setAttribute("nickName", Name);
 		session.setAttribute("uno", user.getUno());
 		session.setAttribute("email", user.getEmail());
-		return "/00-MainPage";
+		return "/main";
 
 	}
 	@GetMapping({ "/read", "/modify" })

@@ -74,7 +74,7 @@ public class MainController {
         int tipTotal = tipService.getTotal();
         model.addAttribute("tipTotal", tipTotal);
 
-        return "/00-MainPage";
+        return "/main";
     }
 
     @PreDestroy 

@@ -2,23 +2,45 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%
-request.setCharacterEncoding("UTF-8");
 
-String url = (String) request.getAttribute("url");
-String filename = (String) request.getAttribute("filename");
-
-StringBuilder sbHtml = new StringBuilder();
-
-sbHtml.append("{");
-sbHtml.append("\"url\" : \"" + url + "\",");
-sbHtml.append("\"filename\" : \"" + filename + "\"");
-sbHtml.append("}");
-
-out.println(sbHtml);
-%>
 <!DOCTYPE html>
 <html lang="en">
+<style>
+.btn-group {
+	display: flex;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	overflow: hidden;
+	width: fit-content;
+}
+
+.btn-item, .btn-item a {
+	flex: 1;
+	text-align: center;
+	padding: 10px 20px;
+	cursor: pointer;
+	background: #fff;
+	font-size: 12px;
+	font-weight: bold;
+	transition: background 0.3s, color 0.3s;
+	text-decoration: none;
+	color: inherit;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* 버튼 경계선 */
+.btn-item:not(:last-child) {
+	border-right: 1px solid #ccc;
+}
+
+/* 호버 효과 */
+.btn-item:hover {
+	background: #f0f0f0;
+}
+}
+</style>
 <head>
 
 <title>Landing Page</title>
@@ -29,8 +51,8 @@ out.println(sbHtml);
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 
 <!-- Theme Font -->
-<link rel="preload" type="text/css" href="/resources/css/theme-font.min.css"
-	as="style">
+<link rel="preload" type="text/css"
+	href="/resources/css/theme-font.min.css" as="style">
 
 <!-- Bootstrap CSS -->
 
@@ -92,29 +114,37 @@ out.println(sbHtml);
 
 	<!-- Header Standard Landing  -->
 
-		<div class="header--standard header--standard-landing" id="header--standard">
-	<div class="container">
-		<div class="header--standard-wrap">
+	<div class="header--standard header--standard-landing"
+		id="header--standard">
+		<div class="container">
+			<div class="header--standard-wrap">
 
-			<a href="12-FavouritePage.html" class="logo"></a>
+				<a href="12-FavouritePage.html" class="logo"></a>
 				<div class="img-wrap">
-					<img loading="lazy" src="/resources/img/logo-colored-small.webp" width="34" height="34" alt="Olympus" class="logo-colored">
+					<a href="#">
+                        <img loading="lazy"
+                             src="/resources/img/logokelog.png"
+                             width="140" height="34"
+                             alt="Logo" class="logo-colored">
+                    </a>
 				</div>
 				
-			<a href="#" class="open-responsive-menu js-open-responsive-menu">
-				<svg class="olymp-menu-icon"><use xlink:href="#olymp-menu-icon"></use></svg>
-			</a>
 
-			<div class="nav nav-pills nav1 header-menu">
-				<div class="mCustomScrollbar">
-					<ul>
-						<li class="nav-item dropdown"><a
-								href="/travel/list" style="color: #000 !important;">추천
-								 게시판</a></li>
+				<a href="#" class="open-responsive-menu js-open-responsive-menu">
+					<svg class="olymp-menu-icon">
+						<use xlink:href="#olymp-menu-icon"></use></svg>
+				</a>
+
+				<div class="nav nav-pills nav1 header-menu">
+					<div class="mCustomScrollbar">
+						<ul>
+							<li class="nav-item dropdown"><a
+								href="02-RecommendPost.html" style="color: #000 !important;">여행
+									추천지</a></li>
 							<li class="nav-item dropdown dropdown-has-megamenu"><a
-								href="/blog/list" style="color: #000 !important;">블로그 게시판</a>
+								href="97-BlogPostBoard.html" style="color: #000 !important;">블로그</a>
 							</li>
-							<li class="nav-item"><a href="/tip/list"
+							<li class="nav-item"><a href="55-HoneyTipBoard.html"
 								style="color: #000 !important;">꿀팁 게시판</a></li>
 							<li class="nav-item"><a href="#"
 								style="color: #000 !important;">전국 날씨예보</a></li>
@@ -135,40 +165,20 @@ out.println(sbHtml);
 									<li><a href="#" id="english">English</a></li>
 									<li><a href="#" id="korean">한국어</a></li>
 								</ul></li>
-							<li class="login-set-item">
-							<c:choose>
-							    <c:when test="${email == null}">
-							        <a href="/login/google/login.do" class="login-user">
-							            <img src="/resources/img/login-user.png"
-							                style="width: 31px; height: 31px; filter: none;">
-							        </a>
-							    </c:when>
-							
-							    <c:otherwise>
-							        <a href="#" class="login-user">
-							            <img src="/resources/img/login-user.png"
-							                class="login-user-menu" style="filter: none;">
-							        </a>
-							        <ul class="login-drop-menu" style="display: none;">
-							        	<c:choose>
-							        		<c:when test="${user.role == 'user'}">
-							            <li><a href="/user/read?uno=${user.uno }" id="mypage">마이페이지</a></li>
-							            	</c:when>
-							            	<c:otherwise>
-							            	<li><a href="/manager/01-ManagerPage-MyPage?uno=${user.uno }" id="mypage">마이페이지</a></li>
-							            	</c:otherwise>
-							            </c:choose>
-							            <li><a href="03-Myblog.html">내 블로그</a></li>
-							            <li><a href="/login/google/revoke/token?token=${token}">로그아웃</a></li>
-							        </ul>
-							    </c:otherwise>
-							</c:choose>	
-							</li>
+							<li class="login-set-item"><a href="#" class="login-user">
+									<img src="/resources/img/login-user.png"
+									class="login-user-menu" style="filter: none;">
+							</a> <!-- 드롭다운 메뉴 -->
+								<ul class="login-drop-menu" style="display: none;">
+									<li><a href="01-ManagerPage-MyPage.html">마이페이지</a></li>
+									<li><a href="03-Myblog.html">내 블로그</a></li>
+									<li><a href="logout.html">로그아웃</a></li>
+								</ul></li>
 						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 
 
@@ -188,29 +198,37 @@ out.println(sbHtml);
 						<!-- 내부 폼 -->
 						<div class="ui-block p-4">
 							<h3 class="text-center mb-4">추천 여행지 글쓰기</h3>
-								<!-- 제목 -->
+							
+							
+						
 							<form id="fom" action="/travel/created" method="post">
 								<input type="hidden" name="email" value="${user.email}">
+								
 								<div class="mb-3">
-									<label for="title" class="form-label fw-bold">제목</label> 
-									<input class="form-control" id="title" name="title" placeholder="제목을 입력하세요">
+									<label>닉네임</label> <input readonly="readonly"
+										class="form-control" name="nickName" value="${nickName }"
+										style=" background-color: #ffffff; border: none;">
+								</div>
+								
+								<div class="mb-3">
+									<label for="title" class="form-label fw-bold">제목</label> <input
+										class="form-control" id="title" name="title"
+										placeholder="제목을 입력하세요">
 								</div>
 								<!-- 해시태그 -->
 								<div class="mb-3">
-									<label for="tag" class="form-label fw-bold">해시태그</label> 
-									<input class="form-control" id="tag" name="tag" placeholder="해시태그를 입력해주세요">
-								</div>								
+									<label for="tag" class="form-label fw-bold">해시태그</label> <input
+										class="form-control" id="tag" name="tag"
+										placeholder="해시태그를 입력해주세요">
+								</div>
 								<!-- 내용 -->
 								<div class="mb-3">
 									<label for="content" class="form-label fw-bold">내용</label>
-									<textarea class="form-control" id="content" name="content" rows="5"
-										style="display: none;"></textarea>
+									<textarea class="form-control" id="content" name="content"
+										rows="5" style="display: none;"></textarea>
 								</div>
 								<div id="editor"></div>
-								<div class="mb-3">
-									<label>닉네임</label> <input readonly="readonly"
-										class="form-control" name="nickName" value="${nickName }">
-								</div>
+								
 								<!-- 태그 
 						<div class="mb-3">
 							<label for="topicTags" class="form-label fw-bold">태그</label>
@@ -218,14 +236,20 @@ out.println(sbHtml);
 						</div>
 						-->
 								<!-- 등록/취소 버튼 (오른쪽 하단) -->
-								<div class="d-flex justify-content-end">
-									<button type="button" id="submitBtn"
-										class="btn btn-sm btn-primary me-2">등록</button>
-									<a href="/travel/list" class="btn btn-sm btn-secondary">취소</a>
+								<div class="row">
+									<div class="col-12 d-flex justify-content-end"
+										style="margin-top: 20px; gap: 15px; padding-bottom: 50px; width: 100%;">
+										<div class="btn-group" style="margin-left: auto;">
+											<div id="submitBtn" class="btn-item">등록</div>
+											<a href="/travel/list" class="btn-item">취소</a>
+										</div>
+									</div>
 								</div>
 							</form>
 						</div>
 					</div>
+
+
 
 					<!-- 하단 푸터 -->
 					<footer class="py-4 mt-5">
@@ -262,37 +286,55 @@ out.println(sbHtml);
 		<!-- SVG icons loader -->
 		<script src="/resources/js/svg-loader.js"></script>
 		<!-- /SVG icons loader -->
-		<script type="text/javascript">
-const editor = new toastui.Editor({
-    el: document.querySelector('#editor'),      // 에디터를 적용할 요소 (컨테이너)
-    height: '500px',                             // 에디터 영역의 높이 값 (OOOpx || auto)
-    initialEditType: 'markdown',                 // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
-    initialValue: '',                            // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
-    previewStyle: 'vertical',                    // 마크다운 프리뷰 스타일 (tab || vertical)
-    placeholder: '내용을 입력해 주세요.',
-    hooks: {
-        async addImageBlobHook(blob, callback) {
-          try {
-            const formData = new FormData();
-            formData.append("image", blob);
-            const response = await fetch("/tui-editor/image-upload", {
-              method: "POST",
-              body: formData,
-            });
+<script type="text/javascript">
+      const editor = new toastui.Editor({
+        el: document.querySelector("#editor"), // 에디터를 적용할 요소 (컨테이너)
+        height: "500px", // 에디터 영역의 높이 값 (OOOpx || auto)
+        initialEditType: "markdown", // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
+        initialValue: "", // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
+        placeholder: '내용을 입력해 주세요',
+        previewStyle: "vertical", // 마크다운 프리뷰 스타일 (tab || vertical)
+        toolbarItems: [
+          ["heading", "bold", "italic", "strike"],
+          ["hr", "quote"],
+          ["ul", "ol", "task", "indent", "outdent"],
+          ["table", "image", "link"],
+          ["code", "codeblock"],
+          ["scrollSync"],
+ 
+        ],
+        hooks: {
+            async addImageBlobHook(blob, callback) {
+              // 이미지 업로드 로직 커스텀
+              try {
+                /*
+                 * 1. 에디터에 업로드한 이미지를 FormData 객체에 저장
+                 *    (이때, 컨트롤러 uploadEditorImage 메서드의 파라미터인 'image'와 formData에 append 하는 key('image')값은 동일해야 함)
+                 */
+                const formData = new FormData();
+                formData.append("image", blob);
 
-            const filename = await response.text();
-            console.log("서버에 저장된 파일명 : ", filename);
+                // 2. FileApiController - uploadEditorImage 메서드 호출
+                const response = await fetch("/editor/image-upload", {
+                  method: "POST",
+                  body: formData,
+                });
 
-            const imageUrl = `C:/tui-editor/image-print?filename=${filename}`;
-            callback(imageUrl, "image alt attribute");
-          } catch (error) {
-            console.error("업로드 실패 : ", error);
+                // 3. 컨트롤러에서 전달받은 디스크에 저장된 파일명
+                const filename = await response.text();
+                console.log("서버에 저장된 파일명 : ", filename);
+
+                // 4. addImageBlobHook의 callback 함수를 통해, 디스크에 저장된 이미지를 에디터에 렌더링
+                const imageUrl ="/editor/image-print?filename=" + filename;
+                callback(imageUrl, "image alt attribute");
+              } catch (error) {
+                console.error("업로드 실패 : ", error);
+              }
+            },
           }
-          
-        }
-    }
-});
-
+      });
+</script>
+<script type="text/javascript">
 // 폼 제출 전에 Editor의 내용을 textarea에 저장
 $('#submitBtn').on('click', function() {
 	// 에디터의 HTML 값을 숨겨진 textarea에 저장
@@ -317,109 +359,110 @@ $('#submitBtn').on('click', function() {
 </script>
 
 		<!-- 다국어JSON파일 불러오기 -->
-<script>
-document.getElementById('language-toggle').addEventListener('click', function(event) {
-    event.preventDefault();
-    const languageTabs = document.getElementById('language-tabs');
-    
-    // 로그인 드롭다운이 열려 있으면 닫기 (선택적)
-    const dropdownMenu = document.querySelector('.login-drop-menu');
-    if (dropdownMenu && dropdownMenu.style.display === 'block') {
-        dropdownMenu.style.display = 'none';
-    }
-
-    // 언어 탭 토글 (email 체크 없이 항상 동작)
-    if (languageTabs.style.display === 'block') {
-        languageTabs.style.display = 'none';
-    } else {
-        languageTabs.style.display = 'block';
-    }
-});
-
-document.getElementById('english').addEventListener('click', function(event) {
-    event.preventDefault();
-    setLanguage('en');
-    loadLanguage('en');
-});
-
-document.getElementById('korean').addEventListener('click', function(event) {
-    event.preventDefault();
-    setLanguage('kr');
-    loadLanguage('kr');
-});
-
-function setLanguage(language) {
-    const tabs = document.querySelectorAll('.language-tabs li a');
-    tabs.forEach(tab => {
-        tab.classList.remove('selected');
-    });
-
-    if (language === 'en') {
-        document.getElementById('english').classList.add('selected');
-    } else if (language === 'kr') {
-        document.getElementById('korean').classList.add('selected');
-    }
-}
-
-function loadLanguage(language) {
-    const filePath = `path/to/lang/${language}.json`;
-    fetch(filePath)
-        .then(response => response.json())
-        .then(data => {
-            updatePageText(data);
-        })
-        .catch(error => console.error('Error loading language file:', error));
-
-    document.getElementById('language-tabs').style.display = 'none';
-}
-
-function updatePageText(data) {
-    document.querySelector('.logo-title').textContent = data.logoTitle;
-    document.querySelector('.sub-title').textContent = data.subTitle;
-    document.querySelector('.title').textContent = data.recommendedPosts;
-    document.querySelector('.post-title').textContent = data.postTitle;
-    document.querySelector('.post-content').textContent = data.postContent;
-}
-
-// 로그인 버튼과 드롭다운 메뉴 가져오기
-const loginButton = document.querySelector('.login-user');
-const loginDropdownMenu = document.querySelector('.login-drop-menu');
-var email = '${email}'; // JSP에서 가져온 email 값
-
-if (loginButton) {
-    loginButton.addEventListener('click', function(event) {
-        if (email) { // email이 있을 때만 드롭다운 토글
-            event.preventDefault();
-            const languageTabs = document.getElementById('language-tabs');
-            if (languageTabs.style.display === 'block') {
-                languageTabs.style.display = 'none';
-            }
-            const isMenuVisible = loginDropdownMenu.style.display === 'block';
-            loginDropdownMenu.style.display = isMenuVisible ? 'none' : 'block';
-        }
-        // email이 null이면 기본 동작(href 이동)이 실행됨
-    });
-}
-
-// 페이지 클릭 시 드롭다운 메뉴 숨기기 (email 체크 제거)
-document.addEventListener('click', function(event) {
-    const languageTabs = document.getElementById('language-tabs');
-    const dropdownMenu = document.querySelector('.login-drop-menu');
-
-    // 언어 탭 외부 클릭 시 닫기
-    if (!document.querySelector('.change-lang').contains(event.target) && 
-        !languageTabs.contains(event.target)) {
-        languageTabs.style.display = 'none';
-    }
-
-    // 로그인 드롭다운 외부 클릭 시 닫기 (email이 있을 때만 적용)
-    if (email && dropdownMenu && 
-        !loginButton.contains(event.target) && 
-        !dropdownMenu.contains(event.target)) {
-        dropdownMenu.style.display = 'none';
-    }
-});
-</script>
+		<script>
+	document.getElementById('language-toggle').addEventListener('click', function(event) {
+			event.preventDefault();
+			const languageTabs = document.getElementById('language-tabs');
+			
+			// 로그인 드롭다운이 열려 있으면 닫기
+			const dropdownMenu = document.querySelector('.login-drop-menu');
+			if (dropdownMenu.style.display === 'block') {
+					dropdownMenu.style.display = 'none';
+			}
+	
+			// 언어 탭이 열려 있으면 닫고, 그렇지 않으면 열기
+			if (languageTabs.style.display === 'block') {
+					languageTabs.style.display = 'none';
+			} else {
+					languageTabs.style.display = 'block';
+			}
+	});
+	
+	document.getElementById('english').addEventListener('click', function(event) {
+			event.preventDefault();
+			setLanguage('en');
+			loadLanguage('en');
+	});
+	
+	document.getElementById('korean').addEventListener('click', function(event) {
+			event.preventDefault();
+			setLanguage('kr');
+			loadLanguage('kr');
+	});
+	
+	function setLanguage(language) {
+			// 선택된 언어 강조
+			const tabs = document.querySelectorAll('.language-tabs li a');
+			tabs.forEach(tab => {
+					tab.classList.remove('selected'); // 기존 선택 해제
+			});
+	
+			if (language === 'en') {
+					document.getElementById('english').classList.add('selected'); // 영어 선택시 강조
+			} else if (language === 'kr') {
+					document.getElementById('korean').classList.add('selected'); // 한국어 선택시 강조
+			}
+	}
+	
+	function loadLanguage(language) {
+			const filePath = `path/to/lang/${language}.json`;  // 언어 파일 경로
+	
+			// Fetch JSON 파일
+			fetch(filePath)
+					.then(response => response.json())
+					.then(data => {
+							// JSON 데이터를 사용하여 페이지 텍스트를 변경
+							updatePageText(data);
+					})
+					.catch(error => console.error('Error loading language file:', error));
+	
+			// 언어 탭 닫기
+			document.getElementById('language-tabs').style.display = 'none';
+	}
+	
+	function updatePageText(data) {
+			// JSON 파일에서 불러온 데이터로 페이지 내용을 업데이트
+			document.querySelector('.logo-title').textContent = data.logoTitle;
+			document.querySelector('.sub-title').textContent = data.subTitle;
+			document.querySelector('.title').textContent = data.recommendedPosts;
+			document.querySelector('.post-title').textContent = data.postTitle;
+			document.querySelector('.post-content').textContent = data.postContent;
+	}
+	
+	// 로그인 버튼과 드롭다운 메뉴 가져오기
+	const loginButton = document.querySelector('.login-user');
+	const loginDropdownMenu = document.querySelector('.login-drop-menu');
+	
+	// 로그인 버튼 클릭 시 드롭다운 메뉴 토글
+	loginButton.addEventListener('click', function(event) {
+			event.preventDefault(); // 링크의 기본 동작 방지 (페이지 이동 방지)
+	
+			// 언어 드롭다운 메뉴가 열려 있으면 닫기
+			const languageTabs = document.getElementById('language-tabs');
+			if (languageTabs.style.display === 'block') {
+					languageTabs.style.display = 'none';
+			}
+	
+			// 로그인 드롭다운 메뉴가 표시되어 있으면 숨기고, 아니면 표시
+			const isMenuVisible = loginDropdownMenu.style.display === 'block';
+			loginDropdownMenu.style.display = isMenuVisible ? 'none' : 'block';
+	});
+	
+	// 페이지 클릭 시 드롭다운 메뉴 숨기기 (드롭다운 외부 클릭 시)
+	document.addEventListener('click', function(event) {
+			// 클릭한 곳이 로그인 버튼이나 드롭다운 메뉴가 아니면 드롭다운 숨기기
+			if (!loginButton.contains(event.target) && !loginDropdownMenu.contains(event.target)) {
+					loginDropdownMenu.style.display = 'none';
+			}
+	
+			// 클릭한 곳이 언어 버튼이나 드롭다운 메뉴가 아니면 언어 드롭다운 메뉴 숨기기
+			const languageTabs = document.getElementById('language-tabs');
+			if (!document.querySelector('.change-lang').contains(event.target) && !languageTabs.contains(event.target)) {
+					languageTabs.style.display = 'none';
+			}
+	});
+	
+	</script>
 
 
 		<script>
@@ -433,7 +476,5 @@ document.addEventListener('click', function(event) {
 	});
 	
 	</script>
-</body>
-</html>
 </body>
 </html>

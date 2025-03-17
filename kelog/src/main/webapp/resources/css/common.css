@@ -21,7 +21,7 @@ header .inner nav ul.sub_menu li:first-child{position: relative;}
 /* header .inner nav ul.sub_menu li:first-child::after{content: ''; display: inline-block; width: 1px; height: 16px; background: rgba(255,255,255,0.6); position: absolute; top: 50%; transform: translateY(-50%); right: -18px;} */
 header.header_black .inner nav ul.sub_menu li:first-child::after{background: rgba(26, 26, 26, 0.6);}
 header .inner nav ul.sub_menu li a.on{position: relative;}
-header .inner nav ul.sub_menu li a.on::after{content: ''; position: absolute; bottom: -2px; left: 0; display: block; width: 100%; height: 2px; background-color: #7A45E5; }
+header .inner nav ul.sub_menu li a.on::after{content: ''; position: absolute; bottom: -2px; left: 0; display: block; width: 100%; height: 2px; background-color: ##ffffff; }
 
 /* 서브 헤더 - 스크롤 */
 header .inner nav.scroll_theme{display: none; position: fixed; height: 80px; top:0; left:0; z-index: 99; width: 100%; background: #fff;}
@@ -34,7 +34,7 @@ header .inner nav .scroll .main_search{background-image: url(https://kfescdn.vis
 
 /* footer */
 .scroll_footer{display: block;}
-footer{width: 100%; background: #FFFFFF; border-top: solid 1px #E6E6EB; }
+footer{width: 100%; background: #ffffff; border-top: solid 1px #E6E6EB; }
 footer .footer_inner{max-width: 928px; margin:0 auto;}
 footer .footer_inner .top_util{padding-bottom: 17px; border-bottom: solid 1px #E6E6EB ;}
 footer .footer_inner .top_util_ul{padding-top: 37px;}
