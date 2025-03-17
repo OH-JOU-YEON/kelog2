@@ -6,12 +6,31 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import com.spring.domain.BlogPostDTO;
 import com.spring.domain.Criteria;
 import com.spring.domain.ReportDTO;
 import com.spring.domain.TipPostDTO;
 
 
 public interface TipPostMapper {
+<<<<<<< HEAD
+=======
+	
+	public void insert(TipPostDTO dto);
+	
+	@Select("SELECT * FROM tipboard ORDER BY tipBoardNo DESC")
+	public List<TipPostDTO> readAll();
+	
+	public TipPostDTO read(int tipBoardNo);
+	
+	public int update(TipPostDTO dto);
+	
+	@Select("SELECT * FROM tipPost WHERE tipPostNo = #{tipPostNo} ")
+	public TipPostDTO findByTipPostNo(int tipPostNo); 
+	
+	@Delete("DELETE FROM tipboard WHERE tipBoardNo = #{tipBoardNo}")	
+	public int delete(int tipBoardNo);
+>>>>>>> origin/save2
 
     public void insert(TipPostDTO dto);
 

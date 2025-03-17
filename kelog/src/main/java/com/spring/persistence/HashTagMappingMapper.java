@@ -1,5 +1,7 @@
 package com.spring.persistence;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 
@@ -15,7 +17,8 @@ public interface HashTagMappingMapper {
 	@Delete("DELETE FROM hashTagMapping WHERE indexNo = #{indexNo}")	
 	public int delete(int indexNo);
 	
-	
+
+	public List<HashTagMappingDTO> findAllHashTagMappingByHashNo(int hashNo); 
 
 	
 	public HashTagMappingDTO findByHashNoAndBlogNo(int hashNo, int blogNo); 

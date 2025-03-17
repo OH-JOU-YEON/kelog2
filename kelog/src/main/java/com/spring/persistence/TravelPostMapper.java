@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.domain.Criteria;
 import com.spring.domain.Criteria2;
+import com.spring.domain.TipPostDTO;
 import com.spring.domain.TravelPostDTO;
 
 public interface TravelPostMapper {
@@ -27,6 +28,9 @@ public interface TravelPostMapper {
 
 	@Select("SELECT * FROM travelpost ORDER BY travelBoardNo DESC ")
 	public List<TravelPostDTO> readAll();
+	
+	@Select("SELECT * FROM travelPost WHERE travelBoardNo = #{travelBoardtNo} ")
+	public TravelPostDTO findBytravelPostNo(int travelBoardNo); 
 
 	// 좋아요
 	

@@ -32,6 +32,9 @@ public interface BlogPostMapper {
 	@Select("SELECT * FROM blogPost WHERE title = #{title} ")
 	public BlogPostDTO findByTitle(String title); 
 	
+	@Select("SELECT * FROM blogPost WHERE blogPostNo = #{blogPostNo} ")
+	public BlogPostDTO findByBlogPostNo(int blogPostNo); 
+	
 	@Select("SELECT * FROM blogPost WHERE blogNo = #{blogNo} ")
 	public List<BlogPostDTO> findAllByBlogNo(int blogNo);
 
