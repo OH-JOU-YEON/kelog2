@@ -26,19 +26,6 @@ public class RoutineController {
 
 	private final RoutineService service;
 
-	// 내 블로그의 일정 페이지
-	@GetMapping("/exchange")
-	public String getEvents(Model model, HttpSession session) {
-		String email = (String) session.getAttribute("email");
-
-		if (email != null) {
-			// 로그인된 사용자의 일정만 가져옴
-			List<RoutineDTO> dto = service.getdtoByEmail(email);
-			model.addAttribute("dto", dto);
-		}
-		return "/kelogs/exchange"; // 일정 페이지
-	}
-
 	// 일정 저장
 	@PostMapping("/addEvent")
 	@ResponseBody

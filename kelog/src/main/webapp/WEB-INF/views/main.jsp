@@ -264,7 +264,6 @@
 									</div>
 								</div>
 								<p>${fn:substring(blog.content, 0, 50)}...
-									<a href="#" class="link-post">${blog.tag}</a>
 								</p> <span class="post__date"> <time class="published"
 										datetime="${blog.regDate}">
 										<fmt:formatDate value="${blog.regDate}"
@@ -278,12 +277,11 @@
 			</div>
 			<article class="hentry post">
 				<div>
-					<c:forEach items="${blogList}" var="blog">
-						<a href="#" class="link-post">${blog.tag}</a>
-					</c:forEach>
 				</div>
 				<div class="post-additional-info inline-items">
-					<p>추천 해시태그 들어갈 자리</p>
+					<c:forEach items="${blogList}" var="blog">
+						<p class="link-post">${blog.tag}</p>
+					</c:forEach>
 				</div>
 			</article>
 			<div class="mCustomScrollbar ps ps--theme_default ps--active-y"
@@ -316,7 +314,7 @@
 	<script src="/resources/Bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="/resources/js/svg-loader.js"></script>
 
-	<script>
+<script>
 document.getElementById('language-toggle').addEventListener('click', function(event) {
     event.preventDefault();
     const languageTabs = document.getElementById('language-tabs');

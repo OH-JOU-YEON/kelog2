@@ -12,14 +12,14 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="Bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="/resources/Bootstrap/dist/css/bootstrap.css">
   <!-- main.css (CalendarAndEvents + ProfilePage 스타일) -->
-  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="/resources/css/main.css">
 
   <!-- 달력에 필요한 라이브러리 (moment, fullcalendar 등) -->
-  <script src="js/libs/moment.min.js"></script>
-  <script src="js/libs/fullcalendar.min.js"></script>
-  <script src="js/main.js"></script>
+  <script src="/resources/js/libs/moment.min.js"></script>
+  <script src="/resources/js/libs/fullcalendar.min.js"></script>
+  <script src="/resources/js/main.js"></script>
 
   <style>
     body {
@@ -158,7 +158,7 @@
       <div class="header--standard-wrap">
         <a href="12-FavouritePage.html" class="logo"></a>
           <div class="img-wrap">
-            <img loading="lazy" src="img/logo-colored-small.webp" width="34" height="34" alt="Olympus" class="logo-colored">
+            <img loading="lazy" src="/resources/img/logo-colored-small.webp" width="34" height="34" alt="Olympus" class="logo-colored">
           </div>
           <div class="title-block">
             <h6 class="logo-title">로고 들어갈 자리</h6>
@@ -172,28 +172,26 @@
         <div class="nav nav-pills nav1 header-menu">
           <div class="mCustomScrollbar">
             <ul>
-              <li class="nav-item"><a href="00-MainPage.html">메인 페이지</a></li>
-              <li class="nav-item dropdown"><a href="02-RecommendPost.html">여행 추천지</a></li>
-              <li class="nav-item dropdown dropdown-has-megamenu"><a href="97-BlogPostBoard.html">블로그 게시판</a></li>
-              <li class="nav-item"><a href="03-Myblog.html">내 블로그</a></li>
-              <li class="nav-item"><a href="55-HoneyTipBoard.html">꿀팁 게시판</a></li>
-              <li class="nav-item"><a href="#">전국 날씨예보</a></li>
+              <li class="nav-item dropdown"><a href="/travel/list" style="color: #000 !important;">여행 추천지</a></li>
+              <li class="nav-item dropdown dropdown-has-megamenu"><a href="/blog/list" style="color: #000 !important;">블로그</a></li>
+              <li class="nav-item"><a href="/tip/list" style="color: #000 !important;">꿀팁 게시판</a></li>
+              <li class="nav-item"><a href="#" style="color: #000 !important;">전국 날씨예보</a></li>
               <li class="close-responsive-menu js-close-responsive-menu">
                 <svg class="olymp-close-icon"><use xlink:href="#olymp-close-icon"></use></svg>
               </li>
               <li class="nav-item js-expanded-menu">
                 <a href="#" class="menu-link">
-                  <img src="img/menu-bar.png" style="width: 26px; height: 26px;">
+                  <img src="/resources/img/menu-bar.png" style="width: 26px; height: 26px;">
                 </a>
               </li>
               <li class="lang-set-item">
                 <a href="#" class="change-lang">
-                  <img src="img/changeLang.png" style="width: 26px; height: 26px;">
+                  <img src="/resources/img/changeLang.png" style="width: 26px; height: 26px;">
                 </a>
               </li>
               <li class="login-set-item">
                 <a href="01-LoginPage.html" class="login-user">
-                  <img src="img/login-user.png" class="login-user-menu">
+                  <img src="/resources/img/login-user.png" class="login-user-menu">
                 </a>
               </li>
             </ul>
@@ -205,7 +203,7 @@
 
   <!-- 배너 -->
   <section class="banner">
-    <img src="img/mainBoard.jpg" alt="배너이미지">
+    <img src="/resources/img/mainBoard.jpg" alt="배너이미지">
   </section>
 
   <!-- 메인 컨테이너 -->
@@ -216,7 +214,7 @@
         <div class="profile-card">
           <div class="card-header">내 프로필</div>
           <div class="card-body text-center">
-            <img src="img/author-page.webp" alt="profile" class="rounded-circle" 
+            <img src="/resources/img/author-page.webp" alt="profile" class="rounded-circle" 
                  style="width:80px; height:80px; object-fit:cover;">
             <h6 class="mt-2">닉네임(사용자 ID)</h6>
             <p class="text-muted">간단한 자기소개 텍스트...</p>
@@ -274,19 +272,19 @@
   </footer>
 
   <!-- Bootstrap & jQuery -->
-  <script src="Bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/jQuery/jquery-3.5.1.min.js"></script>
-  <script src="js/libs/jquery.mousewheel.min.js"></script>
-  <script src="js/libs/perfect-scrollbar.min.js"></script>
-  <script src="js/libs/imagesloaded.pkgd.min.js"></script>
-  <script src="js/libs/material.min.js"></script>
-  <script src="js/libs/selectize.min.js"></script>
-  <script src="js/libs/isotope.pkgd.min.js"></script>
-  <script src="js/libs/ajax-pagination.min.js"></script>
-  <script src="js/libs/jquery.magnific-popup.min.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/libs-init/libs-init.js"></script>
-  <script src="js/svg-loader.js"></script>
+  <script src="/resources/Bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/resources/js/jQuery/jquery-3.5.1.min.js"></script>
+  <script src="/resources/js/libs/jquery.mousewheel.min.js"></script>
+  <script src="/resources/s/libs/perfect-scrollbar.min.js"></script>
+  <script src="/resources/js/libs/imagesloaded.pkgd.min.js"></script>
+  <script src="/resources/js/libs/material.min.js"></script>
+  <script src="j/resources/s/libs/selectize.min.js"></script>
+  <script src="/resources/js/libs/isotope.pkgd.min.js"></script>
+  <script src="/resources/js/libs/ajax-pagination.min.js"></script>
+  <script src="/resources/js/libs/jquery.magnific-popup.min.js"></script>
+  <script src="/resources/js/main.js"></script>
+  <script src="/resources/js/libs-init/libs-init.js"></script>
+  <script src="/resources/js/svg-loader.js"></script>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=04720162558616bc3b85cfe657ce599d&libraries=services"></script>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
@@ -300,10 +298,10 @@ var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니
 // 마커를 표시할 위치와 title 객체 배열입니다 
 var positions = new Array(); 
 
-<c:foreach items="${navs}" var="item">
+<c:forEach items="${navs}" var="item">
 positions.push({title:${item.addName},
 	latlng: new kakao.maps.LatLng(${item.latitude},${item.longitude})});
-</c:foreach>
+</c:forEach>
 
 // 마커 이미지의 이미지 주소입니다
 var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 

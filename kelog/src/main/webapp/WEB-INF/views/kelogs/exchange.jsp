@@ -224,7 +224,7 @@ body {
 									<img src="/resources/img/changeLang.png"
 									style="width: 26px; height: 26px;">
 							</a></li>
-							<li class="login-set-item"><a href="01-LoginPage.html"
+							<li class="login-set-item"><a href="/01-LoginPage.html"
 								class="login-user"> <img src="/resources/img/login-user.png"
 									class="login-user-menu">
 							</a></li>
@@ -323,10 +323,9 @@ body {
 
 				<!-- 우측 탭 버튼 목록 -->
 				<ul class="ui-tabs">
-					<li><a href="#" onclick="showTab(event, 'tab-post')">게시글</a></li>
-					<li><a href="#" onclick="showTab(event, 'tab-map')">지도</a></li>
-					<li class="active"><a href="#"
-						onclick="showTab(event, 'tab-plan')">일정계획</a></li>
+					<li><a href="/Myblog">게시글</a></li>
+					<li><a href="/kelogs/${bd.blogName }/myMap">지도</a></li>
+					<li class="active"><a href="/kelogs/${bd.blogName }/logs">일정계획</a></li>
 				</ul>
 			</div>
 		</div>

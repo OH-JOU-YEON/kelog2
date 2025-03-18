@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.spring.domain.BlogDTO;
 import com.spring.domain.Criteria;
 import com.spring.domain.NavAddressDTO;
+import com.spring.domain.RoutineDTO;
 import com.spring.domain.DTOS.BlogProfileDTO;
 import com.spring.domain.DTOS.logDTO;
 import com.spring.service.BlogServiceImpl;
+import com.spring.service.RoutineService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,7 +25,8 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class BlogController {
 	
-	private final BlogServiceImpl blogService; 
+	private final BlogServiceImpl blogService;
+	private final RoutineService service;
 	
 	
 	
@@ -65,10 +68,15 @@ public class BlogController {
 	}
 	
 	@GetMapping("/kelogs/{blogName}/logs")
-	public String logMapping(Model model, HttpServletRequest request, @PathVariable String blogName) {
-		
-		return "/kelogs/exchange"; 
-		
+	public String logMapping(Model model, HttpSession session, HttpServletRequest request, @PathVariable String blogName) {
+		String email = (String) session.getAttribute("email");
+
+		if (email != null) {
+			// 로그인된 사용자의 일정만 가져옴
+			List<RoutineDTO> dto = service.getdtoByEmail(email);
+			model.addAttribute("dto", dto);
+		}
+		return "/kelogs/exchange"; // 일정 페이지
 	}
 	
 	@GetMapping("/Myblog")

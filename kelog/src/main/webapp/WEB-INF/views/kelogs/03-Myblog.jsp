@@ -5,51 +5,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8">
+<title>Profile + Calendar with Events Popup</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<title>내 블로그 글 작성</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="/resources/Bootstrap/dist/css/bootstrap.css">
 
-	<!-- Required meta tags always come first -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
+<!-- main.css (CalendarAndEvents + ProfilePage 스타일) -->
+<link rel="stylesheet" href="/resources/css/main.css">
 
-	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<!-- 달력에 필요한 라이브러리 (moment, fullcalendar 등) -->
+<script src="/resources/js/libs/moment.min.js"></script>
+<script src="/resources/js/libs/fullcalendar.min.js"></script>
+<script src="/resources/js/main.js"></script>
 
-	<!-- Theme Font -->
-	<link rel="preload" type="text/css" href="/resources/css/theme-font.min.css" as="style">
+<style>
+body {
+	background-color: #edf2f6;
+}
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" type="text/css" href="/resources/Bootstrap/dist/css/bootstrap.css">
+.banner {
+	position: relative;
+	margin-bottom: 2rem;
+	overflow: hidden;
+}
 
-	<!-- Main Styles CSS -->
-	<link rel="stylesheet" type="text/css" href="/resources/css/main.css">
+.banner img {
+	width: 100%;
+	max-height: 400px;
+	object-fit: cover;
+	display: block;
+}
 
-	<!-- Main RTL CSS -->
-	<!--<link rel="stylesheet" type="text/css" href="css/rtl.min.css">-->
+.main-container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 4rem;
+}
 
+.profile-column {
+	padding-right: 2rem;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #fff;
+	padding: 20px;
+	margin-top: 25px;
+}
+
+.profile-card, .calendar-card {
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #fff;
+	margin-bottom: 3rem;
+	margin-top: 1rem;
+}
+
+.profile-card .card-header, .calendar-card .card-header {
+	padding: 10px 16px;
+	border-bottom: 1px solid #ddd;
+	font-weight: 600;
+	background-color: #f2f2f2;
+}
+
+.profile-card .card-body, .calendar-card .card-body {
+	padding: 16px;
+}
+
+.right-column {
+	display: flex;
+	align-items: flex-start;
+	padding-left: 3rem;
+	margin-top: 25px;
+}
+
+.posts-wrapper {
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #fff;
+	padding: 30px 30px 35px 30px;
+	flex: 1;
+	min-width: 700px;
+	position: relative;
+	left: 20px;
+}
+
+.post-card {
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 16px;
+	margin-bottom: 3rem;
+	margin-top: 2rem;
+	height: 200px;
+	background-color: #fff;
+}
+
+.ui-tabs {
+	list-style: none;
+	margin: 0 0 0 1rem;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.ui-tabs li a {
+	display: block;
+	text-decoration: none;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding: 10px 16px;
+	background: #f2f2f2;
+	transition: background 0.2s;
+	color: #333;
+	font-size: 14px;
+	text-align: center;
+	white-space: nowrap;
+}
+
+.ui-tabs li a:hover {
+	background: #e2e2e2;
+}
+
+.ui-tabs li.active a {
+	background: #fff;
+	font-weight: 600;
+	border-right-color: #ccc;
+}
+
+.more-icon {
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
+	transition: transform 0.2s;
+}
+
+.more-icon:hover {
+	transform: scale(1.1);
+}
+
+@media ( max-width : 991px) {
+	.right-column {
+		flex-direction: row;
+		padding-left: 0;
+		flex-wrap: nowrap;
+	}
+	.posts-wrapper {
+		flex: 4;
+		min-width: 0;
+		width: 100%;
+		left: 0;
+		padding: 15px;
+	}
+	.ui-tabs {
+		margin: 0 0 0 1rem;
+		flex: 1;
+		width: auto;
+	}
+	.ui-tabs li a {
+		padding: 5px 8px;
+		font-size: 10px;
+	}
+}
+</style>
 </head>
-<body class="page-has-left-panels page-has-right-panels">
 
-
-<div class="header--standard header--standard-landing" id="header--standard">
-	<div class="container">
-		<div class="header--standard-wrap">
-
-			<a href="/main" class="logo"></a>
+<body>
+	<!-- Header -->
+	<div class="header--standard header--standard-landing"
+		id="header--standard">
+		<div class="container">
+			<div class="header--standard-wrap">
+				<a href="/main" class="logo"></a>
 				<div class="img-wrap">
 					<a href="/main"><img loading="lazy"
 						src="/resources/img/logokelog.png" width="140" height="34"
 						alt="Olympus" class="logo-colored"></a>
 				</div>
-				
-			<a href="#" class="open-responsive-menu js-open-responsive-menu">
-				<svg class="olymp-menu-icon"><use xlink:href="#olymp-menu-icon"></use></svg>
-			</a>
+				<div class="search-container">
+					<input type="text" placeholder="검색어를 입력하세요" id="search-input">
+				</div>
+				<a href="#" class="open-responsive-menu js-open-responsive-menu">
+					<svg class="olymp-menu-icon">
+						<use xlink:href="#olymp-menu-icon"></use></svg>
+				</a>
 
-			<div class="nav nav-pills nav1 header-menu">
-				<div class="mCustomScrollbar">
-					<ul>
-						<li class="nav-item dropdown"><a href="/travel/list"
+				<div class="nav nav-pills nav1 header-menu">
+					<div class="mCustomScrollbar">
+						<ul>
+							<li class="nav-item dropdown"><a href="/travel/list"
 								style="color: #000 !important;">여행 추천지</a></li>
 							<li class="nav-item dropdown dropdown-has-megamenu"><a
 								href="/blog/list" style="color: #000 !important;">블로그</a></li>
@@ -103,151 +249,140 @@
 									</c:otherwise>
 								</c:choose></li>
 						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
-<!-- ... end Header-BP -->
-<div class="main-header-post" style="position: relative;">
-	<img loading="lazy" src="img/MyBlogMain.jpg" alt="author" style="width: 1920px; height: 700px;">
-	
-	<!-- 3개의 탭 -->
-	<div class="tabs" style="position: absolute; bottom: 10px; right: 10px; display: flex; z-index: 10;">
-		<a href="/Myblog" class="btn btn-primary btn-md-2" style="background-color: #9edbff; border-color: #9eb3ff; margin-left: 5px;">게시물</a>
-		<a href="/kelogs/${bd.blogName }/myMap" class="btn btn-primary btn-md-2" style="background-color: #9edbff; border-color: #9eb3ff; margin-left: 5px;">지도</a>
-		<a href="/kelogs/${bd.blogName }/logs" class="btn btn-primary btn-md-2" style="background-color: #9edbff; border-color: #9eb3ff; margin-left: 5px;">일정</a>
-	</div>
-</div>
+	<!-- 배너 -->
+	<section class="banner">
+		<img src="/resources/img/mainBoard.jpg" alt="배너이미지">
+	</section>
 
-<!-- Responsive Header-BP -->
-
-
-<!-- ... end Responsive Header-BP -->
-<div class="header-spacer"></div>
-
-<div class="container">
-	<div class="row">
-
-		<!-- Main Content -->
-	<form class="col col-xl-8 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12" style="margin-left: 85px; background-color:ghostwhite; border-radius: 10px; padding: 15px;">
-		<main>
-			<div class="create-post" style="display: flex; justify-content: end;">
-				<a href="03-MyblogCreatePost.html" class="btn btn-primary btn-md-2" style="background-color: #9edbff; border-color: #9eb3ff;">글쓰기</a>
-			</div> 
-
-			
-
-
-			<div id="newsfeed-items-grid">
-			<c:forEach var="log" items="${blogs}">
-				<div class="ui-block">
-					
-					<article class="hentry post video">
-					
-						<div class="post__author author vcard inline-items">
-							<img loading="lazy" src="#" alt="author" width="42" height="42">
-					
-							<div class="author-date">
-								<a class="h6 post__author-name fn" href="#"><c:out value="${profile.email}"/></a>
-								<div class="post__date">
-									<time class="published" datetime="2004-07-24T18:18">
-										<c:out value="${log.createDate}"/>
-									</time>
-								</div>
-							</div>
-					<c:if test="${profile.mineOrNot eq true}">
-							<div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg>
-								<ul class="more-dropdown">
-									<li>
-										<a href="/modify">글 수정</a>
-									</li>
-									<li>
-										<a href="/remove">글 삭제</a>
-									</li>
-								</ul>
-							</div>
-					</c:if>
-						</div>
-					
-						<div class="post-video">
-							<div class="video-thumb">
-								<img loading="lazy" src=<c:out value="${log.thumbnails}"/> alt="photo" width="197" height="194">
-								
-							</div>
-							<div class="video-content">
-								<a href=<c:out value="${presentURL} + ${log.title} "/> >
- class="h4 title">첨부된 동영상</a>
-								<p><c:out value="${log.preview}"/>
-								</p>
-							</div>
-						</div>
-						<div class="post-additional-info inline-items">
-					
-							<a href="#" class="post-add-icon inline-items">
-								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
-								<span><c:out value="${log.likeCount}"/></span>
-							</a>
-						</div>
-					</article>
-				</div>
-				</c:forEach>
-				</div>
-		</main>
-	</form>
-		<!-- ... end Main Content -->
-
-
-		<!-- Left Sidebar -->
-
-		<aside class="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-6 col-12" style="margin-left: 40px;">
-			<div class="ui-block-weahter">
-				
-				<!-- W-Weather -->
-				
-				<div class="widget w-weather">
-					<img src="/resources/img/BlogUser.png" style="width: 200px; height: 200px; border-radius: 100px;">
-					<h4 style="color: #fff;"><c:out value="${profile.email}"/></h4>
-				</div>
-					<div class="wethear-now inline-items">
-						<div class="max-min-temperature">
-						</div>
+	<!-- 메인 컨테이너 -->
+	<div class="main-container">
+		<div class="row gx-5 align-items-start">
+			<!-- 왼쪽: 프로필 + 달력 -->
+			<div class="col-12 col-lg-3 mb-4 profile-column">
+				<div class="profile-card">
+					<div class="card-header">내 프로필</div>
+					<div class="card-body text-center">
+						<img src="/resources/img/author-page.webp" alt="profile"
+							class="rounded-circle"
+							style="width: 80px; height: 80px; object-fit: cover;">
+						<h6 class="mt-2">닉네임(사용자 ID)</h6>
+						<p class="text-muted">간단한 자기소개 텍스트...</p>
 					</div>
 				</div>
-				
-				<div class="ui-block">
-					<div id="calendar" class="crumina-full-calendar">
+				<div class="calendar-card">
+					<div class="card-header">달력</div>
+					<div class="card-body">
+						<div id="calendar"></div>
+					</div>
 				</div>
-				<script src="/resources/js/libs/fullcalendar.min.js"></script>
-				</div>		
-		</aside>
+			</div>
+
+			<!-- 오른쪽: 게시글 + 탭 메뉴 -->
+			<div class="col-12 col-lg-9 mb-4 right-column">
+				<div class="posts-wrapper">
+					<div class="text-end mb-3">
+						<a href="/blog/created" class="btn btn-primary">글쓰기</a>
+					</div>
+					<div class="post-card">
+						<div class="post__author author vcard inline-items">
+							<img src="/resources/img/author-thumb.webp" alt="author"
+								width="36" height="36">
+							<div class="author-date ms-2">
+								<a class="h6 post__author-name fn" href="#">닉네임</a>
+								<div class="post__date">
+									<time class="published" datetime="2024-12-01T10:00">12월
+										1일 10:00</time>
+								</div>
+							</div>
+						</div>
+						<p>게시글 내용 예시1...</p>
+						<div class="post-additional-info inline-items mt-2">
+							<a href="#"
+								class="post-add-icon inline-items text-decoration-none me-3">
+
+							</a>
+						</div>
+					</div>
+					<div class="post-card">
+						<div class="post__author author vcard inline-items">
+							<img src="/resources/img/author-thumb.webp" alt="author"
+								width="36" height="36">
+							<div class="author-date ms-2">
+								<a class="h6 post__author-name fn" href="#">닉네임</a>
+								<div class="post__date">
+									<time class="published" datetime="2024-12-02T15:30">12월
+										2일 15:30</time>
+								</div>
+							</div>
+						</div>
+						<p>두 번째 게시글 내용...</p>
+						<div class="post-additional-info inline-items mt-2">
+							<a href="#"
+								class="post-add-icon inline-items text-decoration-none me-3">
+
+
+							</a>
+						</div>
+					</div>
+					<div class="text-center mt-3">
+						<a href="#" class="more-icon"> <svg width="24" height="24"
+								viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2"
+								stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+						</a>
+					</div>
+					<div id="tab-map" class="tab-content" style="display: none;">
+						<p>지도 탭 내용</p>
+					</div>
+					<div id="tab-plan" class="tab-content" style="display: none;">
+						<p>일정 계획 탭 내용</p>
+						<!-- 탭 메뉴 -->
+						<ul class="ui-tabs">
+							<li><a href="/Myblog">게시글</a></li>
+							<li><a href="/kelogs/${bd.blogName }/myMap">지도</a></li>
+							<li class="active"><a href="/kelogs/${bd.blogName }/logs">일정계획</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<ul class="ui-tabs">
+							<li><a href="/Myblog">게시글</a></li>
+							<li><a href="/kelogs/${bd.blogName }/myMap">지도</a></li>
+							<li class="active"><a href="/kelogs/${bd.blogName }/logs">일정계획</a></li>
+				</ul>
+			</div>
+		</div>
 	</div>
-</div>
 
-<!-- ... end Window-popup-CHAT for responsive min-width: 768px -->
+	<!-- 하단 푸터 -->
+	<footer class="py-4 mt-5">
+		<div class="container text-center">
+			<p class="mb-1">이용약관 | 개인정보처리방침 | 주소 | 연락처</p>
+			<small>© 2025. All rights reserved.</small>
+		</div>
+	</footer>
 
-<!-- JS Scripts -->
-<script src="/resources/js/jQuery/jquery-3.5.1.min.js"></script>
-
-<script src="/resources/js/libs/jquery.mousewheel.min.js"></script>
-<script src="/resources/js/libs/perfect-scrollbar.min.js"></script>
-<script src="/resources/js/libs/imagesloaded.pkgd.min.js"></script>
-<script src="/resources/js/libs/material.min.js"></script>
-<script src="/resources/js/libs/selectize.min.js"></script>
-<script src="/resources/js/libs/isotope.pkgd.min.js"></script>
-<script src="/resources/js/libs/ajax-pagination.min.js"></script>
-<script src="/resources/js/libs/jquery.magnific-popup.min.js"></script>
-
-<script src="/resources/js/main.js"></script>
-<script src="/resources/js/libs-init/libs-init.js"></script>
-
-<script src="/resources/Bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- SVG icons loader -->
-<script src="/resources/js/svg-loader.js"></script>
-<!-- /SVG icons loader -->
-
+	<!-- Bootstrap & jQuery -->
+	<script src="/resources/Bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/resources/js/jQuery/jquery-3.5.1.min.js"></script>
+	<script src="/resources/js/libs/jquery.mousewheel.min.js"></script>
+	<script src="/resources/js/libs/perfect-scrollbar.min.js"></script>
+	<script src="/resources/js/libs/imagesloaded.pkgd.min.js"></script>
+	<script src="/resources/js/libs/material.min.js"></script>
+	<script src="/resources/js/libs/selectize.min.js"></script>
+	<script src="/resources/js/libs/isotope.pkgd.min.js"></script>
+	<script src="/resources/js/libs/ajax-pagination.min.js"></script>
+	<script src="/resources/js/libs/jquery.magnific-popup.min.js"></script>
+	<script src="/resources/js/main.js"></script>
+	<script src="/resources/js/libs-init/libs-init.js"></script>
+	<script src="/resources/js/svg-loader.js"></script>
 <script>
 document.getElementById('language-toggle').addEventListener('click', function(event) {
     event.preventDefault();
@@ -351,113 +486,38 @@ document.addEventListener('click', function(event) {
     }
 });
 </script>
-<script>
-window.addEventListener('scroll', function () {
-    const header = document.getElementById('header--standard');
-    if (window.scrollY > 50) { // 50px 이상 스크롤 시
+
+
+	<script>
+    window.addEventListener('scroll', function () {
+      const header = document.getElementById('header--standard');
+      if (window.scrollY > 50) {
         header.classList.add('header--scrolled');
-    } else { // 50px 미만이면
+      } else {
         header.classList.remove('header--scrolled');
-    }
-});
+      }
+    });
 
-</script>
-<script>
-				
-	/* -----------------------------
-		 * FullCalendar Init
-		 * Script file: fullcalendar.min.js
-		 * https://fullcalendar.io/
-	* ---------------------------*/
+    document.addEventListener("DOMContentLoaded", function () {
+      var calendarEl = document.getElementById('calendar');
+      if (calendarEl) {
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          plugins: [ 'dayGrid' ],
+          defaultView: 'dayGridMonth',
+          header: {
+            left: 'prev',
+            center: 'title',
+            right: 'next'
+          },
+          events: [
+            { title: '이벤트1', start: '2024-12-10' },
+            { title: '이벤트2', start: '2024-12-25' }
+          ]
+        });
+        calendar.render();
+      }
+    });
 
-	fullCalendar = function () {
-		var calendarEl = document.getElementById('calendar');
-
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-			plugins: ['interaction', 'dayGrid', 'timeGrid'],
-			defaultView: 'dayGridMonth',
-			defaultDate: '2019-05-07',
-			header: {
-				left: 'prev',
-				center: 'title',
-				right: 'next,dayGridMonth,timeGridWeek,timeGridDay'
-			},
-			buttonText: {
-				month: ' ',
-				week: ' ',
-				day: ' '
-			},
-			buttonIcons: {
-				prev: 'far fa-chevron-left',
-				next: 'far fa-chevron-right'
-			},
-
-			eventClick: function (info) {
-				var url = info.event.url;
-				var is_modal = url.match(/^modal\:(#[-\w]+)$/);
-				if (!is_modal) {
-					return;
-				}
-
-				info.jsEvent.preventDefault();
-				var modal = is_modal[1];
-
-				$(modal).modal('show');
-			},
-			events: [
-				{
-					title: 'Chris Greyson’s Bday',
-					start: '2019-05-08',
-					url: 'modal:#public-event'
-				},
-				{
-					title: 'Make Dinner Plans...',
-					start: '2019-05-08',
-					url: 'modal:#private-event'
-				},
-				{
-					title: 'Jenny’s Birthday...',
-					start: '2019-05-30',
-					url: 'modal:#private-event'
-				},
-				{
-					title: 'Videocall to talk...',
-					start: '2019-05-30',
-					url: 'modal:#public-event'
-				},
-				{
-					title: 'Breakfast at the...',
-					start: '2019-05-26',
-					url: 'modal:#public-event'
-				},
-				{
-					title: 'Send the new...',
-					start: '2019-05-26',
-					url: 'modal:#private-event'
-				},
-				{
-					title: 'Take Querty to the...',
-					start: '2019-05-26',
-					url: 'modal:#public-event'
-				}
-			]
-		});
-
-		calendar.render();
-	};
-
-	document.addEventListener("DOMContentLoaded", function () {
-		fullCalendar();
-	});
-
-</script>
-
-	<!-- 하단 푸터 -->
-	<footer class="py-4 mt-5">
-		<div class="container text-center">
-			<p class="mb-1">이용약관 | 개인정보처리방침 | 주소 | 연락처</p>
-			<small>&copy; 2025. All rights reserved.</small>
-		</div>
-	</footer>
+  </script>
 </body>
 </html>
