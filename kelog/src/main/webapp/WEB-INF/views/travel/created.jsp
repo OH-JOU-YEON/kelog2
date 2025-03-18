@@ -191,8 +191,8 @@
 								<div id="editor"></div>
 
 								<div class="mb-3">
-									<label class="form-label fw-bold">썸네일</label> 
-									<input id="i_imageFileName" class="form-control" name="file"
+									<label class="form-label fw-bold">썸네일</label> <input
+										id="i_imageFileName" class="form-control" name="file"
 										type="file" value="${dto.thumbnail}">
 								</div>
 								<div>

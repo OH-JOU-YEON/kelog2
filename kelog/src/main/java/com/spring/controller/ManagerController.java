@@ -1,7 +1,9 @@
 package com.spring.controller;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.domain.ReplyReportDTO;
@@ -51,6 +54,47 @@ public class ManagerController {
 		log.info("user : "+user);
 		model.addAttribute("nickName", nickName);
 		model.addAttribute("user", user);
+	}
+	@PostMapping("/01-ManagerPage-MyPageModify")
+	// 파라미터 자동수집
+	public String modify(@ModelAttribute UserDTO member,@RequestParam("nickName") String nickName ,HttpSession session,@RequestParam("file") MultipartFile file ,RedirectAttributes rttr) {
+		if (!file.isEmpty()) {
+			String uploadFolder = "C:\\Users\\keduit\\Documents\\kelog\\kelog\\src\\main\\webapp\\resources\\img"; // 업로드 경로 설정
+			String originalFileName = file.getOriginalFilename(); // 실제 첨부된 파일이름
+
+			String oldFileName = member.getProfileImg();
+			log.info("기존파일 :"+oldFileName);
+			//기존 파일 삭제
+			if(oldFileName !=null) {
+				File oldFile= new File(uploadFolder,oldFileName);
+				if(oldFile.exists()) {
+					boolean deleted = oldFile.delete();
+					log.info("기존파일 삭제 여부: "+deleted);
+				}
+			}
+			
+			
+			String uploadFileName = UUID.randomUUID().toString() + "_" + originalFileName;
+			
+			try {
+				File saveFile = new File(uploadFolder, uploadFileName);
+				file.transferTo(saveFile);
+				member.setProfileImg(uploadFileName);
+				
+			} catch (Exception e) {
+				log.error(e.getMessage());
+			}
+		}
+		int updateRow = userservice.modify(member);
+		int updatenick = nickNameService.modify(nickName,member.getUno());
+		
+		log.info("modify updateRow: " + updateRow);
+		log.info("modify updatenick: " + updatenick);
+		UserDTO user = userservice.select(member.getUno());
+		String nN = nickNameService.selectNickName(user.getUno());
+		session.setAttribute("user", user);
+		session.setAttribute("nickName", nN);
+		return "/manager/01-ManagerPage-MyPage"; // 목록 페이지로 이동(get방식)
 	}
 	@GetMapping("/01-ManagerPage-UserModify")
 	public void mo(@RequestParam("uno") Integer uno, Model model) {

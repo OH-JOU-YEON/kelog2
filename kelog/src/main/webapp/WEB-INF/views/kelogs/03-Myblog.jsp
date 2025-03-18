@@ -35,13 +35,11 @@
 	<div class="container">
 		<div class="header--standard-wrap">
 
-			<a href="12-FavouritePage.html" class="logo"></a>
+			<a href="/main" class="logo"></a>
 				<div class="img-wrap">
-					<img loading="lazy" src="/resources/img/logo-colored-small.webp" width="34" height="34" alt="Olympus" class="logo-colored">
-				</div>
-				<div class="title-block">
-					<h6 class="logo-title">로고 들어갈 자리</h6>
-					<div class="sub-title">SOCIAL NETWORK</div>
+					<a href="/main"><img loading="lazy"
+						src="/resources/img/logokelog.png" width="140" height="34"
+						alt="Olympus" class="logo-colored"></a>
 				</div>
 				
 			<a href="#" class="open-responsive-menu js-open-responsive-menu">
@@ -51,36 +49,59 @@
 			<div class="nav nav-pills nav1 header-menu">
 				<div class="mCustomScrollbar">
 					<ul>
-						<li class="nav-item">
-							<a href="00-MainPage.html">메인 페이지</a>
-						</li>
-						<li class="nav-item dropdown">
-							<a href="02-RecommendPost.html">여행 추천지</a>
-						</li>
-						<li class="nav-item dropdown dropdown-has-megamenu">
-							<a href="97-BlogPostBoard.html">블로그 게시판</a>
-						</li>
-						<li class="nav-item">
-							<a href=<c:out value="${presentURL}"/>>내 블로그</a>
-						</li>
-						<li class="nav-item">
-							<a href="55-HoneyTipBoard.html">꿀팁 게시판</a>
-						</li>
-						<li class="nav-item">
-							<a href="#">전국 날씨예보</a>
-						</li>
-						<li class="close-responsive-menu js-close-responsive-menu">
-							<svg class="olymp-close-icon"><use xlink:href="#olymp-close-icon"></use></svg>
-						</li>
-						<li class="nav-item js-expanded-menu">
-							<a href="#" class="menu-link"><img src="/resources/img/menu-bar.png" style="width: 26px; height: 26px;"></a>
-						</li>
-						<li class="lang-set-item">
-							<a href="#" class="change-lang"><img src="/resources/img/changeLang.png" style="width: 26px; height: 26px;"></a>
-						</li>
-						<li class="login-set-item">
-							<a href="01-LoginPage.html" class="login-user"><img src="/resources/img/login-user.png" class="login-user-menu"style="width: 26px; height: 26px;"></a>
-						</li>
+						<li class="nav-item dropdown"><a href="/travel/list"
+								style="color: #000 !important;">여행 추천지</a></li>
+							<li class="nav-item dropdown dropdown-has-megamenu"><a
+								href="/blog/list" style="color: #000 !important;">블로그</a></li>
+							<li class="nav-item"><a href="/tip/list"
+								style="color: #000 !important;">꿀팁 게시판</a></li>
+							<li class="nav-item"><a href="#" onclick="alert('업데이트될 기능입니다!'); return false;" 
+							style="color: #000 !important;">전국 날씨예보</a></li>
+							<li class="close-responsive-menu js-close-responsive-menu">
+							</li>
+							<li class="nav-item js-expanded-menu"><a href="#"
+								class="menu-link"><img src="/resources/img/menu-bar.png"
+									style="width: 26px; height: 26px; filter: none;"></a></li>
+							<li class="lang-set-item"><a href="#" class="change-lang"
+								id="language-toggle"> <img
+									src="/resources/img/changeLang.png"
+									style="width: 26px; height: 26px; filter: none;">
+							</a> <!-- 언어 선택 탭 (기본적으로 숨겨짐) -->
+								<ul id="language-tabs" class="language-tabs"
+									style="display: none;">
+									<li><a href="#" id="english" onclick="alert('업데이트될 기능입니다!'); return false;">
+									English</a></li>
+									<li><a href="#" id="korean">한국어</a></li>
+								</ul>
+								</li>
+							<li class="login-set-item"><c:choose>
+									<c:when test="${email == null}">
+										<a href="/login/google/login.do" class="login-user"> <img
+											src="/resources/img/login-user.png"
+											style="width: 31px; height: 31px; filter: none;">
+										</a>
+									</c:when>
+
+									<c:otherwise>
+										<a href="#" class="login-user"> <img
+											src="/resources/img/login-user.png" class="login-user-menu"
+											style="filter: none;">
+										</a>
+										<ul class="login-drop-menu" style="display: none;">
+											<c:choose>
+												<c:when test="${user.role == 'user'}">
+													<li><a href="/user/read?uno=${user.uno }">마이페이지</a></li>
+												</c:when>
+												<c:otherwise>
+													<li><a
+														href="/manager/01-ManagerPage-MyPage?uno=${user.uno }">마이페이지</a></li>
+												</c:otherwise>
+											</c:choose>
+											<li><a href="/Myblog">내 블로그</a></li>
+											<li><a href="/login/google/revoke/token?token=${token}">로그아웃</a></li>
+										</ul>
+									</c:otherwise>
+								</c:choose></li>
 						</ul>
 				</div>
 			</div>
@@ -88,41 +109,15 @@
 	</div>
 </div>
 
-
-<!-- ... end Fixed Sidebar Left -->
-
-
-<!-- Fixed Sidebar Left -->
-
-
-
-<!-- ... end Fixed Sidebar Left -->
-
-
-<!-- Fixed Sidebar Right -->
-
-
-<!-- ... end Fixed Sidebar Right -->
-
-
-<!-- Fixed Sidebar Right-Responsive -->
-
-
-
-<!-- ... end Fixed Sidebar Right-Responsive -->
-
-
-<!-- Header-BP -->
-
 <!-- ... end Header-BP -->
 <div class="main-header-post" style="position: relative;">
 	<img loading="lazy" src="img/MyBlogMain.jpg" alt="author" style="width: 1920px; height: 700px;">
 	
 	<!-- 3개의 탭 -->
 	<div class="tabs" style="position: absolute; bottom: 10px; right: 10px; display: flex; z-index: 10;">
-		<a href="03-Myblog.html" class="btn btn-primary btn-md-2" style="background-color: #9edbff; border-color: #9eb3ff; margin-left: 5px;">게시물</a>
-		<a href="03-MyblogMap.html" class="btn btn-primary btn-md-2" style="background-color: #9edbff; border-color: #9eb3ff; margin-left: 5px;">지도</a>
-		<a href="03-MyblogExchange.html" class="btn btn-primary btn-md-2" style="background-color: #9edbff; border-color: #9eb3ff; margin-left: 5px;">일정</a>
+		<a href="/Myblog" class="btn btn-primary btn-md-2" style="background-color: #9edbff; border-color: #9eb3ff; margin-left: 5px;">게시물</a>
+		<a href="/kelogs/${bd.blogName }/myMap" class="btn btn-primary btn-md-2" style="background-color: #9edbff; border-color: #9eb3ff; margin-left: 5px;">지도</a>
+		<a href="/kelogs/${bd.blogName }/logs" class="btn btn-primary btn-md-2" style="background-color: #9edbff; border-color: #9eb3ff; margin-left: 5px;">일정</a>
 	</div>
 </div>
 
@@ -181,7 +176,6 @@
 								<img loading="lazy" src=<c:out value="${log.thumbnails}"/> alt="photo" width="197" height="194">
 								
 							</div>
-					
 							<div class="video-content">
 								<a href=<c:out value="${presentURL} + ${log.title} "/> >
  class="h4 title">첨부된 동영상</a>
@@ -189,7 +183,6 @@
 								</p>
 							</div>
 						</div>
-					
 						<div class="post-additional-info inline-items">
 					
 							<a href="#" class="post-add-icon inline-items">
@@ -197,15 +190,9 @@
 								<span><c:out value="${log.likeCount}"/></span>
 							</a>
 						</div>
-					
-				
-					
 					</article>
 				</div>
-				
 				</c:forEach>
-
-		
 				</div>
 		</main>
 	</form>
@@ -261,6 +248,109 @@
 <script src="/resources/js/svg-loader.js"></script>
 <!-- /SVG icons loader -->
 
+<script>
+document.getElementById('language-toggle').addEventListener('click', function(event) {
+    event.preventDefault();
+    const languageTabs = document.getElementById('language-tabs');
+    
+    // 로그인 드롭다운이 열려 있으면 닫기 (선택적)
+    const dropdownMenu = document.querySelector('.login-drop-menu');
+    if (dropdownMenu && dropdownMenu.style.display === 'block') {
+        dropdownMenu.style.display = 'none';
+    }
+
+    // 언어 탭 토글 (email 체크 없이 항상 동작)
+    if (languageTabs.style.display === 'block') {
+        languageTabs.style.display = 'none';
+    } else {
+        languageTabs.style.display = 'block';
+    }
+});
+
+document.getElementById('english').addEventListener('click', function(event) {
+    event.preventDefault();
+    setLanguage('en');
+    loadLanguage('en');
+});
+
+document.getElementById('korean').addEventListener('click', function(event) {
+    event.preventDefault();
+    setLanguage('kr');
+    loadLanguage('kr');
+});
+
+function setLanguage(language) {
+    const tabs = document.querySelectorAll('.language-tabs li a');
+    tabs.forEach(tab => {
+        tab.classList.remove('selected');
+    });
+
+    if (language === 'en') {
+        document.getElementById('english').classList.add('selected');
+    } else if (language === 'kr') {
+        document.getElementById('korean').classList.add('selected');
+    }
+}
+
+function loadLanguage(language) {
+    const filePath = `path/to/lang/${language}.json`;
+    fetch(filePath)
+        .then(response => response.json())
+        .then(data => {
+            updatePageText(data);
+        })
+        .catch(error => console.error('Error loading language file:', error));
+
+    document.getElementById('language-tabs').style.display = 'none';
+}
+
+function updatePageText(data) {
+    document.querySelector('.logo-title').textContent = data.logoTitle;
+    document.querySelector('.sub-title').textContent = data.subTitle;
+    document.querySelector('.title').textContent = data.recommendedPosts;
+    document.querySelector('.post-title').textContent = data.postTitle;
+    document.querySelector('.post-content').textContent = data.postContent;
+}
+
+// 로그인 버튼과 드롭다운 메뉴 가져오기
+const loginButton = document.querySelector('.login-user');
+const loginDropdownMenu = document.querySelector('.login-drop-menu');
+var email = '${email}'; // JSP에서 가져온 email 값
+
+if (loginButton) {
+    loginButton.addEventListener('click', function(event) {
+        if (email) { // email이 있을 때만 드롭다운 토글
+            event.preventDefault();
+            const languageTabs = document.getElementById('language-tabs');
+            if (languageTabs.style.display === 'block') {
+                languageTabs.style.display = 'none';
+            }
+            const isMenuVisible = loginDropdownMenu.style.display === 'block';
+            loginDropdownMenu.style.display = isMenuVisible ? 'none' : 'block';
+        }
+        // email이 null이면 기본 동작(href 이동)이 실행됨
+    });
+}
+
+// 페이지 클릭 시 드롭다운 메뉴 숨기기 (email 체크 제거)
+document.addEventListener('click', function(event) {
+    const languageTabs = document.getElementById('language-tabs');
+    const dropdownMenu = document.querySelector('.login-drop-menu');
+
+    // 언어 탭 외부 클릭 시 닫기
+    if (!document.querySelector('.change-lang').contains(event.target) && 
+        !languageTabs.contains(event.target)) {
+        languageTabs.style.display = 'none';
+    }
+
+    // 로그인 드롭다운 외부 클릭 시 닫기 (email이 있을 때만 적용)
+    if (email && dropdownMenu && 
+        !loginButton.contains(event.target) && 
+        !dropdownMenu.contains(event.target)) {
+        dropdownMenu.style.display = 'none';
+    }
+});
+</script>
 <script>
 window.addEventListener('scroll', function () {
     const header = document.getElementById('header--standard');

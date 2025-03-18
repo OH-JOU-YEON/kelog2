@@ -15,6 +15,7 @@ public class BlogPostDTO {
 	private int blogNo;
 	private String title;
 	private String content;
+	private String thumbnail;
 	private String nickName;
 	private String email;
 	@DateTimeFormat(pattern = "yyyy-MM-dd a hh:mm:ss")

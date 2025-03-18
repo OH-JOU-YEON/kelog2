@@ -170,11 +170,10 @@ public class TravelPostController {
         }
 		
 		
-		
 		int updateRow = service.modify(dto);
 		log.info("modify updateRow: " + updateRow);
 		rttr.addFlashAttribute("result", "mod");
-		return "redirect:/travel/list";
+		return "redirect:/travel/read?travelBoardNo="+dto.getTravelBoardNo();
 	}
 
 	@PostMapping("/remove")

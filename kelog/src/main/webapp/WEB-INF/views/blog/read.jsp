@@ -226,12 +226,12 @@
 					</div>
 				</form>
 
-				<div class="crumina-module crumina-heading with-title-decoration">
+			<!-- 	<div class="crumina-module crumina-heading with-title-decoration">
 					<h5 class="heading-title">댓글(15)</h5>
 				</div>
 
 
-				<!-- Comments -->
+				Comments
 
 				<ul class="comments-list style-3">
 					<li class="comment-item">
@@ -381,15 +381,13 @@
 					</li>
 				</ul>
 
-				<!-- ... end Comments -->
+				... end Comments
 			</div>
 			<div
 				class="col col-xl-8 m-auto col-lg-12 col-md-12 col-sm-12 col-12 align-center">
 				<a href="#" class="btn btn-purple btn-md mb60 mt60">댓글 더보기...</a>
-			</div>
+			</div> -->
 
-			<div class="col col-xl-8 m-auto col-lg-12 col-md-12 col-sm-12 col-12">
-			</div>
 		</div>
 	</div>
 	<script>

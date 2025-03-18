@@ -27,30 +27,28 @@ public class BlogController {
 	
 	
 	
-	@GetMapping("/kelogs/{blogName}")
-	public String blogMapping(Model model, HttpServletRequest request, @PathVariable String blogName, Criteria cri) {
+	@GetMapping("/kelogs/{blogName}/")
+	public String blogMapping(Model model, HttpServletRequest request, @PathVariable("blogName") String blogName, Criteria cri) {
 		HttpSession session = request.getSession(false);
-		
 		
         
         String email = (String) session.getAttribute("email");
         
-       BlogDTO blogDTO =   blogService.getBlogByBlogNameAndUno(blogName, email);
+        BlogDTO blogDTO = blogService.getBlogByBlogNameAndUno(blogName, email);
 		
 		BlogProfileDTO blogProfileDTO = blogService.getBlogProfileByBlogName(blogName, email); 
 		
 		model.addAttribute("profile", blogProfileDTO); 
 		
 		List<logDTO> blogs  = blogService.getblogPosts(blogName); 
+		session.setAttribute("bd", blogDTO);
 		
 		model.addAttribute("blogs",blogs); 
-		
-		
 		
 		model.addAttribute("presentURL","kelogs/" + blogName ); 
 		
 		
-		return "blog/03-Myblog";
+		return "/kelogs/03-Myblog";
 		
 	}
 	
@@ -62,20 +60,20 @@ public class BlogController {
 		model.addAttribute("navs", navs); 
 		
 		
-		return "MyblogMap"; 
+		return "/kelogs/03-MyblogMap"; 
 		
 	}
 	
 	@GetMapping("/kelogs/{blogName}/logs")
 	public String logMapping(Model model, HttpServletRequest request, @PathVariable String blogName) {
 		
-		return "blog/03-Myblog"; 
+		return "/kelogs/exchange"; 
 		
 	}
 	
 	@GetMapping("/Myblog")
-	public String myBlogRedirect(HttpServletRequest request) {
-	    HttpSession session = request.getSession(false);
+	public String myBlogRedirect(HttpServletRequest request,HttpSession session) {
+	    session = request.getSession(false);
 	    if (session == null) {
 	        return "redirect:/login"; // 세션이 없으면 로그인 페이지로 이동
 	    }
@@ -89,7 +87,7 @@ public class BlogController {
 	    BlogDTO blogDTO = blogService.getBlogByBlogNameAndUno(email + "_blog", email);
 
 	    // 내 블로그 페이지로 이동
-	    return "redirect:/kelogs/" + blogDTO.getBlogName();
+	    return "redirect:/kelogs/" + blogDTO.getBlogName()+"/";
 	}
 	
 	

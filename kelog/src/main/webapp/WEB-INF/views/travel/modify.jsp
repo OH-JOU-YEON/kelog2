@@ -200,19 +200,16 @@ out.println(sbHtml);
 								<div id="editor">${dto.content }</div>
 								
 								<div class="mb-3">
-									<label for="thumbnail" class="form-label fw-bold">썸네일</label> <input
-										type="file" class="form-control" id="thumbnail"
-										name="thumbnail">
+									<label class="form-label fw-bold">썸네일</label> 
+									<input id="i_imageFileName" class="form-control" name="file"
+										type="file" value="${dto.thumbnail}">
 								</div>
-								<!-- 태그 
-						<div class="mb-3">
-							<label for="topicTags" class="form-label fw-bold">태그</label>
-							<input type="text" class="form-control" id="topicTags" placeholder="태그를 입력하세요 (예: #맛집 #카페)">
-						</div>
-						-->
-
-
-
+								<div>
+									<img id="preview" alt="업로드된 파일" src=""
+										style="width: 500px; display: block; margin: 0 auto;">
+								</div>
+								<input type="hidden" name="thumbnail" value="${dto.thumbnail}">
+								
 								<!-- 버튼 영역 -->
 								<div class="row">
 									<div class="col-12 d-flex justify-content-end"
@@ -266,7 +263,20 @@ out.println(sbHtml);
 	<script src="/resources/js/svg-loader.js"></script>
 	<!-- /SVG icons loader -->
 
-
+<script type="text/javascript">
+$(function() {
+// 이미지 미리보기
+$("#i_imageFileName").on("change", function(event) {
+    console.log(event);
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        console.log(e);
+        $("#preview").attr("src", e.target.result).show();
+    }
+    reader.readAsDataURL(event.target.files[0]);
+});
+});
+</script>
 	<script type="text/javascript">
 $(function(){
 	var formObj = $("form");
@@ -278,7 +288,7 @@ $(function(){
 		console.log(operation);
 		
 		if(operation === "modify"){
-			formObj.attr("action","/travel/modify").attr("method","post");
+			formObj.attr("action","/travel/modify").attr("method","post").attr("enctype", "multipart/form-data");;
 			$('#content').val(editor.getHTML());
 		}else if (operation === "remove"){
 			formObj.attr("action","/travel/remove").attr("method","post");

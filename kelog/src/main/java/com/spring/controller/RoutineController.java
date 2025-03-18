@@ -54,7 +54,7 @@ public class RoutineController {
 			return "redirect:/kelogs/exchange"; // 일정 추가 후 리다이렉트
 		}
 
-		return "redirect:/kelog/exchange"; // 로그인 안 된 경우 리다이렉트
+		return "redirect:/kelogs/exchange"; // 로그인 안 된 경우 리다이렉트
 	}
 
 	@PostMapping("/deleteEvent")
