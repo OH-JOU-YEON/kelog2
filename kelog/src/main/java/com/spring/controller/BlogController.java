@@ -11,11 +11,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.spring.domain.BlogDTO;
+import com.spring.domain.BlogPostDTO;
 import com.spring.domain.Criteria;
 import com.spring.domain.NavAddressDTO;
+import com.spring.domain.ReplyDTO;
 import com.spring.domain.RoutineDTO;
 import com.spring.domain.DTOS.BlogProfileDTO;
 import com.spring.domain.DTOS.logDTO;
+import com.spring.persistence.BlogMapper;
+import com.spring.persistence.BlogPostMapper;
+import com.spring.persistence.BlogReplyMapper;
 import com.spring.service.BlogServiceImpl;
 import com.spring.service.RoutineService;
 
@@ -27,6 +32,42 @@ public class BlogController {
 	
 	private final BlogServiceImpl blogService;
 	private final RoutineService service;
+	
+	private final BlogReplyMapper blogReplyMapper; 
+	
+	private final BlogPostMapper blogPostMapper; 
+	
+	private final BlogMapper blogMapper; 
+	
+	
+	@GetMapping("/kelogs/{blogName}/{blogPostTitle}")
+	public String blogPostMapping(Model model, HttpServletRequest request, @PathVariable("blogName") String blogName,
+			@PathVariable String blogPostTitle) {
+		
+		//블로그 이름으로 검색해서 블로그 번호 얻기 
+		
+		BlogDTO blog = blogMapper.findBlogByBlogName(blogName); 
+		
+		
+		//블로그 번호랑 타이틀로 검색해서 포트스 dto 얻기 
+		
+		BlogPostDTO post = blogPostMapper.findByTitleAndNo(blogPostTitle, blog.getBlogNo()); 
+		
+		
+		
+		
+		//포스트 번호로 댓글 리스트 얻기 
+		
+		List<ReplyDTO> replys = blogReplyMapper.selectReply(post.getBlogPostNo()); 
+		
+		model.addAttribute("replys", replys); 
+		
+		model.addAttribute("post", post); 
+		
+		return "blog/read"; 
+	}
+	
+	
 	
 	
 	
